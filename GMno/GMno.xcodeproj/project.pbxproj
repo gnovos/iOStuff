@@ -17,7 +17,6 @@
 		939098D91512898E006D414D /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 939098CD1512898E006D414D /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		939098DA1512898E006D414D /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 939098CF1512898E006D414D /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		939098DB1512898E006D414D /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 939098D11512898E006D414D /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		939098FA151289BD006D414D /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 939098F4151289BD006D414D /* libzbar.a */; };
 		939098FB151289BD006D414D /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 939098F6151289BD006D414D /* zbar-back.png */; };
 		939098FC151289BD006D414D /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = 939098F7151289BD006D414D /* zbar-help.html */; };
 		939098FD151289BD006D414D /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = 939098F8151289BD006D414D /* zbar-helpicons.png */; };
@@ -124,7 +123,6 @@
 				93CD24EA151057830030ADF4 /* CoreGraphics.framework in Frameworks */,
 				93E948EE1511177600BDEAF5 /* libiconv.dylib in Frameworks */,
 				93E948F0151117A800BDEAF5 /* libzbar.a in Frameworks */,
-				939098FA151289BD006D414D /* libzbar.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
