@@ -15,8 +15,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "93CD24E0151057830030ADF4"
                BuildableName = "GMoma.app"
-               BlueprintName = "GMoma"
-               ReferencedContainer = "container:GMoma.xcodeproj">
+               BlueprintName = "GMno"
+               ReferencedContainer = "container:GMno.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,8 +33,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "93CD24E0151057830030ADF4"
             BuildableName = "GMoma.app"
-            BlueprintName = "GMoma"
-            ReferencedContainer = "container:GMoma.xcodeproj">
+            BlueprintName = "GMno"
+            ReferencedContainer = "container:GMno.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,8 +52,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "93CD24E0151057830030ADF4"
             BuildableName = "GMoma.app"
-            BlueprintName = "GMoma"
-            ReferencedContainer = "container:GMoma.xcodeproj">
+            BlueprintName = "GMno"
+            ReferencedContainer = "container:GMno.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,8 +70,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "93CD24E0151057830030ADF4"
             BuildableName = "GMoma.app"
-            BlueprintName = "GMoma"
-            ReferencedContainer = "container:GMoma.xcodeproj">
+            BlueprintName = "GMno"
+            ReferencedContainer = "container:GMno.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

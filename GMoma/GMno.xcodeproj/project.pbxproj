@@ -88,14 +88,14 @@
 		939098F9151289BD006D414D /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
 		9390990015128B99006D414D /* MZUPCLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZUPCLookup.h; sourceTree = "<group>"; };
 		9390990115128B99006D414D /* MZUPCLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZUPCLookup.m; sourceTree = "<group>"; };
-		93CD24E1151057830030ADF4 /* GMoma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMoma.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		93CD24E1151057830030ADF4 /* GMno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93CD24E5151057830030ADF4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		93CD24E7151057830030ADF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		93CD24E9151057830030ADF4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		93CD24ED151057830030ADF4 /* GMoma-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GMoma-Info.plist"; sourceTree = "<group>"; };
+		93CD24ED151057830030ADF4 /* GMno-Info.plist */ = {isa = PBXFileReference; path = "GMno-Info.plist"; sourceTree = "<group>"; };
 		93CD24EF151057830030ADF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		93CD24F1151057830030ADF4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		93CD24F3151057830030ADF4 /* GMoma-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GMoma-Prefix.pch"; sourceTree = "<group>"; };
+		93CD24F3151057830030ADF4 /* GMno-Prefix.pch */ = {isa = PBXFileReference; path = "GMno-Prefix.pch"; sourceTree = "<group>"; };
 		93CD24F4151057830030ADF4 /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
 		93CD24F5151057830030ADF4 /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
 		93CD24F8151057830030ADF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 		93CD24E2151057830030ADF4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				93CD24E1151057830030ADF4 /* GMoma.app */,
+				93CD24E1151057830030ADF4 /* GMno.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -281,10 +281,10 @@
 		93CD24EC151057830030ADF4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				93CD24ED151057830030ADF4 /* GMoma-Info.plist */,
+				93CD24ED151057830030ADF4 /* GMno-Info.plist */,
 				93CD24EE151057830030ADF4 /* InfoPlist.strings */,
 				93CD24F1151057830030ADF4 /* main.m */,
-				93CD24F3151057830030ADF4 /* GMoma-Prefix.pch */,
+				93CD24F3151057830030ADF4 /* GMno-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -302,9 +302,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		93CD24E0151057830030ADF4 /* GMoma */ = {
+		93CD24E0151057830030ADF4 /* GMno */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93CD24FF151057830030ADF4 /* Build configuration list for PBXNativeTarget "GMoma" */;
+			buildConfigurationList = 93CD24FF151057830030ADF4 /* Build configuration list for PBXNativeTarget "GMno" */;
 			buildPhases = (
 				93CD24DD151057830030ADF4 /* Sources */,
 				93CD24DE151057830030ADF4 /* Frameworks */,
@@ -314,9 +314,9 @@
 			);
 			dependencies = (
 			);
-			name = GMoma;
+			name = GMno;
 			productName = GMoma;
-			productReference = 93CD24E1151057830030ADF4 /* GMoma.app */;
+			productReference = 93CD24E1151057830030ADF4 /* GMno.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -329,7 +329,7 @@
 				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = Masonsoft;
 			};
-			buildConfigurationList = 93CD24DB151057820030ADF4 /* Build configuration list for PBXProject "GMoma" */;
+			buildConfigurationList = 93CD24DB151057820030ADF4 /* Build configuration list for PBXProject "GMno" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -341,7 +341,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				93CD24E0151057830030ADF4 /* GMoma */,
+				93CD24E0151057830030ADF4 /* GMno */,
 			);
 		};
 /* End PBXProject section */
@@ -457,14 +457,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GMoma/GMoma-Prefix.pch";
+				GCC_PREFIX_HEADER = "GMoma/GMno-Prefix.pch";
 				HEADER_SEARCH_PATHS = "ZBarSDK/**";
-				INFOPLIST_FILE = "GMoma/GMoma-Info.plist";
+				INFOPLIST_FILE = "GMoma/GMno-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ZBarSDK\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GMno;
 				PROVISIONING_PROFILE = "3F54B5F4-CF37-480F-9E7F-C6FA9002DDEF";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F54B5F4-CF37-480F-9E7F-C6FA9002DDEF";
 				WRAPPER_EXTENSION = app;
@@ -477,14 +477,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GMoma/GMoma-Prefix.pch";
+				GCC_PREFIX_HEADER = "GMoma/GMno-Prefix.pch";
 				HEADER_SEARCH_PATHS = "ZBarSDK/**";
-				INFOPLIST_FILE = "GMoma/GMoma-Info.plist";
+				INFOPLIST_FILE = "GMoma/GMno-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ZBarSDK\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GMno;
 				PROVISIONING_PROFILE = "3F54B5F4-CF37-480F-9E7F-C6FA9002DDEF";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F54B5F4-CF37-480F-9E7F-C6FA9002DDEF";
 				WRAPPER_EXTENSION = app;
@@ -494,7 +494,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		93CD24DB151057820030ADF4 /* Build configuration list for PBXProject "GMoma" */ = {
+		93CD24DB151057820030ADF4 /* Build configuration list for PBXProject "GMno" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93CD24FD151057830030ADF4 /* Debug */,
@@ -503,7 +503,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93CD24FF151057830030ADF4 /* Build configuration list for PBXNativeTarget "GMoma" */ = {
+		93CD24FF151057830030ADF4 /* Build configuration list for PBXNativeTarget "GMno" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93CD2500151057830030ADF4 /* Debug */,
