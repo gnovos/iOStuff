@@ -22,14 +22,15 @@
 		939098FC151289BD006D414D /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = 939098F7151289BD006D414D /* zbar-help.html */; };
 		939098FD151289BD006D414D /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = 939098F8151289BD006D414D /* zbar-helpicons.png */; };
 		939098FE151289BD006D414D /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 939098F9151289BD006D414D /* zbar-samples.png */; };
+		9390990215128B99006D414D /* MZUPCLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390990115128B99006D414D /* MZUPCLookup.m */; };
 		93CD24E6151057830030ADF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CD24E5151057830030ADF4 /* UIKit.framework */; };
 		93CD24E8151057830030ADF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CD24E7151057830030ADF4 /* Foundation.framework */; };
 		93CD24EA151057830030ADF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CD24E9151057830030ADF4 /* CoreGraphics.framework */; };
 		93CD24F0151057830030ADF4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93CD24EE151057830030ADF4 /* InfoPlist.strings */; };
 		93CD24F2151057830030ADF4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CD24F1151057830030ADF4 /* main.m */; };
-		93CD24F6151057830030ADF4 /* ZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CD24F5151057830030ADF4 /* ZAppDelegate.m */; };
+		93CD24F6151057830030ADF4 /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CD24F5151057830030ADF4 /* MZAppDelegate.m */; };
 		93CD24F9151057830030ADF4 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93CD24F7151057830030ADF4 /* MainStoryboard.storyboard */; };
-		93CD24FC151057830030ADF4 /* ZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CD24FB151057830030ADF4 /* ZViewController.m */; };
+		93CD24FC151057830030ADF4 /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CD24FB151057830030ADF4 /* MZViewController.m */; };
 		93E948E21511162100BDEAF5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E948E11511162100BDEAF5 /* AVFoundation.framework */; };
 		93E948E51511169600BDEAF5 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E948E41511169600BDEAF5 /* CoreVideo.framework */; };
 		93E948E7151116C000BDEAF5 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E948E6151116C000BDEAF5 /* CoreMedia.framework */; };
@@ -85,6 +86,8 @@
 		939098F7151289BD006D414D /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "zbar-help.html"; sourceTree = "<group>"; };
 		939098F8151289BD006D414D /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
 		939098F9151289BD006D414D /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
+		9390990015128B99006D414D /* MZUPCLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZUPCLookup.h; sourceTree = "<group>"; };
+		9390990115128B99006D414D /* MZUPCLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZUPCLookup.m; sourceTree = "<group>"; };
 		93CD24E1151057830030ADF4 /* GMoma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMoma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93CD24E5151057830030ADF4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		93CD24E7151057830030ADF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,11 +96,11 @@
 		93CD24EF151057830030ADF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		93CD24F1151057830030ADF4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		93CD24F3151057830030ADF4 /* GMoma-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GMoma-Prefix.pch"; sourceTree = "<group>"; };
-		93CD24F4151057830030ADF4 /* ZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZAppDelegate.h; sourceTree = "<group>"; };
-		93CD24F5151057830030ADF4 /* ZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZAppDelegate.m; sourceTree = "<group>"; };
+		93CD24F4151057830030ADF4 /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
+		93CD24F5151057830030ADF4 /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
 		93CD24F8151057830030ADF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		93CD24FA151057830030ADF4 /* ZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZViewController.h; sourceTree = "<group>"; };
-		93CD24FB151057830030ADF4 /* ZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZViewController.m; sourceTree = "<group>"; };
+		93CD24FA151057830030ADF4 /* MZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
+		93CD24FB151057830030ADF4 /* MZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
 		93E948E11511162100BDEAF5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		93E948E41511169600BDEAF5 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		93E948E6151116C000BDEAF5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -219,6 +222,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		939098FF15128B7F006D414D /* upc */ = {
+			isa = PBXGroup;
+			children = (
+				9390990015128B99006D414D /* MZUPCLookup.h */,
+				9390990115128B99006D414D /* MZUPCLookup.m */,
+			);
+			name = upc;
+			sourceTree = "<group>";
+		};
 		93CD24D6151057820030ADF4 = {
 			isa = PBXGroup;
 			children = (
@@ -255,11 +267,12 @@
 		93CD24EB151057830030ADF4 /* GMoma */ = {
 			isa = PBXGroup;
 			children = (
-				93CD24F4151057830030ADF4 /* ZAppDelegate.h */,
-				93CD24F5151057830030ADF4 /* ZAppDelegate.m */,
+				939098FF15128B7F006D414D /* upc */,
+				93CD24F4151057830030ADF4 /* MZAppDelegate.h */,
+				93CD24F5151057830030ADF4 /* MZAppDelegate.m */,
 				93CD24F7151057830030ADF4 /* MainStoryboard.storyboard */,
-				93CD24FA151057830030ADF4 /* ZViewController.h */,
-				93CD24FB151057830030ADF4 /* ZViewController.m */,
+				93CD24FA151057830030ADF4 /* MZViewController.h */,
+				93CD24FB151057830030ADF4 /* MZViewController.m */,
 				93CD24EC151057830030ADF4 /* Supporting Files */,
 			);
 			path = GMoma;
@@ -355,8 +368,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				93CD24F2151057830030ADF4 /* main.m in Sources */,
-				93CD24F6151057830030ADF4 /* ZAppDelegate.m in Sources */,
-				93CD24FC151057830030ADF4 /* ZViewController.m in Sources */,
+				93CD24F6151057830030ADF4 /* MZAppDelegate.m in Sources */,
+				93CD24FC151057830030ADF4 /* MZViewController.m in Sources */,
 				939098D21512898E006D414D /* AFHTTPClient.m in Sources */,
 				939098D31512898E006D414D /* AFHTTPRequestOperation.m in Sources */,
 				939098D41512898E006D414D /* AFImageRequestOperation.m in Sources */,
@@ -367,6 +380,7 @@
 				939098D91512898E006D414D /* AFURLConnectionOperation.m in Sources */,
 				939098DA1512898E006D414D /* AFXMLRequestOperation.m in Sources */,
 				939098DB1512898E006D414D /* UIImageView+AFNetworking.m in Sources */,
+				9390990215128B99006D414D /* MZUPCLookup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

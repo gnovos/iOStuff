@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZViewController : UIViewController<ZBarReaderViewDelegate>
+@interface MZViewController : UIViewController<ZBarReaderViewDelegate>
 
 @property(nonatomic, strong) IBOutlet ZBarReaderView* reader;
 

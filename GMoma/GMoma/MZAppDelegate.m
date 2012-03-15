@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "ZAppDelegate.h"
+#import "MZAppDelegate.h"
 
-@implementation ZAppDelegate
+@implementation MZAppDelegate
 
 @synthesize window = _window;
 
-+ (ZAppDelegate*) instance {
++ (MZAppDelegate*) instance {
     return [[UIApplication sharedApplication] delegate];
 }
 

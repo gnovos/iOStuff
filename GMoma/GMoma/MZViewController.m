@@ -8,13 +8,13 @@
 
 //AVCaptureVideoPreviewLayer
 
-#import "ZViewController.h"
+#import "MZViewController.h"
 
-@interface ZViewController ()
+@interface MZViewController ()
 
 @end
 
-@implementation ZViewController
+@implementation MZViewController
 
 @synthesize reader, code, type, item, verdict;
 
@@ -27,6 +27,16 @@
         type.text = [NSString stringWithFormat:@"FOUND %@", sym.typeName];
         code.text = sym.data;
         verdict.text = @"UNKNOWN";
+        
+//        NSURL *url = [NSURL URLWithString:@"https://gowalla.com/users/mattt.json"];
+//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//        
+//        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//            NSLog(@"Name: %@ %@", [JSON valueForKeyPath:@"first_name"], [JSON valueForKeyPath:@"last_name"]);
+//        } failure:nil];
+//        
+//        [operation start];
+        
     }
     
 }

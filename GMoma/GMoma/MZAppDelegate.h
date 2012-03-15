@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MZAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-+ (ZAppDelegate*) instance;
++ (MZAppDelegate*) instance;
 
 @end

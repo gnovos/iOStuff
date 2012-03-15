@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ZAppDelegate.h"
+#import "MZAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([ZAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MZAppDelegate class]));
     }
 }
