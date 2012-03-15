@@ -31,15 +31,14 @@
     }
 
     for (ZBarSymbol *sym in symbols) {  
-        type.text = nil;
-        code.text = nil;
+        type.text = sym.typeName;
+        code.text = @"";
         name.text = @"Looking up code...";
-        description.text = nil;        
+        description.text = @"";        
         verdict.text = @"PLEASE WAIT";
         
         [MZBarcode lookup:sym.data withCompletion:^(MZBarcode *barcode) {            
-            type.text = sym.typeName;
-            code.text = sym.data;
+            code.text = barcode.code;
             name.text = barcode.name;
             description.text = barcode.description;
             verdict.text = @"FOUND";

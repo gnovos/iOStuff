@@ -39,7 +39,7 @@
             barcode.description = [JSON valueForKeyPath:@"description"];
             barcode.price = [JSON valueForKeyPath:@"price"];
         } else {
-            barcode.name = @"Unknown";
+            barcode.name = @"Unknown Item";
         }
         
         completion(barcode);
