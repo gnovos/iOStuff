@@ -9,6 +9,7 @@
 //AVCaptureVideoPreviewLayer
 
 #import "MZViewController.h"
+#import "MZBarcode.h"
 
 @interface MZViewController ()
 
@@ -16,18 +17,35 @@
 
 @implementation MZViewController
 
-@synthesize reader, code, type, item, verdict;
+@synthesize reader, type, code, name, description, verdict;
 
 - (void) readerView: (ZBarReaderView*) readerView
      didReadSymbols: (ZBarSymbolSet*) symbols
           fromImage: (UIImage*) image {
     
-    for(ZBarSymbol *sym in symbols) {
-        NSLog(@"%@ data was %@", sym.typeName, sym.data);
-        type.text = [NSString stringWithFormat:@"FOUND %@", sym.typeName];
-        code.text = sym.data;
-        verdict.text = @"UNKNOWN";
-                
+    NSLog(@"found %d symbols", [symbols count]);
+    
+    for (ZBarSymbol *sym in symbols) {
+        NSLog(@"TYPE %@ CODE: %@ | %d : %d", sym.typeName, sym.data, sym.quality, sym.count);
+        break;                
+    }
+
+    for (ZBarSymbol *sym in symbols) {  
+        type.text = nil;
+        code.text = nil;
+        name.text = @"Looking up code...";
+        description.text = nil;        
+        verdict.text = @"PLEASE WAIT";
+        
+        [MZBarcode lookup:sym.data withCompletion:^(MZBarcode *barcode) {            
+            type.text = sym.typeName;
+            code.text = sym.data;
+            name.text = barcode.name;
+            description.text = barcode.description;
+            verdict.text = @"FOUND";
+        }];
+        
+        break;                
     }
     
 }

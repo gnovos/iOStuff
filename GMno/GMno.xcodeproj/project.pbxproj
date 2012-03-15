@@ -25,7 +25,7 @@
 		9390991B15128D68006D414D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9390990F15128D68006D414D /* MainStoryboard.storyboard */; };
 		9390991D15128D68006D414D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991315128D68006D414D /* main.m */; };
 		9390991E15128D68006D414D /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991515128D68006D414D /* MZAppDelegate.m */; };
-		9390991F15128D68006D414D /* MZUPCLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991715128D68006D414D /* MZUPCLookup.m */; };
+		9390991F15128D68006D414D /* MZBarcode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991715128D68006D414D /* MZBarcode.m */; };
 		9390992015128D68006D414D /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991915128D68006D414D /* MZViewController.m */; };
 		93CD24E6151057830030ADF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CD24E5151057830030ADF4 /* UIKit.framework */; };
 		93CD24E8151057830030ADF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CD24E7151057830030ADF4 /* Foundation.framework */; };
@@ -92,8 +92,8 @@
 		9390991315128D68006D414D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9390991415128D68006D414D /* MZAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
 		9390991515128D68006D414D /* MZAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
-		9390991615128D68006D414D /* MZUPCLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZUPCLookup.h; sourceTree = "<group>"; };
-		9390991715128D68006D414D /* MZUPCLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZUPCLookup.m; sourceTree = "<group>"; };
+		9390991615128D68006D414D /* MZBarcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBarcode.h; sourceTree = "<group>"; };
+		9390991715128D68006D414D /* MZBarcode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZBarcode.m; sourceTree = "<group>"; };
 		9390991815128D68006D414D /* MZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
 		9390991915128D68006D414D /* MZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
 		9390992515128E71006D414D /* MZConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZConstants.h; sourceTree = "<group>"; };
@@ -224,11 +224,12 @@
 		9390990C15128D68006D414D /* GMno */ = {
 			isa = PBXGroup;
 			children = (
-				9390992215128DD1006D414D /* upc */,
+				9390990F15128D68006D414D /* MainStoryboard.storyboard */,
 				9390991415128D68006D414D /* MZAppDelegate.h */,
 				9390991515128D68006D414D /* MZAppDelegate.m */,
 				9390991815128D68006D414D /* MZViewController.h */,
 				9390991915128D68006D414D /* MZViewController.m */,
+				9390992215128DD1006D414D /* upc */,
 			);
 			path = GMno;
 			sourceTree = "<group>";
@@ -236,8 +237,8 @@
 		9390992215128DD1006D414D /* upc */ = {
 			isa = PBXGroup;
 			children = (
-				9390991615128D68006D414D /* MZUPCLookup.h */,
-				9390991715128D68006D414D /* MZUPCLookup.m */,
+				9390991615128D68006D414D /* MZBarcode.h */,
+				9390991715128D68006D414D /* MZBarcode.m */,
 			);
 			name = upc;
 			sourceTree = "<group>";
@@ -247,7 +248,6 @@
 			children = (
 				9390992515128E71006D414D /* MZConstants.h */,
 				9390990D15128D68006D414D /* InfoPlist.strings */,
-				9390990F15128D68006D414D /* MainStoryboard.storyboard */,
 				9390991115128D68006D414D /* GMno-Info.plist */,
 				9390991215128D68006D414D /* GMno-Prefix.pch */,
 				9390991315128D68006D414D /* main.m */,
@@ -380,7 +380,7 @@
 				939098DB1512898E006D414D /* UIImageView+AFNetworking.m in Sources */,
 				9390991D15128D68006D414D /* main.m in Sources */,
 				9390991E15128D68006D414D /* MZAppDelegate.m in Sources */,
-				9390991F15128D68006D414D /* MZUPCLookup.m in Sources */,
+				9390991F15128D68006D414D /* MZBarcode.m in Sources */,
 				9390992015128D68006D414D /* MZViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

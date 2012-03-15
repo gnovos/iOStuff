@@ -14,7 +14,8 @@
 
 @property(nonatomic, strong) IBOutlet UILabel* type;
 @property(nonatomic, strong) IBOutlet UILabel* code;
-@property(nonatomic, strong) IBOutlet UILabel* item;
+@property(nonatomic, strong) IBOutlet UILabel* name;
+@property(nonatomic, strong) IBOutlet UILabel* description;
 @property(nonatomic, strong) IBOutlet UILabel* verdict;
 
 
