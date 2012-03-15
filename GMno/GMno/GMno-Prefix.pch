@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'GMoma' target in the 'GMoma' project
+// Prefix header for all source files of the 'GMno' target in the 'GMno' project
 //
 
 #import <Availability.h>
@@ -12,4 +12,5 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "ZBarSDK.h"
+    #import "MZConstants.h"
 #endif

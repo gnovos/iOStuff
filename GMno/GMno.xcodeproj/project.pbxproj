@@ -24,7 +24,6 @@
 		939098FE151289BD006D414D /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 939098F9151289BD006D414D /* zbar-samples.png */; };
 		9390991A15128D68006D414D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9390990D15128D68006D414D /* InfoPlist.strings */; };
 		9390991B15128D68006D414D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9390990F15128D68006D414D /* MainStoryboard.storyboard */; };
-		9390991C15128D68006D414D /* GMno-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9390991115128D68006D414D /* GMno-Info.plist */; };
 		9390991D15128D68006D414D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991315128D68006D414D /* main.m */; };
 		9390991E15128D68006D414D /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991515128D68006D414D /* MZAppDelegate.m */; };
 		9390991F15128D68006D414D /* MZUPCLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991715128D68006D414D /* MZUPCLookup.m */; };
@@ -98,6 +97,7 @@
 		9390991715128D68006D414D /* MZUPCLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZUPCLookup.m; sourceTree = "<group>"; };
 		9390991815128D68006D414D /* MZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
 		9390991915128D68006D414D /* MZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
+		9390992515128E71006D414D /* MZConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZConstants.h; sourceTree = "<group>"; };
 		93CD24E1151057830030ADF4 /* GMno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93CD24E5151057830030ADF4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		93CD24E7151057830030ADF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -226,24 +226,42 @@
 		9390990C15128D68006D414D /* GMno */ = {
 			isa = PBXGroup;
 			children = (
-				9390990D15128D68006D414D /* InfoPlist.strings */,
-				9390990F15128D68006D414D /* MainStoryboard.storyboard */,
-				9390991115128D68006D414D /* GMno-Info.plist */,
-				9390991215128D68006D414D /* GMno-Prefix.pch */,
-				9390991315128D68006D414D /* main.m */,
+				9390992215128DD1006D414D /* upc */,
 				9390991415128D68006D414D /* MZAppDelegate.h */,
 				9390991515128D68006D414D /* MZAppDelegate.m */,
-				9390991615128D68006D414D /* MZUPCLookup.h */,
-				9390991715128D68006D414D /* MZUPCLookup.m */,
 				9390991815128D68006D414D /* MZViewController.h */,
 				9390991915128D68006D414D /* MZViewController.m */,
 			);
 			path = GMno;
 			sourceTree = "<group>";
 		};
+		9390992215128DD1006D414D /* upc */ = {
+			isa = PBXGroup;
+			children = (
+				9390991615128D68006D414D /* MZUPCLookup.h */,
+				9390991715128D68006D414D /* MZUPCLookup.m */,
+			);
+			name = upc;
+			sourceTree = "<group>";
+		};
+		9390992415128DF8006D414D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9390992515128E71006D414D /* MZConstants.h */,
+				9390990D15128D68006D414D /* InfoPlist.strings */,
+				9390990F15128D68006D414D /* MainStoryboard.storyboard */,
+				9390991115128D68006D414D /* GMno-Info.plist */,
+				9390991215128D68006D414D /* GMno-Prefix.pch */,
+				9390991315128D68006D414D /* main.m */,
+			);
+			name = "Supporting Files";
+			path = GMno;
+			sourceTree = "<group>";
+		};
 		93CD24D6151057820030ADF4 = {
 			isa = PBXGroup;
 			children = (
+				9390992415128DF8006D414D /* Supporting Files */,
 				9390990C15128D68006D414D /* GMno */,
 				93E948EF151117A800BDEAF5 /* libzbar.a */,
 				93E948E81511170A00BDEAF5 /* Libraries */,
@@ -300,7 +318,7 @@
 			dependencies = (
 			);
 			name = GMno;
-			productName = GMoma;
+			productName = GMno;
 			productReference = 93CD24E1151057830030ADF4 /* GMno.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -342,7 +360,6 @@
 				939098FE151289BD006D414D /* zbar-samples.png in Resources */,
 				9390991A15128D68006D414D /* InfoPlist.strings in Resources */,
 				9390991B15128D68006D414D /* MainStoryboard.storyboard in Resources */,
-				9390991C15128D68006D414D /* GMno-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,9 +460,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GMoma/GMno-Prefix.pch";
+				GCC_PREFIX_HEADER = "GMno/GMno-Prefix.pch";
 				HEADER_SEARCH_PATHS = "ZBarSDK/**";
-				INFOPLIST_FILE = "GMoma/GMno-Info.plist";
+				INFOPLIST_FILE = "GMno/GMno-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ZBarSDK\"",
@@ -463,9 +480,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GMoma/GMno-Prefix.pch";
+				GCC_PREFIX_HEADER = "GMno/GMno-Prefix.pch";
 				HEADER_SEARCH_PATHS = "ZBarSDK/**";
-				INFOPLIST_FILE = "GMoma/GMno-Info.plist";
+				INFOPLIST_FILE = "GMno/GMno-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ZBarSDK\"",

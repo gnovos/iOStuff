@@ -1,6 +1,6 @@
 //
 //  ZViewController.m
-//  GMoma
+//  GMno
 //
 //  Created by Mason Glaves on 3/13/12.
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
@@ -27,16 +27,7 @@
         type.text = [NSString stringWithFormat:@"FOUND %@", sym.typeName];
         code.text = sym.data;
         verdict.text = @"UNKNOWN";
-        
-//        NSURL *url = [NSURL URLWithString:@"https://gowalla.com/users/mattt.json"];
-//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//        
-//        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-//            NSLog(@"Name: %@ %@", [JSON valueForKeyPath:@"first_name"], [JSON valueForKeyPath:@"last_name"]);
-//        } failure:nil];
-//        
-//        [operation start];
-        
+                
     }
     
 }
