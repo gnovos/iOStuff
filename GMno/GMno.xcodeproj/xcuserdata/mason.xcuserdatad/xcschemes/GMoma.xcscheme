@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "93CD24E0151057830030ADF4"
-               BuildableName = "GMoma.app"
+               BuildableName = "GMno.app"
                BlueprintName = "GMno"
                ReferencedContainer = "container:GMno.xcodeproj">
             </BuildableReference>
@@ -32,7 +32,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "93CD24E0151057830030ADF4"
-            BuildableName = "GMoma.app"
+            BuildableName = "GMno.app"
             BlueprintName = "GMno"
             ReferencedContainer = "container:GMno.xcodeproj">
          </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "93CD24E0151057830030ADF4"
-            BuildableName = "GMoma.app"
+            BuildableName = "GMno.app"
             BlueprintName = "GMno"
             ReferencedContainer = "container:GMno.xcodeproj">
          </BuildableReference>
@@ -69,7 +69,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "93CD24E0151057830030ADF4"
-            BuildableName = "GMoma.app"
+            BuildableName = "GMno.app"
             BlueprintName = "GMno"
             ReferencedContainer = "container:GMno.xcodeproj">
          </BuildableReference>
