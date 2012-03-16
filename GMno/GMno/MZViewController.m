@@ -26,8 +26,7 @@
     NSLog(@"found %d symbols", [symbols count]);
     
     for (ZBarSymbol *sym in symbols) {
-        NSLog(@"TYPE %@ CODE: %@ | %d : %d", sym.typeName, sym.data, sym.quality, sym.count);
-        break;                
+        NSLog(@"TYPE %@ CODE: %@ QUALITY: %d", sym.typeName, sym.data, sym.quality);
     }
 
     for (ZBarSymbol *sym in symbols) {  
@@ -41,7 +40,17 @@
             code.text = barcode.code;
             name.text = barcode.name;
             description.text = barcode.description;
-            verdict.text = @"FOUND";
+            verdict.text = barcode.category;
+
+            if ([@"Conventional" isEqualToString:barcode.category]) {
+                verdict.backgroundColor = [UIColor yellowColor];
+            } else if ([@"Organic" isEqualToString:barcode.category]) {
+                verdict.backgroundColor = [UIColor greenColor];
+            } else if ([@"GMO" isEqualToString:barcode.category]) {
+                verdict.backgroundColor = [UIColor redColor];                
+            } else {
+                verdict.backgroundColor = [UIColor lightGrayColor];                                
+            }
         }];
         
         break;                

@@ -27,6 +27,7 @@
 		9390991E15128D68006D414D /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991515128D68006D414D /* MZAppDelegate.m */; };
 		9390991F15128D68006D414D /* MZBarcode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991715128D68006D414D /* MZBarcode.m */; };
 		9390992015128D68006D414D /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390991915128D68006D414D /* MZViewController.m */; };
+		9390995B1512B37A006D414D /* NSString+Match.m in Sources */ = {isa = PBXBuildFile; fileRef = 9390995A1512B379006D414D /* NSString+Match.m */; };
 		93CD24E6151057830030ADF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CD24E5151057830030ADF4 /* UIKit.framework */; };
 		93CD24E8151057830030ADF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CD24E7151057830030ADF4 /* Foundation.framework */; };
 		93CD24EA151057830030ADF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CD24E9151057830030ADF4 /* CoreGraphics.framework */; };
@@ -97,6 +98,8 @@
 		9390991815128D68006D414D /* MZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
 		9390991915128D68006D414D /* MZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
 		9390992515128E71006D414D /* MZConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZConstants.h; sourceTree = "<group>"; };
+		939099591512B379006D414D /* NSString+Match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Match.h"; sourceTree = "<group>"; };
+		9390995A1512B379006D414D /* NSString+Match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Match.m"; sourceTree = "<group>"; };
 		93CD24E1151057830030ADF4 /* GMno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93CD24E5151057830030ADF4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		93CD24E7151057830030ADF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -230,6 +233,7 @@
 				9390991815128D68006D414D /* MZViewController.h */,
 				9390991915128D68006D414D /* MZViewController.m */,
 				9390992215128DD1006D414D /* upc */,
+				9390995C1512B37F006D414D /* util */,
 			);
 			path = GMno;
 			sourceTree = "<group>";
@@ -254,6 +258,15 @@
 			);
 			name = "Supporting Files";
 			path = GMno;
+			sourceTree = "<group>";
+		};
+		9390995C1512B37F006D414D /* util */ = {
+			isa = PBXGroup;
+			children = (
+				939099591512B379006D414D /* NSString+Match.h */,
+				9390995A1512B379006D414D /* NSString+Match.m */,
+			);
+			name = util;
 			sourceTree = "<group>";
 		};
 		93CD24D6151057820030ADF4 = {
@@ -382,6 +395,7 @@
 				9390991E15128D68006D414D /* MZAppDelegate.m in Sources */,
 				9390991F15128D68006D414D /* MZBarcode.m in Sources */,
 				9390992015128D68006D414D /* MZViewController.m in Sources */,
+				9390995B1512B37A006D414D /* NSString+Match.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
