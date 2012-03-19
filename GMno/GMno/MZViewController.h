@@ -15,9 +15,11 @@
 @property(nonatomic, strong) IBOutlet UILabel* type;
 @property(nonatomic, strong) IBOutlet UILabel* code;
 @property(nonatomic, strong) IBOutlet UILabel* name;
-@property(nonatomic, strong) IBOutlet UILabel* description;
+@property(nonatomic, strong) IBOutlet UITextView* description;
 @property(nonatomic, strong) IBOutlet UILabel* verdict;
 
+@property(nonatomic, strong) IBOutlet UIButton* torch;
 
+- (IBAction) toggleTorch:(id)sender;
 
 @end
