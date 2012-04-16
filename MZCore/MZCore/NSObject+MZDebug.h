@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (Debug)
+@interface NSObject (MZDebug)
 
 @end

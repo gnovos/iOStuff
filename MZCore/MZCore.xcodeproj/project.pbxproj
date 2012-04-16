@@ -16,8 +16,8 @@
 		0C00D0FC153B98C1006356AB /* MZSingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C00D0FB153B98C1006356AB /* MZSingleton.h */; };
 		0C00D0FF153B99A6006356AB /* NSObject+MZThreading.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C00D0FD153B99A6006356AB /* NSObject+MZThreading.h */; };
 		0C00D100153B99A6006356AB /* NSObject+MZThreading.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00D0FE153B99A6006356AB /* NSObject+MZThreading.m */; };
-		0C00D103153B9CA0006356AB /* NSObject+Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C00D101153B9CA0006356AB /* NSObject+Debug.h */; };
-		0C00D104153B9CA0006356AB /* NSObject+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00D102153B9CA0006356AB /* NSObject+Debug.m */; };
+		0C00D103153B9CA0006356AB /* NSObject+MZDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C00D101153B9CA0006356AB /* NSObject+MZDebug.h */; };
+		0C00D104153B9CA0006356AB /* NSObject+MZDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00D102153B9CA0006356AB /* NSObject+MZDebug.m */; };
 		0C00D107153B9D35006356AB /* NSObject+MZProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C00D105153B9D35006356AB /* NSObject+MZProperties.h */; };
 		0C00D108153B9D35006356AB /* NSObject+MZProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00D106153B9D35006356AB /* NSObject+MZProperties.m */; };
 		0C00D10B153B9DB0006356AB /* NSString+MZRegexp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C00D109153B9DAF006356AB /* NSString+MZRegexp.h */; };
@@ -37,8 +37,8 @@
 		0C00D0FB153B98C1006356AB /* MZSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSingleton.h; sourceTree = "<group>"; };
 		0C00D0FD153B99A6006356AB /* NSObject+MZThreading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MZThreading.h"; sourceTree = "<group>"; };
 		0C00D0FE153B99A6006356AB /* NSObject+MZThreading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MZThreading.m"; sourceTree = "<group>"; };
-		0C00D101153B9CA0006356AB /* NSObject+Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Debug.h"; sourceTree = "<group>"; };
-		0C00D102153B9CA0006356AB /* NSObject+Debug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Debug.m"; sourceTree = "<group>"; };
+		0C00D101153B9CA0006356AB /* NSObject+MZDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MZDebug.h"; sourceTree = "<group>"; };
+		0C00D102153B9CA0006356AB /* NSObject+MZDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MZDebug.m"; sourceTree = "<group>"; };
 		0C00D105153B9D35006356AB /* NSObject+MZProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MZProperties.h"; sourceTree = "<group>"; };
 		0C00D106153B9D35006356AB /* NSObject+MZProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MZProperties.m"; sourceTree = "<group>"; };
 		0C00D109153B9DAF006356AB /* NSString+MZRegexp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MZRegexp.h"; sourceTree = "<group>"; };
@@ -110,8 +110,8 @@
 				0C00D0F2153B9749006356AB /* NSObject+MZSingleton.m */,
 				0C00D0FD153B99A6006356AB /* NSObject+MZThreading.h */,
 				0C00D0FE153B99A6006356AB /* NSObject+MZThreading.m */,
-				0C00D101153B9CA0006356AB /* NSObject+Debug.h */,
-				0C00D102153B9CA0006356AB /* NSObject+Debug.m */,
+				0C00D101153B9CA0006356AB /* NSObject+MZDebug.h */,
+				0C00D102153B9CA0006356AB /* NSObject+MZDebug.m */,
 				0C00D105153B9D35006356AB /* NSObject+MZProperties.h */,
 				0C00D106153B9D35006356AB /* NSObject+MZProperties.m */,
 				0C00D109153B9DAF006356AB /* NSString+MZRegexp.h */,
@@ -148,7 +148,7 @@
 				0C00D0F8153B97F7006356AB /* MZInvoker.h in Headers */,
 				0C00D0FC153B98C1006356AB /* MZSingleton.h in Headers */,
 				0C00D0FF153B99A6006356AB /* NSObject+MZThreading.h in Headers */,
-				0C00D103153B9CA0006356AB /* NSObject+Debug.h in Headers */,
+				0C00D103153B9CA0006356AB /* NSObject+MZDebug.h in Headers */,
 				0C00D107153B9D35006356AB /* NSObject+MZProperties.h in Headers */,
 				0C00D10B153B9DB0006356AB /* NSString+MZRegexp.h in Headers */,
 			);
@@ -209,7 +209,7 @@
 				0C00D0F4153B9749006356AB /* NSObject+MZSingleton.m in Sources */,
 				0C00D0F9153B97F7006356AB /* MZInvoker.m in Sources */,
 				0C00D100153B99A6006356AB /* NSObject+MZThreading.m in Sources */,
-				0C00D104153B9CA0006356AB /* NSObject+Debug.m in Sources */,
+				0C00D104153B9CA0006356AB /* NSObject+MZDebug.m in Sources */,
 				0C00D108153B9D35006356AB /* NSObject+MZProperties.m in Sources */,
 				0C00D10C153B9DB0006356AB /* NSString+MZRegexp.m in Sources */,
 			);

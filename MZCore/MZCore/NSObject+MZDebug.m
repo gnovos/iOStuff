@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "NSObject+Debug.h"
+#import "NSObject+MZDebug.h"
 #import "NSObject+MZProperties.h"
 #import "NSString+MZRegexp.h"
 #import <execinfo.h>
 
 #define kMZ_DEFAULT_BACKTRACE_DEPTH 128
 
-@implementation NSObject (Debug)
+@implementation NSObject (MZDebug)
 
 + (NSArray*) backtrace {
     return [self backtrace:kMZ_DEFAULT_BACKTRACE_DEPTH];    
