@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C00D0B1153B9616006356AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C00D0B0153B9616006356AB /* UIKit.framework */; };
+		0C00D0B3153B9616006356AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C00D0B2153B9616006356AB /* Foundation.framework */; };
+		0C00D0B5153B9616006356AB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C00D0B4153B9616006356AB /* CoreGraphics.framework */; };
+		0C00D0B7153B9616006356AB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C00D0B6153B9616006356AB /* CoreData.framework */; };
+		0C00D0BD153B9616006356AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C00D0BB153B9616006356AB /* InfoPlist.strings */; };
+		0C00D0BF153B9616006356AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00D0BE153B9616006356AB /* main.m */; };
+		0C00D0C3153B9616006356AB /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00D0C2153B9616006356AB /* MZAppDelegate.m */; };
+		0C00D0C6153B9616006356AB /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C00D0C4153B9616006356AB /* MainStoryboard.storyboard */; };
+		0C00D0C9153B9616006356AB /* detox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C00D0C7153B9616006356AB /* detox.xcdatamodeld */; };
+		0C00D0CC153B9616006356AB /* MZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00D0CB153B9616006356AB /* MZMainViewController.m */; };
+		0C00D0CF153B9616006356AB /* MZFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00D0CE153B9616006356AB /* MZFlipsideViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0C00D0AC153B9616006356AB /* detox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = detox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C00D0B0153B9616006356AB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0C00D0B2153B9616006356AB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0C00D0B4153B9616006356AB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0C00D0B6153B9616006356AB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0C00D0BA153B9616006356AB /* detox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "detox-Info.plist"; sourceTree = "<group>"; };
+		0C00D0BC153B9616006356AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C00D0BE153B9616006356AB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0C00D0C0153B9616006356AB /* detox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "detox-Prefix.pch"; sourceTree = "<group>"; };
+		0C00D0C1153B9616006356AB /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
+		0C00D0C2153B9616006356AB /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
+		0C00D0C5153B9616006356AB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		0C00D0C8153B9616006356AB /* detox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = detox.xcdatamodel; sourceTree = "<group>"; };
+		0C00D0CA153B9616006356AB /* MZMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZMainViewController.h; sourceTree = "<group>"; };
+		0C00D0CB153B9616006356AB /* MZMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZMainViewController.m; sourceTree = "<group>"; };
+		0C00D0CD153B9616006356AB /* MZFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZFlipsideViewController.h; sourceTree = "<group>"; };
+		0C00D0CE153B9616006356AB /* MZFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZFlipsideViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0C00D0A9153B9616006356AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C00D0B1153B9616006356AB /* UIKit.framework in Frameworks */,
+				0C00D0B3153B9616006356AB /* Foundation.framework in Frameworks */,
+				0C00D0B5153B9616006356AB /* CoreGraphics.framework in Frameworks */,
+				0C00D0B7153B9616006356AB /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C00D0A1153B9616006356AB = {
+			isa = PBXGroup;
+			children = (
+				0C00D0B8153B9616006356AB /* detox */,
+				0C00D0AF153B9616006356AB /* Frameworks */,
+				0C00D0AD153B9616006356AB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0C00D0AD153B9616006356AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C00D0AC153B9616006356AB /* detox.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0C00D0AF153B9616006356AB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C00D0B0153B9616006356AB /* UIKit.framework */,
+				0C00D0B2153B9616006356AB /* Foundation.framework */,
+				0C00D0B4153B9616006356AB /* CoreGraphics.framework */,
+				0C00D0B6153B9616006356AB /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0C00D0B8153B9616006356AB /* detox */ = {
+			isa = PBXGroup;
+			children = (
+				0C00D0C1153B9616006356AB /* MZAppDelegate.h */,
+				0C00D0C2153B9616006356AB /* MZAppDelegate.m */,
+				0C00D0C4153B9616006356AB /* MainStoryboard.storyboard */,
+				0C00D0CA153B9616006356AB /* MZMainViewController.h */,
+				0C00D0CB153B9616006356AB /* MZMainViewController.m */,
+				0C00D0CD153B9616006356AB /* MZFlipsideViewController.h */,
+				0C00D0CE153B9616006356AB /* MZFlipsideViewController.m */,
+				0C00D0C7153B9616006356AB /* detox.xcdatamodeld */,
+				0C00D0B9153B9616006356AB /* Supporting Files */,
+			);
+			path = detox;
+			sourceTree = "<group>";
+		};
+		0C00D0B9153B9616006356AB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C00D0BA153B9616006356AB /* detox-Info.plist */,
+				0C00D0BB153B9616006356AB /* InfoPlist.strings */,
+				0C00D0BE153B9616006356AB /* main.m */,
+				0C00D0C0153B9616006356AB /* detox-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0C00D0AB153B9616006356AB /* detox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C00D0D2153B9616006356AB /* Build configuration list for PBXNativeTarget "detox" */;
+			buildPhases = (
+				0C00D0A8153B9616006356AB /* Sources */,
+				0C00D0A9153B9616006356AB /* Frameworks */,
+				0C00D0AA153B9616006356AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = detox;
+			productName = detox;
+			productReference = 0C00D0AC153B9616006356AB /* detox.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0C00D0A3153B9616006356AB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MZ;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Masonsoft;
+			};
+			buildConfigurationList = 0C00D0A6153B9616006356AB /* Build configuration list for PBXProject "detox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0C00D0A1153B9616006356AB;
+			productRefGroup = 0C00D0AD153B9616006356AB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0C00D0AB153B9616006356AB /* detox */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0C00D0AA153B9616006356AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C00D0BD153B9616006356AB /* InfoPlist.strings in Resources */,
+				0C00D0C6153B9616006356AB /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0C00D0A8153B9616006356AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C00D0BF153B9616006356AB /* main.m in Sources */,
+				0C00D0C3153B9616006356AB /* MZAppDelegate.m in Sources */,
+				0C00D0C9153B9616006356AB /* detox.xcdatamodeld in Sources */,
+				0C00D0CC153B9616006356AB /* MZMainViewController.m in Sources */,
+				0C00D0CF153B9616006356AB /* MZFlipsideViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0C00D0BB153B9616006356AB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C00D0BC153B9616006356AB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0C00D0C4153B9616006356AB /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C00D0C5153B9616006356AB /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0C00D0D0153B9616006356AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0C00D0D1153B9616006356AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0C00D0D3153B9616006356AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "detox/detox-Prefix.pch";
+				INFOPLIST_FILE = "detox/detox-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0C00D0D4153B9616006356AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "detox/detox-Prefix.pch";
+				INFOPLIST_FILE = "detox/detox-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0C00D0A6153B9616006356AB /* Build configuration list for PBXProject "detox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C00D0D0153B9616006356AB /* Debug */,
+				0C00D0D1153B9616006356AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C00D0D2153B9616006356AB /* Build configuration list for PBXNativeTarget "detox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C00D0D3153B9616006356AB /* Debug */,
+				0C00D0D4153B9616006356AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0C00D0C7153B9616006356AB /* detox.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0C00D0C8153B9616006356AB /* detox.xcdatamodel */,
+			);
+			currentVersion = 0C00D0C8153B9616006356AB /* detox.xcdatamodel */;
+			path = detox.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 0C00D0A3153B9616006356AB /* Project object */;
+}
