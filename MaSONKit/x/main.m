@@ -13,45 +13,79 @@
 #include <mach/mach_time.h>
 #include <unistd.h>
 
-static uint64_t start;
-static uint64_t end;
-static uint64_t melapsed;
-static uint64_t jelapsed;
-
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        NSData* d = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"t" ofType:@"json"]];
+        NSData* d = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"tt" ofType:@"json"]];
            
-        NSLog(@"d len is %d", [d length]);
         JSONDecoder* decoder = [[JSONDecoder alloc] init];        
         NSDictionary* result;
         
         result = [MaSONKit parse:d]; 
-        NSLog(@"%d %@ %@", [result count], [result allKeys], result);
-        [MaSONKit releaseRoot];
+        NSLog(@"%@\n", result);
+        [MaSONKit freeRoot];
+           
+        uint64_t start = 0;
+        uint64_t end = 0;
+        uint64_t a = 0;
+        uint64_t b = 0;
         
-        uint64_t avg = 0;
+        uint64_t av = 0;
+        uint64_t bv = 0;
+        
+        int awin = 0;
+        int bwin = 0;
         
         for (int j=0;j<1000;j++) {
             
-            start = mach_absolute_time();            
-            for (int i =0;i<1000;i++) { 
-                result = [MaSONKit parse:d]; 
-                [MaSONKit releaseRoot];
-            }        
-            end = mach_absolute_time();        
-            melapsed = end - start;        
-            
-            start = mach_absolute_time();            
-            for (int i =0;i<1000;i++) { 
-                result = [decoder objectWithData:d]; 
+            if (j %2 ==0) {
+                start = mach_absolute_time();            
+                for (int i =0;i<1000;i++) { 
+                    result = [MaSONKit parse:d]; 
+                    //[MaSONKit freeRoot];
+                }        
+                end = mach_absolute_time();        
+                a = end - start;        
+                
+                start = mach_absolute_time();            
+                for (int i =0;i<1000;i++) {
+                    result = [decoder objectWithData:d];
+                }        
+                end = mach_absolute_time();        
+                b = end - start;      
+                
+            } else {
+                
+                start = mach_absolute_time();            
+                for (int i =0;i<1000;i++) { 
+                    result = [decoder objectWithData:d];
+                }        
+                end = mach_absolute_time();        
+                b = end - start;      
+                
+                start = mach_absolute_time();            
+                for (int i =0;i<1000;i++) { 
+                    result = [MaSONKit parse:d]; 
+                    //[MaSONKit freeRoot];
+                }        
+                end = mach_absolute_time();        
+                a = end - start;        
+                                
             }
-            end = mach_absolute_time();        
-            jelapsed = end - start;        
-                        
-            avg += (uint64_t)(((jelapsed / (double)melapsed) * 100) - 100);
-            NSLog(@"%llu:%llu %d%% faster (average %d%% faster)", melapsed, jelapsed, (int)((jelapsed / (double)melapsed) * 100) - 100, (int)(avg / (j+1)));
+            
+            av += a / 1000;
+            bv += b / 1000;
+
+            long v1 = av / (j+1);
+            long v2 = bv / (j+1);
+            
+            if (a < b) {
+                awin++;
+            } else {
+                bwin++;
+            }
+            
+            NSLog(@"\nAvB (%d/%d) a:%llu (%ld) b:%llu (%ld)", awin, bwin, a, v1, b, v2);                
             
         }
                 
