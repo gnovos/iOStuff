@@ -42,8 +42,8 @@ int main(int argc, char *argv[])
             end = mach_absolute_time();        
             melapsed = end - start;        
             NSLog(@"MK %d took %llu", j, melapsed);
-            
-//            NSLog(@"MK result is %@", n);
+
+            if (j == 0) { NSLog(@"MK result is %@", result);}
             
             start = mach_absolute_time();            
             for (int i =0;i<10000;i++) { 

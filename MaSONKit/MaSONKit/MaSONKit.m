@@ -281,9 +281,12 @@ static NSUInteger pos;
 static void fill(MaObject* object) {
     
     MaObject* value;
-    NSUInteger start;
-    MaString* key;
-    BOOL keymode = YES;
+    
+    char c;
+    register NSUInteger start;
+    register MaType type = object->null.type;
+
+    MaString* key = nil;
     
     for (; pos < length; pos++) {
         switch (bytes[pos]) {         
@@ -293,15 +296,16 @@ static void fill(MaObject* object) {
                 
             case '"': 
                 start = ++pos;
-                for (;bytes[pos] != '"';pos++) { if (bytes[pos] == '\\') pos++; }
+                for (;(c = bytes[pos]) != '"';pos++) { 
+                    if (c == '\\') { pos++; } else if (c > 127) { pos++; if (bytes[pos] > 127) { pos++; if (bytes[pos] > 127) { pos += 2; } } }
+                }
                 
-                if (keymode && object->null.type == MaHashType) {
+                if (key == nil && type == MaHashType) {
                     key = MaStringMake(start, pos - start);                                       
                     for (;bytes[pos] != ':';pos++);
-                    keymode = NO;
                 } else {
-                    MaSet(object, key, (MaObject*)MaStringMake(start, pos - start));                      
-                    keymode = YES;
+                    MaSet(object, key, (MaObject*)MaStringMake(start, pos - start)); 
+                    key = nil;
                 }                                                
                 break;  
             
@@ -318,27 +322,27 @@ static void fill(MaObject* object) {
             case '8':
             case '9': 
                 start = pos;
-                for (;'-' < bytes[pos] && bytes[pos] <= '9';pos++);                
+                for (;'-' < (c = bytes[pos]) && c <= '9';pos++);                
                 MaSet(object, key, (MaObject*)MaNumberMake(start, pos - start));                      
-                keymode = YES;
+                key = nil;
                 break;   
                 
             case 'n':
                 pos += 3;
                 MaSet(object, key, (MaObject*)&Mnull);
-                keymode = YES;
+                key = nil;
                 break;
                 
             case 't':
                 pos += 3;
                 MaSet(object, key, (MaObject*)&Mtrue);
-                keymode = YES;
+                key = nil;
                 break;
                 
             case 'f':
                 pos += 4;
                 MaSet(object, key, (MaObject*)&Mfalse);
-                keymode = YES;
+                key = nil;
                 break;
                 
             case '{':            
@@ -346,7 +350,7 @@ static void fill(MaObject* object) {
                 value = (MaObject*)MaHashMake();     
                 MaSet(object, key, value);
                 fill(value); 
-                keymode = YES;
+                key = nil;
                 break;            
             
             case '[': 
@@ -354,7 +358,7 @@ static void fill(MaObject* object) {
                 value = (MaObject*)MaArrayMake();
                 MaSet(object, key, value);
                 fill(value); 
-                keymode = YES;
+                key = nil;
                 break;                            
         }        
     }
@@ -364,9 +368,7 @@ static void fill(MaObject* object) {
         
     bytes = [data bytes];
     length = [data length];
-    pos = 0;
-    
-    for (;bytes[pos] != '{';pos++);
+    for (pos = 0;bytes[pos] != '{';pos++);
     pos++;
     
     MaObject* root = (MaObject*)MaHashMake();
