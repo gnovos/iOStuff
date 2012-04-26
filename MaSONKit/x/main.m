@@ -22,16 +22,11 @@ int main(int argc, char *argv[])
 {
     @autoreleasepool {
         NSData* d = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"t" ofType:@"json"]];
-//        NSString* s = @"{ \"firstName\": \"John\", \"last \\\\ \\\"my\\\" Name\" : \"Smith\", \"age\"      : 25, \"address\"  : { \"streetAddress\": \"21 2nd Street\", \"city\"         : \"New York\", \"states\"        : [ \"NY\", [\"CA\", 100]], \"postalCode\"   : \"10021\" },\"phoneNumber\":[{\"type\"  : \"home\", \"number\": \"212 555-1234\" }, { \"type\"  : \"fax\", \"number\": \"646 555-4567\"}]  \n}";
-//        NSString* s = @"{ \"tx\" : [null, true, false], \"testnull\" : null, \"things\" : [ { \"a\" : \"b\" }, [ 5, 4, 3, 2, 1 ], \"thing1\", \"thing2\", 12345 ], \"name\": \"John\", \"age\" : 25, \"addresses\" : { \"mailing\" : { \"street\" : \"addy1\", \"post\" : 44321 }, \"shipping\" : { \"street\" : \"addy2\", \"post\" : 12345 } } }";
-//        NSLog(@"%@", s);
-
-        //NSLog(@"%@", [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding]);
-                
-//        NSData* d = [s dataUsingEncoding:NSUTF8StringEncoding];
            
         JSONDecoder* decoder = [[JSONDecoder alloc] init];        
         NSDictionary* result;
+        
+        result = [MaSONKit parse:d];
         
         for (int j=0;j<10;j++) {
             

@@ -124,35 +124,34 @@ static inline void MaSet(MaObject* o, MaString* key, MaObject* value) {
 
 static void MaFree(MaObject* o) {
   
-//xxx do this better    
-//    switch (o->null.type) {
-//        case MaHashType:
-//            
-//            for (int i=0;i < o->h.length;i++) {
-//                MaFree((MaObject*)o->h.keys[i]);
-//                MaFree(o->h.values[i]);
-//            }
-//            
-//            free(o->h.keys);
-//            free(o->h.values);
-//            
-//            free(o);
-//            
-//            break;
-//        case MaArrayType:
-//            for (int i =0;i<o->a.length;i++) {
-//                MaFree(o->a.items[i]);
-//            }
-//            free(o->a.items);
-//            free(o);
-//            break;
-//        case MaNumberType:
-//        case MaStringType:
-//            free(o);
-//            break;
-//        default:
-//            break;
-//    }    
+    switch (o->null.type) {
+        case MaHashType:
+            
+            for (int i=0;i < o->h.length;i++) {
+                MaFree((MaObject*)o->h.keys[i]);
+                MaFree(o->h.values[i]);
+            }
+            
+            free(o->h.keys);
+            free(o->h.values);
+            
+            free(o);
+            
+            break;
+        case MaArrayType:
+            for (int i =0;i<o->a.length;i++) {
+                MaFree(o->a.items[i]);
+            }
+            free(o->a.items);
+            free(o);
+            break;
+        case MaNumberType:
+        case MaStringType:
+            free(o);
+            break;
+        default:
+            break;
+    }    
     
 }
 
@@ -246,30 +245,29 @@ inline static id NSObjectFromMaObject(MaObject* o, NSData* backing) {
     if (self = [super init]) { wrapped = obj; data = d; }
     return self;
 }
-- (void) dealloc { MaFree(wrapped); wrapped = nil; data = nil; }
 - (NSUInteger)count { return wrapped->h.length; }
 - (id)objectAtIndex:(NSUInteger)index { return NSObjectFromMaObject(wrapped->a.items[index], data); }
 @end
 
-@implementation MaDictionaryWrapper { MaObject* wrapped; NSData* data; }
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d {
-    if (self = [super init]) { wrapped = obj; data = d; }
+@implementation MaDictionaryWrapper { BOOL root; MaObject* wrapped; NSData* data; }
+- (id) initRootWithMaObject:(MaObject*)obj andData:(NSData*)d {
+    if (self = [super init]) { root = YES; wrapped = obj; data = d; }
     return self;
 }
-- (void) dealloc { MaFree(wrapped); wrapped = nil; data = nil; }
+- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d {
+    if (self = [super init]) { root = NO; wrapped = obj; data = d; }
+    return self;
+}
+- (void) dealloc { if (root) { MaFree(wrapped); } }
 - (NSUInteger)count { return wrapped->h.length; }
+- (NSEnumerator*) keyEnumerator { return [[MaEnumerator alloc] initWithMaObject:wrapped andData:data]; }
 - (id) objectForKey:(id)key {
-    
     for (int i = 0; i < wrapped->h.length; i++) {
         NSString* k = NSObjectFromMaObject((MaObject*)wrapped->h.keys[i], data);
         if ([k isEqualToString:key]) { return NSObjectFromMaObject(wrapped->h.values[i], data); }
     }
-    
     return nil;
 }
-
-- (NSEnumerator*) keyEnumerator { return [[MaEnumerator alloc] initWithMaObject:wrapped andData:data]; }
-
 @end
 
 @implementation MaSONKit
@@ -379,8 +377,8 @@ static void fill(MaObject* object) {
     length = 0;
     pos = 0;
     
-    return NSObjectFromMaObject(root, data);
-    
+    return [[MaDictionaryWrapper alloc] initRootWithMaObject:root andData:data];
+        
 }
 
 @end
