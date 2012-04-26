@@ -53,9 +53,7 @@
                "from_user_id":14093707,
                
                "from_user_id_str":"14093707",
-               
-               "geo":null,
-               
+                              
                "id":122032448266698752,
                
                "id_str":"122032448266698752",
@@ -77,9 +75,7 @@
                "text":"Reminder: Blue Angels practice today http://t.co/L9JXJ2ee",
                
                "to_user_id":true,
-               
-               "to_user_id_str":null
-               
+                              
                },
                
                {
@@ -97,9 +93,7 @@
                "from_user_id":2242041,
                
                "from_user_id_str":"2242041",
-               
-               "geo":null,
-               
+                              
                "id":122033683212419072,
                
                "id_str":"122033683212419072",
@@ -119,11 +113,7 @@
                "source":"&lt;a href=&quot;http://twitter.com/&quot;&gt;web&lt;/a&gt;",
                
                "text":"Starting to hear Blue Angels... Not such angels with all of the noise and carbon pollution.",
-               
-               "to_user_id":null,
-               
-               "to_user_id_str":null
-               
+                              
                },
                
                {
@@ -141,8 +131,6 @@
                "from_user_id":182107587,
                
                "from_user_id_str":"182107587",
-               
-               "geo":null,
                
                "id":122033350327279617,
                
@@ -163,11 +151,7 @@
                "source":"&lt;a href=&quot;http://twitter.com/&quot;&gt;web&lt;/a&gt;",
                
                "text":"BZZZzzzZzZzzzZZZZZzZz WHAT? I CAN'T HEAR YOU. THERE ARE BLUE ANGELS. ZZZzzZZZ!",
-               
-               "to_user_id":null,
-               
-               "to_user_id_str":null
-               
+                              
                },
                
                {
@@ -186,8 +170,6 @@
                
                "from_user_id_str":"265656068",
                
-               "geo":null,
-               
                "id":122078461840982016,
                
                "id_str":"122078461840982016",
@@ -205,11 +187,7 @@
                "source":"&lt;a href=&quot;http://dlvr.it&quot; rel=&quot;nofollow&quot;&gt;dlvr.it&lt;/a&gt;",
                
                "text":"SF Fleet Week to open with Blue Angels flyovers | Student ...",
-               
-               "to_user_id":null,
-               
-               "to_user_id_str":null
-               
+                              
                },
                
                {
@@ -228,8 +206,6 @@
                
                "from_user_id_str":"15912539",
                
-               "geo":null,
-               
                "id":122078393641603072,
                
                "id_str":"122078393641603072",
@@ -247,11 +223,7 @@
                "source":"&lt;a href=&quot;http://itunes.apple.com/us/app/twitter/id409789998?mt=12&quot; rel=&quot;nofollow&quot;&gt;Twitter for Mac&lt;/a&gt;",
                
                "text":"RT @gzahnd: WAKE UP HIPPIES, THE BLUE ANGELS ARE IN TOWN!",
-               
-               "to_user_id":null,
-               
-               "to_user_id_str":null
-               
+                              
                },
                
                {
@@ -270,8 +242,6 @@
                
                "from_user_id_str":"32653550",
                
-               "geo":null,
-               
                "id":122078309004742656,
                
                "id_str":"122078309004742656",
@@ -289,11 +259,7 @@
                "source":"&lt;a href=&quot;http://ubersocial.com&quot; rel=&quot;nofollow&quot;&gt;\u00DCberSocial for BlackBerry&lt;/a&gt;",
                
                "text":"Thursday - Just watched the Blue Angels practice over SF Bay Impressive! What a background.  GGB & Alcatraz. ;) .",
-               
-               "to_user_id":null,
-               
-               "to_user_id_str":null
-               
+                              
                },
                
                {
@@ -332,8 +298,6 @@
                
                "from_user_id_str":"20717004",
                
-               "geo":null,
-               
                "id":122078271478317056,
                
                "id_str":"122078271478317056",
@@ -351,11 +315,7 @@
                "source":"&lt;a href=&quot;http://dlvr.it&quot; rel=&quot;nofollow&quot;&gt;dlvr.it&lt;/a&gt;",
                
                "text":"10/8/11: Blue Angels Wine Tasting | Treasure Island http://t.co/fyL8Rs5f",
-               
-               "to_user_id":null,
-               
-               "to_user_id_str":null
-               
+                              
                },
                
                {
@@ -394,8 +354,6 @@
                
                "from_user_id_str":"52736683",
                
-               "geo":null,
-               
                "id":122078043664695296,
                
                "id_str":"122078043664695296",
@@ -414,9 +372,7 @@
                
                "text":"San Francisco 2010 Fleet week photos and video http://t.co/KfzEqOWM",
                
-               "to_user_id":null,
-               
-               "to_user_id_str":null
+               "null_val":null
                
                }
                

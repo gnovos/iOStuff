@@ -23,34 +23,35 @@ int main(int argc, char *argv[])
     @autoreleasepool {
         NSData* d = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"t" ofType:@"json"]];
            
+        NSLog(@"d len is %d", [d length]);
         JSONDecoder* decoder = [[JSONDecoder alloc] init];        
         NSDictionary* result;
         
-        result = [MaSONKit parse:d];
+        result = [MaSONKit parse:d]; 
+        NSLog(@"%d %@ %@", [result count], [result allKeys], result);
+        [MaSONKit releaseRoot];
         
-        for (int j=0;j<10;j++) {
+        uint64_t avg = 0;
+        
+        for (int j=0;j<1000;j++) {
             
             start = mach_absolute_time();            
-            for (int i =0;i<10000;i++) { 
+            for (int i =0;i<1000;i++) { 
                 result = [MaSONKit parse:d]; 
+                [MaSONKit releaseRoot];
             }        
             end = mach_absolute_time();        
             melapsed = end - start;        
-            NSLog(@"MK %d took %llu", j, melapsed);
-
-            if (j == 0) { NSLog(@"MK result is %@", result);}
             
             start = mach_absolute_time();            
-            for (int i =0;i<10000;i++) { 
+            for (int i =0;i<1000;i++) { 
                 result = [decoder objectWithData:d]; 
             }
             end = mach_absolute_time();        
             jelapsed = end - start;        
-            NSLog(@"JK %d took %llu", j, jelapsed);
-            
-//            NSLog(@"JK result is %@", result);
-            
-            NSLog(@"%d%% faster", (int)((jelapsed / (double)melapsed) * 100) - 100);
+                        
+            avg += (uint64_t)(((jelapsed / (double)melapsed) * 100) - 100);
+            NSLog(@"%llu:%llu %d%% faster (average %d%% faster)", melapsed, jelapsed, (int)((jelapsed / (double)melapsed) * 100) - 100, (int)(avg / (j+1)));
             
         }
                 

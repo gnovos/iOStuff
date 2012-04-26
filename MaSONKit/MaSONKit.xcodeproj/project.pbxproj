@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0F34E3154914CC00B4A805 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C0F34E2154914CC00B4A805 /* sample.json */; };
 		0CECC8A41547576E00148794 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CECC8A31547576E00148794 /* Foundation.framework */; };
 		0CECC8AA1547576E00148794 /* MaSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CECC8A91547576E00148794 /* MaSONKit.m */; };
 		0CECC8C2154758AF00148794 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CECC8C1154758AF00148794 /* UIKit.framework */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C0F34E2154914CC00B4A805 /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = sample.json; path = ../../sample.json; sourceTree = "<group>"; };
 		0CECC8A01547576E00148794 /* libMaSONKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMaSONKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CECC8A31547576E00148794 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0CECC8A71547576E00148794 /* MaSONKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MaSONKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				0CECC8C9154758AF00148794 /* InfoPlist.strings */,
 				0CECC8CC154758AF00148794 /* main.m */,
 				0CECC8CE154758AF00148794 /* x-Prefix.pch */,
+				0C0F34E2154914CC00B4A805 /* sample.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			files = (
 				0CECC8CB154758AF00148794 /* InfoPlist.strings in Resources */,
 				0CECC8E51548B44D00148794 /* t.json in Resources */,
+				0C0F34E3154914CC00B4A805 /* sample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,9 +325,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "x/x-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					NS_BLOCK_ASSERTIONS,
+				);
 				INFOPLIST_FILE = "x/x-Info.plist";
+				OTHER_CFLAGS = "-funroll-loops";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -333,6 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "x/x-Prefix.pch";
 				INFOPLIST_FILE = "x/x-Info.plist";
