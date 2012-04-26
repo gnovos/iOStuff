@@ -364,7 +364,7 @@ static inline void fill(MaObject* const object) {
 }
 
 + (NSDictionary*) parse:(NSData*)data {
-        
+    
     bytes = [data bytes];
     length = [data length];
     for (pos = 0;bytes[pos++] != '{';);

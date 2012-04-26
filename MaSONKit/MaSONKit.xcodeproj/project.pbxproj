@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C0F34E3154914CC00B4A805 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C0F34E2154914CC00B4A805 /* sample.json */; };
+		0C0F34FF1549C1DE00B4A805 /* tt.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C0F34FE1549C1DE00B4A805 /* tt.json */; };
 		0CECC8A41547576E00148794 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CECC8A31547576E00148794 /* Foundation.framework */; };
 		0CECC8AA1547576E00148794 /* MaSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CECC8A91547576E00148794 /* MaSONKit.m */; };
 		0CECC8C2154758AF00148794 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CECC8C1154758AF00148794 /* UIKit.framework */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		0C0F34E2154914CC00B4A805 /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = sample.json; path = ../../sample.json; sourceTree = "<group>"; };
+		0C0F34FE1549C1DE00B4A805 /* tt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = tt.json; path = ../../tt.json; sourceTree = "<group>"; };
 		0CECC8A01547576E00148794 /* libMaSONKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMaSONKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CECC8A31547576E00148794 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0CECC8A71547576E00148794 /* MaSONKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MaSONKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		0CECC8C6154758AF00148794 /* x */ = {
 			isa = PBXGroup;
 			children = (
+				0C0F34FE1549C1DE00B4A805 /* tt.json */,
 				0CECC8C7154758AF00148794 /* Supporting Files */,
 				0CECC8E41548B44D00148794 /* t.json */,
 			);
@@ -216,6 +219,7 @@
 				0CECC8CB154758AF00148794 /* InfoPlist.strings in Resources */,
 				0CECC8E51548B44D00148794 /* t.json in Resources */,
 				0C0F34E3154914CC00B4A805 /* sample.json in Resources */,
+				0C0F34FF1549C1DE00B4A805 /* tt.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,12 +332,11 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "x/x-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					NS_BLOCK_ASSERTIONS,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = NS_BLOCK_ASSERTIONS;
+				GCC_UNROLL_LOOPS = YES;
 				INFOPLIST_FILE = "x/x-Info.plist";
-				OTHER_CFLAGS = "-funroll-loops";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-DNS_BLOCK_ASSERTIONS";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -346,7 +349,9 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "x/x-Prefix.pch";
+				GCC_UNROLL_LOOPS = YES;
 				INFOPLIST_FILE = "x/x-Info.plist";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-DNS_BLOCK_ASSERTIONS";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

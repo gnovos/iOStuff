@@ -24,6 +24,10 @@ int main(int argc, char *argv[])
         result = [MaSONKit parse:d]; 
         NSLog(@"%@\n", result);
         [MaSONKit freeRoot];
+        
+        sleep(100);
+        
+        if (1) return 0;
            
         uint64_t start = 0;
         uint64_t end = 0;
