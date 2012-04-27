@@ -122,7 +122,7 @@ static inline void MaSet(MaObject* const o, MaString* const key, MaObject* const
     
 }
 
-static void MaFree(MaObject* const o) {
+static inline void MaFree(MaObject* const o) {
     
     switch (o->null.type) {
         case MaHashType:
@@ -272,15 +272,12 @@ inline static id NSObjectFromMaObject(MaObject* o, NSData* backing) {
 
 static MaObject* root;
 
-static inline const char* fill(register const char* bytes, register MaObject* const object) {
+static inline const char* fill(register const char* bytes, register MaObject* const head) {
     
-    MaObject* value;
-    
-    register const char * start;
-    register NSUInteger len;
-    register MaType type = object->null.type;
-    
+    MaObject* value = nil;    
     MaString* key = nil;
+
+    register NSUInteger len;    
     
     for (;;) {
         switch (*(++bytes)) {  
@@ -290,21 +287,23 @@ static inline const char* fill(register const char* bytes, register MaObject* co
                 return bytes;                
                 
             case 34: 
-                start = ++bytes;
+                ++bytes;
                 len = 0;
                 for (;*(bytes+len) != 34; len++) { 
                     if (*(bytes+len) == 92) { len++; } 
                     else if (*(bytes+len) > 127) { len++; if (*(bytes+len) > 127) { len++; if (*(bytes+len) > 127) { len += 2;} } }
                 }
-                bytes += len;        
                 
-                if (key == nil && type == MaHashType) {
-                    key = MaStringMake(start, len);                                       
+                if (key == nil && head->null.type == MaHashType) {
+                    key = MaStringMake(bytes, len);  
+                    bytes += len;
                     for (;*(++bytes) != 58;);
                 } else {
-                    MaSet(object, key, (MaObject*)MaStringMake(start, len)); 
+                    MaSet(head, key, (MaObject*)MaStringMake(bytes, len)); 
+                    bytes += len;
                     key = nil;
                 }                                                
+
                 break;  
                 
             case 45:
@@ -319,45 +318,42 @@ static inline const char* fill(register const char* bytes, register MaObject* co
             case 55:
             case 56:
             case 57: 
-                start = bytes;
                 len = 0;
-                for (;*(bytes + len) >= 45 && *(bytes + len) <= 57;len++); 
-                
+                for (;*(bytes + len) >= 45 && *(bytes + len) <= 57;len++);                                 
+                MaSet(head, key, (MaObject*)MaNumberMake(bytes, len));                  
                 bytes += len-1;
-                
-                MaSet(object, key, (MaObject*)MaNumberMake(start, len));                      
                 key = nil;
                 break;   
                 
             case 123:            
                 value = (MaObject*)MaHashMake();     
-                MaSet(object, key, value);
+                MaSet(head, key, value);
                 bytes = fill(bytes, value); 
                 key = nil;
                 break;            
                 
             case 91: 
                 value = (MaObject*)MaArrayMake();
-                MaSet(object, key, value);
+                MaSet(head, key, value);
                 bytes = fill(bytes, value); 
                 key = nil;
                 break;                            
                 
             case 110:
                 bytes += 4;
-                MaSet(object, key, (MaObject*)&Mnull);
+                MaSet(head, key, (MaObject*)&Mnull);
                 key = nil;
                 break;
                 
             case 116:
                 bytes += 4;
-                MaSet(object, key, (MaObject*)&Mtrue);
+                MaSet(head, key, (MaObject*)&Mtrue);
                 key = nil;
                 break;
                 
             case 102:
                 bytes += 5;
-                MaSet(object, key, (MaObject*)&Mfalse);
+                MaSet(head, key, (MaObject*)&Mfalse);
                 key = nil;
                 break;                
         }        
