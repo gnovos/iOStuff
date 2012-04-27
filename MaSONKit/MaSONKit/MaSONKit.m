@@ -272,94 +272,7 @@ inline static id NSObjectFromMaObject(MaObject* o, NSData* backing) {
 
 static MaObject* root;
 
-static inline int fill(register const char* const bytes, register NSUInteger pos, MaObject* const object) {
-    
-    MaObject* value;
-    
-    register NSUInteger start;
-    register MaType type = object->null.type;
-    
-    MaString* key = nil;
-    
-    for (;;pos++) {
-        switch (bytes[pos]) { 
-            case 0:
-            case 93:
-            case 125:
-                return pos;                
-                
-            case 34: 
-                start = ++pos;
-                for (;bytes[++pos] != 34;) { 
-                    if (bytes[pos] == 92) { ++pos; } else if (bytes[pos] > 127) { ++pos; if (bytes[pos] > 127) { ++pos; if (bytes[pos] > 127) { pos += 2; } } }
-                }
-                
-                if (key == nil && type == MaHashType) {
-                    key = MaStringMake(&bytes[start], pos - start);                                       
-                    for (;bytes[++pos] != 58;);
-                } else {
-                    MaSet(object, key, (MaObject*)MaStringMake(&bytes[start], pos - start)); 
-                    key = nil;
-                }                                                
-                break;  
-                
-            case 45:
-            case 46:
-            case 48:
-            case 49:
-            case 50:
-            case 51:
-            case 52:
-            case 53:
-            case 54:
-            case 55:
-            case 56:
-            case 57: 
-                start = pos;
-                for (;bytes[pos + 1] >= 45 && bytes[pos + 1] <= 57;++pos);                
-                MaSet(object, key, (MaObject*)MaNumberMake(&bytes[start], (pos + 1) - start));
-                key = nil;
-                break;   
-                
-            case 123:            
-                ++pos;
-                value = (MaObject*)MaHashMake();     
-                MaSet(object, key, value);
-                pos = fill(bytes, pos, value); 
-                key = nil;
-                break;            
-                
-            case 91: 
-                ++pos;
-                value = (MaObject*)MaArrayMake();
-                MaSet(object, key, value);
-                pos = fill(bytes, pos, value); 
-                key = nil;
-                break;                            
-                
-            case 110:
-                pos += 3;
-                MaSet(object, key, (MaObject*)&Mnull);
-                key = nil;
-                break;
-                
-            case 116:
-                pos += 3;
-                MaSet(object, key, (MaObject*)&Mtrue);
-                key = nil;
-                break;
-                
-            case 102:
-                pos += 4;
-                MaSet(object, key, (MaObject*)&Mfalse);
-                key = nil;
-                break;
-                
-        }        
-    }
-}
-
-static inline const char* pfill(register const char* bytes, MaObject* const object) {
+static inline const char* fill(register const char* bytes, register MaObject* const object) {
     
     MaObject* value;
     
@@ -419,14 +332,14 @@ static inline const char* pfill(register const char* bytes, MaObject* const obje
             case 123:            
                 value = (MaObject*)MaHashMake();     
                 MaSet(object, key, value);
-                bytes = pfill(bytes, value); 
+                bytes = fill(bytes, value); 
                 key = nil;
                 break;            
                 
             case 91: 
                 value = (MaObject*)MaArrayMake();
                 MaSet(object, key, value);
-                bytes = pfill(bytes, value); 
+                bytes = fill(bytes, value); 
                 key = nil;
                 break;                            
                 
@@ -453,23 +366,11 @@ static inline const char* pfill(register const char* bytes, MaObject* const obje
 
 + (NSDictionary*) parse:(NSData*)data {
     
-    const char * bytes = [data bytes];
-    NSUInteger pos = 0;
-    for (pos = 0;bytes[pos++] != '{';);
-    root = (MaObject*)MaHashMake();
-    
-    fill(bytes, pos, root);        
-                
-    return [[MaDictionaryWrapper alloc] initRootWithMaObject:root andData:data];        
-}
-
-+ (NSDictionary*) pparse:(NSData*)data {
-    
     const char* bytes = [data bytes];
     for (;*bytes != '{';bytes++);
     
     root = (MaObject*)MaHashMake();    
-    pfill(bytes, root);        
+    fill(bytes, root);        
     
     bytes = nil;
     

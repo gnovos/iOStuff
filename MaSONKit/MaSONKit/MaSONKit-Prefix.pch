@@ -1,7 +1,6 @@
 //
 // Prefix header for all source files of the 'MaSONKit' target in the 'MaSONKit' project
 //
-#define NS_BLOCK_ASSERTIONS
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
