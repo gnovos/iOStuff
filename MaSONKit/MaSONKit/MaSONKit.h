@@ -11,6 +11,5 @@
 @interface MaSONKit : NSObject
 
 + (NSMutableDictionary*) parse:(NSData*)data;
-+ (void) freeRoot;
 
 @end

@@ -45,28 +45,32 @@
     NSData* data = [[NSData alloc] initWithContentsOfFile:path];
     
     NSLog(@"%@", [MaSONKit parse:data]);
-    
+            
     uint64_t start, end, elapsed = 0;
-    int count = 5000;
+    int count = 10;
     
-    elapsed = 0;
-    for (int i =0;i<count;i++) {
-        start = mach_absolute_time();    
-        [MaSONKit parse:data];
-        end = mach_absolute_time();    
-        elapsed += end - start;    
-        [MaSONKit freeRoot];
-    }    
-    NSLog(@"MaSONKit took %llu", elapsed);
+    for (int i =0;i<10;i++) {
+        elapsed = 0;
+        count += count * i;
+        for (int i =0;i<count;i++) {
+            start = mach_absolute_time();    
+            [MaSONKit parse:data];
+            end = mach_absolute_time();    
+            elapsed += end - start;    
+        }    
+        NSLog(@"at %d MaSONKit took %llu", count, elapsed);
+        
+        elapsed = 0;
+        for (int i =0;i<count;i++) {
+            start = mach_absolute_time();    
+            [d objectWithData:data];
+            end = mach_absolute_time();    
+            elapsed += end - start;    
+        }    
+        NSLog(@"at %d JSONKit  took %llu\n\n", count, elapsed);
+        
+    }
     
-    elapsed = 0;
-    for (int i =0;i<count;i++) {
-        start = mach_absolute_time();    
-        [d objectWithData:data];
-        end = mach_absolute_time();    
-        elapsed += end - start;    
-    }    
-    NSLog(@"JSONKit took %llu", elapsed);
 
 }
 

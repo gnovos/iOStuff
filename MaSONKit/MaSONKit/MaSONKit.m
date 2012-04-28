@@ -8,113 +8,130 @@
 
 #import "MaSONKit.h"
 
-#define MaInitialCapacity 32
+#define kMaPageCapacity 256
+#define kMaMaxPages 256
 
-static NSUInteger arrayCapacityWindow = MaInitialCapacity;
-static NSUInteger hashCapacityWindow = MaInitialCapacity;
+#define kMaInitialCapacity 32
 
-typedef enum { MaNullType, MaBoolType, MaStringType, MaNumberType, MaArrayType, MaHashType } MaType;
+static NSUInteger arrayCapacityWindow = kMaInitialCapacity;
+static NSUInteger hashCapacityWindow = kMaInitialCapacity;
 
-typedef struct { 
-    MaType type; 
-} MaNull;
+typedef enum { MaNull, MaTrue, MaFalse, MaString, MaNumber, MaArray, MaHash } MaType;
 
-typedef struct { 
-    MaType type; 
-    BOOL value; 
-} MaBool;
-
-typedef struct { 
+typedef struct _MaObject { 
     MaType type; 
     const char* start; 
     NSUInteger length; 
-} MaString;
-
-typedef struct { 
-    MaType type; 
-    const char* start;           
-    NSUInteger length;                             
-} MaNumber;
-
-typedef struct { 
-    MaType type; 
-    NSUInteger capacity;               
-    NSUInteger length; 
-    union MaObjectU** items; 
-} MaArray;
-
-typedef struct { 
-    MaType type; 
     NSUInteger capacity; 
-    NSUInteger length; 
-    MaString** keys; 
-    union MaObjectU** values; 
-} MaHash;
+    struct _MaObject** keys; 
+    struct _MaObject** values;     
+} MaObject;
 
-typedef union MaObjectU { MaNull null; MaBool b; MaString s; MaNumber n; MaArray a; MaHash h; } MaObject;
+typedef struct {
+    NSInteger index;    
+    NSInteger count;    
+    MaObject** pages;    
+} MaBuffer;
 
-static const MaNull Mnull  = { MaNullType        };
-static const MaBool Mtrue  = { MaBoolType, true  };
-static const MaBool Mfalse = { MaBoolType, false };
+static inline MaBuffer* MaBufferMake() { 
+    MaBuffer* buffer = malloc(sizeof(MaBuffer));
+    buffer->index = 0;
+    buffer->count = 0;
+    buffer->pages = malloc(kMaMaxPages * sizeof(MaObject*));    
+    return buffer;
+}
 
-static inline MaString* MaStringMake(const char* start, const NSUInteger length) { 
-    MaString* s = malloc(sizeof(MaString));
-    s->type = MaStringType; 
-    s->start = start; 
+static inline MaObject* MaMalloc(MaBuffer* const buffer, const MaType const type) { 
+    if (buffer->index >= buffer->count * kMaPageCapacity) {
+        if (buffer->count == kMaMaxPages) {
+            abort();
+        }
+        buffer->pages[buffer->count++] = malloc(kMaPageCapacity * sizeof(MaObject));
+    }
+    
+    int page = buffer->index / kMaPageCapacity;
+    int index = buffer->index % kMaPageCapacity;
+    
+    MaObject* o = &buffer->pages[page][index];
+    buffer->index++;
+    
+    o->type = type; 
+    switch (type) {
+        case MaHash:  
+            o->capacity = hashCapacityWindow; 
+            o->keys = malloc(o->capacity * sizeof(MaObject*));
+        case MaArray:            
+            o->capacity = arrayCapacityWindow; 
+            o->values = malloc(o->capacity * sizeof(MaObject*));
+        default:
+            o->start = 0;
+            o->length = 0;
+    }
+    return o;    
+}
+
+static const MaObject MaNullObject  = { MaNull  };
+static const MaObject MaTrueObject  = { MaTrue  };
+static const MaObject MaFalseObject = { MaFalse };
+
+static inline MaObject* MaObjectMake(MaBuffer *buffer, const MaType type) { 
+    MaObject* o = MaMalloc(buffer, type);
+    o->type = type; 
+    switch (type) {
+        case MaHash:  
+            o->capacity = hashCapacityWindow; 
+            o->keys = malloc(o->capacity * sizeof(MaObject*));
+        case MaArray:            
+            o->capacity = arrayCapacityWindow; 
+            o->values = malloc(o->capacity * sizeof(MaObject*));
+        default:
+            o->start = 0;
+            o->length = 0;
+    }
+    return o;
+}
+
+static inline MaObject* MaStringMake(MaBuffer *buffer, const char* start, const NSUInteger length) { 
+    MaObject* s = MaObjectMake(buffer, MaString);
+    s->start = start;
     s->length = length; 
     return s;
 }
 
-static inline MaNumber* MaNumberMake(const char* start, const NSUInteger length) { 
-    MaNumber* n = malloc(sizeof(MaNumber));
-    n->type = MaNumberType; 
+static inline MaObject* MaNumberMake(MaBuffer *buffer, const char* start, const NSUInteger length) { 
+    MaObject* n = MaObjectMake(buffer, MaNumber);
     n->start = start; 
     n->length = length; 
     return n;
 }
 
-static inline MaArray* MaArrayMake() { 
-    MaArray* a  = malloc(sizeof(MaArray));
-    a->type     = MaArrayType;
-    a->capacity = arrayCapacityWindow;    
-    a->items    = malloc(a->capacity * sizeof(MaObject)); 
-    a->length   = 0;
-    return a;
-}
+static inline MaObject* MaArrayMake(MaBuffer *buffer) { return MaObjectMake(buffer, MaArray); }
 
-static inline MaHash* MaHashMake() { 
-    MaHash* h   = malloc(sizeof(MaHash));
-    h->type     = MaHashType;
-    h->capacity = hashCapacityWindow;    
-    h->keys     = malloc(h->capacity * sizeof(MaString*));
-    h->values   = malloc(h->capacity * sizeof(MaObject*)); 
-    h->length   = 0;
-    return h;
-}
+static inline MaObject* MaHashMake(MaBuffer *buffer) { return MaObjectMake(buffer, MaHash); }
 
-static inline void MaSet(MaObject* const o, MaString* const key, MaObject* const value) {
+static inline void MaSet(MaObject* const o, MaObject* key, MaObject* value) {
     
-    switch (o->null.type) {
-        case MaHashType:
-            if (o->h.length == o->h.capacity) {
-                o->h.capacity += o->h.capacity;
-                hashCapacityWindow = MAX(hashCapacityWindow, o->h.capacity);                
-                o->h.keys = realloc(o->h.keys, o->h.capacity * sizeof(MaString*));
-                o->h.values = realloc(o->h.values, o->h.capacity * sizeof(MaObject*)); 
+    switch (o->type) {
+        case MaHash:
+            if (o->length == o->capacity) {
+                o->capacity += o->capacity;
+                hashCapacityWindow = MAX(o->capacity, hashCapacityWindow);  
+                o->keys = realloc(o->keys, o->capacity);
+                o->values = realloc(o->values, o->capacity);
             }
             
-            o->h.keys[o->h.length] = key;            
-            o->h.values[o->h.length] = value;        
-            o->h.length++;                            
+            o->keys[o->length] = key;            
+            o->values[o->length] = value;        
+            o->length++;                            
             break;
-        case MaArrayType:
-            if (o->a.length == o->a.capacity) {
-                o->a.capacity += o->h.capacity;
-                arrayCapacityWindow = MAX(arrayCapacityWindow, o->h.capacity);
-                o->a.items = realloc(o->a.items, o->a.capacity * sizeof(MaObject)); 
+        case MaArray:
+            if (o->length == o->capacity) {
+                o->capacity += o->capacity;
+                arrayCapacityWindow = MAX(o->capacity, arrayCapacityWindow);                
+                o->values = realloc(o->values, o->capacity);
             }
-            
-            o->a.items[o->a.length++] = value;                                                
+                        
+            o->values[o->length++] = value;                                       
             break;
         default:
             break;
@@ -123,164 +140,112 @@ static inline void MaSet(MaObject* const o, MaString* const key, MaObject* const
 }
 
 static inline void MaFree(MaObject* const o) {
-    
-    switch (o->null.type) {
-        case MaHashType:
-            
-            for (int i=0;i < o->h.length;i++) {
-                MaFree((MaObject*)o->h.keys[i]);
-                MaFree(o->h.values[i]);
-            }            
-            free(o->h.keys);
-            free(o->h.values);            
-            free(o);
-            break;
-        case MaArrayType:
-            for (int i =0;i<o->a.length;i++) {
-                MaFree(o->a.items[i]);
-            }
-            free(o->a.items);
-            free(o);
-            break;
-        case MaNumberType:
-        case MaStringType:
-            free(o);
-            break;
-        default:
-            break;
+    if (o != nil) {
+        switch (o->type) {
+            case MaHash:
+                if (o->keys != nil) {
+                    free(o->keys);
+                    o->keys = nil;
+                }
+            case MaArray:
+                if (o->values != nil) {
+                    free(o->values);
+                    o->values = nil;
+                }                
+            default:
+                break;
+        }            
     }    
-    
 }
 
 @interface MaEnumerator : NSEnumerator
 @end
-@interface MaNumberWrapper: NSNumber
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d;
-@end
-@interface MaStringWrapper: NSString
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d;
-@end
 @interface MaArrayWrapper: NSArray
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d;
+- (id) initWithMaObject:(const MaObject*)obj andCore:(MaSONKit*)core;
 @end
 @interface MaDictionaryWrapper: NSDictionary
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d;
+- (id) initWithMaObject:(const MaObject*)obj andCore:(MaSONKit*)core;
 @end
 
-inline static id NSObjectFromMaObject(MaObject* o, NSData* backing) {
+inline static id NSObjectFromMaObject(const MaObject* o, MaSONKit* core) {
     
     if (o == nil) { return nil; }
-    
-    switch (o->null.type) {
-        case MaNullType:
+        
+    switch (o->type) {
+        case MaNull:
             return nil;
-        case MaBoolType:   
-        case MaNumberType:
-            return [[MaNumberWrapper alloc] initWithMaObject:o andData:backing];
-        case MaStringType: 
-            return [[MaStringWrapper alloc] initWithMaObject:o andData:backing];
-        case MaArrayType: 
-            return [[MaArrayWrapper alloc] initWithMaObject:o andData:backing];
-        case MaHashType:  
-            return [[MaDictionaryWrapper alloc] initWithMaObject:o andData:backing];
+        case MaTrue:
+            return [NSNumber numberWithBool:YES];
+        case MaFalse:   
+            return [NSNumber numberWithBool:NO];
+        case MaNumber: {
+            NSString* num = [[NSString alloc] initWithBytesNoCopy:(char*)o->start length:o->length encoding:NSUTF8StringEncoding freeWhenDone:NO];
+            if ([num rangeOfString:@"."].location == NSNotFound) {
+                return [NSNumber numberWithInt:[num intValue]];                                    
+            } else {
+                return [NSNumber numberWithDouble:[num doubleValue]];                                                    
+            }            
+        }
+        case MaString: 
+            return [[NSString alloc] initWithBytes:o->start length:o->length encoding:NSUTF8StringEncoding];
+        case MaArray: 
+            return [[MaArrayWrapper alloc] initWithMaObject:o andCore:core];
+        case MaHash:  
+            return [[MaDictionaryWrapper alloc] initWithMaObject:o andCore:core];
     }    
 }
 
-@implementation MaEnumerator { NSUInteger at; MaObject* wrapped; NSData* data; }
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d {
-    if (self = [super init]) { at = 0; wrapped = obj; data = d; }
+@implementation MaEnumerator { NSUInteger at;const MaObject* wrapped; MaSONKit* core; }
+- (id) initWithMaObject:(const MaObject*)obj andCore:(MaSONKit*)c {
+    if (self = [super init]) { at = 0; wrapped = obj; core = c; }
     return self;
 }
 - (id) nextObject {    
-    switch (wrapped->null.type) {
-        case MaArrayType: 
-            return (at < wrapped->a.length) ? NSObjectFromMaObject((MaObject*)wrapped->a.items[at++], data) : nil;                                
-        case MaHashType:  
-            return (at < wrapped->h.length) ? NSObjectFromMaObject((MaObject*)wrapped->h.keys[at++], data) : nil;                
+    switch (wrapped->type) {
+        case MaArray: 
+            return (at < wrapped->length) ? NSObjectFromMaObject(wrapped->values[at++], core) : nil;                                
+        case MaHash:  
+            return (at < wrapped->length) ? NSObjectFromMaObject(wrapped->keys[at++], core) : nil;                
         default:
             return nil;
     }    
 }
 @end
 
-@implementation MaNumberWrapper { NSNumber* wrapped; }
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d {
-    if (self = [super init]) {         
-        if (obj->n.type == MaBoolType) {
-            wrapped = [NSNumber numberWithBool:obj->b.value];
-        } else {
-            
-            NSString* num = [[NSString alloc] initWithBytesNoCopy:(char*)obj->s.start length:obj->s.length encoding:NSUTF8StringEncoding freeWhenDone:NO];
-            if ([num rangeOfString:@"."].location == NSNotFound) {
-                wrapped = [NSNumber numberWithInt:[num intValue]];                                    
-            } else {
-                wrapped = [NSNumber numberWithDouble:[num doubleValue]];                                                    
-            }            
-        }        
-    }
+@implementation MaArrayWrapper { const MaObject* wrapped; MaSONKit* core; }
+- (id) initWithMaObject:(const MaObject*)obj andCore:(MaSONKit*)c {
+    if (self = [super init]) { wrapped = obj; core = c; }
     return self;
 }
-- (void)getValue:(void *)value { [wrapped getValue:value]; }
-- (const char *)objCType { return [wrapped objCType]; }
-- (NSString*) description { return [wrapped description]; }
-- (NSString*) descriptionWithLocale:(id)locale { return [wrapped descriptionWithLocale:locale]; }
+- (NSUInteger)count { return wrapped->length; }
+- (id)objectAtIndex:(NSUInteger)index { return NSObjectFromMaObject(wrapped->values[index], core); }
 @end
 
-@implementation MaStringWrapper { NSString* wrapped; }
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d {
-    if (self = [super init]) { 
-        wrapped = [[NSString alloc] initWithBytesNoCopy:(char*)obj->s.start length:obj->s.length encoding:NSUTF8StringEncoding freeWhenDone:NO];
-    }
+@implementation MaDictionaryWrapper { const MaObject* wrapped; MaSONKit* core; }
+- (id) initWithMaObject:(const MaObject*)obj andCore:(MaSONKit*)c {
+    if (self = [super init]) { wrapped = obj; core = c; }
     return self;
 }
-- (NSUInteger)length { return [wrapped length]; }
-- (unichar)characterAtIndex:(NSUInteger)index { return [wrapped characterAtIndex:index]; }
-- (NSString*) description { return [wrapped description]; }
-@end
-
-@implementation MaArrayWrapper { MaObject* wrapped; NSData* data; }
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d {
-    if (self = [super init]) { wrapped = obj; data = d; }
-    return self;
-}
-- (NSUInteger)count { return wrapped->h.length; }
-- (id)objectAtIndex:(NSUInteger)index { return NSObjectFromMaObject(wrapped->a.items[index], data); }
-@end
-
-@implementation MaDictionaryWrapper { BOOL root; MaObject* wrapped; NSData* data; }
-- (id) initRootWithMaObject:(MaObject*)obj andData:(NSData*)d {
-    if (self = [super init]) { root = YES; wrapped = obj; data = d; }
-    return self;
-}
-- (id) initWithMaObject:(MaObject*)obj andData:(NSData*)d {
-    if (self = [super init]) { root = NO; wrapped = obj; data = d; }
-    return self;
-}
-//xxx - (void) dealloc { if (root) { PMaFree(wrapped); } }
-- (NSUInteger)count { return wrapped->h.length; }
-- (NSEnumerator*) keyEnumerator { return [[MaEnumerator alloc] initWithMaObject:wrapped andData:data]; }
+- (NSUInteger)count { return wrapped->length; }
+- (NSEnumerator*) keyEnumerator { return [[MaEnumerator alloc] initWithMaObject:wrapped andCore:core]; }
 - (id) objectForKey:(id)key {
-    for (int i = 0; i < wrapped->h.length; i++) {
-        NSString* k = NSObjectFromMaObject((MaObject*)wrapped->h.keys[i], data);
-        if ([k isEqualToString:key]) { return NSObjectFromMaObject(wrapped->h.values[i], data); }
+    for (int i = 0; i < wrapped->length; i++) {
+        NSString* k = NSObjectFromMaObject(wrapped->keys[i], core);
+        if ([k isEqualToString:key]) { return NSObjectFromMaObject(wrapped->values[i], core); }
     }
     return nil;
 }
 @end
 
-@implementation MaSONKit
-
-static MaObject* root;
-
-static inline const char* fill(register const char* bytes, register MaObject* const head) {
+static inline const char* fill(MaBuffer *buffer, register const char* bytes, register MaObject* const head) {
     
     MaObject* value = nil;    
-    MaString* key = nil;
-
+    MaObject* key = nil;
+    
     register NSUInteger len;    
     
     for (;;) {
-        switch (*(++bytes)) {  
+        switch (*(++bytes)) { 
             case 0:
             case 93:
             case 125:
@@ -289,21 +254,22 @@ static inline const char* fill(register const char* bytes, register MaObject* co
             case 34: 
                 ++bytes;
                 len = 0;
+                
                 for (;*(bytes+len) != 34; len++) { 
                     if (*(bytes+len) == 92) { len++; } 
                     else if (*(bytes+len) > 127) { len++; if (*(bytes+len) > 127) { len++; if (*(bytes+len) > 127) { len += 2;} } }
                 }
                 
-                if (key == nil && head->null.type == MaHashType) {
-                    key = MaStringMake(bytes, len);  
+                if (key == nil && head->type == MaHash) {
+                    key = MaStringMake(buffer, bytes, len);  
                     bytes += len;
                     for (;*(++bytes) != 58;);
                 } else {
-                    MaSet(head, key, (MaObject*)MaStringMake(bytes, len)); 
+                    MaSet(head, key, MaStringMake(buffer, bytes, len)); 
                     bytes += len;
                     key = nil;
                 }                                                
-
+                
                 break;  
                 
             case 45:
@@ -319,66 +285,109 @@ static inline const char* fill(register const char* bytes, register MaObject* co
             case 56:
             case 57: 
                 len = 0;
-                for (;*(bytes + len) >= 45 && *(bytes + len) <= 57;len++);                                 
-                MaSet(head, key, (MaObject*)MaNumberMake(bytes, len));                  
+                for (;*(bytes + len) <= 57 && *(bytes + len) >= 45;len++);                                 
+                MaSet(head, key, MaNumberMake(buffer, bytes, len));                  
                 bytes += len-1;
                 key = nil;
                 break;   
                 
             case 123:            
-                value = (MaObject*)MaHashMake();     
+                value = MaHashMake(buffer);     
                 MaSet(head, key, value);
-                bytes = fill(bytes, value); 
+                bytes = fill(buffer, bytes, value); 
                 key = nil;
                 break;            
                 
             case 91: 
-                value = (MaObject*)MaArrayMake();
+                value = MaArrayMake(buffer);
                 MaSet(head, key, value);
-                bytes = fill(bytes, value); 
+                bytes = fill(buffer, bytes, value); 
                 key = nil;
                 break;                            
                 
             case 110:
                 bytes += 4;
-                MaSet(head, key, (MaObject*)&Mnull);
+                MaSet(head, key, (MaObject*)&MaNullObject);
                 key = nil;
                 break;
                 
             case 116:
                 bytes += 4;
-                MaSet(head, key, (MaObject*)&Mtrue);
+                MaSet(head, key, (MaObject*)&MaTrueObject);
                 key = nil;
                 break;
                 
             case 102:
                 bytes += 5;
-                MaSet(head, key, (MaObject*)&Mfalse);
+                MaSet(head, key, (MaObject*)&MaFalseObject);
                 key = nil;
                 break;                
         }        
     }    
 }
 
-+ (NSDictionary*) parse:(NSData*)data {
-    
-    const char* bytes = [data bytes];
-    for (;*bytes != '{';bytes++);
-    
-    root = (MaObject*)MaHashMake();    
-    fill(bytes, root);        
-    
-    bytes = nil;
-    
-    return [[MaDictionaryWrapper alloc] initRootWithMaObject:root andData:data];        
+@implementation MaSONKit {
+
+    MaBuffer* buffer;    
+    MaObject* root;    
+    NSData* data;
 }
 
+- (id) initWithData:(NSData*)dat {
+    
+    if (self = [super init]) {
+        buffer = MaBufferMake();
+        root = MaHashMake(buffer); 
+        data = dat;
+    }
+    return self;
+}
 
-+ (void) freeRoot {
+- (void) clear {
     if (root != nil) {
         MaFree(root);
+        root = nil;        
     }
-    root = nil;
+    
+    if (buffer != nil) {
+        for (int i=0;i<buffer->count;i++) {
+            if (buffer->pages[i] != nil) {
+                free(buffer->pages[i]);
+                buffer->pages[i] = nil;
+            }
+        }
+        if (buffer->pages != nil) {
+            free(buffer->pages); 
+            buffer->pages = nil;
+        }
+        free(buffer);
+        buffer = nil;        
+    }
+    
+}
+
+- (void) dealloc {
+    [self clear];
+}
+
+- (NSDictionary*) parse {
+    
+    const char* bytes = (const char*)[data bytes];
+        
+    for (;*bytes != '{';bytes++);
+    
+    fill(buffer, bytes, root);  
+    
+    [self clear];
+    
+    return nil;
+                
+    return [[MaDictionaryWrapper alloc] initWithMaObject:root andCore:self];        
+}
+
++ (NSDictionary*) parse:(NSData*)data {
+    MaSONKit* core = [[MaSONKit alloc] initWithData:data];    
+    return [core parse];
 }
 
 
