@@ -44,7 +44,7 @@ static inline MaBuffer* MaBufferMake() {
     return buffer;
 }
 
-static inline MaObject* MaMalloc(MaBuffer* const buffer, const MaType const type) { 
+static inline MaObject* MaMalloc(register MaBuffer* const buffer, register const MaType const type) { 
     if (OFTEN_FALSE(buffer->index >= buffer->count * kMaPageCapacity)) {
         if (OFTEN_FALSE(buffer->count == kMaMaxPages)) {
             [NSException raise:@"MaSizeTooDamnHighException" format:@"That's one big god damn file!"];
@@ -53,8 +53,8 @@ static inline MaObject* MaMalloc(MaBuffer* const buffer, const MaType const type
         buffer->pages[buffer->count++] = malloc(kMaPageCapacity * sizeof(MaObject));
     }
     
-    int page = buffer->index / kMaPageCapacity;
-    int index = buffer->index % kMaPageCapacity;
+    register int page = buffer->index / kMaPageCapacity;
+    register int index = buffer->index % kMaPageCapacity;
     
     MaObject* o = &buffer->pages[page][index];
     buffer->index++;
@@ -78,7 +78,7 @@ static const MaObject MaNullObject  = { MaNull  };
 static const MaObject MaTrueObject  = { MaTrue  };
 static const MaObject MaFalseObject = { MaFalse };
 
-static inline MaObject* MaObjectMake(MaBuffer *buffer, const MaType type) { 
+static inline MaObject* MaObjectMake(register MaBuffer *buffer, const MaType const type) { 
     MaObject* o = MaMalloc(buffer, type);
     o->type = type; 
     switch (type) {
@@ -95,14 +95,14 @@ static inline MaObject* MaObjectMake(MaBuffer *buffer, const MaType type) {
     return o;
 }
 
-static inline MaObject* MaStringMake(MaBuffer *buffer, const char* start, const NSUInteger length) { 
+static inline MaObject* MaStringMake(register MaBuffer *buffer, const char* const start, const NSUInteger length) { 
     MaObject* s = MaObjectMake(buffer, MaString);
     s->start = start;
     s->length = length; 
     return s;
 }
 
-static inline MaObject* MaNumberMake(MaBuffer *buffer, const char* start, const NSUInteger length) { 
+static inline MaObject* MaNumberMake(register MaBuffer *buffer, const char* const start, const NSUInteger length) { 
     MaObject* n = MaObjectMake(buffer, MaNumber);
     n->start = start; 
     n->length = length; 
@@ -140,7 +140,6 @@ static inline void MaSet(MaObject* const o, MaObject* key, MaObject* value) {
         default:
             break;
     }    
-    
 }
 
 static inline void MaFree(MaObject* const o) {
@@ -343,6 +342,13 @@ static inline const char* fill(MaBuffer *buffer, register const char* bytes, reg
         buffer = MaBufferMake();
         root = MaHashMake(buffer); 
         data = dat;
+        
+        const char* bytes = (const char*)[data bytes];
+        
+        for (;*bytes != '{';bytes++);
+        
+        fill(buffer, bytes, root);  
+        
     }
     return self;
 }
@@ -372,20 +378,9 @@ static inline const char* fill(MaBuffer *buffer, register const char* bytes, reg
 
 - (void) dealloc { [self clear]; }
 
-- (NSDictionary*) parse {
-    
-    const char* bytes = (const char*)[data bytes];
-        
-    for (;*bytes != '{';bytes++);
-    
-    fill(buffer, bytes, root);  
-                    
-    return [[MaDictionaryWrapper alloc] initWithMaObject:root andCore:self];        
-}
+- (NSDictionary*) wrap { return [[MaDictionaryWrapper alloc] initWithMaObject:root andCore:self]; }
 
-+ (NSDictionary*) parse:(NSData*)data {
-    return [[[MaSONKit alloc] initWithData:data] parse];
-}
++ (NSDictionary*) parse:(NSData*)data { return [[[MaSONKit alloc] initWithData:data] wrap]; }
 
 
 @end
