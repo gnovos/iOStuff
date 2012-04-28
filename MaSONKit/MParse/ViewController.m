@@ -46,29 +46,34 @@
     
     NSLog(@"%@", [MaSONKit parse:data]);
             
-    uint64_t start, end, elapsed = 0;
-    int count = 10;
+    uint64_t start, end, melapsed, jelapsed = 0;
+    int count = 100;
     
-    for (int i =0;i<10;i++) {
-        elapsed = 0;
-        count += count * i;
+    for (int i=50;i--;) {
+        melapsed = 0;
         for (int i =0;i<count;i++) {
-            start = mach_absolute_time();    
-            [MaSONKit parse:data];
-            end = mach_absolute_time();    
-            elapsed += end - start;    
+            @autoreleasepool {            
+                start = mach_absolute_time();    
+                [MaSONKit parse:data];
+                end = mach_absolute_time();    
+                melapsed += end - start;    
+            }
         }    
-        NSLog(@"at %d MaSONKit took %llu", count, elapsed);
+        NSLog(@"at %d MaSONKit took %llu", count, melapsed);
         
-        elapsed = 0;
+        jelapsed = 0;
         for (int i =0;i<count;i++) {
-            start = mach_absolute_time();    
-            [d objectWithData:data];
-            end = mach_absolute_time();    
-            elapsed += end - start;    
-        }    
-        NSLog(@"at %d JSONKit  took %llu\n\n", count, elapsed);
+            @autoreleasepool {
+                start = mach_absolute_time();    
+                [d objectWithData:data];
+                end = mach_absolute_time();    
+                jelapsed += end - start;    
+            }                
+        }
+        NSLog(@"at %d JSONKit  took %llu", count, jelapsed);
         
+        NSLog(@"%d at %d speedup was %d%%\n\n", i, count, (int)(((jelapsed / (float)melapsed) * 100) - 100));
+
     }
     
 

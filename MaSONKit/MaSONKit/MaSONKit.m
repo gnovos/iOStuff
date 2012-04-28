@@ -8,10 +8,13 @@
 
 #import "MaSONKit.h"
 
-#define kMaPageCapacity 256
+#define kMaPageCapacity 1024
 #define kMaMaxPages 256
 
 #define kMaInitialCapacity 32
+
+#define OFTEN_TRUE(cond)  __builtin_expect(cond, true)
+#define OFTEN_FALSE(cond) __builtin_expect(cond, false)
 
 static NSUInteger arrayCapacityWindow = kMaInitialCapacity;
 static NSUInteger hashCapacityWindow = kMaInitialCapacity;
@@ -42,8 +45,9 @@ static inline MaBuffer* MaBufferMake() {
 }
 
 static inline MaObject* MaMalloc(MaBuffer* const buffer, const MaType const type) { 
-    if (buffer->index >= buffer->count * kMaPageCapacity) {
-        if (buffer->count == kMaMaxPages) {
+    if (OFTEN_FALSE(buffer->index >= buffer->count * kMaPageCapacity)) {
+        if (OFTEN_FALSE(buffer->count == kMaMaxPages)) {
+            [NSException raise:@"MaSizeTooDamnHighException" format:@"That's one big god damn file!"];
             abort();
         }
         buffer->pages[buffer->count++] = malloc(kMaPageCapacity * sizeof(MaObject));
@@ -113,7 +117,7 @@ static inline void MaSet(MaObject* const o, MaObject* key, MaObject* value) {
     
     switch (o->type) {
         case MaHash:
-            if (o->length == o->capacity) {
+            if (OFTEN_FALSE(o->length == o->capacity)) {
                 o->capacity += o->capacity;
                 hashCapacityWindow = MAX(o->capacity, hashCapacityWindow);  
                 o->keys = realloc(o->keys, o->capacity);
@@ -125,7 +129,7 @@ static inline void MaSet(MaObject* const o, MaObject* key, MaObject* value) {
             o->length++;                            
             break;
         case MaArray:
-            if (o->length == o->capacity) {
+            if (OFTEN_FALSE(o->length == o->capacity)) {
                 o->capacity += o->capacity;
                 arrayCapacityWindow = MAX(o->capacity, arrayCapacityWindow);                
                 o->values = realloc(o->values, o->capacity);
@@ -143,12 +147,12 @@ static inline void MaFree(MaObject* const o) {
     if (o != nil) {
         switch (o->type) {
             case MaHash:
-                if (o->keys != nil) {
+                if (OFTEN_TRUE(o->keys != nil)) {
                     free(o->keys);
                     o->keys = nil;
                 }
             case MaArray:
-                if (o->values != nil) {
+                if (OFTEN_TRUE(o->values != nil)) {
                     free(o->values);
                     o->values = nil;
                 }                
@@ -169,7 +173,7 @@ static inline void MaFree(MaObject* const o) {
 
 inline static id NSObjectFromMaObject(const MaObject* o, MaSONKit* core) {
     
-    if (o == nil) { return nil; }
+    if (OFTEN_FALSE(o == nil)) { return nil; }
         
     switch (o->type) {
         case MaNull:
@@ -180,7 +184,7 @@ inline static id NSObjectFromMaObject(const MaObject* o, MaSONKit* core) {
             return [NSNumber numberWithBool:NO];
         case MaNumber: {
             NSString* num = [[NSString alloc] initWithBytesNoCopy:(char*)o->start length:o->length encoding:NSUTF8StringEncoding freeWhenDone:NO];
-            if ([num rangeOfString:@"."].location == NSNotFound) {
+            if (OFTEN_FALSE([num rangeOfString:@"."].location == NSNotFound)) {
                 return [NSNumber numberWithInt:[num intValue]];                                    
             } else {
                 return [NSNumber numberWithDouble:[num doubleValue]];                                                    
@@ -229,9 +233,9 @@ inline static id NSObjectFromMaObject(const MaObject* o, MaSONKit* core) {
 - (NSUInteger)count { return wrapped->length; }
 - (NSEnumerator*) keyEnumerator { return [[MaEnumerator alloc] initWithMaObject:wrapped andCore:core]; }
 - (id) objectForKey:(id)key {
-    for (int i = 0; i < wrapped->length; i++) {
+    for (int i = 0; OFTEN_FALSE(i < wrapped->length); i++) {
         NSString* k = NSObjectFromMaObject(wrapped->keys[i], core);
-        if ([k isEqualToString:key]) { return NSObjectFromMaObject(wrapped->values[i], core); }
+        if (OFTEN_FALSE([k isEqualToString:key])) { return NSObjectFromMaObject(wrapped->values[i], core); }
     }
     return nil;
 }
@@ -255,15 +259,15 @@ static inline const char* fill(MaBuffer *buffer, register const char* bytes, reg
                 ++bytes;
                 len = 0;
                 
-                for (;*(bytes+len) != 34; len++) { 
-                    if (*(bytes+len) == 92) { len++; } 
-                    else if (*(bytes+len) > 127) { len++; if (*(bytes+len) > 127) { len++; if (*(bytes+len) > 127) { len += 2;} } }
+                for (;OFTEN_FALSE(*(bytes+len) != 34); len++) { 
+                    if (OFTEN_FALSE(*(bytes+len)) == 92) { len++; } 
+                    else if (OFTEN_FALSE(*(bytes+len) > 127)) { len++; if (OFTEN_FALSE(*(bytes+len) > 127)) { len++; if (OFTEN_FALSE(*(bytes+len) > 127)) { len += 2;} } }
                 }
                 
-                if (key == nil && head->type == MaHash) {
+                if (key == nil && OFTEN_FALSE(head->type == MaHash)) {
                     key = MaStringMake(buffer, bytes, len);  
                     bytes += len;
-                    for (;*(++bytes) != 58;);
+                    for (;OFTEN_FALSE(*(++bytes) != 58););
                 } else {
                     MaSet(head, key, MaStringMake(buffer, bytes, len)); 
                     bytes += len;
@@ -285,7 +289,7 @@ static inline const char* fill(MaBuffer *buffer, register const char* bytes, reg
             case 56:
             case 57: 
                 len = 0;
-                for (;*(bytes + len) <= 57 && *(bytes + len) >= 45;len++);                                 
+                for (;OFTEN_FALSE(*(bytes + len) <= 57 && *(bytes + len) >= 45);len++);                                 
                 MaSet(head, key, MaNumberMake(buffer, bytes, len));                  
                 bytes += len-1;
                 key = nil;
@@ -366,9 +370,7 @@ static inline const char* fill(MaBuffer *buffer, register const char* bytes, reg
     
 }
 
-- (void) dealloc {
-    [self clear];
-}
+- (void) dealloc { [self clear]; }
 
 - (NSDictionary*) parse {
     
@@ -377,17 +379,12 @@ static inline const char* fill(MaBuffer *buffer, register const char* bytes, reg
     for (;*bytes != '{';bytes++);
     
     fill(buffer, bytes, root);  
-    
-    [self clear];
-    
-    return nil;
-                
+                    
     return [[MaDictionaryWrapper alloc] initWithMaObject:root andCore:self];        
 }
 
 + (NSDictionary*) parse:(NSData*)data {
-    MaSONKit* core = [[MaSONKit alloc] initWithData:data];    
-    return [core parse];
+    return [[[MaSONKit alloc] initWithData:data] parse];
 }
 
 
