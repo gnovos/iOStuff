@@ -53,8 +53,8 @@ static inline MaObject* MaMalloc(register MaBuffer* const buffer, register const
         buffer->pages[buffer->count++] = malloc(kMaPageCapacity * sizeof(MaObject));
     }
     
-    register int page = buffer->index / kMaPageCapacity;
-    register int index = buffer->index % kMaPageCapacity;
+    register NSInteger page = buffer->index / kMaPageCapacity;
+    register NSInteger index = buffer->index % kMaPageCapacity;
     
     MaObject* o = &buffer->pages[page][index];
     buffer->index++;

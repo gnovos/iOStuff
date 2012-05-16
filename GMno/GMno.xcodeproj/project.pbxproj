@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C147A8F154CCD620044320F /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 939098F4151289BD006D414D /* libzbar.a */; };
 		939098D21512898E006D414D /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 939098BE1512898E006D414D /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		939098D31512898E006D414D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 939098C01512898E006D414D /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		939098D41512898E006D414D /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 939098C21512898E006D414D /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -38,7 +39,6 @@
 		93E948E7151116C000BDEAF5 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E948E6151116C000BDEAF5 /* CoreMedia.framework */; };
 		93E948EC1511176100BDEAF5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E948EB1511176100BDEAF5 /* QuartzCore.framework */; };
 		93E948EE1511177600BDEAF5 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E948ED1511177600BDEAF5 /* libiconv.dylib */; };
-		93E948F0151117A800BDEAF5 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E948EF151117A800BDEAF5 /* libzbar.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,7 +113,6 @@
 		93E948E6151116C000BDEAF5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		93E948EB1511176100BDEAF5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		93E948ED1511177600BDEAF5 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		93E948EF151117A800BDEAF5 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzbar.a; path = ZBarSDK/libzbar.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C147A8F154CCD620044320F /* libzbar.a in Frameworks */,
 				93E948EC1511176100BDEAF5 /* QuartzCore.framework in Frameworks */,
 				93E948E7151116C000BDEAF5 /* CoreMedia.framework in Frameworks */,
 				93E948E51511169600BDEAF5 /* CoreVideo.framework in Frameworks */,
@@ -129,7 +129,6 @@
 				93CD24E8151057830030ADF4 /* Foundation.framework in Frameworks */,
 				93CD24EA151057830030ADF4 /* CoreGraphics.framework in Frameworks */,
 				93E948EE1511177600BDEAF5 /* libiconv.dylib in Frameworks */,
-				93E948F0151117A800BDEAF5 /* libzbar.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +287,6 @@
 				939099B31516DCAB006D414D /* Resources */,
 				9390992415128DF8006D414D /* Supporting Files */,
 				9390990C15128D68006D414D /* GMno */,
-				93E948EF151117A800BDEAF5 /* libzbar.a */,
 				93E948E81511170A00BDEAF5 /* Libraries */,
 				93CD24E4151057830030ADF4 /* Frameworks */,
 				93CD24E2151057830030ADF4 /* Products */,
@@ -485,8 +483,8 @@
 		93CD2500151057830030ADF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GMno/GMno-Prefix.pch";
 				HEADER_SEARCH_PATHS = "ZBarSDK/**";
@@ -496,8 +494,8 @@
 					"\"$(SRCROOT)/ZBarSDK\"",
 				);
 				PRODUCT_NAME = GMno;
-				PROVISIONING_PROFILE = "3F54B5F4-CF37-480F-9E7F-C6FA9002DDEF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F54B5F4-CF37-480F-9E7F-C6FA9002DDEF";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -505,8 +503,8 @@
 		93CD2501151057830030ADF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GMno/GMno-Prefix.pch";
 				HEADER_SEARCH_PATHS = "ZBarSDK/**";
@@ -516,8 +514,8 @@
 					"\"$(SRCROOT)/ZBarSDK\"",
 				);
 				PRODUCT_NAME = GMno;
-				PROVISIONING_PROFILE = "3F54B5F4-CF37-480F-9E7F-C6FA9002DDEF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F54B5F4-CF37-480F-9E7F-C6FA9002DDEF";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

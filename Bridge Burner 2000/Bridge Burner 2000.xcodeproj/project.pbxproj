@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CB000031561624B000BD6CC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB000021561624B000BD6CC /* UIKit.framework */; };
+		0CB000051561624B000BD6CC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB000041561624B000BD6CC /* Foundation.framework */; };
+		0CB000071561624B000BD6CC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB000061561624B000BD6CC /* CoreGraphics.framework */; };
+		0CB0000D1561624B000BD6CC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CB0000B1561624B000BD6CC /* InfoPlist.strings */; };
+		0CB0000F1561624B000BD6CC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB0000E1561624B000BD6CC /* main.m */; };
+		0CB000131561624B000BD6CC /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB000121561624B000BD6CC /* MZAppDelegate.m */; };
+		0CB000161561624B000BD6CC /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CB000141561624B000BD6CC /* MainStoryboard.storyboard */; };
+		0CB000191561624B000BD6CC /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB000181561624B000BD6CC /* MZViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0CB000021561624B000BD6CC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0CB000041561624B000BD6CC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0CB000061561624B000BD6CC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0CB0000A1561624B000BD6CC /* Bridge Burner 2000-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bridge Burner 2000-Info.plist"; sourceTree = "<group>"; };
+		0CB0000C1561624B000BD6CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0CB0000E1561624B000BD6CC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0CB000101561624B000BD6CC /* Bridge Burner 2000-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge Burner 2000-Prefix.pch"; sourceTree = "<group>"; };
+		0CB000111561624B000BD6CC /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
+		0CB000121561624B000BD6CC /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
+		0CB000151561624B000BD6CC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		0CB000171561624B000BD6CC /* MZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
+		0CB000181561624B000BD6CC /* MZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
+		0CB0FFFE1561624B000BD6CC /* Bridge Burner 2000.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bridge Burner 2000.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0CB0FFFB1561624B000BD6CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB000031561624B000BD6CC /* UIKit.framework in Frameworks */,
+				0CB000051561624B000BD6CC /* Foundation.framework in Frameworks */,
+				0CB000071561624B000BD6CC /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0CB000011561624B000BD6CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CB000021561624B000BD6CC /* UIKit.framework */,
+				0CB000041561624B000BD6CC /* Foundation.framework */,
+				0CB000061561624B000BD6CC /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0CB000081561624B000BD6CC /* Bridge Burner 2000 */ = {
+			isa = PBXGroup;
+			children = (
+				0CB000111561624B000BD6CC /* MZAppDelegate.h */,
+				0CB000121561624B000BD6CC /* MZAppDelegate.m */,
+				0CB000141561624B000BD6CC /* MainStoryboard.storyboard */,
+				0CB000171561624B000BD6CC /* MZViewController.h */,
+				0CB000181561624B000BD6CC /* MZViewController.m */,
+				0CB000091561624B000BD6CC /* Supporting Files */,
+			);
+			path = "Bridge Burner 2000";
+			sourceTree = "<group>";
+		};
+		0CB000091561624B000BD6CC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0CB0000A1561624B000BD6CC /* Bridge Burner 2000-Info.plist */,
+				0CB0000B1561624B000BD6CC /* InfoPlist.strings */,
+				0CB0000E1561624B000BD6CC /* main.m */,
+				0CB000101561624B000BD6CC /* Bridge Burner 2000-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0CB0FFF31561624B000BD6CC = {
+			isa = PBXGroup;
+			children = (
+				0CB000081561624B000BD6CC /* Bridge Burner 2000 */,
+				0CB000011561624B000BD6CC /* Frameworks */,
+				0CB0FFFF1561624B000BD6CC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0CB0FFFF1561624B000BD6CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0CB0FFFE1561624B000BD6CC /* Bridge Burner 2000.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0CB0FFFD1561624B000BD6CC /* Bridge Burner 2000 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0CB0001C1561624B000BD6CC /* Build configuration list for PBXNativeTarget "Bridge Burner 2000" */;
+			buildPhases = (
+				0CB0FFFA1561624B000BD6CC /* Sources */,
+				0CB0FFFB1561624B000BD6CC /* Frameworks */,
+				0CB0FFFC1561624B000BD6CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Bridge Burner 2000";
+			productName = "Bridge Burner 2000";
+			productReference = 0CB0FFFE1561624B000BD6CC /* Bridge Burner 2000.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0CB0FFF51561624B000BD6CC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MZ;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Masonsoft;
+			};
+			buildConfigurationList = 0CB0FFF81561624B000BD6CC /* Build configuration list for PBXProject "Bridge Burner 2000" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0CB0FFF31561624B000BD6CC;
+			productRefGroup = 0CB0FFFF1561624B000BD6CC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0CB0FFFD1561624B000BD6CC /* Bridge Burner 2000 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0CB0FFFC1561624B000BD6CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB0000D1561624B000BD6CC /* InfoPlist.strings in Resources */,
+				0CB000161561624B000BD6CC /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0CB0FFFA1561624B000BD6CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB0000F1561624B000BD6CC /* main.m in Sources */,
+				0CB000131561624B000BD6CC /* MZAppDelegate.m in Sources */,
+				0CB000191561624B000BD6CC /* MZViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0CB0000B1561624B000BD6CC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0CB0000C1561624B000BD6CC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0CB000141561624B000BD6CC /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0CB000151561624B000BD6CC /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0CB0001A1561624B000BD6CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0CB0001B1561624B000BD6CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0CB0001D1561624B000BD6CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bridge Burner 2000/Bridge Burner 2000-Prefix.pch";
+				INFOPLIST_FILE = "Bridge Burner 2000/Bridge Burner 2000-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0CB0001E1561624B000BD6CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bridge Burner 2000/Bridge Burner 2000-Prefix.pch";
+				INFOPLIST_FILE = "Bridge Burner 2000/Bridge Burner 2000-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0CB0001C1561624B000BD6CC /* Build configuration list for PBXNativeTarget "Bridge Burner 2000" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CB0001D1561624B000BD6CC /* Debug */,
+				0CB0001E1561624B000BD6CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0CB0FFF81561624B000BD6CC /* Build configuration list for PBXProject "Bridge Burner 2000" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CB0001A1561624B000BD6CC /* Debug */,
+				0CB0001B1561624B000BD6CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0CB0FFF51561624B000BD6CC /* Project object */;
+}
