@@ -1,8 +1,8 @@
 //
 //  MZAppDelegate.h
-//  iVolution
+//  Drinking with Friends
 //
-//  Created by Mason Glaves on 6/10/12.
+//  Created by Mason Glaves on 6/11/12.
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
@@ -11,7 +11,5 @@
 @interface MZAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-+ (NSString*) appVersion;
 
 @end

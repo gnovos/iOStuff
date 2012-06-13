@@ -1,9 +1,9 @@
 //
 //  MZAppDelegate.h
-//  iVolution
+//  FlipDraw
 //
-//  Created by Mason Glaves on 6/10/12.
-//  Copyright (c) 2012 Masonsoft. All rights reserved.
+//  Created by Mason on 6/12/12.
+//  Copyright (c) 2012 Mason. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,7 +11,5 @@
 @interface MZAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-+ (NSString*) appVersion;
 
 @end

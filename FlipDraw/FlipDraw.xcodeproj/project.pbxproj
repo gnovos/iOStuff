@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CD348E515875FEC00AEFDAF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD348E415875FEC00AEFDAF /* UIKit.framework */; };
+		0CD348E715875FEC00AEFDAF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD348E615875FEC00AEFDAF /* Foundation.framework */; };
+		0CD348E915875FEC00AEFDAF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD348E815875FEC00AEFDAF /* CoreGraphics.framework */; };
+		0CD348EF15875FEC00AEFDAF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CD348ED15875FEC00AEFDAF /* InfoPlist.strings */; };
+		0CD348F115875FEC00AEFDAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD348F015875FEC00AEFDAF /* main.m */; };
+		0CD348F515875FEC00AEFDAF /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD348F415875FEC00AEFDAF /* MZAppDelegate.m */; };
+		0CD348F815875FEC00AEFDAF /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CD348F615875FEC00AEFDAF /* MainStoryboard.storyboard */; };
+		0CD348FB15875FEC00AEFDAF /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD348FA15875FEC00AEFDAF /* MZViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0CD348E015875FEC00AEFDAF /* FlipDraw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipDraw.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CD348E415875FEC00AEFDAF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0CD348E615875FEC00AEFDAF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0CD348E815875FEC00AEFDAF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0CD348EC15875FEC00AEFDAF /* FlipDraw-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlipDraw-Info.plist"; sourceTree = "<group>"; };
+		0CD348EE15875FEC00AEFDAF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0CD348F015875FEC00AEFDAF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0CD348F215875FEC00AEFDAF /* FlipDraw-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlipDraw-Prefix.pch"; sourceTree = "<group>"; };
+		0CD348F315875FEC00AEFDAF /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
+		0CD348F415875FEC00AEFDAF /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
+		0CD348F715875FEC00AEFDAF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		0CD348F915875FEC00AEFDAF /* MZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
+		0CD348FA15875FEC00AEFDAF /* MZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0CD348DD15875FEC00AEFDAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CD348E515875FEC00AEFDAF /* UIKit.framework in Frameworks */,
+				0CD348E715875FEC00AEFDAF /* Foundation.framework in Frameworks */,
+				0CD348E915875FEC00AEFDAF /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0CD348D515875FEC00AEFDAF = {
+			isa = PBXGroup;
+			children = (
+				0CD348EA15875FEC00AEFDAF /* FlipDraw */,
+				0CD348E315875FEC00AEFDAF /* Frameworks */,
+				0CD348E115875FEC00AEFDAF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0CD348E115875FEC00AEFDAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0CD348E015875FEC00AEFDAF /* FlipDraw.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0CD348E315875FEC00AEFDAF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CD348E415875FEC00AEFDAF /* UIKit.framework */,
+				0CD348E615875FEC00AEFDAF /* Foundation.framework */,
+				0CD348E815875FEC00AEFDAF /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0CD348EA15875FEC00AEFDAF /* FlipDraw */ = {
+			isa = PBXGroup;
+			children = (
+				0CD348F315875FEC00AEFDAF /* MZAppDelegate.h */,
+				0CD348F415875FEC00AEFDAF /* MZAppDelegate.m */,
+				0CD348F615875FEC00AEFDAF /* MainStoryboard.storyboard */,
+				0CD348F915875FEC00AEFDAF /* MZViewController.h */,
+				0CD348FA15875FEC00AEFDAF /* MZViewController.m */,
+				0CD348EB15875FEC00AEFDAF /* Supporting Files */,
+			);
+			path = FlipDraw;
+			sourceTree = "<group>";
+		};
+		0CD348EB15875FEC00AEFDAF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0CD348EC15875FEC00AEFDAF /* FlipDraw-Info.plist */,
+				0CD348ED15875FEC00AEFDAF /* InfoPlist.strings */,
+				0CD348F015875FEC00AEFDAF /* main.m */,
+				0CD348F215875FEC00AEFDAF /* FlipDraw-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0CD348DF15875FEC00AEFDAF /* FlipDraw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0CD348FE15875FEC00AEFDAF /* Build configuration list for PBXNativeTarget "FlipDraw" */;
+			buildPhases = (
+				0CD348DC15875FEC00AEFDAF /* Sources */,
+				0CD348DD15875FEC00AEFDAF /* Frameworks */,
+				0CD348DE15875FEC00AEFDAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FlipDraw;
+			productName = FlipDraw;
+			productReference = 0CD348E015875FEC00AEFDAF /* FlipDraw.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0CD348D715875FEC00AEFDAF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MZ;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Mason;
+			};
+			buildConfigurationList = 0CD348DA15875FEC00AEFDAF /* Build configuration list for PBXProject "FlipDraw" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0CD348D515875FEC00AEFDAF;
+			productRefGroup = 0CD348E115875FEC00AEFDAF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0CD348DF15875FEC00AEFDAF /* FlipDraw */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0CD348DE15875FEC00AEFDAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CD348EF15875FEC00AEFDAF /* InfoPlist.strings in Resources */,
+				0CD348F815875FEC00AEFDAF /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0CD348DC15875FEC00AEFDAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CD348F115875FEC00AEFDAF /* main.m in Sources */,
+				0CD348F515875FEC00AEFDAF /* MZAppDelegate.m in Sources */,
+				0CD348FB15875FEC00AEFDAF /* MZViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0CD348ED15875FEC00AEFDAF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0CD348EE15875FEC00AEFDAF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0CD348F615875FEC00AEFDAF /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0CD348F715875FEC00AEFDAF /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0CD348FC15875FEC00AEFDAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0CD348FD15875FEC00AEFDAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0CD348FF15875FEC00AEFDAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlipDraw/FlipDraw-Prefix.pch";
+				INFOPLIST_FILE = "FlipDraw/FlipDraw-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0CD3490015875FEC00AEFDAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlipDraw/FlipDraw-Prefix.pch";
+				INFOPLIST_FILE = "FlipDraw/FlipDraw-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0CD348DA15875FEC00AEFDAF /* Build configuration list for PBXProject "FlipDraw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CD348FC15875FEC00AEFDAF /* Debug */,
+				0CD348FD15875FEC00AEFDAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0CD348FE15875FEC00AEFDAF /* Build configuration list for PBXNativeTarget "FlipDraw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CD348FF15875FEC00AEFDAF /* Debug */,
+				0CD3490015875FEC00AEFDAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0CD348D715875FEC00AEFDAF /* Project object */;
+}

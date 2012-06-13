@@ -16,6 +16,9 @@
 		0CDEAD9F1585608500FF7B58 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDEAD9D1585608500FF7B58 /* MainStoryboard.storyboard */; };
 		0CDEADA21585608500FF7B58 /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDEADA11585608500FF7B58 /* MZViewController.m */; };
 		0CDEADAB15858ACA00FF7B58 /* intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CDEADAA15858ACA00FF7B58 /* intro.png */; };
+		0CDEADAD15858BD600FF7B58 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDEADAC15858BD600FF7B58 /* MessageUI.framework */; };
+		0CDEADD11586834100FF7B58 /* detail.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0CDEADD01586834100FF7B58 /* detail.txt */; };
+		0CDEADD31586837300FF7B58 /* intro.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0CDEADD21586837300FF7B58 /* intro.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		0CDEADA01585608500FF7B58 /* MZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
 		0CDEADA11585608500FF7B58 /* MZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
 		0CDEADAA15858ACA00FF7B58 /* intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro.png; sourceTree = "<group>"; };
+		0CDEADAC15858BD600FF7B58 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		0CDEADD01586834100FF7B58 /* detail.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = detail.txt; sourceTree = "<group>"; };
+		0CDEADD21586837300FF7B58 /* intro.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = intro.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CDEADAD15858BD600FF7B58 /* MessageUI.framework in Frameworks */,
 				0CDEAD8C1585608500FF7B58 /* UIKit.framework in Frameworks */,
 				0CDEAD8E1585608500FF7B58 /* Foundation.framework in Frameworks */,
 				0CDEAD901585608500FF7B58 /* CoreGraphics.framework in Frameworks */,
@@ -69,6 +76,7 @@
 		0CDEAD8A1585608500FF7B58 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CDEADAC15858BD600FF7B58 /* MessageUI.framework */,
 				0CDEAD8B1585608500FF7B58 /* UIKit.framework */,
 				0CDEAD8D1585608500FF7B58 /* Foundation.framework */,
 				0CDEAD8F1585608500FF7B58 /* CoreGraphics.framework */,
@@ -103,6 +111,7 @@
 		0CDEADA815858A8800FF7B58 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0CDEADCE1586833100FF7B58 /* text */,
 				0CDEADA915858A9800FF7B58 /* images */,
 				0CDEAD921585608500FF7B58 /* Supporting Files */,
 			);
@@ -115,6 +124,15 @@
 				0CDEADAA15858ACA00FF7B58 /* intro.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		0CDEADCE1586833100FF7B58 /* text */ = {
+			isa = PBXGroup;
+			children = (
+				0CDEADD01586834100FF7B58 /* detail.txt */,
+				0CDEADD21586837300FF7B58 /* intro.txt */,
+			);
+			name = text;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +190,8 @@
 				0CDEAD961585608500FF7B58 /* InfoPlist.strings in Resources */,
 				0CDEAD9F1585608500FF7B58 /* MainStoryboard.storyboard in Resources */,
 				0CDEADAB15858ACA00FF7B58 /* intro.png in Resources */,
+				0CDEADD11586834100FF7B58 /* detail.txt in Resources */,
+				0CDEADD31586837300FF7B58 /* intro.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,10 +278,15 @@
 		0CDEADA61585608500FF7B58 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iVolution/iVolution-Prefix.pch";
 				INFOPLIST_FILE = "iVolution/iVolution-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E34C5277-8A83-447B-A3FC-4CAFA163BB80";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E34C5277-8A83-447B-A3FC-4CAFA163BB80";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -269,10 +294,15 @@
 		0CDEADA71585608500FF7B58 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Livonia GLAVES";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Livonia GLAVES";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iVolution/iVolution-Prefix.pch";
 				INFOPLIST_FILE = "iVolution/iVolution-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9A41C561-7829-4FBB-AB08-00171C5D2B3B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9A41C561-7829-4FBB-AB08-00171C5D2B3B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -296,6 +326,7 @@
 				0CDEADA71585608500FF7B58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

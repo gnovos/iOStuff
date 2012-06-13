@@ -1,18 +1,14 @@
 //
 //  MZAppDelegate.m
-//  iVolution
+//  PhotoBomb
 //
-//  Created by Mason Glaves on 6/10/12.
-//  Copyright (c) 2012 Masonsoft. All rights reserved.
+//  Created by Mason on 6/12/12.
+//  Copyright (c) 2012 Mason. All rights reserved.
 //
 
 #import "MZAppDelegate.h"
 
 @implementation MZAppDelegate
-
-@synthesize window = _window;
-
-+ (NSString*) appVersion { return [[[NSBundle bundleForClass:[self class]] infoDictionary] objectForKey:@"CFBundleVersion"]; }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
