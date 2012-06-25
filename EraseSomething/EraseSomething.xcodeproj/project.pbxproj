@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C05D08E159592BA0029D997 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C05D08C159592BA0029D997 /* libTestFlight.a */; };
+		0C05D090159593E20029D997 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C05D08F159593E20029D997 /* libz.dylib */; };
+		0C5DDA621597E154001605AC /* MZMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DDA601597E154001605AC /* MZMazeViewController.m */; };
+		0C5DDA631597E154001605AC /* MZMazeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C5DDA611597E154001605AC /* MZMazeViewController.xib */; };
+		0C5DDA671597E197001605AC /* MZGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DDA651597E197001605AC /* MZGuessViewController.m */; };
+		0C5DDA681597E197001605AC /* MZGuessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C5DDA661597E197001605AC /* MZGuessViewController.xib */; };
+		0C5DDA6F159845FE001605AC /* MZDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DDA6E159845FE001605AC /* MZDrawing.m */; };
+		0C5DDA721598460B001605AC /* MZStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DDA711598460B001605AC /* MZStroke.m */; };
+		0C61A290159510E700052185 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C61A28F159510E700052185 /* UIKit.framework */; };
+		0C61A292159510E700052185 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C61A291159510E700052185 /* Foundation.framework */; };
+		0C61A294159510E700052185 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C61A293159510E700052185 /* CoreGraphics.framework */; };
+		0C61A29A159510E700052185 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C61A298159510E700052185 /* InfoPlist.strings */; };
+		0C61A29C159510E700052185 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A29B159510E700052185 /* main.m */; };
+		0C61A2A0159510E700052185 /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A29F159510E700052185 /* MZAppDelegate.m */; };
+		0C61A2B41595125800052185 /* MZPlaygroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A2B21595125800052185 /* MZPlaygroundViewController.m */; };
+		0C61A2B51595125800052185 /* MZPlaygroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C61A2B31595125800052185 /* MZPlaygroundViewController.xib */; };
+		0C61A2BB1595161200052185 /* MZRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A2B91595161200052185 /* MZRootViewController.m */; };
+		0C61A2BC1595161200052185 /* MZRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C61A2BA1595161200052185 /* MZRootViewController.xib */; };
+		0C61A2C01595162500052185 /* MZSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A2BE1595162500052185 /* MZSettingsViewController.m */; };
+		0C61A2C11595162500052185 /* MZSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C61A2BF1595162500052185 /* MZSettingsViewController.xib */; };
+		0C61A2C51595164800052185 /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A2C31595164800052185 /* MZViewController.m */; };
+		0C61A2D81595270700052185 /* MZCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A2D71595270700052185 /* MZCanvas.m */; };
+		0C61A2DB1595275300052185 /* MZView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A2DA1595275300052185 /* MZView.m */; };
+		0C8997DA15953E0100BA12A2 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8997D915953E0100BA12A2 /* OpenGLES.framework */; };
+		0C8997DD15953E3C00BA12A2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8997DC15953E3C00BA12A2 /* QuartzCore.framework */; };
+		0C8997E01595441000BA12A2 /* brush.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C8997DF1595441000BA12A2 /* brush.png */; };
+		0C8997E4159555E100BA12A2 /* smoke_brush.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C8997E3159555E100BA12A2 /* smoke_brush.png */; };
+		0CB0FCFA1597BE0D004883CF /* MZGameCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB0FCF91597BE0D004883CF /* MZGameCenter.m */; };
+		0CB0FD131597C559004883CF /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB0FD121597C559004883CF /* GameKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0C05D08C159592BA0029D997 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		0C05D08D159592BA0029D997 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		0C05D08F159593E20029D997 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		0C5DDA5F1597E154001605AC /* MZMazeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMazeViewController.h; sourceTree = "<group>"; };
+		0C5DDA601597E154001605AC /* MZMazeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMazeViewController.m; sourceTree = "<group>"; };
+		0C5DDA611597E154001605AC /* MZMazeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZMazeViewController.xib; sourceTree = "<group>"; };
+		0C5DDA641597E197001605AC /* MZGuessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZGuessViewController.h; sourceTree = "<group>"; };
+		0C5DDA651597E197001605AC /* MZGuessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZGuessViewController.m; sourceTree = "<group>"; };
+		0C5DDA661597E197001605AC /* MZGuessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZGuessViewController.xib; sourceTree = "<group>"; };
+		0C5DDA6D159845FE001605AC /* MZDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDrawing.h; sourceTree = "<group>"; };
+		0C5DDA6E159845FE001605AC /* MZDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZDrawing.m; sourceTree = "<group>"; };
+		0C5DDA701598460B001605AC /* MZStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZStroke.h; sourceTree = "<group>"; };
+		0C5DDA711598460B001605AC /* MZStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZStroke.m; sourceTree = "<group>"; };
+		0C61A28B159510E700052185 /* EraseSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EraseSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C61A28F159510E700052185 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0C61A291159510E700052185 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0C61A293159510E700052185 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0C61A297159510E700052185 /* EraseSomething-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EraseSomething-Info.plist"; sourceTree = "<group>"; };
+		0C61A299159510E700052185 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C61A29B159510E700052185 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0C61A29D159510E700052185 /* EraseSomething-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EraseSomething-Prefix.pch"; sourceTree = "<group>"; };
+		0C61A29E159510E700052185 /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
+		0C61A29F159510E700052185 /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
+		0C61A2B11595125800052185 /* MZPlaygroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPlaygroundViewController.h; sourceTree = "<group>"; };
+		0C61A2B21595125800052185 /* MZPlaygroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZPlaygroundViewController.m; sourceTree = "<group>"; };
+		0C61A2B31595125800052185 /* MZPlaygroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZPlaygroundViewController.xib; sourceTree = "<group>"; };
+		0C61A2B81595161200052185 /* MZRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRootViewController.h; sourceTree = "<group>"; };
+		0C61A2B91595161200052185 /* MZRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRootViewController.m; sourceTree = "<group>"; };
+		0C61A2BA1595161200052185 /* MZRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZRootViewController.xib; sourceTree = "<group>"; };
+		0C61A2BD1595162500052185 /* MZSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSettingsViewController.h; sourceTree = "<group>"; };
+		0C61A2BE1595162500052185 /* MZSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZSettingsViewController.m; sourceTree = "<group>"; };
+		0C61A2BF1595162500052185 /* MZSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZSettingsViewController.xib; sourceTree = "<group>"; };
+		0C61A2C21595164800052185 /* MZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
+		0C61A2C31595164800052185 /* MZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
+		0C61A2D61595270700052185 /* MZCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCanvas.h; sourceTree = "<group>"; };
+		0C61A2D71595270700052185 /* MZCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCanvas.m; sourceTree = "<group>"; };
+		0C61A2D91595275300052185 /* MZView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZView.h; sourceTree = "<group>"; };
+		0C61A2DA1595275300052185 /* MZView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZView.m; sourceTree = "<group>"; };
+		0C8997D915953E0100BA12A2 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		0C8997DC15953E3C00BA12A2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0C8997DF1595441000BA12A2 /* brush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brush.png; sourceTree = "<group>"; };
+		0C8997E3159555E100BA12A2 /* smoke_brush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke_brush.png; sourceTree = "<group>"; };
+		0CB0FCF81597BE0D004883CF /* MZGameCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZGameCenter.h; sourceTree = "<group>"; };
+		0CB0FCF91597BE0D004883CF /* MZGameCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZGameCenter.m; sourceTree = "<group>"; };
+		0CB0FD121597C559004883CF /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0C61A288159510E700052185 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB0FD131597C559004883CF /* GameKit.framework in Frameworks */,
+				0C05D090159593E20029D997 /* libz.dylib in Frameworks */,
+				0C8997DD15953E3C00BA12A2 /* QuartzCore.framework in Frameworks */,
+				0C8997DA15953E0100BA12A2 /* OpenGLES.framework in Frameworks */,
+				0C61A290159510E700052185 /* UIKit.framework in Frameworks */,
+				0C61A292159510E700052185 /* Foundation.framework in Frameworks */,
+				0C61A294159510E700052185 /* CoreGraphics.framework in Frameworks */,
+				0C05D08E159592BA0029D997 /* libTestFlight.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C05D089159592900029D997 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				0C05D08B159592A30029D997 /* TestFlight */,
+			);
+			name = Libraries;
+			path = EraseSomething;
+			sourceTree = "<group>";
+		};
+		0C05D08B159592A30029D997 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				0C05D08C159592BA0029D997 /* libTestFlight.a */,
+				0C05D08D159592BA0029D997 /* TestFlight.h */,
+			);
+			name = TestFlight;
+			sourceTree = "<group>";
+		};
+		0C5DDA6915984584001605AC /* models */ = {
+			isa = PBXGroup;
+			children = (
+				0C5DDA6D159845FE001605AC /* MZDrawing.h */,
+				0C5DDA6E159845FE001605AC /* MZDrawing.m */,
+				0C5DDA701598460B001605AC /* MZStroke.h */,
+				0C5DDA711598460B001605AC /* MZStroke.m */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		0C61A280159510E700052185 = {
+			isa = PBXGroup;
+			children = (
+				0C61A295159510E700052185 /* EraseSomething */,
+				0C05D089159592900029D997 /* Libraries */,
+				0C61A28E159510E700052185 /* Frameworks */,
+				0C61A28C159510E700052185 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0C61A28C159510E700052185 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C61A28B159510E700052185 /* EraseSomething.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0C61A28E159510E700052185 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CB0FD121597C559004883CF /* GameKit.framework */,
+				0C05D08F159593E20029D997 /* libz.dylib */,
+				0C8997DC15953E3C00BA12A2 /* QuartzCore.framework */,
+				0C8997D915953E0100BA12A2 /* OpenGLES.framework */,
+				0C61A28F159510E700052185 /* UIKit.framework */,
+				0C61A291159510E700052185 /* Foundation.framework */,
+				0C61A293159510E700052185 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0C61A295159510E700052185 /* EraseSomething */ = {
+			isa = PBXGroup;
+			children = (
+				0C61A2C7159516A500052185 /* application */,
+				0C5DDA6915984584001605AC /* models */,
+				0C61A2B6159515C100052185 /* views */,
+				0C8997DE159543FD00BA12A2 /* Resources */,
+				0C61A296159510E700052185 /* Supporting Files */,
+			);
+			path = EraseSomething;
+			sourceTree = "<group>";
+		};
+		0C61A296159510E700052185 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C61A297159510E700052185 /* EraseSomething-Info.plist */,
+				0C61A298159510E700052185 /* InfoPlist.strings */,
+				0C61A29B159510E700052185 /* main.m */,
+				0C61A29D159510E700052185 /* EraseSomething-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C61A2AF1595121E00052185 /* playground */ = {
+			isa = PBXGroup;
+			children = (
+				0C61A2B11595125800052185 /* MZPlaygroundViewController.h */,
+				0C61A2B21595125800052185 /* MZPlaygroundViewController.m */,
+				0C61A2B31595125800052185 /* MZPlaygroundViewController.xib */,
+				0C5DDA5F1597E154001605AC /* MZMazeViewController.h */,
+				0C5DDA601597E154001605AC /* MZMazeViewController.m */,
+				0C5DDA611597E154001605AC /* MZMazeViewController.xib */,
+				0C5DDA641597E197001605AC /* MZGuessViewController.h */,
+				0C5DDA651597E197001605AC /* MZGuessViewController.m */,
+				0C5DDA661597E197001605AC /* MZGuessViewController.xib */,
+			);
+			name = playground;
+			sourceTree = "<group>";
+		};
+		0C61A2B01595123500052185 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				0C61A2BD1595162500052185 /* MZSettingsViewController.h */,
+				0C61A2BE1595162500052185 /* MZSettingsViewController.m */,
+				0C61A2BF1595162500052185 /* MZSettingsViewController.xib */,
+			);
+			name = settings;
+			sourceTree = "<group>";
+		};
+		0C61A2B6159515C100052185 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				0C61A2D5159526A700052185 /* components */,
+				0C61A2B7159515E200052185 /* root */,
+				0C61A2AF1595121E00052185 /* playground */,
+				0C61A2B01595123500052185 /* settings */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		0C61A2B7159515E200052185 /* root */ = {
+			isa = PBXGroup;
+			children = (
+				0C61A2B81595161200052185 /* MZRootViewController.h */,
+				0C61A2B91595161200052185 /* MZRootViewController.m */,
+				0C61A2BA1595161200052185 /* MZRootViewController.xib */,
+			);
+			name = root;
+			sourceTree = "<group>";
+		};
+		0C61A2C7159516A500052185 /* application */ = {
+			isa = PBXGroup;
+			children = (
+				0C61A29E159510E700052185 /* MZAppDelegate.h */,
+				0C61A29F159510E700052185 /* MZAppDelegate.m */,
+				0CB0FCF81597BE0D004883CF /* MZGameCenter.h */,
+				0CB0FCF91597BE0D004883CF /* MZGameCenter.m */,
+			);
+			name = application;
+			sourceTree = "<group>";
+		};
+		0C61A2D5159526A700052185 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				0C61A2C21595164800052185 /* MZViewController.h */,
+				0C61A2C31595164800052185 /* MZViewController.m */,
+				0C61A2D91595275300052185 /* MZView.h */,
+				0C61A2DA1595275300052185 /* MZView.m */,
+				0C61A2D61595270700052185 /* MZCanvas.h */,
+				0C61A2D71595270700052185 /* MZCanvas.m */,
+			);
+			name = components;
+			sourceTree = "<group>";
+		};
+		0C8997DE159543FD00BA12A2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0C8997E3159555E100BA12A2 /* smoke_brush.png */,
+				0C8997DF1595441000BA12A2 /* brush.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0C61A28A159510E700052185 /* EraseSomething */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C61A2AC159510E700052185 /* Build configuration list for PBXNativeTarget "EraseSomething" */;
+			buildPhases = (
+				0C61A287159510E700052185 /* Sources */,
+				0C61A288159510E700052185 /* Frameworks */,
+				0C61A289159510E700052185 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EraseSomething;
+			productName = EraseSomething;
+			productReference = 0C61A28B159510E700052185 /* EraseSomething.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0C61A282159510E700052185 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MZ;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Mason;
+			};
+			buildConfigurationList = 0C61A285159510E700052185 /* Build configuration list for PBXProject "EraseSomething" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0C61A280159510E700052185;
+			productRefGroup = 0C61A28C159510E700052185 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0C61A28A159510E700052185 /* EraseSomething */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0C61A289159510E700052185 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C61A29A159510E700052185 /* InfoPlist.strings in Resources */,
+				0C61A2B51595125800052185 /* MZPlaygroundViewController.xib in Resources */,
+				0C61A2BC1595161200052185 /* MZRootViewController.xib in Resources */,
+				0C61A2C11595162500052185 /* MZSettingsViewController.xib in Resources */,
+				0C8997E01595441000BA12A2 /* brush.png in Resources */,
+				0C8997E4159555E100BA12A2 /* smoke_brush.png in Resources */,
+				0C5DDA631597E154001605AC /* MZMazeViewController.xib in Resources */,
+				0C5DDA681597E197001605AC /* MZGuessViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0C61A287159510E700052185 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C61A29C159510E700052185 /* main.m in Sources */,
+				0C61A2A0159510E700052185 /* MZAppDelegate.m in Sources */,
+				0C61A2B41595125800052185 /* MZPlaygroundViewController.m in Sources */,
+				0C61A2BB1595161200052185 /* MZRootViewController.m in Sources */,
+				0C61A2C01595162500052185 /* MZSettingsViewController.m in Sources */,
+				0C61A2C51595164800052185 /* MZViewController.m in Sources */,
+				0C61A2D81595270700052185 /* MZCanvas.m in Sources */,
+				0C61A2DB1595275300052185 /* MZView.m in Sources */,
+				0CB0FCFA1597BE0D004883CF /* MZGameCenter.m in Sources */,
+				0C5DDA621597E154001605AC /* MZMazeViewController.m in Sources */,
+				0C5DDA671597E197001605AC /* MZGuessViewController.m in Sources */,
+				0C5DDA6F159845FE001605AC /* MZDrawing.m in Sources */,
+				0C5DDA721598460B001605AC /* MZStroke.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0C61A298159510E700052185 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C61A299159510E700052185 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0C61A2AA159510E700052185 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 armv6";
+			};
+			name = Debug;
+		};
+		0C61A2AB159510E700052185 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv6";
+			};
+			name = Release;
+		};
+		0C61A2AD159510E700052185 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EraseSomething/EraseSomething-Prefix.pch";
+				INFOPLIST_FILE = "EraseSomething/EraseSomething-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/EraseSomething\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0C61A2AE159510E700052185 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EraseSomething/EraseSomething-Prefix.pch";
+				INFOPLIST_FILE = "EraseSomething/EraseSomething-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/EraseSomething\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0C61A285159510E700052185 /* Build configuration list for PBXProject "EraseSomething" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C61A2AA159510E700052185 /* Debug */,
+				0C61A2AB159510E700052185 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C61A2AC159510E700052185 /* Build configuration list for PBXNativeTarget "EraseSomething" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C61A2AD159510E700052185 /* Debug */,
+				0C61A2AE159510E700052185 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0C61A282159510E700052185 /* Project object */;
+}

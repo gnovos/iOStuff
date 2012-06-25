@@ -2,11 +2,12 @@
 //  MZViewController.m
 //  FlipOut
 //
-//  Created by Mason Glaves on 6/13/12.
-//  Copyright (c) 2012 Masonsoft. All rights reserved.
+//  Created by Mason on 6/13/12.
+//  Copyright (c) 2012 Mason. All rights reserved.
 //
 
 #import "MZViewController.h"
+#import "MZGameCenter.h"
 
 @interface MZViewController ()
 
@@ -20,10 +21,15 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)viewDidUnload
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [MZGameCenter authenticateLocalUser];
+}
+
+- (void)didReceiveMemoryWarning
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

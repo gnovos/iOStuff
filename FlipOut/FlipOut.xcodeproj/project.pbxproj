@@ -7,110 +7,131 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C6719461589425700850AEF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6719451589425700850AEF /* UIKit.framework */; };
-		0C6719481589425700850AEF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6719471589425700850AEF /* Foundation.framework */; };
-		0C67194A1589425700850AEF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6719491589425700850AEF /* CoreGraphics.framework */; };
-		0C6719501589425700850AEF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C67194E1589425700850AEF /* InfoPlist.strings */; };
-		0C6719521589425700850AEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6719511589425700850AEF /* main.m */; };
-		0C6719561589425700850AEF /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6719551589425700850AEF /* MZAppDelegate.m */; };
-		0C6719591589425700850AEF /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C6719571589425700850AEF /* MainStoryboard_iPhone.storyboard */; };
-		0C67195C1589425700850AEF /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C67195A1589425700850AEF /* MainStoryboard_iPad.storyboard */; };
-		0C67195F1589425700850AEF /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C67195E1589425700850AEF /* MZViewController.m */; };
+		0C19A626158996840080B224 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C19A625158996840080B224 /* UIKit.framework */; };
+		0C19A628158996840080B224 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C19A627158996840080B224 /* Foundation.framework */; };
+		0C19A62A158996840080B224 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C19A629158996840080B224 /* CoreGraphics.framework */; };
+		0C19A630158996850080B224 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C19A62E158996850080B224 /* InfoPlist.strings */; };
+		0C19A632158996850080B224 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C19A631158996850080B224 /* main.m */; };
+		0C19A636158996850080B224 /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C19A635158996850080B224 /* MZAppDelegate.m */; };
+		0C19A639158996850080B224 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C19A637158996850080B224 /* MainStoryboard_iPhone.storyboard */; };
+		0C19A63C158996850080B224 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C19A63A158996850080B224 /* MainStoryboard_iPad.storyboard */; };
+		0C19A63F158996850080B224 /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C19A63E158996850080B224 /* MZViewController.m */; };
+		0C19A6501589973E0080B224 /* MZGameCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C19A64F1589973E0080B224 /* MZGameCenter.m */; };
+		0C19A652158997C60080B224 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C19A651158997C60080B224 /* GameKit.framework */; };
+		0C19A654158997CC0080B224 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C19A653158997CC0080B224 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C6719411589425700850AEF /* FlipOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C6719451589425700850AEF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		0C6719471589425700850AEF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		0C6719491589425700850AEF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		0C67194D1589425700850AEF /* FlipOut-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlipOut-Info.plist"; sourceTree = "<group>"; };
-		0C67194F1589425700850AEF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0C6719511589425700850AEF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0C6719531589425700850AEF /* FlipOut-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlipOut-Prefix.pch"; sourceTree = "<group>"; };
-		0C6719541589425700850AEF /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
-		0C6719551589425700850AEF /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
-		0C6719581589425700850AEF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		0C67195B1589425700850AEF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		0C67195D1589425700850AEF /* MZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
-		0C67195E1589425700850AEF /* MZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
+		0C19A621158996840080B224 /* FlipOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C19A625158996840080B224 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0C19A627158996840080B224 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0C19A629158996840080B224 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0C19A62D158996850080B224 /* FlipOut-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlipOut-Info.plist"; sourceTree = "<group>"; };
+		0C19A62F158996850080B224 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C19A631158996850080B224 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0C19A633158996850080B224 /* FlipOut-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlipOut-Prefix.pch"; sourceTree = "<group>"; };
+		0C19A634158996850080B224 /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
+		0C19A635158996850080B224 /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
+		0C19A638158996850080B224 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		0C19A63B158996850080B224 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		0C19A63D158996850080B224 /* MZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
+		0C19A63E158996850080B224 /* MZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
+		0C19A64E1589973E0080B224 /* MZGameCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZGameCenter.h; sourceTree = "<group>"; };
+		0C19A64F1589973E0080B224 /* MZGameCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZGameCenter.m; sourceTree = "<group>"; };
+		0C19A651158997C60080B224 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		0C19A653158997CC0080B224 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0C67193E1589425700850AEF /* Frameworks */ = {
+		0C19A61E158996840080B224 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C6719461589425700850AEF /* UIKit.framework in Frameworks */,
-				0C6719481589425700850AEF /* Foundation.framework in Frameworks */,
-				0C67194A1589425700850AEF /* CoreGraphics.framework in Frameworks */,
+				0C19A654158997CC0080B224 /* QuartzCore.framework in Frameworks */,
+				0C19A652158997C60080B224 /* GameKit.framework in Frameworks */,
+				0C19A626158996840080B224 /* UIKit.framework in Frameworks */,
+				0C19A628158996840080B224 /* Foundation.framework in Frameworks */,
+				0C19A62A158996840080B224 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C6719361589425700850AEF = {
+		0C19A616158996840080B224 = {
 			isa = PBXGroup;
 			children = (
-				0C67194B1589425700850AEF /* FlipOut */,
-				0C6719441589425700850AEF /* Frameworks */,
-				0C6719421589425700850AEF /* Products */,
+				0C19A62B158996850080B224 /* FlipOut */,
+				0C19A624158996840080B224 /* Frameworks */,
+				0C19A622158996840080B224 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		0C6719421589425700850AEF /* Products */ = {
+		0C19A622158996840080B224 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0C6719411589425700850AEF /* FlipOut.app */,
+				0C19A621158996840080B224 /* FlipOut.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0C6719441589425700850AEF /* Frameworks */ = {
+		0C19A624158996840080B224 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0C6719451589425700850AEF /* UIKit.framework */,
-				0C6719471589425700850AEF /* Foundation.framework */,
-				0C6719491589425700850AEF /* CoreGraphics.framework */,
+				0C19A653158997CC0080B224 /* QuartzCore.framework */,
+				0C19A651158997C60080B224 /* GameKit.framework */,
+				0C19A625158996840080B224 /* UIKit.framework */,
+				0C19A627158996840080B224 /* Foundation.framework */,
+				0C19A629158996840080B224 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0C67194B1589425700850AEF /* FlipOut */ = {
+		0C19A62B158996850080B224 /* FlipOut */ = {
 			isa = PBXGroup;
 			children = (
-				0C6719541589425700850AEF /* MZAppDelegate.h */,
-				0C6719551589425700850AEF /* MZAppDelegate.m */,
-				0C6719571589425700850AEF /* MainStoryboard_iPhone.storyboard */,
-				0C67195A1589425700850AEF /* MainStoryboard_iPad.storyboard */,
-				0C67195D1589425700850AEF /* MZViewController.h */,
-				0C67195E1589425700850AEF /* MZViewController.m */,
-				0C67194C1589425700850AEF /* Supporting Files */,
+				0C19A64D1589970C0080B224 /* controllers */,
+				0C19A634158996850080B224 /* MZAppDelegate.h */,
+				0C19A635158996850080B224 /* MZAppDelegate.m */,
+				0C19A637158996850080B224 /* MainStoryboard_iPhone.storyboard */,
+				0C19A63A158996850080B224 /* MainStoryboard_iPad.storyboard */,
+				0C19A63D158996850080B224 /* MZViewController.h */,
+				0C19A63E158996850080B224 /* MZViewController.m */,
+				0C19A62C158996850080B224 /* Supporting Files */,
 			);
 			path = FlipOut;
 			sourceTree = "<group>";
 		};
-		0C67194C1589425700850AEF /* Supporting Files */ = {
+		0C19A62C158996850080B224 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0C67194D1589425700850AEF /* FlipOut-Info.plist */,
-				0C67194E1589425700850AEF /* InfoPlist.strings */,
-				0C6719511589425700850AEF /* main.m */,
-				0C6719531589425700850AEF /* FlipOut-Prefix.pch */,
+				0C19A62D158996850080B224 /* FlipOut-Info.plist */,
+				0C19A62E158996850080B224 /* InfoPlist.strings */,
+				0C19A631158996850080B224 /* main.m */,
+				0C19A633158996850080B224 /* FlipOut-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C19A64D1589970C0080B224 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0C19A64E1589973E0080B224 /* MZGameCenter.h */,
+				0C19A64F1589973E0080B224 /* MZGameCenter.m */,
+			);
+			name = controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0C6719401589425700850AEF /* FlipOut */ = {
+		0C19A620158996840080B224 /* FlipOut */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0C6719621589425700850AEF /* Build configuration list for PBXNativeTarget "FlipOut" */;
+			buildConfigurationList = 0C19A642158996850080B224 /* Build configuration list for PBXNativeTarget "FlipOut" */;
 			buildPhases = (
-				0C67193D1589425700850AEF /* Sources */,
-				0C67193E1589425700850AEF /* Frameworks */,
-				0C67193F1589425700850AEF /* Resources */,
+				0C19A61D158996840080B224 /* Sources */,
+				0C19A61E158996840080B224 /* Frameworks */,
+				0C19A61F158996840080B224 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -118,83 +139,84 @@
 			);
 			name = FlipOut;
 			productName = FlipOut;
-			productReference = 0C6719411589425700850AEF /* FlipOut.app */;
+			productReference = 0C19A621158996840080B224 /* FlipOut.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		0C6719381589425700850AEF /* Project object */ = {
+		0C19A618158996840080B224 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MZ;
-				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = Masonsoft;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Mason;
 			};
-			buildConfigurationList = 0C67193B1589425700850AEF /* Build configuration list for PBXProject "FlipOut" */;
+			buildConfigurationList = 0C19A61B158996840080B224 /* Build configuration list for PBXProject "FlipOut" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 0C6719361589425700850AEF;
-			productRefGroup = 0C6719421589425700850AEF /* Products */;
+			mainGroup = 0C19A616158996840080B224;
+			productRefGroup = 0C19A622158996840080B224 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0C6719401589425700850AEF /* FlipOut */,
+				0C19A620158996840080B224 /* FlipOut */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0C67193F1589425700850AEF /* Resources */ = {
+		0C19A61F158996840080B224 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C6719501589425700850AEF /* InfoPlist.strings in Resources */,
-				0C6719591589425700850AEF /* MainStoryboard_iPhone.storyboard in Resources */,
-				0C67195C1589425700850AEF /* MainStoryboard_iPad.storyboard in Resources */,
+				0C19A630158996850080B224 /* InfoPlist.strings in Resources */,
+				0C19A639158996850080B224 /* MainStoryboard_iPhone.storyboard in Resources */,
+				0C19A63C158996850080B224 /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0C67193D1589425700850AEF /* Sources */ = {
+		0C19A61D158996840080B224 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C6719521589425700850AEF /* main.m in Sources */,
-				0C6719561589425700850AEF /* MZAppDelegate.m in Sources */,
-				0C67195F1589425700850AEF /* MZViewController.m in Sources */,
+				0C19A632158996850080B224 /* main.m in Sources */,
+				0C19A636158996850080B224 /* MZAppDelegate.m in Sources */,
+				0C19A63F158996850080B224 /* MZViewController.m in Sources */,
+				0C19A6501589973E0080B224 /* MZGameCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0C67194E1589425700850AEF /* InfoPlist.strings */ = {
+		0C19A62E158996850080B224 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0C67194F1589425700850AEF /* en */,
+				0C19A62F158996850080B224 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		0C6719571589425700850AEF /* MainStoryboard_iPhone.storyboard */ = {
+		0C19A637158996850080B224 /* MainStoryboard_iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0C6719581589425700850AEF /* en */,
+				0C19A638158996850080B224 /* en */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
-		0C67195A1589425700850AEF /* MainStoryboard_iPad.storyboard */ = {
+		0C19A63A158996850080B224 /* MainStoryboard_iPad.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0C67195B1589425700850AEF /* en */,
+				0C19A63B158996850080B224 /* en */,
 			);
 			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
@@ -202,12 +224,13 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0C6719601589425700850AEF /* Debug */ = {
+		0C19A640158996850080B224 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -218,30 +241,29 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		0C6719611589425700850AEF /* Release */ = {
+		0C19A641158996850080B224 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -249,7 +271,7 @@
 			};
 			name = Release;
 		};
-		0C6719631589425700850AEF /* Debug */ = {
+		0C19A643158996850080B224 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -260,7 +282,7 @@
 			};
 			name = Debug;
 		};
-		0C6719641589425700850AEF /* Release */ = {
+		0C19A644158996850080B224 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -274,24 +296,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0C67193B1589425700850AEF /* Build configuration list for PBXProject "FlipOut" */ = {
+		0C19A61B158996840080B224 /* Build configuration list for PBXProject "FlipOut" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0C6719601589425700850AEF /* Debug */,
-				0C6719611589425700850AEF /* Release */,
+				0C19A640158996850080B224 /* Debug */,
+				0C19A641158996850080B224 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0C6719621589425700850AEF /* Build configuration list for PBXNativeTarget "FlipOut" */ = {
+		0C19A642158996850080B224 /* Build configuration list for PBXNativeTarget "FlipOut" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0C6719631589425700850AEF /* Debug */,
-				0C6719641589425700850AEF /* Release */,
+				0C19A643158996850080B224 /* Debug */,
+				0C19A644158996850080B224 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 0C6719381589425700850AEF /* Project object */;
+	rootObject = 0C19A618158996840080B224 /* Project object */;
 }

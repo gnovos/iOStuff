@@ -1,21 +1,41 @@
 //
 //  MZAppDelegate.m
-//  FlipOut
+//  EraseSomething
 //
-//  Created by Mason on 6/13/12.
+//  Created by Mason on 6/22/12.
 //  Copyright (c) 2012 Mason. All rights reserved.
 //
 
 #import "MZAppDelegate.h"
+#import "MZRootViewController.h"
 
 @implementation MZAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        @try {
+            [TestFlight takeOff:@"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"];
+        }
+        @catch (id exception) {
+            NSLog(@"Test Flight failed: %@", exception);
+        }
+    });
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    MZRootViewController* root = [[MZRootViewController alloc] init];
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:root];
+    
+    [nav setNavigationBarHidden:YES];
+    
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
