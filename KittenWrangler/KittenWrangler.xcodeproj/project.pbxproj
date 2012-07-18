@@ -1,0 +1,376 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C31C71915AA6E9F004D1067 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71815AA6E9F004D1067 /* UIKit.framework */; };
+		0C31C71B15AA6E9F004D1067 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71A15AA6E9F004D1067 /* Foundation.framework */; };
+		0C31C71D15AA6E9F004D1067 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71C15AA6E9F004D1067 /* CoreGraphics.framework */; };
+		0C31C71F15AA6E9F004D1067 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71E15AA6E9F004D1067 /* GLKit.framework */; };
+		0C31C72115AA6E9F004D1067 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C72015AA6E9F004D1067 /* OpenGLES.framework */; };
+		0C31C72715AA6E9F004D1067 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C31C72515AA6E9F004D1067 /* InfoPlist.strings */; };
+		0C31C72915AA6E9F004D1067 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C72815AA6E9F004D1067 /* main.m */; };
+		0C31C72D15AA6E9F004D1067 /* KWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C72C15AA6E9F004D1067 /* KWAppDelegate.m */; };
+		0C31C73015AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C31C72E15AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard */; };
+		0C31C73315AA6E9F004D1067 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C31C73115AA6E9F004D1067 /* MainStoryboard_iPad.storyboard */; };
+		0C31C73515AA6E9F004D1067 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C31C73415AA6E9F004D1067 /* Shader.fsh */; };
+		0C31C73715AA6E9F004D1067 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C31C73615AA6E9F004D1067 /* Shader.vsh */; };
+		0C31C73A15AA6E9F004D1067 /* KWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C73915AA6E9F004D1067 /* KWViewController.m */; };
+		0C31C74315AA6F51004D1067 /* KWBasket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C74215AA6F51004D1067 /* KWBasket.m */; };
+		0C31C74615AA6F5F004D1067 /* KWKitten.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C74515AA6F5F004D1067 /* KWKitten.m */; };
+		0C31C74915AA6F6F004D1067 /* KWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C74815AA6F6F004D1067 /* KWObject.m */; };
+		0C31C74C15AA6FB2004D1067 /* KWYarn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C74B15AA6FB2004D1067 /* KWYarn.m */; };
+		0C7F61C915B4BC3E00924B64 /* KWEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F61C815B4BC3E00924B64 /* KWEngine.m */; };
+		0CF257BB15B621260020B895 /* KWLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF257BA15B621260020B895 /* KWLevel.m */; };
+		0CF257BE15B635F20020B895 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CF257BD15B635F10020B895 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0C31C71415AA6E9F004D1067 /* KittenWrangler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KittenWrangler.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C31C71815AA6E9F004D1067 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0C31C71A15AA6E9F004D1067 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0C31C71C15AA6E9F004D1067 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0C31C71E15AA6E9F004D1067 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		0C31C72015AA6E9F004D1067 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		0C31C72415AA6E9F004D1067 /* KittenWrangler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KittenWrangler-Info.plist"; sourceTree = "<group>"; };
+		0C31C72615AA6E9F004D1067 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C31C72815AA6E9F004D1067 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0C31C72A15AA6E9F004D1067 /* KittenWrangler-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KittenWrangler-Prefix.pch"; sourceTree = "<group>"; };
+		0C31C72B15AA6E9F004D1067 /* KWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWAppDelegate.h; sourceTree = "<group>"; };
+		0C31C72C15AA6E9F004D1067 /* KWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KWAppDelegate.m; sourceTree = "<group>"; };
+		0C31C72F15AA6E9F004D1067 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		0C31C73215AA6E9F004D1067 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		0C31C73415AA6E9F004D1067 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		0C31C73615AA6E9F004D1067 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		0C31C73815AA6E9F004D1067 /* KWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWViewController.h; sourceTree = "<group>"; };
+		0C31C73915AA6E9F004D1067 /* KWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KWViewController.m; sourceTree = "<group>"; };
+		0C31C74115AA6F51004D1067 /* KWBasket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWBasket.h; sourceTree = "<group>"; };
+		0C31C74215AA6F51004D1067 /* KWBasket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWBasket.m; sourceTree = "<group>"; };
+		0C31C74415AA6F5F004D1067 /* KWKitten.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWKitten.h; sourceTree = "<group>"; };
+		0C31C74515AA6F5F004D1067 /* KWKitten.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWKitten.m; sourceTree = "<group>"; };
+		0C31C74715AA6F6F004D1067 /* KWObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWObject.h; sourceTree = "<group>"; };
+		0C31C74815AA6F6F004D1067 /* KWObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWObject.m; sourceTree = "<group>"; };
+		0C31C74A15AA6FB2004D1067 /* KWYarn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWYarn.h; sourceTree = "<group>"; };
+		0C31C74B15AA6FB2004D1067 /* KWYarn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWYarn.m; sourceTree = "<group>"; };
+		0C7F61C715B4BC3E00924B64 /* KWEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWEngine.h; sourceTree = "<group>"; };
+		0C7F61C815B4BC3E00924B64 /* KWEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWEngine.m; sourceTree = "<group>"; };
+		0CF257B915B621260020B895 /* KWLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWLevel.h; sourceTree = "<group>"; };
+		0CF257BA15B621260020B895 /* KWLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWLevel.m; sourceTree = "<group>"; };
+		0CF257BD15B635F10020B895 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0CF257BF15B637DD0020B895 /* KWLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWLog.h; sourceTree = "<group>"; };
+		0CF257C015B65ACF0020B895 /* KWConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWConst.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0C31C71115AA6E9F004D1067 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CF257BE15B635F20020B895 /* QuartzCore.framework in Frameworks */,
+				0C31C71915AA6E9F004D1067 /* UIKit.framework in Frameworks */,
+				0C31C71B15AA6E9F004D1067 /* Foundation.framework in Frameworks */,
+				0C31C71D15AA6E9F004D1067 /* CoreGraphics.framework in Frameworks */,
+				0C31C71F15AA6E9F004D1067 /* GLKit.framework in Frameworks */,
+				0C31C72115AA6E9F004D1067 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C31C70915AA6E9E004D1067 = {
+			isa = PBXGroup;
+			children = (
+				0C31C72215AA6E9F004D1067 /* KittenWrangler */,
+				0C31C71715AA6E9F004D1067 /* Frameworks */,
+				0C31C71515AA6E9F004D1067 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0C31C71515AA6E9F004D1067 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C31C71415AA6E9F004D1067 /* KittenWrangler.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0C31C71715AA6E9F004D1067 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CF257BD15B635F10020B895 /* QuartzCore.framework */,
+				0C31C71815AA6E9F004D1067 /* UIKit.framework */,
+				0C31C71A15AA6E9F004D1067 /* Foundation.framework */,
+				0C31C71C15AA6E9F004D1067 /* CoreGraphics.framework */,
+				0C31C71E15AA6E9F004D1067 /* GLKit.framework */,
+				0C31C72015AA6E9F004D1067 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0C31C72215AA6E9F004D1067 /* KittenWrangler */ = {
+			isa = PBXGroup;
+			children = (
+				0C7F61C515B4BC2400924B64 /* Engine */,
+				0C31C74015AA6F35004D1067 /* Models */,
+				0C31C72B15AA6E9F004D1067 /* KWAppDelegate.h */,
+				0C31C72C15AA6E9F004D1067 /* KWAppDelegate.m */,
+				0C31C72E15AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard */,
+				0C31C73115AA6E9F004D1067 /* MainStoryboard_iPad.storyboard */,
+				0C31C73415AA6E9F004D1067 /* Shader.fsh */,
+				0C31C73615AA6E9F004D1067 /* Shader.vsh */,
+				0C31C73815AA6E9F004D1067 /* KWViewController.h */,
+				0C31C73915AA6E9F004D1067 /* KWViewController.m */,
+				0C31C72315AA6E9F004D1067 /* Supporting Files */,
+			);
+			path = KittenWrangler;
+			sourceTree = "<group>";
+		};
+		0C31C72315AA6E9F004D1067 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C31C72415AA6E9F004D1067 /* KittenWrangler-Info.plist */,
+				0C31C72515AA6E9F004D1067 /* InfoPlist.strings */,
+				0C31C72815AA6E9F004D1067 /* main.m */,
+				0C31C72A15AA6E9F004D1067 /* KittenWrangler-Prefix.pch */,
+				0CF257BF15B637DD0020B895 /* KWLog.h */,
+				0CF257C015B65ACF0020B895 /* KWConst.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C31C74015AA6F35004D1067 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0CF257B915B621260020B895 /* KWLevel.h */,
+				0CF257BA15B621260020B895 /* KWLevel.m */,
+				0C31C74715AA6F6F004D1067 /* KWObject.h */,
+				0C31C74815AA6F6F004D1067 /* KWObject.m */,
+				0C31C74115AA6F51004D1067 /* KWBasket.h */,
+				0C31C74215AA6F51004D1067 /* KWBasket.m */,
+				0C31C74415AA6F5F004D1067 /* KWKitten.h */,
+				0C31C74515AA6F5F004D1067 /* KWKitten.m */,
+				0C31C74A15AA6FB2004D1067 /* KWYarn.h */,
+				0C31C74B15AA6FB2004D1067 /* KWYarn.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		0C7F61C515B4BC2400924B64 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				0C7F61C715B4BC3E00924B64 /* KWEngine.h */,
+				0C7F61C815B4BC3E00924B64 /* KWEngine.m */,
+			);
+			name = Engine;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0C31C71315AA6E9F004D1067 /* KittenWrangler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C31C73D15AA6E9F004D1067 /* Build configuration list for PBXNativeTarget "KittenWrangler" */;
+			buildPhases = (
+				0C31C71015AA6E9F004D1067 /* Sources */,
+				0C31C71115AA6E9F004D1067 /* Frameworks */,
+				0C31C71215AA6E9F004D1067 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KittenWrangler;
+			productName = KittenWrangler;
+			productReference = 0C31C71415AA6E9F004D1067 /* KittenWrangler.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0C31C70B15AA6E9E004D1067 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KW;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Masonsoft;
+			};
+			buildConfigurationList = 0C31C70E15AA6E9E004D1067 /* Build configuration list for PBXProject "KittenWrangler" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0C31C70915AA6E9E004D1067;
+			productRefGroup = 0C31C71515AA6E9F004D1067 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0C31C71315AA6E9F004D1067 /* KittenWrangler */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0C31C71215AA6E9F004D1067 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C31C72715AA6E9F004D1067 /* InfoPlist.strings in Resources */,
+				0C31C73015AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard in Resources */,
+				0C31C73315AA6E9F004D1067 /* MainStoryboard_iPad.storyboard in Resources */,
+				0C31C73515AA6E9F004D1067 /* Shader.fsh in Resources */,
+				0C31C73715AA6E9F004D1067 /* Shader.vsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0C31C71015AA6E9F004D1067 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C31C72915AA6E9F004D1067 /* main.m in Sources */,
+				0C31C72D15AA6E9F004D1067 /* KWAppDelegate.m in Sources */,
+				0C31C73A15AA6E9F004D1067 /* KWViewController.m in Sources */,
+				0C31C74315AA6F51004D1067 /* KWBasket.m in Sources */,
+				0C31C74615AA6F5F004D1067 /* KWKitten.m in Sources */,
+				0C31C74915AA6F6F004D1067 /* KWObject.m in Sources */,
+				0C31C74C15AA6FB2004D1067 /* KWYarn.m in Sources */,
+				0C7F61C915B4BC3E00924B64 /* KWEngine.m in Sources */,
+				0CF257BB15B621260020B895 /* KWLevel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0C31C72515AA6E9F004D1067 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C31C72615AA6E9F004D1067 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0C31C72E15AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C31C72F15AA6E9F004D1067 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		0C31C73115AA6E9F004D1067 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C31C73215AA6E9F004D1067 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0C31C73B15AA6E9F004D1067 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0C31C73C15AA6E9F004D1067 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0C31C73E15AA6E9F004D1067 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KittenWrangler/KittenWrangler-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "KittenWrangler/KittenWrangler-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0C31C73F15AA6E9F004D1067 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KittenWrangler/KittenWrangler-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "KittenWrangler/KittenWrangler-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0C31C70E15AA6E9E004D1067 /* Build configuration list for PBXProject "KittenWrangler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C31C73B15AA6E9F004D1067 /* Debug */,
+				0C31C73C15AA6E9F004D1067 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C31C73D15AA6E9F004D1067 /* Build configuration list for PBXNativeTarget "KittenWrangler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C31C73E15AA6E9F004D1067 /* Debug */,
+				0C31C73F15AA6E9F004D1067 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0C31C70B15AA6E9E004D1067 /* Project object */;
+}

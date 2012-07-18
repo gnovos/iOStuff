@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MZDrawing : NSObject
+@interface MZDrawing : NSObject <NSCoding>
 
 @end

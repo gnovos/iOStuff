@@ -14,7 +14,8 @@
 		0C5DDA671597E197001605AC /* MZGuessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DDA651597E197001605AC /* MZGuessViewController.m */; };
 		0C5DDA681597E197001605AC /* MZGuessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C5DDA661597E197001605AC /* MZGuessViewController.xib */; };
 		0C5DDA6F159845FE001605AC /* MZDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DDA6E159845FE001605AC /* MZDrawing.m */; };
-		0C5DDA721598460B001605AC /* MZStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DDA711598460B001605AC /* MZStroke.m */; };
+		0C5DDE651598D7A400D4FD56 /* MZDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DDE631598D7A400D4FD56 /* MZDrawViewController.m */; };
+		0C5DDE661598D7A400D4FD56 /* MZDrawViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C5DDE641598D7A400D4FD56 /* MZDrawViewController.xib */; };
 		0C61A290159510E700052185 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C61A28F159510E700052185 /* UIKit.framework */; };
 		0C61A292159510E700052185 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C61A291159510E700052185 /* Foundation.framework */; };
 		0C61A294159510E700052185 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C61A293159510E700052185 /* CoreGraphics.framework */; };
@@ -30,6 +31,8 @@
 		0C61A2C51595164800052185 /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A2C31595164800052185 /* MZViewController.m */; };
 		0C61A2D81595270700052185 /* MZCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A2D71595270700052185 /* MZCanvas.m */; };
 		0C61A2DB1595275300052185 /* MZView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A2DA1595275300052185 /* MZView.m */; };
+		0C6386AE15A279CA001973A2 /* MZStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6386AD15A279CA001973A2 /* MZStroke.m */; };
+		0C6386B115A27A40001973A2 /* MZBrush.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6386B015A27A40001973A2 /* MZBrush.m */; };
 		0C8997DA15953E0100BA12A2 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8997D915953E0100BA12A2 /* OpenGLES.framework */; };
 		0C8997DD15953E3C00BA12A2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8997DC15953E3C00BA12A2 /* QuartzCore.framework */; };
 		0C8997E01595441000BA12A2 /* brush.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C8997DF1595441000BA12A2 /* brush.png */; };
@@ -50,8 +53,9 @@
 		0C5DDA661597E197001605AC /* MZGuessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZGuessViewController.xib; sourceTree = "<group>"; };
 		0C5DDA6D159845FE001605AC /* MZDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDrawing.h; sourceTree = "<group>"; };
 		0C5DDA6E159845FE001605AC /* MZDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZDrawing.m; sourceTree = "<group>"; };
-		0C5DDA701598460B001605AC /* MZStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZStroke.h; sourceTree = "<group>"; };
-		0C5DDA711598460B001605AC /* MZStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZStroke.m; sourceTree = "<group>"; };
+		0C5DDE621598D7A400D4FD56 /* MZDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDrawViewController.h; sourceTree = "<group>"; };
+		0C5DDE631598D7A400D4FD56 /* MZDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZDrawViewController.m; sourceTree = "<group>"; };
+		0C5DDE641598D7A400D4FD56 /* MZDrawViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MZDrawViewController.xib; sourceTree = "<group>"; };
 		0C61A28B159510E700052185 /* EraseSomething.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EraseSomething.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C61A28F159510E700052185 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0C61A291159510E700052185 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -77,6 +81,10 @@
 		0C61A2D71595270700052185 /* MZCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCanvas.m; sourceTree = "<group>"; };
 		0C61A2D91595275300052185 /* MZView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZView.h; sourceTree = "<group>"; };
 		0C61A2DA1595275300052185 /* MZView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZView.m; sourceTree = "<group>"; };
+		0C6386AC15A279CA001973A2 /* MZStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZStroke.h; sourceTree = "<group>"; };
+		0C6386AD15A279CA001973A2 /* MZStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZStroke.m; sourceTree = "<group>"; };
+		0C6386AF15A27A40001973A2 /* MZBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBrush.h; sourceTree = "<group>"; };
+		0C6386B015A27A40001973A2 /* MZBrush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZBrush.m; sourceTree = "<group>"; };
 		0C8997D915953E0100BA12A2 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		0C8997DC15953E3C00BA12A2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0C8997DF1595441000BA12A2 /* brush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brush.png; sourceTree = "<group>"; };
@@ -126,10 +134,12 @@
 		0C5DDA6915984584001605AC /* models */ = {
 			isa = PBXGroup;
 			children = (
+				0C6386AF15A27A40001973A2 /* MZBrush.h */,
+				0C6386B015A27A40001973A2 /* MZBrush.m */,
+				0C6386AC15A279CA001973A2 /* MZStroke.h */,
+				0C6386AD15A279CA001973A2 /* MZStroke.m */,
 				0C5DDA6D159845FE001605AC /* MZDrawing.h */,
 				0C5DDA6E159845FE001605AC /* MZDrawing.m */,
-				0C5DDA701598460B001605AC /* MZStroke.h */,
-				0C5DDA711598460B001605AC /* MZStroke.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -201,6 +211,9 @@
 				0C5DDA641597E197001605AC /* MZGuessViewController.h */,
 				0C5DDA651597E197001605AC /* MZGuessViewController.m */,
 				0C5DDA661597E197001605AC /* MZGuessViewController.xib */,
+				0C5DDE621598D7A400D4FD56 /* MZDrawViewController.h */,
+				0C5DDE631598D7A400D4FD56 /* MZDrawViewController.m */,
+				0C5DDE641598D7A400D4FD56 /* MZDrawViewController.xib */,
 			);
 			name = playground;
 			sourceTree = "<group>";
@@ -329,6 +342,7 @@
 				0C8997E4159555E100BA12A2 /* smoke_brush.png in Resources */,
 				0C5DDA631597E154001605AC /* MZMazeViewController.xib in Resources */,
 				0C5DDA681597E197001605AC /* MZGuessViewController.xib in Resources */,
+				0C5DDE661598D7A400D4FD56 /* MZDrawViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +365,9 @@
 				0C5DDA621597E154001605AC /* MZMazeViewController.m in Sources */,
 				0C5DDA671597E197001605AC /* MZGuessViewController.m in Sources */,
 				0C5DDA6F159845FE001605AC /* MZDrawing.m in Sources */,
-				0C5DDA721598460B001605AC /* MZStroke.m in Sources */,
+				0C5DDE651598D7A400D4FD56 /* MZDrawViewController.m in Sources */,
+				0C6386AE15A279CA001973A2 /* MZStroke.m in Sources */,
+				0C6386B115A27A40001973A2 /* MZBrush.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

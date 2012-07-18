@@ -1,0 +1,21 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$interface_c_c_transition_progress.html" title="CCTransitionProgress" alt="" coords="581,574,720,602"/>
+<area shape="rect" id="node4" href="$interface_c_c_transition_scene.html" title="CCTransitionScene" alt="" coords="513,494,639,522"/>
+<area shape="rect" id="node6" href="$interface_c_c_scene.html" title="CCScene" alt="" coords="573,385,643,413"/>
+<area shape="rect" id="node8" href="$interface_c_c_node.html" title="CCNode" alt="" coords="574,305,641,333"/>
+<area shape="rect" id="node11" href="$interface_c_c_grid_base.html" title="CCGridBase" alt="" coords="219,211,308,239"/>
+<area shape="rect" id="node13" href="$structcc_grid_size.html" title="A 2D grid size." alt="" coords="5,102,85,130"/>
+<area shape="rect" id="node15" href="$interface_c_c_grabber.html" title="CCGrabber" alt="" coords="109,102,192,130"/>
+<area shape="rect" id="node17" href="$interface_c_c_texture2_d.html" title="CCTexture2D" alt="" coords="216,102,312,130"/>
+<area shape="rect" id="node19" href="$interface_c_c_g_l_program.html" title="CCGLProgram" alt="" coords="309,7,411,35"/>
+<area shape="rect" id="node22" href="$interface_c_c_array.html" title="CCArray" alt="" coords="633,157,703,185"/>
+<area shape="rect" id="node24" href="$structcc_array.html" title="ccArray" alt="" coords="683,7,747,35"/>
+<area shape="rect" id="node33" href="$structt_hash_element.html" title="tHashElement" alt="" coords="821,102,917,130"/>
+<area shape="rect" id="node26" href="$interface_c_c_camera.html" title="CCCamera" alt="" coords="626,211,707,239"/>
+<area shape="rect" id="node28" href="$interface_c_c_scheduler.html" title="CCScheduler" alt="" coords="731,211,823,239"/>
+<area shape="rect" id="node31" href="$interface_c_c_action_manager.html" title="CCActionManager" alt="" coords="848,211,971,239"/>
+<area shape="rect" id="node35" href="$struct_u_t__hash__handle.html" title="UT_hash_handle" alt="" coords="966,7,1079,35"/>
+<area shape="rect" id="node38" href="$struct_u_t__hash__table.html" title="UT_hash_table" alt="" coords="1006,211,1108,239"/>
+<area shape="rect" id="node40" href="$struct_u_t__hash__bucket.html" title="UT_hash_bucket" alt="" coords="1098,102,1211,130"/>
+<area shape="rect" id="node45" href="$interface_c_c_action.html" title="CCAction" alt="" coords="806,7,881,35"/>
+</map>

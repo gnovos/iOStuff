@@ -33,6 +33,7 @@
 }
 
 + (void) authenticationChanged {
+    NSLog(@"Authentication Changed");
     
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
         NSLog(@"Authentication changed: player authenticated.");
@@ -41,6 +42,34 @@
     }
     
 }
+
+/* Indicates a state change for the given peer.
+ */
+- (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
+    
+}
+
+/* Indicates a connection request was received from another peer. 
+ 
+ Accept by calling -acceptConnectionFromPeer:
+ Deny by calling -denyConnectionFromPeer:
+ */
+- (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID {
+    
+}
+
+/* Indicates a connection error occurred with a peer, which includes connection request failures, or disconnects due to timeouts.
+ */
+- (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error {
+    
+}
+
+/* Indicates an error occurred with the session such as failing to make available.
+ */
+- (void)session:(GKSession *)session didFailWithError:(NSError *)error {
+    
+}
+
 
 
 @end

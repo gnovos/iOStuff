@@ -1,0 +1,23 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$interface_c_c_menu_item_label.html" title="CCMenuItemLabel" alt="" coords="601,507,725,535"/>
+<area shape="rect" id="node4" href="$interface_c_c_menu_item.html" title="CCMenuItem" alt="" coords="794,398,888,426"/>
+<area shape="rect" id="node6" href="$interface_c_c_node.html" title="CCNode" alt="" coords="462,305,529,333"/>
+<area shape="rect" id="node49" href="$interface_c_c_node.html" title="CCNode\&lt; CCLabelProtocol, CCRGBAProtocol \&gt;" alt="" coords="216,398,505,426"/>
+<area shape="rect" id="node9" href="$interface_c_c_grid_base.html" title="CCGridBase" alt="" coords="342,211,431,239"/>
+<area shape="rect" id="node11" href="$structcc_grid_size.html" title="A 2D grid size." alt="" coords="313,102,393,130"/>
+<area shape="rect" id="node13" href="$interface_c_c_grabber.html" title="CCGrabber" alt="" coords="417,102,500,130"/>
+<area shape="rect" id="node15" href="$interface_c_c_texture2_d.html" title="CCTexture2D" alt="" coords="192,102,288,130"/>
+<area shape="rect" id="node17" href="$interface_c_c_g_l_program.html" title="CCGLProgram" alt="" coords="78,7,180,35"/>
+<area shape="rect" id="node20" href="$interface_c_c_array.html" title="CCArray" alt="" coords="614,211,684,239"/>
+<area shape="rect" id="node22" href="$structcc_array.html" title="ccArray" alt="" coords="631,7,695,35"/>
+<area shape="rect" id="node31" href="$structt_hash_element.html" title="tHashElement" alt="" coords="718,102,815,130"/>
+<area shape="rect" id="node24" href="$interface_c_c_camera.html" title="CCCamera" alt="" coords="237,211,317,239"/>
+<area shape="rect" id="node26" href="$interface_c_c_scheduler.html" title="CCScheduler" alt="" coords="120,211,212,239"/>
+<area shape="rect" id="node29" href="$interface_c_c_action_manager.html" title="CCActionManager" alt="" coords="708,211,831,239"/>
+<area shape="rect" id="node33" href="$struct_u_t__hash__handle.html" title="UT_hash_handle" alt="" coords="908,7,1020,35"/>
+<area shape="rect" id="node36" href="$struct_u_t__hash__table.html" title="UT_hash_table" alt="" coords="947,211,1049,239"/>
+<area shape="rect" id="node38" href="$struct_u_t__hash__bucket.html" title="UT_hash_bucket" alt="" coords="838,102,951,130"/>
+<area shape="rect" id="node43" href="$interface_c_c_action.html" title="CCAction" alt="" coords="729,7,804,35"/>
+<area shape="rect" id="node45" href="$protocol_c_c_r_g_b_a_protocol-p.html" title="CC RGBA protocol." alt="" coords="530,398,667,426"/>
+<area shape="rect" id="node47" href="$structcc_color3_b.html" title="ccColor3B" alt="" coords="691,398,769,426"/>
+</map>
