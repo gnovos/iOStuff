@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C062A5615B6716D00BB1CB2 /* KWRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C062A5515B6716D00BB1CB2 /* KWRenderView.m */; };
 		0C31C71915AA6E9F004D1067 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71815AA6E9F004D1067 /* UIKit.framework */; };
 		0C31C71B15AA6E9F004D1067 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71A15AA6E9F004D1067 /* Foundation.framework */; };
 		0C31C71D15AA6E9F004D1067 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71C15AA6E9F004D1067 /* CoreGraphics.framework */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C062A5415B6716D00BB1CB2 /* KWRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWRenderView.h; sourceTree = "<group>"; };
+		0C062A5515B6716D00BB1CB2 /* KWRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWRenderView.m; sourceTree = "<group>"; };
 		0C31C71415AA6E9F004D1067 /* KittenWrangler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KittenWrangler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C31C71815AA6E9F004D1067 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0C31C71A15AA6E9F004D1067 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -164,6 +167,8 @@
 			children = (
 				0CF257C315B668220020B895 /* KWViewController.h */,
 				0CF257C415B668220020B895 /* KWViewController.m */,
+				0C062A5415B6716D00BB1CB2 /* KWRenderView.h */,
+				0C062A5515B6716D00BB1CB2 /* KWRenderView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				0C7F61C915B4BC3E00924B64 /* KWEngine.m in Sources */,
 				0CF257BB15B621260020B895 /* KWLevel.m in Sources */,
 				0CF257C515B668220020B895 /* KWViewController.m in Sources */,
+				0C062A5615B6716D00BB1CB2 /* KWRenderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

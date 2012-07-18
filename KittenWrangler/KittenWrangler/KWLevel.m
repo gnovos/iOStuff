@@ -26,7 +26,7 @@ static const NSUInteger kKWTimeLimitLevelCost  = 30;
 
 }
 
-@synthesize level, bounds;
+@synthesize level, bounds, baskets, kittens, toys;
 
 - (id) initLevel:(NSUInteger)lvl {
     if (self = [self init]) {
@@ -41,7 +41,7 @@ static const NSUInteger kKWTimeLimitLevelCost  = 30;
 
         [baskets addObject:[[KWBasket alloc] initWithLevel:self]];
         
-        for (int i = 0; i < level; i++) {
+        for (int i = 0; i < level * 10; i++) {
             [kittens addObject:[[KWKitten alloc] initWithLevel:self]];
         }
     }

@@ -25,7 +25,7 @@ typedef enum {
 
 typedef enum {
     KWKittenEnergyTired    = 0,
-    KWKittenEnergyExcited  = 10
+    KWKittenEnergyExcited  = 40
 } KWKittenEnergy;
 
 @implementation KWKitten {
@@ -38,7 +38,7 @@ typedef enum {
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:kKWDefaultKittenSize]) {
         mood = KWKittenMoodBored;
-        energy = KWKittenEnergyExcited;
+        energy = arc4random_uniform(KWKittenEnergyExcited);
     }
     return self;
 }

@@ -13,8 +13,11 @@
 @interface KWLevel : NSObject
 
 @property (nonatomic, readonly, assign) NSUInteger level;
-
 @property (nonatomic, readonly, assign) CGRect bounds;
+
+@property (nonatomic, readonly, strong) NSArray* baskets;
+@property (nonatomic, readonly, strong) NSArray* kittens;
+@property (nonatomic, readonly, strong) NSArray* toys;
 
 - (id) initLevel:(NSUInteger)lvl;
 

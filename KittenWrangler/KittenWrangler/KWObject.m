@@ -42,7 +42,7 @@
 }
 
 - (void) tick:(CGFloat)dt {
-    dlog(@"tick:%f %@", dt, self);
+//xxx    dlog(@"tick:%f %@", dt, self);
     
     [self normalizeRotation];
         

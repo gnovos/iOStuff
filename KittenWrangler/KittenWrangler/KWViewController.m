@@ -7,26 +7,26 @@
 //
 
 #import "KWViewController.h"
-#import "KWEngine.h"
+#import "KWRenderView.h"
 
 @interface KWViewController ()
 
 @end
 
 @implementation KWViewController {
-    KWEngine* engine;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    engine = [[KWEngine alloc] init];
+    IBOutlet KWRenderView* render;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    [self viewDidAppear:animated];
-        
-    [engine start];
+    [super viewDidAppear:animated];
+            
+    [render start];
     
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [render pause];
+    [super viewWillDisappear:animated];
 }
 
 @end

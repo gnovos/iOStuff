@@ -29,7 +29,7 @@
     [self stop];
     loop = [CADisplayLink displayLinkWithTarget:self selector:@selector(loop:)];
     
-    loop.frameInterval = 10; //xxx slooow it down for testing
+    //loop.frameInterval = 10; //xxx slooow it down for testing
     
     [loop addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 }

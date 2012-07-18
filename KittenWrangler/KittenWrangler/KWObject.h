@@ -12,9 +12,9 @@
 
 typedef enum {
     KWObjectVelocityMotionless = 0,
-    KWObjectVelocitySlow       = 3,
-    KWObjectVelocityAverage    = 10,
-    KWObjectVelocityFast       = 30
+    KWObjectVelocitySlow       = 30,
+    KWObjectVelocityAverage    = 80,
+    KWObjectVelocityFast       = 150
 } KWObjectVelocity;
 
 @interface KWObject : NSObject
