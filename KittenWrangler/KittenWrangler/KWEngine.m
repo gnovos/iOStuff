@@ -12,10 +12,11 @@
 #import "KWLevel.h"
 
 @implementation KWEngine {        
-    KWLevel* level;
     CADisplayLink* loop;
     CFTimeInterval last;
 }
+
+@synthesize level;
 
 - (id) init {
     if (self = [super init]) {

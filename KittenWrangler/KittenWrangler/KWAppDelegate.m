@@ -7,18 +7,13 @@
 //
 
 #import "KWAppDelegate.h"
-#import "KWEngine.h"
 
 @implementation KWAppDelegate
 
 @synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    KWEngine* e = [[KWEngine alloc] init];
-    
-    [e start];
-    
+{    
     // Override point for customization after application launch.
     return YES;
 }

@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class KWLevel;
+
 @interface KWEngine : NSObject
+
+@property (nonatomic, readonly, strong) KWLevel* level;
 
 - (void) start;
 - (void) stop;

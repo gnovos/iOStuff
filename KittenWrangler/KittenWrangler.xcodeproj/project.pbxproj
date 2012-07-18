@@ -17,9 +17,6 @@
 		0C31C72D15AA6E9F004D1067 /* KWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C72C15AA6E9F004D1067 /* KWAppDelegate.m */; };
 		0C31C73015AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C31C72E15AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard */; };
 		0C31C73315AA6E9F004D1067 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C31C73115AA6E9F004D1067 /* MainStoryboard_iPad.storyboard */; };
-		0C31C73515AA6E9F004D1067 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C31C73415AA6E9F004D1067 /* Shader.fsh */; };
-		0C31C73715AA6E9F004D1067 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C31C73615AA6E9F004D1067 /* Shader.vsh */; };
-		0C31C73A15AA6E9F004D1067 /* KWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C73915AA6E9F004D1067 /* KWViewController.m */; };
 		0C31C74315AA6F51004D1067 /* KWBasket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C74215AA6F51004D1067 /* KWBasket.m */; };
 		0C31C74615AA6F5F004D1067 /* KWKitten.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C74515AA6F5F004D1067 /* KWKitten.m */; };
 		0C31C74915AA6F6F004D1067 /* KWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C74815AA6F6F004D1067 /* KWObject.m */; };
@@ -27,6 +24,7 @@
 		0C7F61C915B4BC3E00924B64 /* KWEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F61C815B4BC3E00924B64 /* KWEngine.m */; };
 		0CF257BB15B621260020B895 /* KWLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF257BA15B621260020B895 /* KWLevel.m */; };
 		0CF257BE15B635F20020B895 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CF257BD15B635F10020B895 /* QuartzCore.framework */; };
+		0CF257C515B668220020B895 /* KWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF257C415B668220020B895 /* KWViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,10 +42,6 @@
 		0C31C72C15AA6E9F004D1067 /* KWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KWAppDelegate.m; sourceTree = "<group>"; };
 		0C31C72F15AA6E9F004D1067 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		0C31C73215AA6E9F004D1067 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		0C31C73415AA6E9F004D1067 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		0C31C73615AA6E9F004D1067 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		0C31C73815AA6E9F004D1067 /* KWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWViewController.h; sourceTree = "<group>"; };
-		0C31C73915AA6E9F004D1067 /* KWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KWViewController.m; sourceTree = "<group>"; };
 		0C31C74115AA6F51004D1067 /* KWBasket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWBasket.h; sourceTree = "<group>"; };
 		0C31C74215AA6F51004D1067 /* KWBasket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWBasket.m; sourceTree = "<group>"; };
 		0C31C74415AA6F5F004D1067 /* KWKitten.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWKitten.h; sourceTree = "<group>"; };
@@ -63,6 +57,8 @@
 		0CF257BD15B635F10020B895 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0CF257BF15B637DD0020B895 /* KWLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWLog.h; sourceTree = "<group>"; };
 		0CF257C015B65ACF0020B895 /* KWConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWConst.h; sourceTree = "<group>"; };
+		0CF257C315B668220020B895 /* KWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWViewController.h; sourceTree = "<group>"; };
+		0CF257C415B668220020B895 /* KWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,16 +111,10 @@
 		0C31C72215AA6E9F004D1067 /* KittenWrangler */ = {
 			isa = PBXGroup;
 			children = (
+				0CF257C215B667F10020B895 /* Application */,
+				0CF257C115B667EB0020B895 /* Views */,
 				0C7F61C515B4BC2400924B64 /* Engine */,
 				0C31C74015AA6F35004D1067 /* Models */,
-				0C31C72B15AA6E9F004D1067 /* KWAppDelegate.h */,
-				0C31C72C15AA6E9F004D1067 /* KWAppDelegate.m */,
-				0C31C72E15AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard */,
-				0C31C73115AA6E9F004D1067 /* MainStoryboard_iPad.storyboard */,
-				0C31C73415AA6E9F004D1067 /* Shader.fsh */,
-				0C31C73615AA6E9F004D1067 /* Shader.vsh */,
-				0C31C73815AA6E9F004D1067 /* KWViewController.h */,
-				0C31C73915AA6E9F004D1067 /* KWViewController.m */,
 				0C31C72315AA6E9F004D1067 /* Supporting Files */,
 			);
 			path = KittenWrangler;
@@ -167,6 +157,26 @@
 				0C7F61C815B4BC3E00924B64 /* KWEngine.m */,
 			);
 			name = Engine;
+			sourceTree = "<group>";
+		};
+		0CF257C115B667EB0020B895 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0CF257C315B668220020B895 /* KWViewController.h */,
+				0CF257C415B668220020B895 /* KWViewController.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		0CF257C215B667F10020B895 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				0C31C72B15AA6E9F004D1067 /* KWAppDelegate.h */,
+				0C31C72C15AA6E9F004D1067 /* KWAppDelegate.m */,
+				0C31C72E15AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard */,
+				0C31C73115AA6E9F004D1067 /* MainStoryboard_iPad.storyboard */,
+			);
+			name = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,8 +234,6 @@
 				0C31C72715AA6E9F004D1067 /* InfoPlist.strings in Resources */,
 				0C31C73015AA6E9F004D1067 /* MainStoryboard_iPhone.storyboard in Resources */,
 				0C31C73315AA6E9F004D1067 /* MainStoryboard_iPad.storyboard in Resources */,
-				0C31C73515AA6E9F004D1067 /* Shader.fsh in Resources */,
-				0C31C73715AA6E9F004D1067 /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,13 +246,13 @@
 			files = (
 				0C31C72915AA6E9F004D1067 /* main.m in Sources */,
 				0C31C72D15AA6E9F004D1067 /* KWAppDelegate.m in Sources */,
-				0C31C73A15AA6E9F004D1067 /* KWViewController.m in Sources */,
 				0C31C74315AA6F51004D1067 /* KWBasket.m in Sources */,
 				0C31C74615AA6F5F004D1067 /* KWKitten.m in Sources */,
 				0C31C74915AA6F6F004D1067 /* KWObject.m in Sources */,
 				0C31C74C15AA6FB2004D1067 /* KWYarn.m in Sources */,
 				0C7F61C915B4BC3E00924B64 /* KWEngine.m in Sources */,
 				0CF257BB15B621260020B895 /* KWLevel.m in Sources */,
+				0CF257C515B668220020B895 /* KWViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
