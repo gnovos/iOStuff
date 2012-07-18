@@ -30,14 +30,14 @@ otherButtonTitles:nil]; \
 
 #define dline     dlog(@".")
 
-#define dobj(o)   dlog(#o @"=%@", o)
-#define dptr(p)   dlog(#p @"=%p", p)
-#define dint(i)   dlog(#i @"=%d", i)
-#define dfloat(f) dlog(#f @"=%f", f)
+#define dlobj(o)   dlog(#o @"=%@", o)
+#define dlptr(p)   dlog(#p @"=%p", p)
+#define dlint(i)   dlog(#i @"=%d", i)
+#define dlfloat(f) dlog(#f @"=%f", f)
 
-#define drect(r)  dlog(#r @"={{%f,%f},{%f,%f}}", r.origin.x, r.origin.y, r.size.width, r.size.height)
-#define dsize(s)  dlog(#s @"={%f,%f}", s.width, s.height)
-#define dpoint(p) dlog(#p @"={%f,%f}", p.x, p.y)
+#define dlrect(r)  dlog(#r @"={{%f,%f},{%f,%f}}", r.origin.x, r.origin.y, r.size.width, r.size.height)
+#define dlsize(s)  dlog(#s @"={%f,%f}", s.width, s.height)
+#define dlpoint(p) dlog(#p @"={%f,%f}", p.x, p.y)
 
 
 #endif

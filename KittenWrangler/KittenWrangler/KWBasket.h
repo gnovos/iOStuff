@@ -9,10 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "KWObject.h"
 
-@interface KWBasket : KWObject 
+@class KWKitten;
+
+@interface KWBasket : KWObject <NSCopying>
 
 @property (nonatomic, readonly, strong) NSMutableArray* kittens;
 
 - (id) initWithLevel:(KWLevel*)lvl;
+
+- (void) addKitten:(KWKitten*)kitten;
+- (void) removeKitten:(KWKitten*)kitten;
 
 @end

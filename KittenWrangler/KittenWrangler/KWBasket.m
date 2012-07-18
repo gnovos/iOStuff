@@ -8,8 +8,9 @@
 
 #import "KWBasket.h"
 #import "KWKitten.h"
+#import "KWLevel.h"
 
-static const CGSize kKWDefaultBasketSize = { 50, 50 };
+static const CGSize kKWDefaultBasketSize = { 100, 100 };
 
 @implementation KWBasket 
 
@@ -20,6 +21,18 @@ static const CGSize kKWDefaultBasketSize = { 50, 50 };
         kittens = [[NSMutableArray alloc] init];
     }
     return self;    
+}
+
+- (void) addKitten:(KWKitten*)kitten {
+    [kittens addObject:kitten];
+}
+
+- (void) removeKitten:(KWKitten*)kitten {
+    [kittens removeObject:kitten];
+}
+
+- (id) copyWithZone:(NSZone *)zone {
+    return self;
 }
 
 - (NSString*) description {

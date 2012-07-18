@@ -41,7 +41,7 @@ static const NSUInteger kKWTimeLimitLevelCost  = 30;
 
         [baskets addObject:[[KWBasket alloc] initWithLevel:self]];
         
-        for (int i = 0; i < level * 10; i++) {
+        for (int i = 0; i < level * 3; i++) {
             [kittens addObject:[[KWKitten alloc] initWithLevel:self]];
         }
     }
@@ -71,6 +71,12 @@ static const NSUInteger kKWTimeLimitLevelCost  = 30;
         [kitten tick:dt];
     }];
         
+}
+
+- (void) move:(KWKitten*)kitten toBasket:(KWBasket*)basket {
+    [kittens removeObject:kitten];
+    [baskets makeObjectsPerformSelector:@selector(removeKitten:) withObject:kitten];
+    [basket addKitten:kitten];
 }
 
 - (NSArray*) visible:(KWObject*)obj {

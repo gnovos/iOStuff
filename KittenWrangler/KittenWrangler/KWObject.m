@@ -16,8 +16,10 @@
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
         level = lvl;
-        bounds.size = size;
-        bounds.origin = [self randomPointIn:level.bounds];
+        while (CGRectIsEmpty(bounds) || !CGRectContainsRect(level.bounds, bounds)) {
+            bounds.size = size;
+            bounds.origin = [self randomPointIn:level.bounds];
+        }
     }
     return self;
 }
@@ -80,19 +82,6 @@
         
     CGFloat dir = dx ? tan(dy / dx) : dy < 0 ? kKWAngle270Degrees : kKWAngle90Degrees;
     return dir;
-}
-
-- (BOOL) sees:(KWObject*)other {
-
-    CGPoint d = { sin(rotation / 180.0 * M_PI), sin((rotation + kKWAngle90Degrees) / kKWAngle180Degrees) };
-    
-    CGFloat slope = d.x ? (d.y / d.x) : MAXFLOAT;
-    
-    CGFloat mx = CGRectGetMidX(other.bounds);
-    CGFloat my = mx * slope;
-    
-    return CGRectContainsPoint(other.bounds, CGPointMake(mx, my));
-    
 }
 
 - (NSString*) description {

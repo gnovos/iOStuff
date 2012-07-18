@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class KWObject;
+@class KWObject, KWBasket, KWKitten;
 
 @interface KWLevel : NSObject
 
@@ -26,5 +26,7 @@
 - (NSArray*) visible:(KWObject*)obj;
 
 - (BOOL) complete;
+
+- (void) move:(KWKitten*)kitten toBasket:(KWBasket*)basket;
 
 @end

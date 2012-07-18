@@ -37,7 +37,6 @@ typedef enum {
 
 - (BOOL) moving;
 
-- (BOOL) sees:(KWObject*)other;
 - (CGFloat) directionOf:(KWObject*)other;
 
 - (void) tick:(CGFloat)dt;
