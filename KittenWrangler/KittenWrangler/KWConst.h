@@ -16,6 +16,8 @@ static const CGFloat kKWAngle180Degrees = 180.0f;
 static const CGFloat kKWAngle270Degrees = 270.0f;
 static const CGFloat kKWAngle360Degrees = 360.0f;
 
+static const CGFloat kKWKittenInterest  = 0.5f;
+
 #define KWCGRectCenter(x) CGPointMake(CGRectGetMidX(x), CGRectGetMidY(x))
 #define kKWRandomHeading arc4random_uniform(kKWAngle360Degrees)
 #define degreesToRadians(x) (M_PI * x / kKWAngle180Degrees)

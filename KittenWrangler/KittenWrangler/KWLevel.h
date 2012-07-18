@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class KWObject;
+
 @interface KWLevel : NSObject
 
 @property (nonatomic, readonly, assign) NSUInteger level;
@@ -17,6 +19,8 @@
 - (id) initLevel:(NSUInteger)lvl;
 
 - (void) tick:(CGFloat)dt;
+
+- (NSArray*) visible:(KWObject*)obj;
 
 - (BOOL) complete;
 

@@ -50,11 +50,6 @@ static const NSUInteger kKWTimeLimitLevelCost  = 30;
 
 - (BOOL) timeout { return [[NSDate date] timeIntervalSinceDate:start] > timelimit; }
 
-- (NSArray*) objects {
-    //xxxx
-    return nil;
-}
-
 - (BOOL) complete { return kittens.count == 0 || [self timeout]; }
 
 - (void) tick:(CGFloat)dt {    
@@ -63,8 +58,6 @@ static const NSUInteger kKWTimeLimitLevelCost  = 30;
         return;
     }
     
-//    dlog(@"tick:%f %@", dt, self);
-        
     [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
         [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
             if (kitten.bored) {
@@ -80,21 +73,32 @@ static const NSUInteger kKWTimeLimitLevelCost  = 30;
         
 }
 
-//- (NSArray*) visibleFrom:(CGPoint)loc atAngle:(CGFloat)angle {
-//    
-//    CGPoint d = { sin(angle / 180.0 * M_PI), sin((angle + kKWRotate90Degrees) / kKWRotate180Degrees) };
-//    
-//    CGFloat slope = d.x ? (d.y / d.x) : MAXFLOAT;
-//    
-//    CGFloat mx = CGRectGetMidX(other.bounds);
-//    CGFloat my = mx * slope;
-//    
-//    return CGRectContainsPoint(other.bounds, CGPointMake(mx, my));
-//
-//    
-//}
+- (NSArray*) visible:(KWObject*)obj {
+    
+    CGPoint d = { sin(obj.rotation / 180.0 * M_PI), sin((obj.rotation + kKWAngle90Degrees) / kKWAngle180Degrees) };
+    
+    CGFloat slope = d.x ? (d.y / d.x) : 0;
+    
+    NSMutableArray* visible = [[NSMutableArray alloc] init];
+        
+    void (^block) (KWObject* obj, NSUInteger idx, BOOL *stop) = ^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+        
+        CGFloat mx = CGRectGetMidX(obj.bounds);
+        CGFloat my = obj.bounds.origin.x * slope;
+        
+        if (CGRectContainsPoint(obj.bounds, CGPointMake(mx, my))) {
+            [visible addObject:obj];
+        }
+        
+    };
+    
+    [kittens enumerateObjectsUsingBlock:block];
+    
+    [toys enumerateObjectsUsingBlock:block];
 
+    return visible;
 
+}
 
 - (NSString*) description {
     return [NSString stringWithFormat:@"level:%d limit:%d/%ds baskets:%d kittens:%d toys:%d",

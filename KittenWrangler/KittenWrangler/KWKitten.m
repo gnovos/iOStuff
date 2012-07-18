@@ -58,25 +58,26 @@ typedef enum {
     }
 }
 
+- (BOOL) interested { return arc4random_uniform(100) / 100.0f > kKWKittenInterest; }
+
 - (void) explore {
     self.velocity = KWKittenActionExplore;
     self.heading = kKWRandomHeading;
     mood = KWKittenMoodInterested;
     chase = nil;
     
-    //xxx
-//    [self.level.objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
-//        if ([self sees:obj] && obj.moving) {
-//            //xxx make this a % chance?
-//            chase = obj;
-//            *stop = YES;
-//        }
-//    }];
+    [[self.level visible:self] enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+        if (obj.moving && [self interested]) {
+            chase = obj;
+            *stop = YES;
+        }
+    }];
 }
 
 - (void) tick:(CGFloat)dt {       
     if (self.tired) {
         self.velocity = KWKittenActionIdle;
+        chase = nil;
     } else if (self.bored) {
         [self explore];
     }
