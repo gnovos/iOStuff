@@ -20,19 +20,20 @@ typedef enum {
 
 typedef enum {
     KWKittenMoodBored      = 0,
-    KWKittenMoodInterested = 10,
+    KWKittenMoodInterested = 5,
 } KWKittenMood;
 
 typedef enum {
     KWKittenEnergyTired    = 0,
-    KWKittenEnergyExcited  = 40
+    KWKittenEnergyExcited  = 50
 } KWKittenEnergy;
 
 @implementation KWKitten {
     CGFloat mood;
     CGFloat energy;
     
-    KWObject* chase;
+    KWKitten* chase;
+//    KWObject* chase;
 }
 
 - (id) initWithLevel:(KWLevel*)lvl {
@@ -43,46 +44,49 @@ typedef enum {
     return self;
 }
 
-- (BOOL) idle      { return self.velocity == KWKittenActionIdle;    }
-- (BOOL) stalking  { return self.velocity == KWKittenActionStalk;   }
-- (BOOL) exploring { return self.velocity == KWKittenActionExplore; }
-- (BOOL) chasing   { return self.velocity == KWKittenActionChase;   }
+- (BOOL) idle      { return self.velocity == KWKittenActionIdle;           }
+- (BOOL) stalking  { return self.velocity == KWKittenActionStalk;          }
+- (BOOL) exploring { return self.velocity == KWKittenActionExplore;        }
+- (BOOL) chasing   { return chase && self.velocity == KWKittenActionChase; }
 
-- (BOOL) bored     { return mood          <= KWKittenMoodBored;     }
-- (BOOL) tired     { return energy        <= KWKittenEnergyTired;   }
+- (BOOL) bored     { return mood          <= KWKittenMoodBored;            }
+- (BOOL) tired     { return energy        <= KWKittenEnergyTired;          }
 
 - (void) turn:(CGFloat)dt {
     if (chase) {
-        self.heading = [self direction:chase];
-        self.velocity = chase.velocity;
+        self.heading += [self directionOf:chase];
+        self.velocity = KWKittenActionChase;//chase.velocity;
     }
 }
 
-- (BOOL) interested { return arc4random_uniform(100) / 100.0f > kKWKittenInterest; }
+- (BOOL) interested { return arc4random_uniform(100) / 100.0f > kKWKittenInterest;  }
 
 - (void) explore {
     self.velocity = KWKittenActionExplore;
     self.heading = kKWRandomHeading;
     mood = KWKittenMoodInterested;
+    chase.chased = NO;
     chase = nil;
     
-    [[self.level visible:self] enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+    [[self.level visible:self] enumerateObjectsUsingBlock:^(KWKitten* obj, NSUInteger idx, BOOL *stop) {
         if (obj.moving && [self interested]) {
             chase = obj;
+            chase.chased = YES;
             *stop = YES;
         }
     }];
 }
 
-- (void) tick:(CGFloat)dt {       
+- (void) tick:(CGFloat)dt {
     if (self.tired) {
         self.velocity = KWKittenActionIdle;
+        chase.chased = NO;
         chase = nil;
     } else if (self.bored) {
         [self explore];
     }
     
-    if (self.idle) {
+    if (self.idle) {        
         mood -= dt;
         energy += dt;
     } else {
@@ -92,11 +96,10 @@ typedef enum {
                         
     [self  turn:dt];
     [super tick:dt];
-            
 }
 
 - (NSString*) description {
-    return [[super description] stringByAppendingFormat:@" mood:%d energy:%d chasing:%@", (int)mood, (int)energy, chase];
+    return [[super description] stringByAppendingFormat:@" mood:%d energy:%d chasing:%@", (int)mood, (int)energy, self.chasing ? @"YES" : @"NO"];
 }
 
 

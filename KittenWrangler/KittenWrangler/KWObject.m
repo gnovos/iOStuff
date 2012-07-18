@@ -71,14 +71,15 @@
     
 }
 
-- (CGFloat) direction:(KWObject*)other {
+- (CGFloat) directionOf:(KWObject*)other {
     CGPoint a = other.center;
     CGPoint b = self.center;
     
     CGFloat dx = a.x - b.x;
     CGFloat dy = a.y - b.y;
         
-    return dx ? tan(dy / dx) : dy < 0 ? kKWAngle270Degrees : kKWAngle90Degrees ;
+    CGFloat dir = dx ? tan(dy / dx) : dy < 0 ? kKWAngle270Degrees : kKWAngle90Degrees;
+    return dir;
 }
 
 - (BOOL) sees:(KWObject*)other {

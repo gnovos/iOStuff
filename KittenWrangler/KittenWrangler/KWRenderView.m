@@ -48,10 +48,15 @@
     [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 2.0);
-        UIColor* color = k.idle ? [UIColor redColor] : [UIColor blueColor];
+        UIColor* color = k.idle ? [UIColor redColor] : [UIColor blueColor];        
+        if (k.chased) {
+            color = UIColor.yellowColor;
+            CGContextSetFillColorWithColor(context, [UIColor yellowColor].CGColor);
+        }
+        if (k.chasing) {
+            color = UIColor.lightGrayColor;
+        }
         CGContextSetStrokeColorWithColor(context, color.CGColor);
-        
-        //xxx CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
         CGContextAddEllipseInRect(context, k.bounds);
         CGContextStrokePath(context);
     }];
