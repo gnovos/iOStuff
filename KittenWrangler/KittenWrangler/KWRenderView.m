@@ -44,23 +44,39 @@
 
     KWLevel* level = engine.level;
     
-    [level.baskets enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+    [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
         CGContextSetLineWidth(context, 2.0);
         CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
-        CGContextAddRect(context, obj.bounds);
+        CGContextAddRect(context, basket.bounds);
         CGContextStrokePath(context);
+        
+        [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
+            
+            CGContextSetLineWidth(context, 2.0);
+            
+            CGContextSetStrokeColorWithColor(context, [UIColor orangeColor].CGColor);
+            
+            CGFloat dashArray[] = {10,3};
+            
+            CGContextSetLineDash(context, idx, dashArray, 2);
+            
+            CGContextAddEllipseInRect(context, k.bounds);
+            
+            CGContextStrokePath(context);
+        }];
+        
+        CGContextSetLineDash(context, 0, NULL, 0);
     }];
     
     [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-        CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 2.0);
-        UIColor* color = k.idle ? [UIColor redColor] : [UIColor blueColor];        
+        UIColor* color = k.idle ? [UIColor lightGrayColor] : [UIColor blueColor];        
         if (k.chased) {
             color = UIColor.yellowColor;
             CGContextSetFillColorWithColor(context, [UIColor yellowColor].CGColor);
         }
         if (k.chasing) {
-            color = UIColor.lightGrayColor;
+            color = UIColor.redColor;
         }
         if (k.held) {
             color = UIColor.brownColor;

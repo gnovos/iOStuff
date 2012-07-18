@@ -9,7 +9,7 @@
 #import "KWKitten.h"
 #import "KWLevel.h"
 
-static const CGSize kKWDefaultKittenSize = { 50, 50 };
+static const CGSize kKWDefaultKittenSize = { 30, 30 };
 
 typedef enum {
     KWKittenActionIdle    = KWObjectVelocityMotionless,
