@@ -44,6 +44,25 @@
 
     KWLevel* level = engine.level;
     
+    const char* label = [[NSString stringWithFormat:@"Level %d (%d s)", level.level, (int)level.remaining] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    UIColor* tfill = [UIColor colorWithRed:(0.5f * level.remaining) green:0.3f blue:0.3f alpha:0.2f];
+    UIColor* tstroke = [UIColor colorWithRed:0.5f green:0.5f blue:0.7f alpha:0.3f];
+    
+    CGContextSetStrokeColorWithColor(context, tstroke.CGColor);
+    CGContextSetFillColorWithColor(context, tfill.CGColor);
+
+	double text_angle = -M_PI/4.0;  // 45 Degrees counterclockwise
+    
+	CGAffineTransform xform = CGAffineTransformMake(cos(text_angle),  sin(text_angle),
+                                                    sin(text_angle), -cos(text_angle),
+                                                    0.0,  0.0);
+    
+	CGContextSetTextMatrix(context, xform);
+	CGContextSelectFont(context, "Helvetica Bold", 38.f, kCGEncodingMacRoman);
+	CGContextSetTextDrawingMode(context, kCGTextFillStroke);
+    CGContextShowTextAtPoint(context, 70, 350, label, strlen(label));
+    
     [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
         CGContextSetLineWidth(context, 2.0);
         CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);

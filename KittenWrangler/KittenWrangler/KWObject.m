@@ -64,7 +64,9 @@
         loc.origin.x += d.x;
         loc.origin.y += d.y;
         
-        if (CGRectContainsPoint(level.bounds, KWCGRectCenter(loc))) {
+        //xxx check collisions
+        
+        if (CGRectContainsRect(level.bounds, loc)) {
             bounds = loc;
         } else {
             heading += kKWAngle45Degrees;

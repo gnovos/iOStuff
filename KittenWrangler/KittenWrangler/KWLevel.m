@@ -10,15 +10,15 @@
 #import "KWBasket.h"
 #import "KWKitten.h"
 
-static const NSUInteger kKWTimeLimitMaxSeconds = 10 * 60;
-static const NSUInteger kKWTimeLimitLevelCost  = 30;
+static const int kKWTimeLimitMaxSeconds = 10 * 60;
+static const int kKWTimeLimitLevelCost  = 5;
 
 @implementation KWLevel {
     
     NSMutableArray* baskets;
     NSMutableArray* kittens;
     NSMutableArray* toys;
-    NSUInteger level;
+    int level;
     
     NSUInteger timelimit;
     
@@ -28,7 +28,7 @@ static const NSUInteger kKWTimeLimitLevelCost  = 30;
 
 @synthesize level, bounds, baskets, kittens, toys;
 
-- (id) initLevel:(NSUInteger)lvl {
+- (id) initLevel:(int)lvl {
     if (self = [self init]) {
         
         level = lvl;
@@ -48,7 +48,11 @@ static const NSUInteger kKWTimeLimitLevelCost  = 30;
     return self;
 }
 
-- (BOOL) timeout { return [[NSDate date] timeIntervalSinceDate:start] > timelimit; }
+- (NSTimeInterval) remaining {
+    return timelimit - [[NSDate date] timeIntervalSinceDate:start];
+}
+
+- (BOOL) timeout { return self.remaining <= 0; }
 
 - (BOOL) complete { return kittens.count == 0 || [self timeout]; }
 
