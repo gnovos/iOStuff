@@ -55,7 +55,6 @@
     CGContextSetFillColorWithColor(context, tfill.CGColor);
 
 	double text_angle = -M_PI/4.0;  // 45 Degrees counterclockwise
-    
 	CGAffineTransform xform = CGAffineTransformMake(cos(text_angle),  sin(text_angle),
                                                     sin(text_angle), -cos(text_angle),
                                                     0.0,  0.0);
@@ -68,7 +67,7 @@
     [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
         CGContextSetLineWidth(context, 2.0);
         CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
-        CGContextAddRect(context, basket.bounds);
+        CGContextAddRect(context, basket.layer.bounds);
         CGContextStrokePath(context);
         
         [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
@@ -81,9 +80,27 @@
             
             CGContextSetLineDash(context, idx, dashArray, 2);
             
-            CGContextAddEllipseInRect(context, k.bounds);
+            CGContextAddEllipseInRect(context, k.layer.bounds);
             
             CGContextStrokePath(context);
+            
+            CGContextSetTextDrawingMode(context, kCGTextFill);
+            CGContextSelectFont(context, "Helvetica Bold", 10.0f, kCGEncodingMacRoman);
+            CGContextSetFillColorWithColor(context, UIColor.darkGrayColor.CGColor);
+            
+            const char* enfo = [[NSString stringWithFormat:@"       e: %.2f", k.energy] cStringUsingEncoding:NSUTF8StringEncoding];
+            const char* mnfo = [[NSString stringWithFormat:@"       m: %.2f", k.mood] cStringUsingEncoding:NSUTF8StringEncoding];
+            
+            double text_angle = -M_PI / 180.0;
+            CGAffineTransform xform = CGAffineTransformMake(cos(text_angle),  sin(text_angle),
+                                                            sin(text_angle), -cos(text_angle),
+                                                            0.0,  0.0);
+            CGPoint d = k.center;
+            CGContextSetTextMatrix(context, xform);
+            CGContextShowTextAtPoint(context, d.x, d.y, enfo, strlen(enfo));
+            CGContextShowTextAtPoint(context, d.x, d.y + 10.0f, mnfo, strlen(mnfo));
+            CGContextStrokePath(context);
+            
         }];
         
         CGContextSetLineDash(context, 0, NULL, 0);
@@ -107,24 +124,39 @@
         CGPoint d = k.center;
         
         CGContextSetFillColorWithColor(context, cfill.CGColor);
-        CGContextAddEllipseInRect(context, k.bounds);
+        CGContextAddEllipseInRect(context, k.layer.bounds);
         CGContextFillPath(context);
         
         CGContextSetStrokeColorWithColor(context, color.CGColor);
-        CGContextAddEllipseInRect(context, k.bounds);
+        CGContextAddEllipseInRect(context, k.layer.bounds);
         CGContextStrokePath(context);
         
-        CGContextSelectFont(context, "Helvetica Bold", 12.f, kCGEncodingMacRoman);
         CGContextSetTextDrawingMode(context, kCGTextFill);
+        CGContextSelectFont(context, "Helvetica Bold", 10.0f, kCGEncodingMacRoman);
+        CGContextSetFillColorWithColor(context, UIColor.darkGrayColor.CGColor);
+        
+        const char* enfo = [[NSString stringWithFormat:@"       e: %.2f", k.energy] cStringUsingEncoding:NSUTF8StringEncoding];
+        const char* mnfo = [[NSString stringWithFormat:@"       m: %.2f", k.mood] cStringUsingEncoding:NSUTF8StringEncoding];
+        
+        double text_angle = -M_PI / 180.0;
+        CGAffineTransform xform = CGAffineTransformMake(cos(text_angle),  sin(text_angle),
+                                                        sin(text_angle), -cos(text_angle),
+                                                        0.0,  0.0);
+        
+        CGContextSetTextMatrix(context, xform);
+        CGContextShowTextAtPoint(context, d.x, d.y, enfo, strlen(enfo));
+        CGContextShowTextAtPoint(context, d.x, d.y + 10.0f, mnfo, strlen(mnfo));
+        CGContextStrokePath(context);
 
+        CGContextSelectFont(context, "Helvetica Bold", 12.0f, kCGEncodingMacRoman);
         CGContextSetFillColorWithColor(context, UIColor.purpleColor.CGColor);
         CGContextSetTextMatrix(context, CGAffineTransformMakeRotation(-degreesToRadians(k.heading)));
-        CGContextShowTextAtPoint(context, d.x + 3 , d.y + 3 , "^", 1);
+        CGContextShowTextAtPoint(context, d.x + 3 , d.y + 3, "^", 1);
         CGContextStrokePath(context);
 
         CGContextSetFillColorWithColor(context, color.CGColor);
         CGContextSetTextMatrix(context, CGAffineTransformMakeRotation(-degreesToRadians(k.rotation)));
-        CGContextShowTextAtPoint(context, d.x + 3 , d.y + 3 , "^", 1);
+        CGContextShowTextAtPoint(context, d.x + 3 , d.y + 3, "^", 1);
         CGContextStrokePath(context);
     }];
 }
@@ -135,7 +167,7 @@
         CGPoint loc = [touch locationInView:self];
         KWLevel* level = engine.level;
         [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-            if (CGRectContainsPoint(k.bounds, loc)) {
+            if (CGRectContainsPoint(k.layer.bounds, loc)) {
                 //xxx associate with touch
                 k.held = YES;
             }
@@ -148,12 +180,12 @@
         CGPoint loc = [touch previousLocationInView:self];
         KWLevel* level = engine.level;
         [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-            if (k.held && CGRectContainsPoint(k.bounds, loc)) {
-                CGRect bounds = k.bounds;
+            if (k.held && CGRectContainsPoint(k.layer.bounds, loc)) {
+                CGRect bounds = k.layer.bounds;
                 bounds.origin = [touch locationInView:self];
                 bounds.origin.x -= bounds.size.width / 2.0f;
                 bounds.origin.y -= bounds.size.height / 2.0f;
-                k.bounds = bounds;
+                k.layer.bounds = bounds;
             }            
         }];
         
@@ -167,9 +199,9 @@
         
         __block NSMutableDictionary* drops = [[NSMutableDictionary alloc] init];
         [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-            if (k.held && CGRectContainsPoint(k.bounds, loc)) {
+            if (k.held && CGRectContainsPoint(k.layer.bounds, loc)) {
                 [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
-                    if (CGRectContainsPoint(basket.bounds, k.center)) {
+                    if (CGRectContainsPoint(basket.layer.bounds, k.center)) {
                         NSMutableArray* kits = [drops objectForKey:basket];
                         if (kits == nil) {
                             kits = [[NSMutableArray alloc] init];
@@ -181,7 +213,7 @@
                 }];
                 
                 k.held = NO;
-                CGRect bounds = k.bounds;
+                CGRect bounds = k.layer.bounds;
                 bounds.origin = [touch locationInView:self];
                 bounds.origin.x -= bounds.size.width / 2.0f;
                 bounds.origin.y -= bounds.size.height / 2.0f;

@@ -23,5 +23,12 @@
 - (BOOL) bored;
 - (BOOL) tired;
 
+- (void) capture;
+
+
+//xxx temp
+- (CGFloat) mood;
+- (CGFloat) energy;
+
 
 @end

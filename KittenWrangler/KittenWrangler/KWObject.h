@@ -19,7 +19,6 @@ typedef enum {
 
 @interface KWObject : NSObject
 
-@property (nonatomic, assign)           CGRect  bounds;
 @property (nonatomic, assign)           BOOL    held;
 
 @property (nonatomic, assign)           CGFloat heading;
@@ -32,6 +31,9 @@ typedef enum {
 @property (nonatomic, readonly, assign) KWLevel* level;
 
 @property (nonatomic, assign) KWObjectVelocity velocity;
+
+@property (nonatomic, readonly, strong) CALayer* layer;
+
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size;
 

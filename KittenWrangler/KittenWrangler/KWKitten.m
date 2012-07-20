@@ -19,6 +19,7 @@ typedef enum {
 typedef enum {
     KWKittenMoodBored      = 0,
     KWKittenMoodInterested = 5,
+    KWKittenMoodCaptured   = 10
 } KWKittenMood;
 
 typedef enum {
@@ -41,6 +42,9 @@ typedef enum {
     return self;
 }
 
+- (CGFloat) mood { return mood; }
+- (CGFloat) energy { return energy; }
+
 - (BOOL) idle      { return self.velocity == KWKittenActionIdle;           }
 - (BOOL) stalking  { return self.velocity == KWKittenActionStalk;          }
 - (BOOL) exploring { return self.velocity == KWKittenActionExplore;        }
@@ -49,6 +53,8 @@ typedef enum {
 - (BOOL) bored     { return mood          <= KWKittenMoodBored;            }
 - (BOOL) tired     { return energy        <= KWKittenEnergyTired;          }
 
+- (void) capture   { mood = arc4random_uniform(KWKittenMoodCaptured) + KWKittenMoodCaptured; }
+
 - (void) turn:(CGFloat)dt {
     if (chase) {
         self.heading += [self directionOf:chase];
@@ -56,7 +62,7 @@ typedef enum {
     }
 }
 
-- (BOOL) interested { return arc4random_uniform(100) / 100.0f > kKWKittenInterest;  }
+- (BOOL) interested { return kKWRandomPercent > kKWKittenInterest;  }
 
 - (void) explore {
     self.velocity = KWKittenActionExplore;
@@ -84,11 +90,11 @@ typedef enum {
     }
     
     if (self.idle) {        
-        mood -= dt;
+        mood -= MIN(dt, kKWRandomPercent);
         energy += dt;
     } else {
-        mood -= dt; //xxx should go down less quickly than above
-        energy -= dt;
+        mood -= dt * kKWRandomPercent;
+        energy -= MIN(dt, kKWRandomPercent);
     }
                         
     [self  turn:dt];

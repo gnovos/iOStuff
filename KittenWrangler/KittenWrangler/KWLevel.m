@@ -41,7 +41,7 @@ static const int kKWTimeLimitLevelCost  = 5;
 
         [baskets addObject:[[KWBasket alloc] initWithLevel:self]];
         
-        for (int i = 0; i < level * kKWKittensPerLevel; i++) {
+        for (int i = 0; i < level * (arc4random_uniform(kKWKittensPerLevel) + kKWKittensPerLevel); i++) {
             [kittens addObject:[[KWKitten alloc] initWithLevel:self]];
         }
     }
@@ -65,7 +65,17 @@ static const int kKWTimeLimitLevelCost  = 5;
     [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
         [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
             if (kitten.bored) {
+                CGRect kbounds = kitten.layer.bounds;
+                CGPoint exit = CGPointMake(basket.layer.bounds.origin.x - kitten.layer.bounds.size.height, CGRectGetMidY(basket.layer.bounds));
+                if (exit.x < 0) {
+                    exit.x = CGRectGetMinY(basket.layer.bounds) + 1.0f;
+                }
+                kbounds.origin = exit;
+                kitten.layer.bounds = kbounds;
                 [kittens addObject:kitten];
+                *stop = YES;
+            } else {
+                [kitten tick:dt];
             }
         }];
         [basket.kittens removeObjectsInArray:kittens];
@@ -78,6 +88,7 @@ static const int kKWTimeLimitLevelCost  = 5;
 }
 
 - (void) move:(KWKitten*)kitten toBasket:(KWBasket*)basket {
+    [kitten capture];
     [kittens removeObject:kitten];
     [baskets makeObjectsPerformSelector:@selector(removeKitten:) withObject:kitten];
     [basket addKitten:kitten];
@@ -89,7 +100,7 @@ static const int kKWTimeLimitLevelCost  = 5;
     
     void (^block) (KWObject* o, NSUInteger idx, BOOL *stop) = ^(KWObject* o, NSUInteger idx, BOOL *stop) {
         
-        if (o != obj && CGRectIntersectsRect(rect, o.bounds)) {
+        if (o != obj && CGRectIntersectsRect(rect, o.layer.bounds)) {
             vacant = NO;
             *stop = YES;
         }
@@ -118,10 +129,10 @@ static const int kKWTimeLimitLevelCost  = 5;
         
     void (^block) (KWObject* obj, NSUInteger idx, BOOL *stop) = ^(KWObject* obj, NSUInteger idx, BOOL *stop) {
         
-        CGFloat mx = CGRectGetMidX(obj.bounds);
-        CGFloat my = obj.bounds.origin.x * slope;
+        CGFloat mx = CGRectGetMidX(obj.layer.bounds);
+        CGFloat my = obj.layer.bounds.origin.x * slope;
         
-        if (CGRectContainsPoint(obj.bounds, CGPointMake(mx, my))) {
+        if (CGRectContainsPoint(obj.layer.bounds, CGPointMake(mx, my))) {
             [visible addObject:obj];
         }
         

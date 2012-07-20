@@ -22,9 +22,11 @@ static const CGFloat kKWKittensPerLevel = 3;
 
 #define KWCGRectCenter(x) CGPointMake(CGRectGetMidX(x), CGRectGetMidY(x))
 #define kKWRandomHeading arc4random_uniform(kKWAngle360Degrees)
+#define kKWRandomPercent (arc4random_uniform(100) / 100.0f)
+
 #define degreesToRadians(x) (M_PI * x / kKWAngle180Degrees)
 
-static const CGSize kKWDefaultKittenSize = { 27, 27 };
+static const CGSize kKWDefaultKittenSize = { 30, 30 };
 static const CGSize kKWDefaultBasketSize = { 70, 70 };
 
 

@@ -11,15 +11,18 @@
 
 @implementation KWObject
 
-@synthesize heading, bounds, rotation, velocity, held, level;
+@synthesize heading, rotation, velocity, held, level, layer;
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
         level = lvl;
+        layer = [CALayer layer];
+        CGRect bounds = layer.bounds;
         while (CGRectIsEmpty(bounds) || !CGRectContainsRect(level.bounds, bounds) || ![level vacant:bounds excluding:self]) {
             bounds.size = size;
             bounds.origin = [self randomPointIn:level.bounds];
         }
+        layer.bounds = bounds;
     }
     return self;
 }
@@ -28,9 +31,9 @@
     return CGPointMake(arc4random_uniform(rect.size.width), arc4random_uniform(rect.size.height));
 }
 
-- (CGPoint) location { return bounds.origin; }
-- (CGSize)  size     { return bounds.size;   }
-- (CGPoint) center   { return KWCGRectCenter(bounds); }
+- (CGPoint) location { return layer.bounds.origin; }
+- (CGSize)  size     { return layer.bounds.size;   }
+- (CGPoint) center   { return KWCGRectCenter(layer.bounds); }
 
 - (BOOL)    moving   { return !held && velocity > KWObjectVelocityMotionless; }
 
@@ -58,10 +61,10 @@
         CGPoint d = CGPointMake(sin(rotation / kKWAngle180Degrees * M_PI) * (dt * velocity),
                                 sin((rotation + kKWAngle90Degrees) / kKWAngle180Degrees * M_PI) * (dt * velocity));
         
-        CGRect loc = CGRectMake(bounds.origin.x + d.x, bounds.origin.y + d.y, bounds.size.width, bounds.size.height);
+        CGRect loc = CGRectMake(layer.bounds.origin.x + d.x, layer.bounds.origin.y + d.y, layer.bounds.size.width, layer.bounds.size.height);
         
         if ([level vacant:loc excluding:self] && CGRectContainsRect(level.bounds, loc)) {
-            bounds = loc;
+            layer.bounds = loc;
         } else {
             heading += kKWAngle15Degrees;
         }        
@@ -83,7 +86,7 @@
 - (NSString*) description {
     return [NSString stringWithFormat:@"%@ loc:(%d,%d) rot:%d/%d v:%d",
             self.class,
-            (int)bounds.origin.x, (int)bounds.origin.y,
+            (int)layer.bounds.origin.x, (int)layer.bounds.origin.y,
             (int)heading, (int)rotation, velocity];
 }
 
