@@ -18,5 +18,7 @@
 - (void) stop;
 - (void) pause;
 
+- (void) add:(void(^)(void))block;
+
 
 @end

@@ -9,8 +9,6 @@
 #import "KWKitten.h"
 #import "KWLevel.h"
 
-static const CGSize kKWDefaultKittenSize = { 30, 30 };
-
 typedef enum {
     KWKittenActionIdle    = KWObjectVelocityMotionless,
     KWKittenActionStalk   = KWObjectVelocitySlow,
@@ -33,7 +31,6 @@ typedef enum {
     CGFloat energy;
     
     KWKitten* chase;
-//    KWObject* chase;
 }
 
 - (id) initWithLevel:(KWLevel*)lvl {

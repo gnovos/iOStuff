@@ -41,7 +41,7 @@ static const int kKWTimeLimitLevelCost  = 5;
 
         [baskets addObject:[[KWBasket alloc] initWithLevel:self]];
         
-        for (int i = 0; i < level * 3; i++) {
+        for (int i = 0; i < level * kKWKittensPerLevel; i++) {
             [kittens addObject:[[KWKitten alloc] initWithLevel:self]];
         }
     }
@@ -81,6 +81,31 @@ static const int kKWTimeLimitLevelCost  = 5;
     [kittens removeObject:kitten];
     [baskets makeObjectsPerformSelector:@selector(removeKitten:) withObject:kitten];
     [basket addKitten:kitten];
+}
+
+- (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj {
+    
+    __block BOOL vacant = YES;
+    
+    void (^block) (KWObject* o, NSUInteger idx, BOOL *stop) = ^(KWObject* o, NSUInteger idx, BOOL *stop) {
+        
+        if (o != obj && CGRectIntersectsRect(rect, o.bounds)) {
+            vacant = NO;
+            *stop = YES;
+        }
+    };
+    
+    [baskets enumerateObjectsUsingBlock:block];
+    
+    if (vacant) {
+        [kittens enumerateObjectsUsingBlock:block];
+    }
+    
+    if (vacant) {
+        [toys enumerateObjectsUsingBlock:block];
+    }
+    
+    return vacant;
 }
 
 - (NSArray*) visible:(KWObject*)obj {

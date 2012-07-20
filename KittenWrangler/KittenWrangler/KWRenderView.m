@@ -13,17 +13,18 @@
 #import "KWKitten.h"
 #import "KWBasket.h"
 
+//xxx use a better rendering engine than this horrible thing
+
 @implementation KWRenderView {
     KWEngine* engine;
-    CADisplayLink* loop;
     NSMutableDictionary* tracking;
 }
 
 - (void) setup {
     engine = [[KWEngine alloc] init];
     tracking = [[NSMutableDictionary alloc] init];
-    //xxx use a better rendering engine
-    loop = [CADisplayLink displayLinkWithTarget:self selector:@selector(setNeedsDisplay)];
+    __block id slf = self;
+    [engine add:^{ [slf setNeedsDisplay]; }];
     
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = YES;
@@ -34,7 +35,6 @@
 
 - (void) start {
     [engine start];
-    [loop addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 }
 - (void) pause { [engine pause]; }
 - (void) stop  { [engine stop]; }
@@ -48,6 +48,8 @@
     
     UIColor* tfill = [UIColor colorWithRed:(0.5f * level.remaining) green:0.3f blue:0.3f alpha:0.2f];
     UIColor* tstroke = [UIColor colorWithRed:0.5f green:0.5f blue:0.7f alpha:0.3f];
+
+    UIColor* cfill = [UIColor colorWithRed:0.3F green:0.3f blue:0.5f alpha:0.2f];
     
     CGContextSetStrokeColorWithColor(context, tstroke.CGColor);
     CGContextSetFillColorWithColor(context, tfill.CGColor);
@@ -90,19 +92,39 @@
     [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
         CGContextSetLineWidth(context, 2.0);
         UIColor* color = k.idle ? [UIColor lightGrayColor] : [UIColor blueColor];        
-        if (k.chased) {
+        if (k.chasing && k.chased) {
+            color = UIColor.magentaColor;
+        } else if (k.chasing) {
+            color = UIColor.redColor;
+        } else if (k.chased) {
             color = UIColor.yellowColor;
             CGContextSetFillColorWithColor(context, [UIColor yellowColor].CGColor);
-        }
-        if (k.chasing) {
-            color = UIColor.redColor;
         }
         if (k.held) {
             color = UIColor.brownColor;
         }
-
+        
+        CGPoint d = k.center;
+        
+        CGContextSetFillColorWithColor(context, cfill.CGColor);
+        CGContextAddEllipseInRect(context, k.bounds);
+        CGContextFillPath(context);
+        
         CGContextSetStrokeColorWithColor(context, color.CGColor);
         CGContextAddEllipseInRect(context, k.bounds);
+        CGContextStrokePath(context);
+        
+        CGContextSelectFont(context, "Helvetica Bold", 12.f, kCGEncodingMacRoman);
+        CGContextSetTextDrawingMode(context, kCGTextFill);
+
+        CGContextSetFillColorWithColor(context, UIColor.purpleColor.CGColor);
+        CGContextSetTextMatrix(context, CGAffineTransformMakeRotation(-degreesToRadians(k.heading)));
+        CGContextShowTextAtPoint(context, d.x + 3 , d.y + 3 , "^", 1);
+        CGContextStrokePath(context);
+
+        CGContextSetFillColorWithColor(context, color.CGColor);
+        CGContextSetTextMatrix(context, CGAffineTransformMakeRotation(-degreesToRadians(k.rotation)));
+        CGContextShowTextAtPoint(context, d.x + 3 , d.y + 3 , "^", 1);
         CGContextStrokePath(context);
     }];
 }

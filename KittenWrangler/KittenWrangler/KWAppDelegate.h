@@ -6,6 +6,12 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
+//xxx
+//TODO:
+//collision detect
+//CAnimation
+
+
 #import <UIKit/UIKit.h>
 
 @interface KWAppDelegate : UIResponder <UIApplicationDelegate>

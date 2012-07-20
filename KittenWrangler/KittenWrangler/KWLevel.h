@@ -31,4 +31,6 @@
 
 - (void) move:(KWKitten*)kitten toBasket:(KWBasket*)basket;
 
+- (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj;
+
 @end

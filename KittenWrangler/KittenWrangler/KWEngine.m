@@ -14,6 +14,7 @@
 @implementation KWEngine {        
     CADisplayLink* loop;
     CFTimeInterval last;
+    NSMutableArray* callblocks;
 }
 
 @synthesize level;
@@ -21,6 +22,7 @@
 - (id) init {
     if (self = [super init]) {
         level = [[KWLevel alloc] initLevel:1];
+        callblocks = [[NSMutableArray alloc] init];
     }
     return self;    
 }
@@ -28,9 +30,7 @@
 - (void) start {
     [self stop];
     loop = [CADisplayLink displayLinkWithTarget:self selector:@selector(loop:)];
-    
-    //loop.frameInterval = 10; //xxx slooow it down for testing
-    
+        
     [loop addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 }
 
@@ -52,7 +52,15 @@
     if (level.complete) {
         level = [[KWLevel alloc] initLevel:level.level + 1];
     }
+    
+    [callblocks enumerateObjectsUsingBlock:^(void(^block)(void), NSUInteger idx, BOOL *stop) {
+        block();
+    }];
         
+}
+
+- (void) add:(void(^)(void))block {
+    [callblocks addObject:[block copy]];
 }
 
 

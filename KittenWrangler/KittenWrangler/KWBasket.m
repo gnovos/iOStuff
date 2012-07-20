@@ -10,8 +10,6 @@
 #import "KWKitten.h"
 #import "KWLevel.h"
 
-static const CGSize kKWDefaultBasketSize = { 100, 100 };
-
 @implementation KWBasket 
 
 @synthesize kittens;

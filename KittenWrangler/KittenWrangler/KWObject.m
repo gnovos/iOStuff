@@ -16,7 +16,7 @@
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
         level = lvl;
-        while (CGRectIsEmpty(bounds) || !CGRectContainsRect(level.bounds, bounds)) {
+        while (CGRectIsEmpty(bounds) || !CGRectContainsRect(level.bounds, bounds) || ![level vacant:bounds excluding:self]) {
             bounds.size = size;
             bounds.origin = [self randomPointIn:level.bounds];
         }
@@ -55,21 +55,15 @@
     
     if (self.moving) {
         //xxx introduce accelerometer bias
-        CGPoint d = {
-            sin(rotation / kKWAngle180Degrees * M_PI) * (dt * velocity),
-            sin((rotation + kKWAngle90Degrees) / kKWAngle180Degrees * M_PI) * (dt * velocity)
-        };
+        CGPoint d = CGPointMake(sin(rotation / kKWAngle180Degrees * M_PI) * (dt * velocity),
+                                sin((rotation + kKWAngle90Degrees) / kKWAngle180Degrees * M_PI) * (dt * velocity));
         
-        CGRect loc = bounds;
-        loc.origin.x += d.x;
-        loc.origin.y += d.y;
+        CGRect loc = CGRectMake(bounds.origin.x + d.x, bounds.origin.y + d.y, bounds.size.width, bounds.size.height);
         
-        //xxx check collisions
-        
-        if (CGRectContainsRect(level.bounds, loc)) {
+        if ([level vacant:loc excluding:self] && CGRectContainsRect(level.bounds, loc)) {
             bounds = loc;
         } else {
-            heading += kKWAngle45Degrees;
+            heading += kKWAngle15Degrees;
         }        
     }
     
