@@ -11,7 +11,7 @@
 
 @implementation KWObject
 
-@synthesize level, heading;
+@synthesize level, heading, touch;
 
 @dynamic held, captured, velocity;
 

@@ -79,7 +79,7 @@ static const int kKWTimeLimitLevelCost  = 5;
     }];
 }
 
-- (void) addKittens:(NSArray*)kits {
+- (void) free:(NSArray*)kits {
     [kits enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
         [baskets makeObjectsPerformSelector:@selector(removeKitten:) withObject:kitten];
         kitten.captured = NO;
@@ -87,11 +87,11 @@ static const int kKWTimeLimitLevelCost  = 5;
     }];
 }
  
-- (void) move:(KWKitten*)kitten toBasket:(KWBasket*)basket {
-    kitten.captured = YES;
-    [kittens removeObject:kitten];
-    [baskets makeObjectsPerformSelector:@selector(removeKitten:) withObject:kitten];
-    [basket addKitten:kitten];
+- (void) capture:(NSArray*)kits {
+    [kits enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
+        [kittens removeObject:kitten];
+        kitten.captured = YES;
+    }];
 }
 
 - (BOOL) vacant:(CGPoint)p excluding:(KWObject*)obj {

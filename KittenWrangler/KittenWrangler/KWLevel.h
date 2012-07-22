@@ -29,8 +29,8 @@
 
 - (BOOL) complete;
 
-- (void) addKittens:(NSArray*)kits;
-- (void) move:(KWKitten*)kitten toBasket:(KWBasket*)basket;
+- (void) free:(NSArray*)kits;
+- (void) capture:(KWKitten*)kitten;
 
 - (BOOL) vacant:(CGPoint)rect excluding:(KWObject*)obj;
 

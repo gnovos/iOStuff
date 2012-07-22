@@ -71,8 +71,8 @@
     
     [[gfx stroke:fill] dash:10.0f off:3.0f];
 
-    [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-        [[level sight:k] enumerateObjectsUsingBlock:^(KWObject* kk, NSUInteger idx, BOOL *stop) {
+    [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *kstop) {
+        [[level sight:k] enumerateObjectsUsingBlock:^(KWObject* kk, NSUInteger idx, BOOL *lstop) {
             [gfx line:k.position to:kk.position];
         }];
     }];
@@ -80,25 +80,26 @@
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *stop) {
+    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
         CGPoint loc = [touch locationInView:self];
         KWLevel* level = engine.level;
-        [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
+        [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *kstop) {
+            //xxx expand the touch area?
             if (CGRectContainsPoint(k.frame, loc)) {
-                //xxx associate with touch
+                k.touch = touch;
                 k.held = YES;
+                *kstop = YES;
             }
         }];
     }];
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *stop) {
-        CGPoint loc = [touch previousLocationInView:self];
+    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
         KWLevel* level = engine.level;
-        [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-            if (k.held && CGRectContainsPoint(k.frame, loc)) {
+        [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *kstop) {
+            if (k.touch == touch) {
+                dline;
                 [CATransaction begin];
                 [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
                 k.position = [touch locationInView:self];
@@ -110,39 +111,36 @@
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *stop) {
+    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
         CGPoint loc = [touch previousLocationInView:self];
         KWLevel* level = engine.level;
         
-        __block NSMutableDictionary* drops = [[NSMutableDictionary alloc] init];
-        [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-            if (k.held && CGRectContainsPoint(k.frame, loc)) {
-                [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
+        [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *kstop) {
+            if (k.touch == touch) {
+                [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *bstop) {
                     if (CGRectContainsPoint(basket.frame, k.position)) {
-                        NSMutableArray* kits = [drops objectForKey:basket];
-                        if (kits == nil) {
-                            kits = [[NSMutableArray alloc] init];
-                            [drops setObject:kits forKey:basket];
-                        }
-                        [kits addObject:k];
-                        *stop = YES;
+                        [basket addKitten:k];
+                        *bstop = YES;
                     }
                 }];
-                
-                k.held = NO;
-                [CATransaction begin];
-                [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-                k.position = [touch locationInView:self];
-                [CATransaction commit];
+                k.touch = nil;
             }
         }];
+        
+        [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
+            [level capture:basket.kittens];
+            
+        }];
 
-        [drops enumerateKeysAndObjectsUsingBlock:^(KWBasket* basket, NSArray* kits, BOOL *stop) {
-            [kits enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-                [level move:k toBasket:basket];
-            }];
-        }];        
+    }];
+}
 
+- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *stop) {
+        KWLevel* level = engine.level;
+        [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
+            if (k.touch == touch) { k.touch = nil; }
+        }];
     }];
 }
 

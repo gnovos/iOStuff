@@ -19,6 +19,9 @@ typedef enum {
 
 @interface KWObject : CALayer
 
+@property (nonatomic, weak) UITouch* touch;
+
+//xxx remove this, use touch
 @property (nonatomic, assign) BOOL held;
 @property (nonatomic, assign) BOOL captured;
 
