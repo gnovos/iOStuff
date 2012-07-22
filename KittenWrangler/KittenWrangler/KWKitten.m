@@ -9,6 +9,7 @@
 #import "KWKitten.h"
 #import "KWLevel.h"
 
+//xxx do this better
 typedef enum {
     KWKittenActionIdle    = KWObjectVelocityMotionless,
     KWKittenActionStalk   = KWObjectVelocitySlow,
@@ -31,7 +32,12 @@ typedef enum {
     CGFloat mood;
     CGFloat energy;
     
+    //xxx especially this
     KWKitten* chasing;
+}
+
+- (NSString*) description {
+    return [[super description] stringByAppendingFormat:@" mood:%d energy:%d chasing:%@", (int)mood, (int)energy, self.chasing ? @"YES" : @"NO"];
 }
 
 - (id) initWithLevel:(KWLevel*)lvl {
@@ -98,10 +104,6 @@ typedef enum {
     [self  turn:dt];
     [super tick:dt];
     
-}
-
-- (NSString*) description {
-    return [[super description] stringByAppendingFormat:@" mood:%d energy:%d chasing:%@", (int)mood, (int)energy, self.chasing ? @"YES" : @"NO"];
 }
 
 - (void) drawInContext:(CGContextRef)ctx {

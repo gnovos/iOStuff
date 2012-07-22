@@ -15,6 +15,11 @@
 
 @dynamic held, captured, velocity;
 
+- (NSString*) description {
+    return [NSString stringWithFormat:@"%@ loc:(%d,%d) v:%d",
+            self.class, (int)self.position.x, (int)self.position.y, self.velocity];
+}
+
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
         self.needsDisplayOnBoundsChange = YES;
@@ -102,12 +107,6 @@
         
     CGFloat dir = dx ? tan(dy / dx) : dy < 0 ? kKWAngle270Degrees : kKWAngle90Degrees;
     return dir;
-}
-
-- (NSString*) description {
-    return [NSString stringWithFormat:@"%@ loc:(%d,%d) v:%d",
-            self.class,
-            (int)self.position.x, (int)self.position.y, self.velocity];
 }
 
 @end

@@ -28,6 +28,12 @@ static const int kKWTimeLimitLevelCost  = 5;
 
 @synthesize level, bounds, baskets, kittens, toys;
 
+- (NSString*) description {
+    return [NSString stringWithFormat:@"level:%d limit:%d/%ds baskets:%d kittens:%d toys:%d",
+            level, (int)[[NSDate date] timeIntervalSinceDate:start], timelimit,
+            baskets.count, kittens.count, toys.count];
+}
+
 - (id) initLevel:(int)lvl {
     if (self = [self init]) {
         
@@ -65,23 +71,22 @@ static const int kKWTimeLimitLevelCost  = 5;
     }
     
     [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
-        [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
-            if (kitten.bored) {
-                [kittens addObject:kitten];
-                *stop = YES;
-            } else {
-                [kitten tick:dt];
-            }
-        }];
-        [basket.kittens removeObjectsInArray:kittens];
+        [basket tick:dt];
     }];
     
     [kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
         [kitten tick:dt];
     }];
-        
 }
 
+- (void) addKittens:(NSArray*)kits {
+    [kits enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
+        [baskets makeObjectsPerformSelector:@selector(removeKitten:) withObject:kitten];
+        kitten.captured = NO;
+        [kittens addObject:kitten];
+    }];
+}
+ 
 - (void) move:(KWKitten*)kitten toBasket:(KWBasket*)basket {
     kitten.captured = YES;
     [kittens removeObject:kitten];
@@ -146,15 +151,6 @@ static const int kKWTimeLimitLevelCost  = 5;
 
     return visible;
 
-}
-
-- (NSString*) description {
-    return [NSString stringWithFormat:@"level:%d limit:%d/%ds baskets:%d kittens:%d toys:%d",
-            level,
-            (int)[[NSDate date] timeIntervalSinceDate:start], timelimit,
-            baskets.count,
-            kittens.count,
-            toys.count];
 }
 
 

@@ -14,6 +14,10 @@
 
 @synthesize kittens;
 
+- (NSString*) description {
+    return [[super description] stringByAppendingFormat:@" kittens:%d", kittens.count];
+}
+
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:kKWDefaultBasketSize]) {
         kittens = [[NSMutableArray alloc] init];
@@ -21,20 +25,26 @@
     return self;    
 }
 
+- (void) tick:(CGFloat)dt {
+    
+    NSMutableArray* escaped = [[NSMutableArray alloc] init];
+    
+    [kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
+        if (kitten.bored) {
+            [escaped addObject:kitten];
+        } else {
+            [kitten tick:dt];
+        }
+    }];
+    [kittens removeObjectsInArray:escaped];
+    
+    [self.level addKittens:kittens];
+    
+    [super tick:dt];
+}
+
 - (void) addKitten:(KWKitten*)kitten {
     [kittens addObject:kitten];
-}
-
-- (void) removeKitten:(KWKitten*)kitten {
-    [kittens removeObject:kitten];
-}
-
-- (id) copyWithZone:(NSZone *)zone {
-    return self;
-}
-
-- (NSString*) description {
-    return [[super description] stringByAppendingFormat:@" kittens:%d", kittens.count];
 }
 
 - (void) drawInContext:(CGContextRef)ctx {

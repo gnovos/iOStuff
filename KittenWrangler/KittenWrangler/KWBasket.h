@@ -11,13 +11,11 @@
 
 @class KWKitten;
 
-@interface KWBasket : KWObject <NSCopying>
+@interface KWBasket : KWObject
 
 @property (nonatomic, readonly, strong) NSMutableArray* kittens;
 
 - (id) initWithLevel:(KWLevel*)lvl;
-
 - (void) addKitten:(KWKitten*)kitten;
-- (void) removeKitten:(KWKitten*)kitten;
 
 @end
