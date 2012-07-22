@@ -56,13 +56,16 @@ typedef enum {
     return self;
 }
 
-- (BOOL) idle      { return self.velocity == KWKittenActionIdle;           }
-- (BOOL) stalking  { return self.velocity == KWKittenActionStalk;          }
-- (BOOL) exploring { return self.velocity == KWKittenActionExplore;        }
+- (BOOL) idle      { return self.velocity == KWKittenActionIdle;             }
+- (BOOL) stalking  { return self.velocity == KWKittenActionStalk;            }
+- (BOOL) exploring { return self.velocity == KWKittenActionExplore;          }
 - (BOOL) chasing   { return chasing && self.velocity == KWKittenActionChase; }
 
-- (BOOL) bored     { return mood          <= KWKittenMoodBored;            }
-- (BOOL) tired     { return energy        <= KWKittenEnergyTired;          }
+- (BOOL) bored     { return mood          <= KWKittenMoodBored;              }
+- (BOOL) tired     { return energy        <= KWKittenEnergyTired;            }
+
+- (BOOL) moving    { return !self.captured && !self.touch && self.velocity > KWObjectVelocityMotionless; }
+
 
 - (BOOL) captured { return self.capture; }
 - (void) setCaptured:(BOOL)cap {
