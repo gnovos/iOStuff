@@ -13,6 +13,8 @@
 
 @property (nonatomic, assign) BOOL chased;
 
+@property (nonatomic, assign) BOOL captured;
+
 - (id) initWithLevel:(KWLevel*)lvl;
 
 - (BOOL) idle;
@@ -22,11 +24,5 @@
 
 - (BOOL) bored;
 - (BOOL) tired;
-
-
-//xxx temp
-- (CGFloat) mood;
-- (CGFloat) energy;
-
 
 @end

@@ -13,7 +13,7 @@
 
 @synthesize level, heading;
 
-@dynamic touch, captured, velocity;
+@dynamic touch, velocity;
 
 - (NSString*) description {
     return [NSString stringWithFormat:@"%@ loc:(%d,%d) v:%d",
@@ -43,7 +43,7 @@
         keys = [NSSet setWithObjects:
                 @"velocity",
                 @"touch",
-                @"captured",
+                @"capture",
                 nil];
     });
     
@@ -54,7 +54,7 @@
     return CGPointMake(arc4random_uniform(rect.size.width), arc4random_uniform(rect.size.height));
 }
 
-- (BOOL) moving   { return !self.captured && !self.touch && self.velocity > KWObjectVelocityMotionless; }
+- (BOOL) moving   { return !self.touch && self.velocity > KWObjectVelocityMotionless; }
 
 - (void) tick:(CGFloat)dt {
 //    dlog(@"tick:%f %@", dt, self);

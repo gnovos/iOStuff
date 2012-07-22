@@ -9,6 +9,10 @@
 #import "KWKitten.h"
 #import "KWLevel.h"
 
+@interface KWKitten ()
+@property (nonatomic, assign) BOOL capture;
+@end
+
 //xxx do this better
 typedef enum {
     KWKittenActionIdle    = KWObjectVelocityMotionless,
@@ -32,9 +36,13 @@ typedef enum {
     CGFloat mood;
     CGFloat energy;
     
+    BOOL captured;
+    
     //xxx especially this
     KWKitten* chasing;
 }
+
+@dynamic capture;
 
 - (NSString*) description {
     return [[super description] stringByAppendingFormat:@" mood:%d energy:%d chasing:%@", (int)mood, (int)energy, self.chasing ? @"YES" : @"NO"];
@@ -48,9 +56,6 @@ typedef enum {
     return self;
 }
 
-- (CGFloat) mood { return mood; }
-- (CGFloat) energy { return energy; }
-
 - (BOOL) idle      { return self.velocity == KWKittenActionIdle;           }
 - (BOOL) stalking  { return self.velocity == KWKittenActionStalk;          }
 - (BOOL) exploring { return self.velocity == KWKittenActionExplore;        }
@@ -58,6 +63,15 @@ typedef enum {
 
 - (BOOL) bored     { return mood          <= KWKittenMoodBored;            }
 - (BOOL) tired     { return energy        <= KWKittenEnergyTired;          }
+
+- (BOOL) captured { return self.capture; }
+- (void) setCaptured:(BOOL)cap {
+    self.capture = cap;
+    if (captured) {
+        mood = KWKittenMoodCaptured;
+        self.velocity = KWObjectVelocityMotionless;
+    }
+}
 
 - (void) turn:(CGFloat)dt {
     if (chasing) {
