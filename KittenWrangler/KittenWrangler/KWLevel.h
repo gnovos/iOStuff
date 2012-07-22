@@ -23,7 +23,7 @@
 
 - (void) tick:(CGFloat)dt;
 
-- (NSArray*) visible:(KWObject*)obj;
+- (NSArray*) sight:(KWObject*)obj;
 
 - (NSTimeInterval) remaining;
 

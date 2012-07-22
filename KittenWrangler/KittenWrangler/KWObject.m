@@ -26,6 +26,7 @@
         }
         self.frame = rect;
         self.backgroundColor = [UIColor colorWithWhite:0.5f alpha:0.2f].CGColor;
+        heading = kKWRandomHeading;
     }
     return self;
 }
@@ -49,8 +50,11 @@
     
     while (heading < 0 || heading > kKWAngle360Degrees) {
         heading += heading < 0 ? kKWAngle360Degrees : -kKWAngle360Degrees;
-    }    
-    self.transform = CATransform3DMakeRotation(degreesToRadians(heading), 0, 0, 1.0f);
+    }
+    
+    CGFloat dir = degreesToRadians(heading);
+    
+    self.transform = CATransform3DMakeRotation(dir, 0, 0, 1.0f);
 
     if (self.moving) {
         
@@ -58,8 +62,8 @@
         
         CGPoint p = self.position;
         
-        p.x += dm * cosf(degreesToRadians(heading));
-        p.y += dm * sinf(degreesToRadians(heading));
+        p.x += dm * cosf(dir);
+        p.y += dm * sinf(dir);
         
         if (CGRectContainsPoint(level.bounds, p) && [level vacant:p excluding:self]) {
             self.position = p;

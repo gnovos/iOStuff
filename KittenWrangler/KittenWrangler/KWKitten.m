@@ -67,12 +67,12 @@ typedef enum {
 
 - (void) explore {
     self.velocity = KWKittenActionExplore;
-    self.heading = kKWRandomHeading;
+    self.heading += kKWRandomHeading;
     mood = KWKittenMoodInterested;
     chase.chased = NO;
     chase = nil;
     
-    [[self.level visible:self] enumerateObjectsUsingBlock:^(KWKitten* obj, NSUInteger idx, BOOL *stop) {
+    [[self.level sight:self] enumerateObjectsUsingBlock:^(KWKitten* obj, NSUInteger idx, BOOL *stop) {
         if (obj.moving && [self interested]) {
             chase = obj;
             chase.chased = YES;
@@ -121,7 +121,8 @@ typedef enum {
         color = UIColor.brownColor;
     }
     
-    CGFloat inner = 3.0f;
+    CGFloat inner = 2.0f;
+    
     CGRect bounds = CGRectInset(self.bounds, inner, inner);
 
     CGPoint d = KWCGRectCenter(bounds);

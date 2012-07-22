@@ -122,30 +122,35 @@ static const int kKWTimeLimitLevelCost  = 5;
     return vacant;
 }
 
-- (NSArray*) visible:(KWObject*)obj {
-    ///xxx fix this
+- (NSArray*) sight:(KWObject*)o {
     
     NSMutableArray* visible = [[NSMutableArray alloc] init];
-
-    ///xxx fix this
-//    CGPoint d = { sin(obj.rotation / 180.0 * M_PI), sin((obj.rotation + kKWAngle90Degrees) / kKWAngle180Degrees) };
-//    
-//    CGFloat slope = d.x ? (d.y / d.x) : 0;
-//    
-//    void (^block) (KWObject* obj, NSUInteger idx, BOOL *stop) = ^(KWObject* obj, NSUInteger idx, BOOL *stop) {
-//        
-//        CGFloat mx = CGRectGetMidX(obj.layer.frame);
-//        CGFloat my = obj.layer.position.x * slope;
-//        
-//        if (CGRectContainsPoint(obj.layer.frame, CGPointMake(mx, my))) {
-//            [visible addObject:obj];
-//        }
-//        
-//    };
-//    
-//    [kittens enumerateObjectsUsingBlock:block];
-//    
-//    [toys enumerateObjectsUsingBlock:block];
+    
+    CGFloat rads = degreesToRadians(o.heading);
+    
+    CGPoint p = o.position;
+    
+    void (^block) (KWObject* obj, NSUInteger idx, BOOL *stop) = ^(KWObject* k, NSUInteger idx, BOOL *stop) {
+        if (k != o) {
+            CGPoint q = k.position;
+                        
+            CGFloat dist = p.x - q.x;
+            CGFloat dir = cosf(rads);
+            BOOL match = (dir < 0 && dist > 0) || (dir > 0 && dist < 0);
+            
+            if (match) {
+                CGFloat m = tan(rads) * dist;
+                q.y = p.y - m;
+                if (CGRectContainsPoint(k.frame, q)) {
+                    [visible addObject:k];
+                }            
+            }
+        }
+    };
+    
+    [kittens enumerateObjectsUsingBlock:block];
+    
+    [toys enumerateObjectsUsingBlock:block];
 
     return visible;
 
