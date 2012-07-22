@@ -66,9 +66,8 @@
     UIColor* fill = [UIColor colorWithRed:(0.5f * level.remaining) green:0.3f blue:0.3f alpha:0.2f];
     if (level.remaining > 0) {
         NSString* text = [NSString stringWithFormat:@"Level %d (%d s)", level.level, (int)level.remaining];
-        [[[[[[gfx stroke:stroke] fill:fill] angle:-45.0f] font:@"Helvetica Bold" size:38.0f] x:70.0f y:300.0f] text:text];
+        [[[[[[[gfx stroke:stroke] fill:fill] angle:-45.0f] mode:kCGTextFillStroke] font:@"Helvetica Bold" size:38.0f] x:70.0f y:300.0f] text:text];
     }
-    
     
     [[gfx stroke:fill] dash:10.0f off:3.0f];
 

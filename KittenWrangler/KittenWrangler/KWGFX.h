@@ -18,6 +18,7 @@
 - (id) fill:(UIColor*)fill;
 - (id) stroke:(UIColor*)stroke;
 - (id) angle:(CGFloat)degrees;
+- (id) mode:(CGTextDrawingMode)mode;
 - (id) font:(NSString*)name size:(CGFloat)size;
 - (id) at:(CGPoint)loc;
 - (id) x:(CGFloat)x y:(CGFloat)y;
