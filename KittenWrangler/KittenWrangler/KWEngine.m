@@ -45,7 +45,11 @@
     
     CFTimeInterval elapsed = link.timestamp - last;
     
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    [CATransaction setValue:[NSNumber numberWithFloat:elapsed] forKey:kCATransactionAnimationDuration];
     [level tick:elapsed];
+    [CATransaction commit];
         
     last = link.timestamp;
     

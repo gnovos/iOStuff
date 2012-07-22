@@ -63,27 +63,30 @@ static const int kKWTimeLimitLevelCost  = 5;
     }
     
     [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
-        [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
-            if (kitten.bored) {
-                CGRect kbounds = kitten.layer.bounds;
-                CGPoint exit = CGPointMake(basket.layer.bounds.origin.x - kitten.layer.bounds.size.height, CGRectGetMidY(basket.layer.bounds));
-                if (exit.x < 0) {
-                    exit.x = CGRectGetMinY(basket.layer.bounds) + 1.0f;
-                }
-                kbounds.origin = exit;
-                kitten.layer.bounds = kbounds;
-                [kittens addObject:kitten];
-                *stop = YES;
-            } else {
-                [kitten tick:dt];
-            }
-        }];
-        [basket.kittens removeObjectsInArray:kittens];
+//xxx fix this, particularly the exiting
+//        [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
+//            if (kitten.bored) {
+//                CGRect kbounds = kitten.layer.frame;
+//                CGPoint exit = CGPointMake(basket.layer.frame.origin.x - kitten.layer.frame.size.height, CGRectGetMidY(basket.layer.frame));
+//                if (exit.x < 0) {
+//                    exit.x = CGRectGetMinY(basket.layer.frame) + 1.0f;
+//                }
+//                kbounds.origin = exit;
+//                kitten.layer.frame = kbounds;
+//                [kittens addObject:kitten];
+//                *stop = YES;
+//            } else {
+//                [kitten tick:dt];
+//            }
+//        }];
+//        [basket.kittens removeObjectsInArray:kittens];
     }];
+    
     
     [kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
         [kitten tick:dt];
     }];
+    
         
 }
 
@@ -94,13 +97,13 @@ static const int kKWTimeLimitLevelCost  = 5;
     [basket addKitten:kitten];
 }
 
-- (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj {
+- (BOOL) vacant:(CGPoint)p excluding:(KWObject*)obj {
     
     __block BOOL vacant = YES;
     
+    //xxx do this better
     void (^block) (KWObject* o, NSUInteger idx, BOOL *stop) = ^(KWObject* o, NSUInteger idx, BOOL *stop) {
-        
-        if (o != obj && CGRectIntersectsRect(rect, o.layer.bounds)) {
+        if (o != obj && CGRectContainsPoint(o.frame, p)) {
             vacant = NO;
             *stop = YES;
         }
@@ -120,27 +123,29 @@ static const int kKWTimeLimitLevelCost  = 5;
 }
 
 - (NSArray*) visible:(KWObject*)obj {
-    
-    CGPoint d = { sin(obj.rotation / 180.0 * M_PI), sin((obj.rotation + kKWAngle90Degrees) / kKWAngle180Degrees) };
-    
-    CGFloat slope = d.x ? (d.y / d.x) : 0;
+    ///xxx fix this
     
     NSMutableArray* visible = [[NSMutableArray alloc] init];
-        
-    void (^block) (KWObject* obj, NSUInteger idx, BOOL *stop) = ^(KWObject* obj, NSUInteger idx, BOOL *stop) {
-        
-        CGFloat mx = CGRectGetMidX(obj.layer.bounds);
-        CGFloat my = obj.layer.bounds.origin.x * slope;
-        
-        if (CGRectContainsPoint(obj.layer.bounds, CGPointMake(mx, my))) {
-            [visible addObject:obj];
-        }
-        
-    };
-    
-    [kittens enumerateObjectsUsingBlock:block];
-    
-    [toys enumerateObjectsUsingBlock:block];
+
+    ///xxx fix this
+//    CGPoint d = { sin(obj.rotation / 180.0 * M_PI), sin((obj.rotation + kKWAngle90Degrees) / kKWAngle180Degrees) };
+//    
+//    CGFloat slope = d.x ? (d.y / d.x) : 0;
+//    
+//    void (^block) (KWObject* obj, NSUInteger idx, BOOL *stop) = ^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+//        
+//        CGFloat mx = CGRectGetMidX(obj.layer.frame);
+//        CGFloat my = obj.layer.position.x * slope;
+//        
+//        if (CGRectContainsPoint(obj.layer.frame, CGPointMake(mx, my))) {
+//            [visible addObject:obj];
+//        }
+//        
+//    };
+//    
+//    [kittens enumerateObjectsUsingBlock:block];
+//    
+//    [toys enumerateObjectsUsingBlock:block];
 
     return visible;
 

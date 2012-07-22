@@ -11,6 +11,7 @@
 
 static const CGFloat kKWAngle0Degrees   = 0.0f;
 static const CGFloat kKWAngle15Degrees  = 15.0f;
+static const CGFloat kKWAngle23Degrees  = 23.0f;
 static const CGFloat kKWAngle45Degrees  = 45.0f;
 static const CGFloat kKWAngle90Degrees  = 90.0f;
 static const CGFloat kKWAngle180Degrees = 180.0f;
@@ -24,9 +25,9 @@ static const CGFloat kKWKittensPerLevel = 3;
 #define kKWRandomHeading arc4random_uniform(kKWAngle360Degrees)
 #define kKWRandomPercent (arc4random_uniform(100) / 100.0f)
 
-#define degreesToRadians(x) (M_PI * x / kKWAngle180Degrees)
+#define degreesToRadians(x) (x * M_PI / kKWAngle180Degrees)
 
-static const CGSize kKWDefaultKittenSize = { 30, 30 };
+static const CGSize kKWDefaultKittenSize = { 35, 35 };
 static const CGSize kKWDefaultBasketSize = { 70, 70 };
 
 

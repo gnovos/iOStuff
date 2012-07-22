@@ -37,4 +37,13 @@
     return [[super description] stringByAppendingFormat:@" kittens:%d", kittens.count];
 }
 
+- (void) drawInContext:(CGContextRef)ctx {
+    
+    CGContextSetLineWidth(ctx, 2.0);
+    CGContextSetStrokeColorWithColor(ctx, [UIColor greenColor].CGColor);
+    CGContextAddRect(ctx, self.bounds);
+    CGContextStrokePath(ctx);
+    
+}
+
 @end

@@ -17,23 +17,15 @@ typedef enum {
     KWObjectVelocityFast       = 150
 } KWObjectVelocity;
 
-@interface KWObject : NSObject
+@interface KWObject : CALayer
 
 @property (nonatomic, assign)           BOOL    held;
 
-@property (nonatomic, assign)           CGFloat heading;
-@property (nonatomic, assign, readonly) CGFloat rotation;
-
-@property (nonatomic, readonly, assign) CGPoint location;
-@property (nonatomic, readonly, assign) CGSize  size;
-@property (nonatomic, readonly, assign) CGPoint center;
-
 @property (nonatomic, readonly, assign) KWLevel* level;
 
+@property (nonatomic, assign) CGFloat heading;
+
 @property (nonatomic, assign) KWObjectVelocity velocity;
-
-@property (nonatomic, readonly, strong) CALayer* layer;
-
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size;
 

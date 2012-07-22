@@ -11,70 +11,80 @@
 
 @implementation KWObject
 
-@synthesize heading, rotation, velocity, held, level, layer;
+@synthesize held, level, heading;
+
+@dynamic velocity;
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
+        self.needsDisplayOnBoundsChange = YES;
         level = lvl;
-        layer = [CALayer layer];
-        CGRect bounds = layer.bounds;
-        while (CGRectIsEmpty(bounds) || !CGRectContainsRect(level.bounds, bounds) || ![level vacant:bounds excluding:self]) {
-            bounds.size = size;
-            bounds.origin = [self randomPointIn:level.bounds];
+        CGRect rect = CGRectZero;
+        while (CGRectIsEmpty(rect) || !CGRectContainsRect(level.bounds, rect) || ![level vacant:rect.origin excluding:self]) {
+            rect.size = size;
+            rect.origin = [self randomPointIn:level.bounds];
         }
-        layer.bounds = bounds;
+        self.frame = rect;
+        self.backgroundColor = [UIColor colorWithWhite:0.5f alpha:0.2f].CGColor;
     }
     return self;
+}
+
++ (BOOL) needsDisplayForKey:(NSString *)key {
+    if ([@"velocity" isEqualToString:key]) {
+        return YES;
+    }
+    dlobj(key);
+    return [super needsDisplayForKey:key];
 }
 
 - (CGPoint) randomPointIn:(CGRect)rect {
     return CGPointMake(arc4random_uniform(rect.size.width), arc4random_uniform(rect.size.height));
 }
 
-- (CGPoint) location { return layer.bounds.origin; }
-- (CGSize)  size     { return layer.bounds.size;   }
-- (CGPoint) center   { return KWCGRectCenter(layer.bounds); }
-
-- (BOOL)    moving   { return !held && velocity > KWObjectVelocityMotionless; }
-
-- (void) normalizeRotation {
-    while (rotation < 0 || rotation > kKWAngle360Degrees) {
-        rotation += rotation < 0 ? kKWAngle360Degrees : -kKWAngle360Degrees;
-    }    
-    while (heading < 0 || heading > kKWAngle360Degrees) {
-        heading += heading < 0 ? kKWAngle360Degrees : -kKWAngle360Degrees;
-    }
-}
+- (BOOL) moving   { return !held && self.velocity > KWObjectVelocityMotionless; }
 
 - (void) tick:(CGFloat)dt {
-//xxx    dlog(@"tick:%f %@", dt, self);
+//    dlog(@"tick:%f %@", dt, self);
     
-    [self normalizeRotation];
-        
-    if (rotation != heading) {
-        CGFloat rx = heading - rotation;        
-        rotation += rx / 2.0;
-    }
-    
+    while (heading < 0 || heading > kKWAngle360Degrees) {
+        heading += heading < 0 ? kKWAngle360Degrees : -kKWAngle360Degrees;
+    }    
+    self.transform = CATransform3DMakeRotation(degreesToRadians(heading), 0, 0, 1.0f);
+
     if (self.moving) {
-        //xxx introduce accelerometer bias
-        CGPoint d = CGPointMake(sin(rotation / kKWAngle180Degrees * M_PI) * (dt * velocity),
-                                sin((rotation + kKWAngle90Degrees) / kKWAngle180Degrees * M_PI) * (dt * velocity));
         
-        CGRect loc = CGRectMake(layer.bounds.origin.x + d.x, layer.bounds.origin.y + d.y, layer.bounds.size.width, layer.bounds.size.height);
+        CGFloat dm = self.velocity * dt;
         
-        if ([level vacant:loc excluding:self] && CGRectContainsRect(level.bounds, loc)) {
-            layer.bounds = loc;
+        CGPoint p = self.position;
+        
+        p.x += dm * cosf(degreesToRadians(heading));
+        p.y += dm * sinf(degreesToRadians(heading));
+        
+        if (CGRectContainsPoint(level.bounds, p) && [level vacant:p excluding:self]) {
+            self.position = p;
         } else {
-            heading += kKWAngle15Degrees;
-        }        
+            if (p.x < 0) {
+                p.x = 1.0f;
+            }
+            if (p.y < 0) {
+                p.y = 1.0f;
+            }
+            if (p.x > CGRectGetMaxX(level.bounds)){
+                p.x = CGRectGetMaxX(level.bounds) - 1.0f;
+            }
+            if (p.y > CGRectGetMaxY(level.bounds)){
+                p.y = CGRectGetMaxY(level.bounds) - 1.0f;
+            }
+            heading += kKWRandomHeading;
+        }
+
     }
-    
 }
 
 - (CGFloat) directionOf:(KWObject*)other {
-    CGPoint a = other.center;
-    CGPoint b = self.center;
+    CGPoint a = other.position;
+    CGPoint b = self.position;
     
     CGFloat dx = a.x - b.x;
     CGFloat dy = a.y - b.y;
@@ -84,12 +94,9 @@
 }
 
 - (NSString*) description {
-    return [NSString stringWithFormat:@"%@ loc:(%d,%d) rot:%d/%d v:%d",
+    return [NSString stringWithFormat:@"%@ loc:(%d,%d) v:%d",
             self.class,
-            (int)layer.bounds.origin.x, (int)layer.bounds.origin.y,
-            (int)heading, (int)rotation, velocity];
+            (int)self.position.x, (int)self.position.y, self.velocity];
 }
-
-
 
 @end
