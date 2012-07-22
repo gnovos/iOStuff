@@ -54,7 +54,9 @@ static const int kKWTimeLimitLevelCost  = 5;
 
 - (BOOL) timeout { return self.remaining <= 0; }
 
-- (BOOL) complete { return kittens.count == 0 || [self timeout]; }
+- (BOOL) complete {
+    return kittens.count == 0 || [self timeout];
+}
 
 - (void) tick:(CGFloat)dt {    
     if (start == nil) {
@@ -91,7 +93,7 @@ static const int kKWTimeLimitLevelCost  = 5;
 }
 
 - (void) move:(KWKitten*)kitten toBasket:(KWBasket*)basket {
-    [kitten capture];
+    kitten.captured = YES;
     [kittens removeObject:kitten];
     [baskets makeObjectsPerformSelector:@selector(removeKitten:) withObject:kitten];
     [basket addKitten:kitten];

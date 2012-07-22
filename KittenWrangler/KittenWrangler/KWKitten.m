@@ -31,7 +31,7 @@ typedef enum {
     CGFloat mood;
     CGFloat energy;
     
-    KWKitten* chase;
+    KWKitten* chasing;
 }
 
 - (id) initWithLevel:(KWLevel*)lvl {
@@ -48,19 +48,16 @@ typedef enum {
 - (BOOL) idle      { return self.velocity == KWKittenActionIdle;           }
 - (BOOL) stalking  { return self.velocity == KWKittenActionStalk;          }
 - (BOOL) exploring { return self.velocity == KWKittenActionExplore;        }
-- (BOOL) chasing   { return chase && self.velocity == KWKittenActionChase; }
+- (BOOL) chasing   { return chasing && self.velocity == KWKittenActionChase; }
 
 - (BOOL) bored     { return mood          <= KWKittenMoodBored;            }
 - (BOOL) tired     { return energy        <= KWKittenEnergyTired;          }
 
-- (void) capture   { mood = arc4random_uniform(KWKittenMoodCaptured) + KWKittenMoodCaptured; }
-
 - (void) turn:(CGFloat)dt {
-    //xxx
-//    if (chase) {
-//        self.heading += [self directionOf:chase];
-//        self.velocity = KWKittenActionChase;//chase.velocity;
-//    }
+    if (chasing) {
+        self.heading += [self directionOf:chasing];
+        self.velocity = KWKittenActionChase;//chase.velocity;
+    }
 }
 
 - (BOOL) interested { return kKWRandomPercent > kKWKittenInterest;  }
@@ -69,13 +66,13 @@ typedef enum {
     self.velocity = KWKittenActionExplore;
     self.heading += kKWRandomHeading;
     mood = KWKittenMoodInterested;
-    chase.chased = NO;
-    chase = nil;
+    chasing.chased = NO;
+    chasing = nil;
     
     [[self.level sight:self] enumerateObjectsUsingBlock:^(KWKitten* obj, NSUInteger idx, BOOL *stop) {
-        if (obj.moving && [self interested]) {
-            chase = obj;
-            chase.chased = YES;
+        if (obj.moving && !obj.chased) {// && [self interested]) {
+            chasing = obj;
+            chasing.chased = YES;
             *stop = YES;
         }
     }];    
@@ -84,8 +81,8 @@ typedef enum {
 - (void) tick:(CGFloat)dt {
     if (self.tired) {
         self.velocity = KWKittenActionIdle;
-        chase.chased = NO;
-        chase = nil;
+        chasing.chased = NO;
+        chasing = nil;
     } else if (self.bored) {
         [self explore];
     }
@@ -108,6 +105,11 @@ typedef enum {
 }
 
 - (void) drawInContext:(CGContextRef)context {
+    CGFloat inner = 2.0f;
+    
+    CGRect bounds = CGRectInset(self.bounds, inner, inner);
+    
+    CGPoint d = KWCGRectCenter(bounds);
     
     UIColor* color = self.idle ? [UIColor lightGrayColor] : [UIColor blueColor];
     if (self.chasing && self.chased) {
@@ -116,43 +118,29 @@ typedef enum {
         color = UIColor.redColor;
     } else if (self.chased) {
         color = UIColor.yellowColor;
+    } else if (self.captured) {
+        color = UIColor.orangeColor;
     }
     if (self.held) {
         color = UIColor.brownColor;
     }
     
-    CGFloat inner = 2.0f;
-    
-    CGRect bounds = CGRectInset(self.bounds, inner, inner);
-
-    CGPoint d = KWCGRectCenter(bounds);
-
     CGContextSetStrokeColorWithColor(context, color.CGColor);
+
+    if (self.captured) {
+        CGFloat dash[] = {10,3};
+        CGContextSetLineDash(context, 0, dash, 2);
+    } else {
+        CGContextSelectFont(context, "Helvetica Bold", 12.0f, kCGEncodingMacRoman);
+        CGContextSetTextDrawingMode(context, kCGTextStroke);
+//        CGContextSetStrokeColorWithColor(context, UIColor.purpleColor.CGColor);
+        CGContextShowTextAtPoint(context, d.x , d.y, ">", 1);
+        CGContextStrokePath(context);        
+    }
 
     CGContextAddEllipseInRect(context, bounds);
     CGContextStrokePath(context);
-    
-    CGContextSelectFont(context, "Helvetica Bold", 12.0f, kCGEncodingMacRoman);
-    CGContextSetTextDrawingMode(context, kCGTextStroke);
-
-    CGContextSetStrokeColorWithColor(context, UIColor.purpleColor.CGColor);
-    CGContextShowTextAtPoint(context, d.x , d.y, ">", 1);
-    CGContextStrokePath(context);
-    
             
-//    CGContextSelectFont(context, "Helvetica Bold", 12.0f, kCGEncodingMacRoman);
-//    CGContextSetTextDrawingMode(context, kCGTextStroke);    
-//    
-//    CGContextSetStrokeColorWithColor(context, UIColor.purpleColor.CGColor);
-//    CGContextSetTextMatrix(context, CGAffineTransformMakeRotation(-degreesToRadians(self.heading)));
-//    CGContextShowTextAtPoint(context, d.x , d.y, "^", 1);
-//    CGContextStrokePath(context);
-//    
-//    CGContextSetStrokeColorWithColor(context, color.CGColor);
-//    CGContextSetTextMatrix(context, CGAffineTransformMakeRotation(-degreesToRadians(self.rotation)));
-//    CGContextShowTextAtPoint(context, d.x, d.y, "^", 1);
-//    CGContextStrokePath(context);
-    
 }
 
 

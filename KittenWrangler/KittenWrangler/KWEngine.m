@@ -55,11 +55,11 @@
     
     if (level.complete) {
         level = [[KWLevel alloc] initLevel:level.level + 1];
+        [callblocks enumerateObjectsUsingBlock:^(void(^block)(void), NSUInteger idx, BOOL *stop) {
+            block();
+        }];
     }
     
-    [callblocks enumerateObjectsUsingBlock:^(void(^block)(void), NSUInteger idx, BOOL *stop) {
-        block();
-    }];
         
 }
 

@@ -11,9 +11,9 @@
 
 @implementation KWObject
 
-@synthesize held, level, heading;
+@synthesize level, heading;
 
-@dynamic velocity;
+@dynamic held, captured, velocity;
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
@@ -25,39 +25,44 @@
             rect.origin = [self randomPointIn:level.bounds];
         }
         self.frame = rect;
-        self.backgroundColor = [UIColor colorWithWhite:0.5f alpha:0.2f].CGColor;
         heading = kKWRandomHeading;
     }
     return self;
 }
 
 + (BOOL) needsDisplayForKey:(NSString *)key {
-    if ([@"velocity" isEqualToString:key]) {
-        return YES;
-    }
-    dlobj(key);
-    return [super needsDisplayForKey:key];
+    
+    static NSSet* keys;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        keys = [NSSet setWithObjects:
+                @"velocity",
+                @"held",
+                @"captured",
+                nil];
+    });
+    
+    return [keys containsObject:key] || [super needsDisplayForKey:key];
 }
 
 - (CGPoint) randomPointIn:(CGRect)rect {
     return CGPointMake(arc4random_uniform(rect.size.width), arc4random_uniform(rect.size.height));
 }
 
-- (BOOL) moving   { return !held && self.velocity > KWObjectVelocityMotionless; }
+- (BOOL) moving   { return !self.captured && !self.held && self.velocity > KWObjectVelocityMotionless; }
 
 - (void) tick:(CGFloat)dt {
 //    dlog(@"tick:%f %@", dt, self);
     
-    while (heading < 0 || heading > kKWAngle360Degrees) {
-        heading += heading < 0 ? kKWAngle360Degrees : -kKWAngle360Degrees;
-    }
-    
-    CGFloat dir = degreesToRadians(heading);
-    
-    self.transform = CATransform3DMakeRotation(dir, 0, 0, 1.0f);
-
     if (self.moving) {
+        while (heading < 0 || heading > kKWAngle360Degrees) {
+            heading += heading < 0 ? kKWAngle360Degrees : -kKWAngle360Degrees;
+        }
         
+        CGFloat dir = degreesToRadians(heading);
+        
+        self.transform = CATransform3DMakeRotation(dir, 0, 0, 1.0f);
+    
         CGFloat dm = self.velocity * dt;
         
         CGPoint p = self.position;
@@ -65,7 +70,9 @@
         p.x += dm * cosf(dir);
         p.y += dm * sinf(dir);
         
-        if (CGRectContainsPoint(level.bounds, p) && [level vacant:p excluding:self]) {
+        BOOL vacant = [level vacant:p excluding:self] || ![level vacant:self.position excluding:self];
+        
+        if (CGRectContainsPoint(level.bounds, p) && vacant) {
             self.position = p;
         } else {
             if (p.x < 0) {

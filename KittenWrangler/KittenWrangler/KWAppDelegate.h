@@ -10,6 +10,8 @@
 //TODO:
 //collision detect
 //CAnimation
+//spash screenz (and win screens)
+//game kit (and milestones, etc)
 
 
 #import <UIKit/UIKit.h>

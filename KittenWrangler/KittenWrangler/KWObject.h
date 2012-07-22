@@ -19,7 +19,8 @@ typedef enum {
 
 @interface KWObject : CALayer
 
-@property (nonatomic, assign)           BOOL    held;
+@property (nonatomic, assign) BOOL held;
+@property (nonatomic, assign) BOOL captured;
 
 @property (nonatomic, readonly, assign) KWLevel* level;
 

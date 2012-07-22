@@ -23,8 +23,11 @@
 - (void) setup {
     engine = [[KWEngine alloc] init];
     tracking = [[NSMutableDictionary alloc] init];
-    __block id slf = self;
-    [engine add:^{ [slf setNeedsDisplay]; }];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(setNeedsDisplay) userInfo:nil repeats:YES];
+    
+    id slf = self;
+    [engine add:^{ [slf reset]; }];
     
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = YES;
@@ -33,141 +36,62 @@
 - (id) initWithCoder:(NSCoder *)decoder { if (self = [super initWithCoder:decoder]) { [self setup]; } return self; }
 - (id) initWithFrame:(CGRect)frame { if (self = [super initWithFrame:frame]) { [self setup]; } return self; }
 
-- (void) start {
+- (void) reset {
+    
+    [[self.layer sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    
     [engine.level.baskets enumerateObjectsUsingBlock:^(KWBasket* b, NSUInteger idx, BOOL *stop) {
         [self.layer addSublayer:b];
     }];
-
+    
     [engine.level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
         [self.layer addSublayer:k];
-    }];
-    
+    }];    
+}
+
+- (void) start {
+    [self reset];
     [engine start];
 }
 - (void) pause { [engine pause]; }
 - (void) stop  { [engine stop]; }
 
-//- (void) xdrawRect:(CGRect)rect {
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//
-//    KWLevel* level = engine.level;
-//    
-//    const char* label = [[NSString stringWithFormat:@"Level %d (%d s)", level.level, (int)level.remaining] cStringUsingEncoding:NSUTF8StringEncoding];
-//    
-//    UIColor* tfill = [UIColor colorWithRed:(0.5f * level.remaining) green:0.3f blue:0.3f alpha:0.2f];
-//    UIColor* tstroke = [UIColor colorWithRed:0.5f green:0.5f blue:0.7f alpha:0.3f];
-//
-//    UIColor* cfill = [UIColor colorWithRed:0.3F green:0.3f blue:0.5f alpha:0.2f];
-//    
-//    CGContextSetStrokeColorWithColor(context, tstroke.CGColor);
-//    CGContextSetFillColorWithColor(context, tfill.CGColor);
-//
-//	double text_angle = -M_PI/4.0;  // 45 Degrees counterclockwise
-//	CGAffineTransform xform = CGAffineTransformMake(cos(text_angle),  sin(text_angle),
-//                                                    sin(text_angle), -cos(text_angle),
-//                                                    0.0,  0.0);
-//    
-//	CGContextSetTextMatrix(context, xform);
-//	CGContextSelectFont(context, "Helvetica Bold", 38.f, kCGEncodingMacRoman);
-//	CGContextSetTextDrawingMode(context, kCGTextFillStroke);
-//    CGContextShowTextAtPoint(context, 70, 350, label, strlen(label));
-//    
-//    [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
-//        CGContextSetLineWidth(context, 2.0);
-//        CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
-//        CGContextAddRect(context, basket.layer.bounds);
-//        CGContextStrokePath(context);
-//        
-//        [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-//            
-//            CGContextSetLineWidth(context, 2.0);
-//            
-//            CGContextSetStrokeColorWithColor(context, [UIColor orangeColor].CGColor);
-//            
-//            CGFloat dashArray[] = {10,3};
-//            
-//            CGContextSetLineDash(context, idx, dashArray, 2);
-//            
-//            CGContextAddEllipseInRect(context, k.layer.frame);
-//            
-//            CGContextStrokePath(context);
-//            
-//            CGContextSetTextDrawingMode(context, kCGTextFill);
-//            CGContextSelectFont(context, "Helvetica Bold", 10.0f, kCGEncodingMacRoman);
-//            CGContextSetFillColorWithColor(context, UIColor.darkGrayColor.CGColor);
-//            
-//            const char* enfo = [[NSString stringWithFormat:@"       e: %.2f", k.energy] cStringUsingEncoding:NSUTF8StringEncoding];
-//            const char* mnfo = [[NSString stringWithFormat:@"       m: %.2f", k.mood] cStringUsingEncoding:NSUTF8StringEncoding];
-//            
-//            double text_angle = -M_PI / 180.0;
-//            CGAffineTransform xform = CGAffineTransformMake(cos(text_angle),  sin(text_angle),
-//                                                            sin(text_angle), -cos(text_angle),
-//                                                            0.0,  0.0);
-//            CGPoint d = k.center;
-//            CGContextSetTextMatrix(context, xform);
-//            CGContextShowTextAtPoint(context, d.x, d.y, enfo, strlen(enfo));
-//            CGContextShowTextAtPoint(context, d.x, d.y + 10.0f, mnfo, strlen(mnfo));
-//            CGContextStrokePath(context);
-//            
-//        }];
-//        
-//        CGContextSetLineDash(context, 0, NULL, 0);
-//    }];
-//    
-//    [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
-//        CGContextSetLineWidth(context, 2.0);
-//        UIColor* color = k.idle ? [UIColor lightGrayColor] : [UIColor blueColor];        
-//        if (k.chasing && k.chased) {
-//            color = UIColor.magentaColor;
-//        } else if (k.chasing) {
-//            color = UIColor.redColor;
-//        } else if (k.chased) {
-//            color = UIColor.yellowColor;
-//            CGContextSetFillColorWithColor(context, [UIColor yellowColor].CGColor);
-//        }
-//        if (k.held) {
-//            color = UIColor.brownColor;
-//        }
-//        
-//        CGPoint d = k.center;
-//        
-//        CGContextSetFillColorWithColor(context, cfill.CGColor);
-//        CGContextAddEllipseInRect(context, k.layer.frame);
-//        CGContextFillPath(context);
-//        
-//        CGContextSetStrokeColorWithColor(context, color.CGColor);
-//        CGContextAddEllipseInRect(context, k.layer.frame);
-//        CGContextStrokePath(context);
-//        
-//        CGContextSetTextDrawingMode(context, kCGTextFill);
-//        CGContextSelectFont(context, "Helvetica Bold", 10.0f, kCGEncodingMacRoman);
-//        CGContextSetFillColorWithColor(context, UIColor.darkGrayColor.CGColor);
-//        
-//        const char* enfo = [[NSString stringWithFormat:@"       e: %.2f", k.energy] cStringUsingEncoding:NSUTF8StringEncoding];
-//        const char* mnfo = [[NSString stringWithFormat:@"       m: %.2f", k.mood] cStringUsingEncoding:NSUTF8StringEncoding];
-//        
-//        double text_angle = -M_PI / 180.0;
-//        CGAffineTransform xform = CGAffineTransformMake(cos(text_angle),  sin(text_angle),
-//                                                        sin(text_angle), -cos(text_angle),
-//                                                        0.0,  0.0);
-//        
-//        CGContextSetTextMatrix(context, xform);
-//        CGContextShowTextAtPoint(context, d.x, d.y, enfo, strlen(enfo));
-//        CGContextShowTextAtPoint(context, d.x, d.y + 10.0f, mnfo, strlen(mnfo));
-//        CGContextStrokePath(context);
-//
-//        CGContextSelectFont(context, "Helvetica Bold", 12.0f, kCGEncodingMacRoman);
-//        CGContextSetFillColorWithColor(context, UIColor.purpleColor.CGColor);
-//        CGContextSetTextMatrix(context, CGAffineTransformMakeRotation(-degreesToRadians(k.heading)));
-//        CGContextShowTextAtPoint(context, d.x + 3 , d.y + 3, "^", 1);
-//        CGContextStrokePath(context);
-//
-//        CGContextSetFillColorWithColor(context, color.CGColor);
-//        CGContextSetTextMatrix(context, CGAffineTransformMakeRotation(-degreesToRadians(k.rotation)));
-//        CGContextShowTextAtPoint(context, d.x + 3 , d.y + 3, "^", 1);
-//        CGContextStrokePath(context);
-//    }];
-//}
+- (void) drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    KWLevel* level = engine.level;
+    
+    const char* label = [[NSString stringWithFormat:@"Level %d (%d s)", level.level, (int)level.remaining] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    UIColor* tfill = [UIColor colorWithRed:(0.5f * level.remaining) green:0.3f blue:0.3f alpha:0.2f];
+    UIColor* tstroke = [UIColor colorWithRed:0.5f green:0.5f blue:0.7f alpha:0.3f];
+    
+    CGContextSetStrokeColorWithColor(context, tstroke.CGColor);
+    CGContextSetFillColorWithColor(context, tfill.CGColor);
+    
+	double text_angle = -M_PI/4.0;  // 45 Degrees counterclockwise
+	CGAffineTransform xform = CGAffineTransformMake(cos(text_angle),  sin(text_angle),
+                                                    sin(text_angle), -cos(text_angle),
+                                                    0.0,  0.0);
+    
+	CGContextSetTextMatrix(context, xform);
+	CGContextSelectFont(context, "Helvetica Bold", 38.f, kCGEncodingMacRoman);
+	CGContextSetTextDrawingMode(context, kCGTextFillStroke);
+    CGContextShowTextAtPoint(context, 70, 350, label, strlen(label));
+    
+    CGContextSetStrokeColorWithColor(context, tfill.CGColor);
+    CGFloat dash[] = {10,3};
+    CGContextSetLineDash(context, 0, dash, 2);
+    
+    [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
+        [[level sight:k] enumerateObjectsUsingBlock:^(KWObject* kk, NSUInteger idx, BOOL *stop) {
+            CGContextMoveToPoint(context, k.position.x, k.position.y);
+            CGContextAddLineToPoint(context, kk.position.x, kk.position.y);
+        }];
+    }];
+    
+    CGContextStrokePath(context);
+    
+}
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
