@@ -38,12 +38,7 @@
 }
 
 - (void) drawInContext:(CGContextRef)ctx {
-    
-    CGContextSetLineWidth(ctx, 2.0);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor greenColor].CGColor);
-    CGContextAddRect(ctx, self.bounds);
-    CGContextStrokePath(ctx);
-    
+    [[[[[KWGFX alloc] initWithContext:ctx] width:2.0f] stroke:[UIColor greenColor]] rect:self.bounds];
 }
 
 @end

@@ -12,6 +12,7 @@
 #import "KWObject.h"
 #import "KWKitten.h"
 #import "KWBasket.h"
+#import "KWGFX.h"
 
 //xxx use a better rendering engine than this horrible thing
 
@@ -57,39 +58,25 @@
 - (void) stop  { [engine stop]; }
 
 - (void) drawRect:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
     KWLevel* level = engine.level;
     
-    const char* label = [[NSString stringWithFormat:@"Level %d (%d s)", level.level, (int)level.remaining] cStringUsingEncoding:NSUTF8StringEncoding];
+    KWGFX* gfx = KWGFX.current;
+        
+    UIColor* stroke = [UIColor colorWithRed:0.5f green:0.5f blue:0.7f alpha:0.3f];
+    UIColor* fill = [UIColor colorWithRed:(0.5f * level.remaining) green:0.3f blue:0.3f alpha:0.2f];
+    if (level.remaining > 0) {
+        NSString* text = [NSString stringWithFormat:@"Level %d (%d s)", level.level, (int)level.remaining];
+        [[[[[[gfx stroke:stroke] fill:fill] angle:-45.0f] font:@"Helvetica Bold" size:38.0f] x:70.0f y:300.0f] text:text];
+    }
     
-    UIColor* tfill = [UIColor colorWithRed:(0.5f * level.remaining) green:0.3f blue:0.3f alpha:0.2f];
-    UIColor* tstroke = [UIColor colorWithRed:0.5f green:0.5f blue:0.7f alpha:0.3f];
     
-    CGContextSetStrokeColorWithColor(context, tstroke.CGColor);
-    CGContextSetFillColorWithColor(context, tfill.CGColor);
-    
-	double text_angle = -M_PI/4.0;  // 45 Degrees counterclockwise
-	CGAffineTransform xform = CGAffineTransformMake(cos(text_angle),  sin(text_angle),
-                                                    sin(text_angle), -cos(text_angle),
-                                                    0.0,  0.0);
-    
-	CGContextSetTextMatrix(context, xform);
-	CGContextSelectFont(context, "Helvetica Bold", 38.f, kCGEncodingMacRoman);
-	CGContextSetTextDrawingMode(context, kCGTextFillStroke);
-    CGContextShowTextAtPoint(context, 70, 350, label, strlen(label));
-    
-    CGContextSetStrokeColorWithColor(context, tfill.CGColor);
-    CGFloat dash[] = {10,3};
-    CGContextSetLineDash(context, 0, dash, 2);
-    
+    [[gfx stroke:fill] dash:10.0f off:3.0f];
+
     [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
         [[level sight:k] enumerateObjectsUsingBlock:^(KWObject* kk, NSUInteger idx, BOOL *stop) {
-            CGContextMoveToPoint(context, k.position.x, k.position.y);
-            CGContextAddLineToPoint(context, kk.position.x, kk.position.y);
+            [gfx line:k.position to:kk.position];
         }];
     }];
-    
-    CGContextStrokePath(context);
     
 }
 

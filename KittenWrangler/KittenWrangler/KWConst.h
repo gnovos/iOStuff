@@ -32,5 +32,4 @@ static const CGSize kKWDefaultKittenSize = { 35, 35 };
 static const CGSize kKWDefaultBasketSize = { 70, 70 };
 
 
-
 #endif

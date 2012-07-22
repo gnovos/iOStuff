@@ -15,4 +15,5 @@
 
     #import "KWLog.h"
     #import "KWConst.h"
+    #import "KWGFX.h"
 #endif

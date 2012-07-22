@@ -10,7 +10,7 @@
 #import "KWBasket.h"
 #import "KWKitten.h"
 
-static const int kKWTimeLimitMaxSeconds = 10 * 60;
+static const int kKWTimeLimitMaxSeconds = 3 * 60;
 static const int kKWTimeLimitLevelCost  = 5;
 
 @implementation KWLevel {
@@ -65,30 +65,20 @@ static const int kKWTimeLimitLevelCost  = 5;
     }
     
     [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
-//xxx fix this, particularly the exiting
-//        [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
-//            if (kitten.bored) {
-//                CGRect kbounds = kitten.layer.frame;
-//                CGPoint exit = CGPointMake(basket.layer.frame.origin.x - kitten.layer.frame.size.height, CGRectGetMidY(basket.layer.frame));
-//                if (exit.x < 0) {
-//                    exit.x = CGRectGetMinY(basket.layer.frame) + 1.0f;
-//                }
-//                kbounds.origin = exit;
-//                kitten.layer.frame = kbounds;
-//                [kittens addObject:kitten];
-//                *stop = YES;
-//            } else {
-//                [kitten tick:dt];
-//            }
-//        }];
-//        [basket.kittens removeObjectsInArray:kittens];
+        [basket.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
+            if (kitten.bored) {
+                [kittens addObject:kitten];
+                *stop = YES;
+            } else {
+                [kitten tick:dt];
+            }
+        }];
+        [basket.kittens removeObjectsInArray:kittens];
     }];
-    
     
     [kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
         [kitten tick:dt];
     }];
-    
         
 }
 

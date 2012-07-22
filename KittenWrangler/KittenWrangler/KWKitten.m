@@ -104,7 +104,9 @@ typedef enum {
     return [[super description] stringByAppendingFormat:@" mood:%d energy:%d chasing:%@", (int)mood, (int)energy, self.chasing ? @"YES" : @"NO"];
 }
 
-- (void) drawInContext:(CGContextRef)context {
+- (void) drawInContext:(CGContextRef)ctx {
+    KWGFX* gfx = [[KWGFX alloc] initWithContext:ctx];
+    
     CGFloat inner = 2.0f;
     
     CGRect bounds = CGRectInset(self.bounds, inner, inner);
@@ -121,26 +123,20 @@ typedef enum {
     } else if (self.captured) {
         color = UIColor.orangeColor;
     }
+    
     if (self.held) {
         color = UIColor.brownColor;
     }
     
-    CGContextSetStrokeColorWithColor(context, color.CGColor);
-
+    [gfx stroke:color];
+    
     if (self.captured) {
-        CGFloat dash[] = {10,3};
-        CGContextSetLineDash(context, 0, dash, 2);
+        [gfx dash:10.0f off:3.0f];
     } else {
-        CGContextSelectFont(context, "Helvetica Bold", 12.0f, kCGEncodingMacRoman);
-        CGContextSetTextDrawingMode(context, kCGTextStroke);
-//        CGContextSetStrokeColorWithColor(context, UIColor.purpleColor.CGColor);
-        CGContextShowTextAtPoint(context, d.x , d.y, ">", 1);
-        CGContextStrokePath(context);        
+        [[[gfx font:@"Helvetica Bold" size:12.0f] x:d.x y:d.y] text:@">"];
     }
-
-    CGContextAddEllipseInRect(context, bounds);
-    CGContextStrokePath(context);
-            
+    
+    [gfx elipse:bounds];            
 }
 
 
