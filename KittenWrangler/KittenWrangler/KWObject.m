@@ -11,9 +11,9 @@
 
 @implementation KWObject
 
-@synthesize level, heading, touch;
+@synthesize level, heading;
 
-@dynamic held, captured, velocity;
+@dynamic touch, captured, velocity;
 
 - (NSString*) description {
     return [NSString stringWithFormat:@"%@ loc:(%d,%d) v:%d",
@@ -42,7 +42,7 @@
     dispatch_once(&once, ^{
         keys = [NSSet setWithObjects:
                 @"velocity",
-                @"held",
+                @"touch",
                 @"captured",
                 nil];
     });
@@ -54,7 +54,7 @@
     return CGPointMake(arc4random_uniform(rect.size.width), arc4random_uniform(rect.size.height));
 }
 
-- (BOOL) moving   { return !self.captured && !self.held && self.velocity > KWObjectVelocityMotionless; }
+- (BOOL) moving   { return !self.captured && !self.touch && self.velocity > KWObjectVelocityMotionless; }
 
 - (void) tick:(CGFloat)dt {
 //    dlog(@"tick:%f %@", dt, self);

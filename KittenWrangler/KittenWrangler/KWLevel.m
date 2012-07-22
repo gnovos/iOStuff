@@ -82,7 +82,7 @@ static const int kKWTimeLimitLevelCost  = 5;
 - (void) free:(NSArray*)kits {
     [kits enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
         [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
-            [basket.kittens makeObjectsPerformSelector:@selector(removeObject:) withObject:kitten];
+            [basket.kittens removeObject:kitten];
         }];
         kitten.captured = NO;
         [kittens addObject:kitten];

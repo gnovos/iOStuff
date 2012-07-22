@@ -87,7 +87,6 @@
             //xxx expand the touch area?
             if (CGRectContainsPoint(k.frame, loc)) {
                 k.touch = touch;
-                k.held = YES;
                 *kstop = YES;
             }
         }];
@@ -116,7 +115,8 @@
         [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *kstop) {
             if (k.touch == touch) {
                 [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *bstop) {
-                    if (CGRectContainsPoint(basket.frame, k.position)) {
+                    CGPoint loc = [touch locationInView:self];
+                    if (CGRectContainsPoint(basket.frame, loc)) {
                         [basket addKitten:k];
                         *bstop = YES;
                     }
@@ -127,7 +127,6 @@
         
         [level.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
             [level capture:basket.kittens];
-            
         }];
 
     }];

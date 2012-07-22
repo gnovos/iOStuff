@@ -126,7 +126,7 @@ typedef enum {
         color = UIColor.orangeColor;
     }
     
-    if (self.held) {
+    if (self.touch) {
         color = UIColor.brownColor;
     }
     

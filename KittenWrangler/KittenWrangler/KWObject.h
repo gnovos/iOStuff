@@ -21,8 +21,6 @@ typedef enum {
 
 @property (nonatomic, weak) UITouch* touch;
 
-//xxx remove this, use touch
-@property (nonatomic, assign) BOOL held;
 @property (nonatomic, assign) BOOL captured;
 
 @property (nonatomic, readonly, assign) KWLevel* level;

@@ -38,7 +38,7 @@
     }];
     [kittens removeObjectsInArray:escaped];
     
-    [self.level free:kittens];
+    [self.level free:escaped];
     
     [super tick:dt];
 }
