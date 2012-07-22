@@ -29,8 +29,8 @@
 
 - (BOOL) complete;
 
-- (void) free:(NSArray*)kits;
-- (void) capture:(KWKitten*)kitten;
+- (void) free:(NSArray*)kittens;
+- (void) capture:(NSArray*)kittens;
 
 - (BOOL) vacant:(CGPoint)rect excluding:(KWObject*)obj;
 

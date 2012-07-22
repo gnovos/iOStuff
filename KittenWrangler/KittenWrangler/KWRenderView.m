@@ -99,7 +99,6 @@
         KWLevel* level = engine.level;
         [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *kstop) {
             if (k.touch == touch) {
-                dline;
                 [CATransaction begin];
                 [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
                 k.position = [touch locationInView:self];
@@ -112,7 +111,6 @@
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
-        CGPoint loc = [touch previousLocationInView:self];
         KWLevel* level = engine.level;
         
         [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *kstop) {
