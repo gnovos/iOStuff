@@ -27,6 +27,8 @@
 		0CF257BB15B621260020B895 /* KWLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF257BA15B621260020B895 /* KWLevel.m */; };
 		0CF257BE15B635F20020B895 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CF257BD15B635F10020B895 /* QuartzCore.framework */; };
 		0CF257C515B668220020B895 /* KWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF257C415B668220020B895 /* KWViewController.m */; };
+		0CFF172515BCDF0400042C67 /* KWToy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF172415BCDF0400042C67 /* KWToy.m */; };
+		0CFF172815BCDF1F00042C67 /* KWMouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF172715BCDF1F00042C67 /* KWMouse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,10 @@
 		0CF257C015B65ACF0020B895 /* KWConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWConst.h; sourceTree = "<group>"; };
 		0CF257C315B668220020B895 /* KWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWViewController.h; sourceTree = "<group>"; };
 		0CF257C415B668220020B895 /* KWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWViewController.m; sourceTree = "<group>"; };
+		0CFF172315BCDF0400042C67 /* KWToy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWToy.h; sourceTree = "<group>"; };
+		0CFF172415BCDF0400042C67 /* KWToy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWToy.m; sourceTree = "<group>"; };
+		0CFF172615BCDF1F00042C67 /* KWMouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWMouse.h; sourceTree = "<group>"; };
+		0CFF172715BCDF1F00042C67 /* KWMouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWMouse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +159,10 @@
 				0C31C74515AA6F5F004D1067 /* KWKitten.m */,
 				0C31C74A15AA6FB2004D1067 /* KWYarn.h */,
 				0C31C74B15AA6FB2004D1067 /* KWYarn.m */,
+				0CFF172315BCDF0400042C67 /* KWToy.h */,
+				0CFF172415BCDF0400042C67 /* KWToy.m */,
+				0CFF172615BCDF1F00042C67 /* KWMouse.h */,
+				0CFF172715BCDF1F00042C67 /* KWMouse.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -273,6 +283,8 @@
 				0CF257C515B668220020B895 /* KWViewController.m in Sources */,
 				0C062A5615B6716D00BB1CB2 /* KWRenderView.m in Sources */,
 				0C47B23B15BC9B7A00B259B0 /* KWGFX.m in Sources */,
+				0CFF172515BCDF0400042C67 /* KWToy.m in Sources */,
+				0CFF172815BCDF1F00042C67 /* KWMouse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

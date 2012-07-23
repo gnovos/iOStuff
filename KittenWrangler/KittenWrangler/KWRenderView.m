@@ -12,6 +12,7 @@
 #import "KWObject.h"
 #import "KWKitten.h"
 #import "KWBasket.h"
+#import "KWToy.h"
 #import "KWGFX.h"
 
 @implementation KWRenderView {
@@ -45,7 +46,11 @@
     
     [engine.level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *stop) {
         [self.layer addSublayer:k];
-    }];    
+    }];
+    
+    [engine.level.toys enumerateObjectsUsingBlock:^(KWToy* t, NSUInteger idx, BOOL *stop) {
+        [self.layer addSublayer:t];
+    }];
 }
 
 - (void) start {

@@ -1,14 +1,14 @@
 //
-//  KWYarn.h
+//  KWMouse.h
 //  KittenWrangler
 //
-//  Created by Mason Glaves on 7/8/12.
+//  Created by Mason on 7/22/12.
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "KWToy.h"
+#import "KWObject.h"
 
-@interface KWYarn : KWToy
+@interface KWMouse : KWObject
 
 - (id) initWithLevel:(KWLevel*)lvl;
 

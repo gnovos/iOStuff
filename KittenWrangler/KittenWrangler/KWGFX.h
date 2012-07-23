@@ -27,10 +27,12 @@
 - (id) rect:(CGRect)rect;
 - (id) width:(CGFloat)width;
 - (id) line:(CGPoint)from to:(CGPoint)to;
+- (id) to:(CGPoint)to;
 - (id) elipse:(CGRect)rect;
 - (id) dash:(CGFloat)on off:(CGFloat)off;
 - (id) text:(NSString*)text;
 - (id) stroke;
 - (id) fill;
+- (id) felipse:(CGRect)rect;
 
 @end

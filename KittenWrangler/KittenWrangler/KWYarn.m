@@ -10,4 +10,10 @@
 
 @implementation KWYarn
 
+- (id) initWithLevel:(KWLevel*)lvl {
+    if (self = [super initWithLevel:lvl andSize:kKWDefaultYarnSize]) {
+    }
+    return self;
+}
+
 @end

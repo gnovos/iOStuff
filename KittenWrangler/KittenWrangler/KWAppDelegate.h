@@ -13,6 +13,7 @@
 //spash screenz (and win screens)
 //game kit (and milestones, etc)
 //add graphics.
+//add sounds
 //sort kittens by something something?
 
 #import <UIKit/UIKit.h>

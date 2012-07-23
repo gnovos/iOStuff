@@ -26,6 +26,7 @@ typedef enum {
 typedef enum {
     KWKittenMoodBored      = 0,
     KWKittenMoodInterested = 5,
+    KWKittenMoodExcited    = 7,
     KWKittenMoodCaptured   = 10
 } KWKittenMood;
 
@@ -40,7 +41,6 @@ typedef enum {
     
     KWKittenState state;
     
-    //xxx especially this
     KWObject* chasing;
 }
 
@@ -118,6 +118,7 @@ typedef enum {
     [[self.level sight:self] enumerateObjectsUsingBlock:^(KWKitten* obj, NSUInteger idx, BOOL *stop) {
         if (obj.moving && [self interested]) {
             chasing = obj;
+            mood += KWKittenMoodExcited;
             *stop = YES;
         }
     }];    
@@ -151,7 +152,6 @@ typedef enum {
     
     CGRect bounds = CGRectInset(self.bounds, inner, inner);
     
-    CGPoint d = KWCGRectCenter(bounds);
     
     UIColor* color = [UIColor blueColor];
     if (self.touch) {
@@ -171,7 +171,7 @@ typedef enum {
     if (self.captured) {
         [gfx dash:10.0f off:3.0f];
     } else {
-        [[[gfx font:@"Helvetica Bold" size:12.0f] x:d.x y:d.y] text:@">"];
+        [[[gfx font:@"Helvetica Bold" size:12.0f] at:KWCGRectCenter(bounds)] text:@">"];
     }
     
     [gfx elipse:bounds];            

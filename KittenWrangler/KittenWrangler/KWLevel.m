@@ -9,6 +9,8 @@
 #import "KWLevel.h"
 #import "KWBasket.h"
 #import "KWKitten.h"
+#import "KWMouse.h"
+#import "KWToy.h"
 
 static const int kKWTimeLimitMaxSeconds = 3 * 60;
 static const int kKWTimeLimitLevelCost  = 5;
@@ -53,6 +55,9 @@ static const int kKWTimeLimitLevelCost  = 5;
         for (int i = 0; i < level * (kKWRandom(kKWKittensPerLevel) + kKWKittensPerLevel); i++) {
             [kittens addObject:[[KWKitten alloc] initWithLevel:self]];
         }
+        
+        [toys addObject:[[KWMouse alloc] initWithLevel:self]];
+        
     }
     return self;
 }
@@ -77,9 +82,14 @@ static const int kKWTimeLimitLevelCost  = 5;
         [basket tick:dt];
     }];
     
+    [toys enumerateObjectsUsingBlock:^(KWToy* toy, NSUInteger idx, BOOL *stop) {
+        [toy tick:dt];
+    }];
+    
     [kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
         [kitten tick:dt];
     }];
+        
 }
 
 - (void) free:(NSArray*)kits {

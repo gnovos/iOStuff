@@ -14,7 +14,8 @@ typedef enum {
     KWObjectVelocityMotionless = 0,
     KWObjectVelocitySlow       = 50,
     KWObjectVelocityAverage    = 100,
-    KWObjectVelocityFast       = 150
+    KWObjectVelocityFast       = 150,
+    KWObjectVelocitySuperFast  = 200,
 } KWObjectVelocity;
 
 @interface KWObject : CALayer

@@ -31,6 +31,8 @@ static const CGFloat kKWKittensPerLevel = 3;
 
 static const CGSize kKWDefaultKittenSize = { 35, 35 };
 static const CGSize kKWDefaultBasketSize = { 70, 70 };
+static const CGSize kKWDefaultMouseSize  = { 10, 10 };
+static const CGSize kKWDefaultYarnSize   = { 50, 50 };
 
 
 #endif

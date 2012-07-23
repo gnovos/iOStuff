@@ -84,6 +84,11 @@
     return self.stroke;
 }
 
+- (id) to:(CGPoint)to {
+    CGContextAddLineToPoint(ctx, to.x, to.y);
+    return self.stroke;
+}
+
 - (id) elipse:(CGRect)rect {
     CGContextAddEllipseInRect(ctx, rect);
     return self.stroke;
@@ -116,6 +121,9 @@
     return self;
 }
 
-
+- (id) felipse:(CGRect)rect {
+    CGContextAddEllipseInRect(ctx, rect);
+    return self.fill;
+}
 
 @end
