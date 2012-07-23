@@ -356,13 +356,15 @@
 		0C31C73E15AA6E9F004D1067 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KittenWrangler/KittenWrangler-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "KittenWrangler/KittenWrangler-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9076CB2C-42CC-488F-B210-9D70063B5FED";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9076CB2C-42CC-488F-B210-9D70063B5FED";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -370,13 +372,15 @@
 		0C31C73F15AA6E9F004D1067 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KittenWrangler/KittenWrangler-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "KittenWrangler/KittenWrangler-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9076CB2C-42CC-488F-B210-9D70063B5FED";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9076CB2C-42CC-488F-B210-9D70063B5FED";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -55,15 +55,13 @@
     
     if (level.complete) {
         level = [[KWLevel alloc] initLevel:level.level + 1];
-        [callblocks enumerateObjectsUsingBlock:^(void(^block)(void), NSUInteger idx, BOOL *stop) {
-            block();
+        [callblocks enumerateObjectsUsingBlock:^(void(^block)(KWEngineEvent event), NSUInteger idx, BOOL *stop) {
+            block(KWEngineEventLevelComplete);
         }];
     }
-    
-        
 }
 
-- (void) add:(void(^)(void))block {
+- (void) add:(void(^)(KWEngineEvent event))block {
     [callblocks addObject:[block copy]];
 }
 

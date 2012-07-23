@@ -14,8 +14,6 @@
 #import "KWBasket.h"
 #import "KWGFX.h"
 
-//xxx use a better rendering engine than this horrible thing
-
 @implementation KWRenderView {
     KWEngine* engine;
     NSMutableDictionary* tracking;
@@ -28,7 +26,7 @@
     [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(setNeedsDisplay) userInfo:nil repeats:YES];
     
     id slf = self;
-    [engine add:^{ [slf reset]; }];
+    [engine add:^(KWEngineEvent event){ [slf reset]; }];
     
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = YES;
@@ -84,8 +82,7 @@
         CGPoint loc = [touch locationInView:self];
         KWLevel* level = engine.level;
         [level.kittens enumerateObjectsUsingBlock:^(KWKitten* k, NSUInteger idx, BOOL *kstop) {
-            //xxx expand the touch area?
-            if (CGRectContainsPoint(k.frame, loc)) {
+            if (CGRectContainsPoint(CGRectInset(k.frame, -10.0f, -10.0f), loc)) {
                 k.touch = touch;
                 *kstop = YES;
             }

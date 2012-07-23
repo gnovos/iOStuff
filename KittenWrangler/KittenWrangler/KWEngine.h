@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    KWEngineEventLevelComplete
+} KWEngineEvent;
+
 @class KWLevel;
 
 @interface KWEngine : NSObject
@@ -18,7 +22,7 @@
 - (void) stop;
 - (void) pause;
 
-- (void) add:(void(^)(void))block;
+- (void) add:(void(^)(KWEngineEvent event))block;
 
 
 @end

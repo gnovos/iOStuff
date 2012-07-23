@@ -46,8 +46,11 @@ static const int kKWTimeLimitLevelCost  = 5;
         toys    = [[NSMutableArray alloc] init];
 
         [baskets addObject:[[KWBasket alloc] initWithLevel:self]];
+        for (int i = 0; i < level / 3; i++) {
+            [baskets addObject:[[KWBasket alloc] initWithLevel:self]];
+        }
         
-        for (int i = 0; i < level * (arc4random_uniform(kKWKittensPerLevel) + kKWKittensPerLevel); i++) {
+        for (int i = 0; i < level * (kKWRandom(kKWKittensPerLevel) + kKWKittensPerLevel); i++) {
             [kittens addObject:[[KWKitten alloc] initWithLevel:self]];
         }
     }
@@ -100,7 +103,6 @@ static const int kKWTimeLimitLevelCost  = 5;
     
     __block BOOL vacant = YES;
     
-    //xxx do this better
     void (^block) (KWObject* o, NSUInteger idx, BOOL *stop) = ^(KWObject* o, NSUInteger idx, BOOL *stop) {
         if (o != obj && CGRectContainsPoint(o.frame, p)) {
             vacant = NO;
@@ -110,13 +112,8 @@ static const int kKWTimeLimitLevelCost  = 5;
     
     [baskets enumerateObjectsUsingBlock:block];
     
-    if (vacant) {
-        [kittens enumerateObjectsUsingBlock:block];
-    }
-    
-    if (vacant) {
-        [toys enumerateObjectsUsingBlock:block];
-    }
+    if (vacant) { [kittens enumerateObjectsUsingBlock:block]; }
+    if (vacant) { [toys enumerateObjectsUsingBlock:block];    }
     
     return vacant;
 }
@@ -148,7 +145,6 @@ static const int kKWTimeLimitLevelCost  = 5;
     };
     
     [kittens enumerateObjectsUsingBlock:block];
-    
     [toys enumerateObjectsUsingBlock:block];
 
     return visible;

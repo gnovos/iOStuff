@@ -22,8 +22,9 @@ static const CGFloat kKWKittenInterest  = 0.5f;
 static const CGFloat kKWKittensPerLevel = 3;
 
 #define KWCGRectCenter(x) CGPointMake(CGRectGetMidX(x), CGRectGetMidY(x))
-#define kKWRandomHeading arc4random_uniform(kKWAngle360Degrees)
-#define kKWRandomPercent (arc4random_uniform(100) / 100.0f)
+#define kKWRandom(amount) arc4random_uniform(amount)
+#define kKWRandomHeading kKWRandom(kKWAngle360Degrees)
+#define kKWRandomPercent (kKWRandom(100) / 100.0f)
 
 #define degreesToRadians(deg) (deg * M_PI / kKWAngle180Degrees)
 #define radiansToDegrees(rad) (rad * kKWAngle180Degrees / M_PI)

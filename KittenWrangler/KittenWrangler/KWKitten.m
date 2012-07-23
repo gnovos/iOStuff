@@ -71,7 +71,7 @@ typedef enum {
 - (void) setCaptured:(BOOL)cap {
     self.capture = cap;
     if (captured) {
-        mood = KWKittenMoodCaptured;
+        mood = KWKittenMoodCaptured + kKWRandom(KWKittenMoodCaptured);
         self.velocity = KWObjectVelocityMotionless;
     }
 }
