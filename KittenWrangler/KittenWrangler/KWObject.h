@@ -12,8 +12,8 @@
 
 typedef enum {
     KWObjectVelocityMotionless = 0,
-    KWObjectVelocitySlow       = 30,
-    KWObjectVelocityAverage    = 80,
+    KWObjectVelocitySlow       = 50,
+    KWObjectVelocityAverage    = 100,
     KWObjectVelocityFast       = 150
 } KWObjectVelocity;
 

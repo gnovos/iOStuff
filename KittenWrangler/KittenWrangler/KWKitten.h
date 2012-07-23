@@ -12,7 +12,6 @@
 @interface KWKitten : KWObject
 
 @property (nonatomic, assign) BOOL chased;
-
 @property (nonatomic, assign) BOOL captured;
 
 - (id) initWithLevel:(KWLevel*)lvl;

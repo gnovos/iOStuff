@@ -8,7 +8,6 @@
 
 //xxx
 //TODO:
-//change velocity to states
 //better ai (chase, staking, better motion states, etc)
 //add toys, etc.
 //more baskets

@@ -13,13 +13,15 @@
 @property (nonatomic, assign) BOOL capture;
 @end
 
-//xxx do this better
 typedef enum {
-    KWKittenActionIdle    = KWObjectVelocityMotionless,
-    KWKittenActionStalk   = KWObjectVelocitySlow,
-    KWKittenActionExplore = KWObjectVelocityAverage,
-    KWKittenActionChase   = KWObjectVelocityFast
-} KWKittenAction;
+    KWKittenStateSleeping,
+    KWKittenStateSitting,
+    KWKittenStateStalking,
+    KWKittenStateExploring,
+    KWKittenStateChasing,
+    KWKittenStateHeld,
+    KWKittenStateCaptured
+} KWKittenState;
 
 typedef enum {
     KWKittenMoodBored      = 0,
@@ -36,7 +38,7 @@ typedef enum {
     CGFloat mood;
     CGFloat energy;
     
-    BOOL captured;
+    KWKittenState state;
     
     //xxx especially this
     KWKitten* chasing;
@@ -56,37 +58,60 @@ typedef enum {
     return self;
 }
 
-- (BOOL) idle      { return self.velocity == KWKittenActionIdle;             }
-- (BOOL) stalking  { return self.velocity == KWKittenActionStalk;            }
-- (BOOL) exploring { return self.velocity == KWKittenActionExplore;          }
-- (BOOL) chasing   { return chasing && self.velocity == KWKittenActionChase; }
+- (BOOL) idle      { return state == KWKittenStateSitting || state == KWKittenStateSleeping; }
+- (BOOL) stalking  { return state == KWKittenStateStalking; }
+- (BOOL) exploring { return state == KWKittenStateExploring;}
+- (BOOL) chasing   { return state == KWKittenStateChasing; }
 
-- (BOOL) bored     { return mood          <= KWKittenMoodBored;              }
-- (BOOL) tired     { return energy        <= KWKittenEnergyTired;            }
+- (BOOL) bored     { return mood <= KWKittenMoodBored; }
+- (BOOL) tired     { return energy <= KWKittenEnergyTired; }
 
 - (BOOL) moving    { return !self.captured && !self.touch && self.velocity > KWObjectVelocityMotionless; }
 
+- (KWObjectVelocity) velocityForState:(KWKittenState)st {
+    switch (st) {
+        case KWKittenStateHeld:
+        case KWKittenStateCaptured:
+        case KWKittenStateSitting:
+        case KWKittenStateSleeping:
+            return KWObjectVelocityMotionless;
+            
+        case KWKittenStateStalking:
+            return KWObjectVelocitySlow;
+            
+        case KWKittenStateExploring:
+            return KWObjectVelocityAverage;
+            
+        case KWKittenStateChasing:
+            return KWObjectVelocityFast;
+    }
+}
+
+- (void) setState:(KWKittenState)st {
+    self.velocity = [self velocityForState:st];
+    state = st;
+}
 
 - (BOOL) captured { return self.capture; }
 - (void) setCaptured:(BOOL)cap {
     self.capture = cap;
-    if (captured) {
+    if (cap) {
         mood = KWKittenMoodCaptured + kKWRandom(KWKittenMoodCaptured);
-        self.velocity = KWObjectVelocityMotionless;
+        self.state = KWKittenStateCaptured;
     }
 }
 
 - (void) turn:(CGFloat)dt {
     if (chasing) {
         self.heading += [self directionOf:chasing];
-        self.velocity = KWKittenActionChase;//chase.velocity;
+        self.state = KWKittenStateChasing;
     }
 }
 
 - (BOOL) interested { return kKWRandomPercent > kKWKittenInterest;  }
 
 - (void) explore {
-    self.velocity = KWKittenActionExplore;
+    self.state = KWKittenStateExploring;
     self.heading += kKWRandomHeading;
     mood = KWKittenMoodInterested;
     chasing.chased = NO;
@@ -103,7 +128,7 @@ typedef enum {
 
 - (void) tick:(CGFloat)dt {
     if (self.tired) {
-        self.velocity = KWKittenActionIdle;
+        self.state = KWKittenStateSleeping;
         chasing.chased = NO;
         chasing = nil;
     } else if (self.bored) {
