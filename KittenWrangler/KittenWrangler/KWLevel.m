@@ -147,7 +147,12 @@ static const int kKWTimeLimitLevelCost  = 5;
             if (match) {
                 CGFloat m = tan(rads) * dist;
                 q.y = p.y - m;
-                if (CGRectContainsPoint(k.frame, q)) {
+                CGRect size = k.frame;
+                if (size.size.width < o.frame.size.width || size.size.height < o.frame.size.height) {
+                    size.size = o.frame.size;
+                }
+                
+                if (CGRectContainsPoint(size, q)) {
                     [visible addObject:k];
                 }            
             }

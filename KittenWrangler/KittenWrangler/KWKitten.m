@@ -8,6 +8,7 @@
 
 #import "KWKitten.h"
 #import "KWLevel.h"
+#import "KWToy.h"
 
 @interface KWKitten ()
 @property (nonatomic, assign) BOOL capture;
@@ -115,11 +116,15 @@ typedef enum {
     self.heading += kKWRandomHeading;
     mood = KWKittenMoodInterested;
     chasing = nil;
-    [[self.level sight:self] enumerateObjectsUsingBlock:^(KWKitten* obj, NSUInteger idx, BOOL *stop) {
-        if (obj.moving && [self interested]) {
+    [[self.level sight:self] enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[KWToy class]] || (obj.moving && [self interested])) {
             chasing = obj;
+            self.state = KWKittenStateChasing;
             mood += KWKittenMoodExcited;
-            *stop = YES;
+            if ([obj isKindOfClass:[KWToy class]]) {
+                mood += KWKittenMoodExcited;
+            }
+            *stop = YES;            
         }
     }];    
 }
@@ -158,8 +163,6 @@ typedef enum {
         color = UIColor.brownColor;
     } else if (self.idle) {
         color = UIColor.lightGrayColor;
-    } else if (self.chasing) {
-        color = UIColor.magentaColor;
     } else if (self.chasing) {
         color = UIColor.redColor;
     } else if (self.captured) {
