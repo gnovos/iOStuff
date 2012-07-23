@@ -10,7 +10,6 @@
 //TODO:
 //better ai (chase, staking, better motion states, etc)
 //add toys, etc.
-//more baskets
 //spash screenz (and win screens)
 //game kit (and milestones, etc)
 //add graphics.

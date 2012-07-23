@@ -41,7 +41,7 @@ typedef enum {
     KWKittenState state;
     
     //xxx especially this
-    KWKitten* chasing;
+    KWObject* chasing;
 }
 
 @dynamic capture;
@@ -114,13 +114,10 @@ typedef enum {
     self.state = KWKittenStateExploring;
     self.heading += kKWRandomHeading;
     mood = KWKittenMoodInterested;
-    chasing.chased = NO;
     chasing = nil;
-    
     [[self.level sight:self] enumerateObjectsUsingBlock:^(KWKitten* obj, NSUInteger idx, BOOL *stop) {
-        if (obj.moving && !obj.chased) {// && [self interested]) {
+        if (obj.moving && [self interested]) {
             chasing = obj;
-            chasing.chased = YES;
             *stop = YES;
         }
     }];    
@@ -129,7 +126,6 @@ typedef enum {
 - (void) tick:(CGFloat)dt {
     if (self.tired) {
         self.state = KWKittenStateSleeping;
-        chasing.chased = NO;
         chasing = nil;
     } else if (self.bored) {
         [self explore];
@@ -157,21 +153,19 @@ typedef enum {
     
     CGPoint d = KWCGRectCenter(bounds);
     
-    UIColor* color = self.idle ? [UIColor lightGrayColor] : [UIColor blueColor];
-    if (self.chasing && self.chased) {
+    UIColor* color = [UIColor blueColor];
+    if (self.touch) {
+        color = UIColor.brownColor;
+    } else if (self.idle) {
+        color = UIColor.lightGrayColor;
+    } else if (self.chasing) {
         color = UIColor.magentaColor;
     } else if (self.chasing) {
         color = UIColor.redColor;
-    } else if (self.chased) {
-        color = UIColor.yellowColor;
     } else if (self.captured) {
         color = UIColor.orangeColor;
     }
-    
-    if (self.touch) {
-        color = UIColor.brownColor;
-    }
-    
+        
     [gfx stroke:color];
     
     if (self.captured) {
