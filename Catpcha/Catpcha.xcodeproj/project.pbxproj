@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0C062A5615B6716D00BB1CB2 /* KWRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C062A5515B6716D00BB1CB2 /* KWRenderView.m */; };
+		0C15C36E15C77E06008A4DA7 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C15C36D15C77E06008A4DA7 /* CoreMotion.framework */; };
+		0C15C37815C78291008A4DA7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C15C37715C78291008A4DA7 /* GameKit.framework */; };
+		0C15C37B15C782FC008A4DA7 /* KWGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C15C37A15C782FC008A4DA7 /* KWGameManager.m */; };
 		0C31C71915AA6E9F004D1067 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71815AA6E9F004D1067 /* UIKit.framework */; };
 		0C31C71B15AA6E9F004D1067 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71A15AA6E9F004D1067 /* Foundation.framework */; };
 		0C31C71D15AA6E9F004D1067 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C31C71C15AA6E9F004D1067 /* CoreGraphics.framework */; };
@@ -34,6 +37,10 @@
 /* Begin PBXFileReference section */
 		0C062A5415B6716D00BB1CB2 /* KWRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWRenderView.h; sourceTree = "<group>"; };
 		0C062A5515B6716D00BB1CB2 /* KWRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWRenderView.m; sourceTree = "<group>"; };
+		0C15C36D15C77E06008A4DA7 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		0C15C37715C78291008A4DA7 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		0C15C37915C782FC008A4DA7 /* KWGameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWGameManager.h; sourceTree = "<group>"; };
+		0C15C37A15C782FC008A4DA7 /* KWGameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWGameManager.m; sourceTree = "<group>"; };
 		0C31C71415AA6E9F004D1067 /* Catpcha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catpcha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C31C71815AA6E9F004D1067 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0C31C71A15AA6E9F004D1067 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -78,6 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C15C37815C78291008A4DA7 /* GameKit.framework in Frameworks */,
+				0C15C36E15C77E06008A4DA7 /* CoreMotion.framework in Frameworks */,
 				0CF257BE15B635F20020B895 /* QuartzCore.framework in Frameworks */,
 				0C31C71915AA6E9F004D1067 /* UIKit.framework in Frameworks */,
 				0C31C71B15AA6E9F004D1067 /* Foundation.framework in Frameworks */,
@@ -110,6 +119,8 @@
 		0C31C71715AA6E9F004D1067 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C15C37715C78291008A4DA7 /* GameKit.framework */,
+				0C15C36D15C77E06008A4DA7 /* CoreMotion.framework */,
 				0CF257BD15B635F10020B895 /* QuartzCore.framework */,
 				0C31C71815AA6E9F004D1067 /* UIKit.framework */,
 				0C31C71A15AA6E9F004D1067 /* Foundation.framework */,
@@ -172,6 +183,8 @@
 			children = (
 				0C47B23915BC9B7A00B259B0 /* KWGFX.h */,
 				0C47B23A15BC9B7A00B259B0 /* KWGFX.m */,
+				0C15C37915C782FC008A4DA7 /* KWGameManager.h */,
+				0C15C37A15C782FC008A4DA7 /* KWGameManager.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -285,6 +298,7 @@
 				0C47B23B15BC9B7A00B259B0 /* KWGFX.m in Sources */,
 				0CFF172515BCDF0400042C67 /* KWToy.m in Sources */,
 				0CFF172815BCDF1F00042C67 /* KWMouse.m in Sources */,
+				0C15C37B15C782FC008A4DA7 /* KWGameManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,15 +382,15 @@
 		0C31C73E15AA6E9F004D1067 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Catpcha/Catpcha-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "Catpcha/Catpcha-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9076CB2C-42CC-488F-B210-9D70063B5FED";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9076CB2C-42CC-488F-B210-9D70063B5FED";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -384,15 +398,15 @@
 		0C31C73F15AA6E9F004D1067 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mason GLAVES (48M2F8H2PJ)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Catpcha/Catpcha-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "Catpcha/Catpcha-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9076CB2C-42CC-488F-B210-9D70063B5FED";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9076CB2C-42CC-488F-B210-9D70063B5FED";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

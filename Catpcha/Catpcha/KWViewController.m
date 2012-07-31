@@ -8,8 +8,12 @@
 
 #import "KWViewController.h"
 #import "KWRenderView.h"
+#import <CoreMotion/CoreMotion.h>
+#import "KWGameManager.h"
 
 @interface KWViewController ()
+
+@property (nonatomic, strong) CMMotionManager *motion;
 
 @end
 
@@ -17,9 +21,21 @@
     IBOutlet KWRenderView* render;
 }
 
+@synthesize motion;
+
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [render start];
+    [[KWGameManager instance] authenticate:^{
+        [render start];
+    } failure:^{
+        [[[UIAlertView alloc] initWithTitle:@"Oh Meow!"
+                                    message:@"We couldn't authenticate with Game Genter.  :(  Without authenticating with game center you'll find gameplay kinda limited."
+                                   delegate:nil
+                          cancelButtonTitle:@"Okay"
+                          otherButtonTitles:nil] show];
+        [render start];
+    }];
+
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -30,12 +46,20 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     
-    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / 30.0];
-    [UIAccelerometer sharedAccelerometer].delegate = self;
-}
-
-- (void) accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration {
-    NSLog(@"x:%f y:%f z:%f", acceleration.x, acceleration.y, acceleration.z);
+    motion = [[CMMotionManager alloc] init];
+    
+    if (motion.isDeviceMotionAvailable) {
+		motion.deviceMotionUpdateInterval = 1.0 / 30.0;
+        [motion startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion* move, NSError* error) {
+            NSLog(@"moved: %@", move);
+//xxx
+//             CATransform3D transform;
+//             transform = CATransform3DMakeRotation(move.attitude.pitch, 1, 0, 0);
+//             transform = CATransform3DRotate(transform, move.attitude.roll, 0, 1, 0);
+//             
+//             self.view.layer.sublayerTransform = transform;
+         }];
+    }
 }
 
 @end
