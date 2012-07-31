@@ -2,16 +2,17 @@
 //  main.m
 //  Catpcha
 //
-//  Created by Mason on 7/22/12.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Created by Mason Glaves on 7/8/12.
+//  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-int main(int argc, char *argv[]) {
-    
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, @"AppDelegate");
-    [pool release];
-    return retVal;
+#import "KWAppDelegate.h"
+
+int main(int argc, char *argv[])
+{
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([KWAppDelegate class]));
+    }
 }
