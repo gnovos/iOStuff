@@ -10,6 +10,9 @@
 
 @interface KWGFX : NSObject
 
++ (void) animate:(void(^)(void))animation;
++ (void) animate:(CFTimeInterval)duration animation:(void(^)(void))animation onComplete:(void(^)(void))completion;
+
 + (id) current;
 
 - (id) initWithContext:(CGContextRef)context;

@@ -20,12 +20,11 @@ typedef enum {
 
 @interface KWObject : CALayer
 
+@property (nonatomic, assign) BOOL touchable;
+
 @property (nonatomic, weak) UITouch* touch;
-
 @property (nonatomic, readonly, assign) KWLevel* level;
-
 @property (nonatomic, assign) CGFloat heading;
-
 @property (nonatomic, assign) KWObjectVelocity velocity;
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size;
@@ -34,6 +33,6 @@ typedef enum {
 
 - (CGFloat) directionOf:(KWObject*)other;
 
-- (void) tick:(CGFloat)dt;
+- (BOOL) tick:(CGFloat)dt;
 
 @end

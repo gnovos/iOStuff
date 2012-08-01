@@ -33,14 +33,19 @@
     
     if (gcClass && osVersionSupported) {
         GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-        [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error) {
-            playerID = localPlayer.isAuthenticated ? localPlayer.playerID : nil;
-            if (playerID) {
-                success();
-            } else {
-                failure();
-            }
-        }];
+        playerID = localPlayer.isAuthenticated ? localPlayer.playerID : nil;
+        if (playerID) {
+            success();
+        } else {
+            [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error) {
+                playerID = localPlayer.isAuthenticated ? localPlayer.playerID : nil;
+                if (playerID) {
+                    success();
+                } else {
+                    failure();
+                }
+            }];
+        }        
     } else {
         failure();
     }

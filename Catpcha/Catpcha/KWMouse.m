@@ -17,13 +17,13 @@
     return self;
 }
 
-- (void) tick:(CGFloat)dt {
+- (BOOL) tick:(CGFloat)dt {
     CGFloat tilt = kKWRandom(kKWAngle23Degrees);
     if ((int)tilt % 2 == 0) {
         tilt *= -1;
     }
     self.heading += tilt;
-    [super tick:dt];    
+    return [super tick:dt];
 }
 
 - (void) drawInContext:(CGContextRef)ctx {

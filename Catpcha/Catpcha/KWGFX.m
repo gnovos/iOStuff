@@ -13,6 +13,23 @@
     CGPoint at;
 }
 
++ (void) animate:(void(^)(void))animation {
+    [self animate:0 animation:animation onComplete:nil];
+}
+
++ (void) animate:(CFTimeInterval)duration animation:(void(^)(void))animation onComplete:(void(^)(void))completion {
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    if (duration > 0) {
+        [CATransaction setAnimationDuration:duration];
+    } 
+    if (completion) {
+        [CATransaction setCompletionBlock:completion];
+    }
+    animation();
+    [CATransaction commit];
+}
+
 + (id) current { return [[self alloc] initWithContext:UIGraphicsGetCurrentContext()]; }
 
 - (id) initWithContext:(CGContextRef)context {

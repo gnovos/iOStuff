@@ -11,7 +11,9 @@
 #import "KWToy.h"
 
 @interface KWKitten ()
+
 @property (nonatomic, assign) BOOL capture;
+
 @end
 
 typedef enum {
@@ -53,6 +55,7 @@ typedef enum {
 
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:kKWDefaultKittenSize]) {
+        self.touchable = YES;
         mood = KWKittenMoodBored;
         energy = arc4random_uniform(KWKittenEnergyExcited);
     }
@@ -129,7 +132,7 @@ typedef enum {
     }];    
 }
 
-- (void) tick:(CGFloat)dt {
+- (BOOL) tick:(CGFloat)dt {
     if (self.tired) {
         self.state = KWKittenStateSleeping;
         chasing = nil;
@@ -145,8 +148,9 @@ typedef enum {
         energy -= MIN(dt, kKWRandomPercent);
     }
                         
-    [self  turn:dt];
-    [super tick:dt];
+    [self turn:dt];
+    
+    return [super tick:dt];
     
 }
 

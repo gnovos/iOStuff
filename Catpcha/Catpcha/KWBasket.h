@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "KWObject.h"
-
-@class KWKitten;
+#import "KWKitten.h"
 
 @interface KWBasket : KWObject
 

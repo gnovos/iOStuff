@@ -25,7 +25,7 @@
     return self;    
 }
 
-- (void) tick:(CGFloat)dt {
+- (BOOL) tick:(CGFloat)dt {
     
     NSMutableArray* escaped = [[NSMutableArray alloc] init];
     
@@ -40,7 +40,7 @@
     
     [self.level free:escaped];
     
-    [super tick:dt];
+    return [super tick:dt];
 }
 
 - (void) addKitten:(KWKitten*)kitten {

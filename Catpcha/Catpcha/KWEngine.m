@@ -15,6 +15,8 @@
     CADisplayLink* loop;
     CFTimeInterval last;
     NSMutableArray* callblocks;
+    
+    CGPoint bias;
 }
 
 @synthesize level;
@@ -45,24 +47,26 @@
     
     CFTimeInterval elapsed = link.timestamp - last;
     
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    [CATransaction setValue:[NSNumber numberWithFloat:elapsed] forKey:kCATransactionAnimationDuration];
-    [level tick:elapsed];
-    [CATransaction commit];
-        
+    [KWGFX animate:elapsed animation:^{
+        [level tick:elapsed];
+    } onComplete:nil];
+            
     last = link.timestamp;
     
     if (level.complete) {
         level = [[KWLevel alloc] initLevel:level.level + 1];
-        [callblocks enumerateObjectsUsingBlock:^(void(^block)(KWEngineEvent event), NSUInteger idx, BOOL *stop) {
-            block(KWEngineEventLevelComplete);
+        [callblocks enumerateObjectsUsingBlock:^(void(^block)(KWEngineEvent event, id object), NSUInteger idx, BOOL *stop) {
+            block(KWEngineEventLevelComplete, level);
         }];
     }
 }
 
-- (void) add:(void(^)(KWEngineEvent event))block {
+- (void) add:(void(^)(KWEngineEvent event, id obj))block {
     [callblocks addObject:[block copy]];
+}
+
+- (void) bias:(CGPoint)attitude {
+    bias = attitude;
 }
 
 

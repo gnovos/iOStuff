@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KWLevel.h"
 
 @interface KWRenderView : UIView
 
-- (void) start;
-- (void) pause;
-- (void) stop;
+@property (nonatomic, strong) KWLevel* level;
 
 @end

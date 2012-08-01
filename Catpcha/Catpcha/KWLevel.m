@@ -11,11 +11,15 @@
 #import "KWKitten.h"
 #import "KWMouse.h"
 #import "KWToy.h"
+#import "KWBackground.h"
 
-static const int kKWTimeLimitMaxSeconds = 3 * 60;
+static const int kKWTimeLimitMaxSeconds = 1 * 60;
+
 static const int kKWTimeLimitLevelCost  = 5;
 
 @implementation KWLevel {
+    
+    KWBackground* background;
     
     NSMutableArray* baskets;
     NSMutableArray* kittens;
@@ -28,7 +32,20 @@ static const int kKWTimeLimitLevelCost  = 5;
 
 }
 
-@synthesize level, bounds, baskets, kittens, toys;
+@synthesize level, bounds, timelimit;
+
+- (NSArray*) objects {
+    
+    NSMutableArray* objects = [[NSMutableArray alloc] initWithCapacity:1 + baskets.count + kittens.count + toys.count];
+
+    [objects addObject:background];
+    [objects addObjectsFromArray:baskets];
+    [objects addObjectsFromArray:kittens];
+    [objects addObjectsFromArray:toys];
+    
+    return objects;
+    
+}
 
 - (NSString*) description {
     return [NSString stringWithFormat:@"level:%d limit:%d/%ds baskets:%d kittens:%d toys:%d",
@@ -38,7 +55,7 @@ static const int kKWTimeLimitLevelCost  = 5;
 
 - (id) initLevel:(int)lvl {
     if (self = [self init]) {
-        
+                
         level = lvl;
         timelimit = kKWTimeLimitMaxSeconds - (kKWTimeLimitLevelCost * level);
 
@@ -46,6 +63,8 @@ static const int kKWTimeLimitLevelCost  = 5;
         baskets = [[NSMutableArray alloc] init];
         kittens = [[NSMutableArray alloc] init];
         toys    = [[NSMutableArray alloc] init];
+        
+        background = [[KWBackground alloc] initWithLevel:self andFrame:bounds];
 
         [baskets addObject:[[KWBasket alloc] initWithLevel:self]];
         for (int i = 0; i < level / 3; i++) {
@@ -63,7 +82,7 @@ static const int kKWTimeLimitLevelCost  = 5;
 }
 
 - (NSTimeInterval) remaining {
-    return timelimit - [[NSDate date] timeIntervalSinceDate:start];
+    return timelimit - (start ? [[NSDate date] timeIntervalSinceDate:start] : 0);
 }
 
 - (BOOL) timeout { return self.remaining <= 0; }
@@ -78,35 +97,40 @@ static const int kKWTimeLimitLevelCost  = 5;
         return;
     }
     
-    [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
-        [basket tick:dt];
+    [self.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
+        if ([o tick:dt]) {
+            [o setNeedsDisplay];
+        }
     }];
-    
-    [toys enumerateObjectsUsingBlock:^(KWToy* toy, NSUInteger idx, BOOL *stop) {
-        [toy tick:dt];
-    }];
-    
-    [kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
-        [kitten tick:dt];
-    }];
-        
+            
 }
 
 - (void) free:(NSArray*)kits {
     [kits enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
-        [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *stop) {
-            [basket.kittens removeObject:kitten];
-        }];
         kitten.captured = NO;
         [kittens addObject:kitten];
     }];
 }
  
-- (void) capture:(NSArray*)kits {
-    [kits enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
-        [kittens removeObject:kitten];
-        kitten.captured = YES;
-    }];
+- (void) drop:(KWObject*)object {
+    if ([object isKindOfClass:[KWKitten class]]) {
+        KWKitten* kitten = (KWKitten*)object;
+        [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *bstop) {
+            if (CGRectContainsPoint(basket.frame, kitten.position)) {
+                [kittens removeObject:kitten];
+                [basket addKitten:kitten];
+                kitten.captured = YES;
+                *bstop = YES;
+            }
+        }];
+    }
+}
+
+- (NSArray*) touched:(CGPoint)point {
+    return [self.objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWObject* o, NSDictionary *bindings) {
+        float feather = -10.0f;
+        return o.touchable && CGRectContainsPoint(CGRectInset(o.frame, feather, feather), point);
+    }]];
 }
 
 - (BOOL) vacant:(CGPoint)p excluding:(KWObject*)obj {

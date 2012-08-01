@@ -11,7 +11,7 @@
 
 @implementation KWObject
 
-@synthesize level, heading;
+@synthesize level, heading, touchable;
 
 @dynamic touch, velocity;
 
@@ -22,6 +22,7 @@
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
+        touchable = NO;
         self.needsDisplayOnBoundsChange = YES;
         level = lvl;
         CGRect rect = CGRectZero;
@@ -56,9 +57,7 @@
 
 - (BOOL) moving   { return !self.touch && self.velocity > KWObjectVelocityMotionless; }
 
-- (void) tick:(CGFloat)dt {
-//    dlog(@"tick:%f %@", dt, self);
-    
+- (BOOL) tick:(CGFloat)dt {
     if (self.moving) {
         while (heading < 0 || heading > kKWAngle360Degrees) {
             heading += heading < 0 ? kKWAngle360Degrees : -kKWAngle360Degrees;
@@ -74,6 +73,8 @@
         
         p.x += dm * cosf(dir);
         p.y += dm * sinf(dir);
+        
+        //xxx introduce bias
         
         BOOL vacant = [level vacant:p excluding:self] || ![level vacant:self.position excluding:self];
         
@@ -94,8 +95,9 @@
             }
             heading += kKWRandomHeading;
         }
-
     }
+    
+    return NO;
 }
 
 - (CGFloat) directionOf:(KWObject*)other {

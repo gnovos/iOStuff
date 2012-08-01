@@ -8,9 +8,9 @@
 
 //xxx
 //TODO:
+//kitten ai should change with level
 //better ai (chase, staking, better motion states, etc)
 //add toys, etc.
-//acceleropeter
 //spash screenz (and win screens)
 //game kit (and milestones, etc)
 //multiplayer (steal kittens, dogs to scare away, etceteras)
