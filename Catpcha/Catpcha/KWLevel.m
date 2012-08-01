@@ -11,71 +11,66 @@
 #import "KWKitten.h"
 #import "KWMouse.h"
 #import "KWToy.h"
-#import "KWBackground.h"
+#import "KWLine.h"
 
 static const int kKWTimeLimitMaxSeconds = 1 * 60;
 
 static const int kKWTimeLimitLevelCost  = 5;
 
 @implementation KWLevel {
+        
+    NSMutableArray* objects;
     
-    KWBackground* background;
-    
-    NSMutableArray* baskets;
-    NSMutableArray* kittens;
-    NSMutableArray* toys;
     int level;
     
     NSUInteger timelimit;
     
     NSDate* start;
+    
+    NSMutableArray* sight;
+
 
 }
 
-@synthesize level, bounds, timelimit;
-
-- (NSArray*) objects {
-    
-    NSMutableArray* objects = [[NSMutableArray alloc] initWithCapacity:1 + baskets.count + kittens.count + toys.count];
-
-    [objects addObject:background];
-    [objects addObjectsFromArray:baskets];
-    [objects addObjectsFromArray:kittens];
-    [objects addObjectsFromArray:toys];
-    
-    return objects;
-    
-}
+@synthesize level, timelimit;
 
 - (NSString*) description {
-    return [NSString stringWithFormat:@"level:%d limit:%d/%ds baskets:%d kittens:%d toys:%d",
+    return [NSString stringWithFormat:@"level:%d limit:%d/%ds objects:%d",
             level, (int)[[NSDate date] timeIntervalSinceDate:start], timelimit,
-            baskets.count, kittens.count, toys.count];
+            objects.count];
 }
+
+- (NSArray*) objects { return [objects copy]; }
 
 - (id) initLevel:(int)lvl {
     if (self = [self init]) {
+        self.needsDisplayOnBoundsChange = YES;
                 
         level = lvl;
         timelimit = kKWTimeLimitMaxSeconds - (kKWTimeLimitLevelCost * level);
 
-        bounds  = [UIScreen mainScreen].bounds;
-        baskets = [[NSMutableArray alloc] init];
-        kittens = [[NSMutableArray alloc] init];
-        toys    = [[NSMutableArray alloc] init];
+        self.frame = [UIScreen mainScreen].bounds;
+        objects = [[NSMutableArray alloc] init];
+        sight = [[NSMutableArray alloc] init];
         
-        background = [[KWBackground alloc] initWithLevel:self andFrame:bounds];
-
-        [baskets addObject:[[KWBasket alloc] initWithLevel:self]];
+        [objects addObject:[[KWBasket alloc] initWithLevel:self]];
         for (int i = 0; i < level / 3; i++) {
-            [baskets addObject:[[KWBasket alloc] initWithLevel:self]];
+            [objects addObject:[[KWBasket alloc] initWithLevel:self]];
         }
         
         for (int i = 0; i < level * (kKWRandom(kKWKittensPerLevel) + kKWKittensPerLevel); i++) {
-            [kittens addObject:[[KWKitten alloc] initWithLevel:self]];
+            [objects addObject:[[KWKitten alloc] initWithLevel:self]];
         }
         
-        [toys addObject:[[KWMouse alloc] initWithLevel:self]];
+        [objects addObject:[[KWMouse alloc] initWithLevel:self]];
+        
+        [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+            while (!CGRectContainsRect(self.bounds, obj.frame) || ![self vacant:obj.frame.origin excluding:obj]) {
+                obj.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
+            }
+            [self addSublayer:obj];
+        }];
+        
         
     }
     return self;
@@ -88,7 +83,15 @@ static const int kKWTimeLimitLevelCost  = 5;
 - (BOOL) timeout { return self.remaining <= 0; }
 
 - (BOOL) complete {
-    return kittens.count == 0 || [self timeout];
+    __block BOOL uncaptured = NO;
+    [[objects copy] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[KWKitten class]] && !((KWKitten*)obj).captured) {
+            uncaptured = YES;
+            *stop = YES;
+        }
+    }];
+    
+    return !uncaptured || [self timeout];
 }
 
 - (void) tick:(CGFloat)dt {    
@@ -96,28 +99,35 @@ static const int kKWTimeLimitLevelCost  = 5;
         start = [NSDate date];
         return;
     }
+        
+    [sight removeAllObjects];
     
-    [self.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
-        if ([o tick:dt]) {
-            [o setNeedsDisplay];
+    [[objects copy] enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
+        if ([o tick:dt]) { [o setNeedsDisplay]; }
+        
+        if ([o isKindOfClass:[KWKitten class]]) {            
+            [[self sight:o] enumerateObjectsUsingBlock:^(KWObject* kk, NSUInteger idx, BOOL *lstop) {
+                KWLine* line = [[KWLine alloc] init];
+                line.start = o.position;
+                line.end = kk.position;
+                [sight addObject:line];
+            }];
         }
     }];
-            
+    [self setNeedsDisplay];
 }
 
-- (void) free:(NSArray*)kits {
-    [kits enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
-        kitten.captured = NO;
-        [kittens addObject:kitten];
-    }];
+- (void) free:(KWKitten*)kitten {
+    kitten.captured = NO;
+    [objects addObject:kitten];
 }
  
 - (void) drop:(KWObject*)object {
     if ([object isKindOfClass:[KWKitten class]]) {
         KWKitten* kitten = (KWKitten*)object;
-        [baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *bstop) {
+        [[objects copy] enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *bstop) {
             if (CGRectContainsPoint(basket.frame, kitten.position)) {
-                [kittens removeObject:kitten];
+                [objects removeObject:kitten];
                 [basket addKitten:kitten];
                 kitten.captured = YES;
                 *bstop = YES;
@@ -127,7 +137,7 @@ static const int kKWTimeLimitLevelCost  = 5;
 }
 
 - (NSArray*) touched:(CGPoint)point {
-    return [self.objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWObject* o, NSDictionary *bindings) {
+    return [[objects copy] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWObject* o, NSDictionary *bindings) {
         float feather = -10.0f;
         return o.touchable && CGRectContainsPoint(CGRectInset(o.frame, feather, feather), point);
     }]];
@@ -137,32 +147,27 @@ static const int kKWTimeLimitLevelCost  = 5;
     
     __block BOOL vacant = YES;
     
-    void (^block) (KWObject* o, NSUInteger idx, BOOL *stop) = ^(KWObject* o, NSUInteger idx, BOOL *stop) {
+    [[objects copy] enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
         if (o != obj && CGRectContainsPoint(o.frame, p)) {
             vacant = NO;
             *stop = YES;
         }
-    };
-    
-    [baskets enumerateObjectsUsingBlock:block];
-    
-    if (vacant) { [kittens enumerateObjectsUsingBlock:block]; }
-    if (vacant) { [toys enumerateObjectsUsingBlock:block];    }
+    }];
     
     return vacant;
 }
 
-- (NSArray*) sight:(KWObject*)o {
+- (NSArray*) sight:(KWObject*)seer {
     
     NSMutableArray* visible = [[NSMutableArray alloc] init];
     
-    CGFloat rads = degreesToRadians(o.heading);
+    CGFloat rads = degreesToRadians(seer.heading);
     
-    CGPoint p = o.position;
+    CGPoint p = seer.position;
     
-    void (^block) (KWObject* obj, NSUInteger idx, BOOL *stop) = ^(KWObject* k, NSUInteger idx, BOOL *stop) {
-        if (k != o) {
-            CGPoint q = k.position;
+    [[objects copy] enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+        if (obj != seer) {
+            CGPoint q = obj.position;
                         
             CGFloat dist = p.x - q.x;
             CGFloat dir = cosf(rads);
@@ -171,23 +176,43 @@ static const int kKWTimeLimitLevelCost  = 5;
             if (match) {
                 CGFloat m = tan(rads) * dist;
                 q.y = p.y - m;
-                CGRect size = k.frame;
-                if (size.size.width < o.frame.size.width || size.size.height < o.frame.size.height) {
-                    size.size = o.frame.size;
+                CGRect size = obj.frame;
+                if (size.size.width < seer.frame.size.width || size.size.height < seer.frame.size.height) {
+                    size.size = seer.frame.size;
                 }
                 
-                if (CGRectContainsPoint(size, q)) {
-                    [visible addObject:k];
+                //xxx look into making this a constant or less constant?
+                CGRect view = CGRectInset(size, -10.0f, -10.0f);
+                
+                if (CGRectContainsPoint(view, q)) {
+                    [visible addObject:obj];
                 }            
             }
         }
-    };
+    }];
     
-    [kittens enumerateObjectsUsingBlock:block];
-    [toys enumerateObjectsUsingBlock:block];
-
     return visible;
 
+}
+
+- (void) drawInContext:(CGContextRef)ctx {
+    KWGFX* gfx = [[KWGFX alloc] initWithContext:ctx];
+    
+    double remaining = self.remaining;
+    float remain = (0.8f * (1.0f - (remaining / self.timelimit)));
+    
+    UIColor* fill = [UIColor colorWithRed:0.7f green:0.3f blue:0.3f alpha:0.2f + remain];
+    if (remaining > 0) {
+        NSString* text = [NSString stringWithFormat:@"Level %d (%d s)", self.level, (int)remaining];
+        [[[[[[[gfx stroke:[UIColor colorWithRed:0.5f green:0.5f blue:0.7f alpha:0.3f]] fill:fill] angle:-45.0f] mode:kCGTextFillStroke]
+           font:@"Helvetica Bold" size:38.0f] x:80.0f y:345.0f] text:text];
+    }
+    
+    [[gfx stroke:[UIColor colorWithRed:0.1f green:0.5f blue:0.3f alpha:0.6f]] dash:10.0f off:7.0f];
+    [sight enumerateObjectsUsingBlock:^(KWLine* line, NSUInteger idx, BOOL *stop) {
+        [gfx line:line.start to:line.end];
+    }];
+    
 }
 
 

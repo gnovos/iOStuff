@@ -9,16 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "KWObject.h"
 
-@class KWObject;
+@class KWObject, KWKitten;
 
-@interface KWLevel : NSObject
+@interface KWLevel : CALayer
 
 @property (nonatomic, readonly, assign) int level;
-@property (nonatomic, readonly, assign) CGRect bounds;
-
-@property (nonatomic, readonly, strong) NSArray* objects;
-
 @property (nonatomic, readonly, assign) NSUInteger timelimit;
+@property (nonatomic, readonly, strong) NSArray* objects;
 
 - (id) initLevel:(int)lvl;
 
@@ -33,7 +30,7 @@
 - (void) drop:(KWObject*)object;
 
 //xxx eventually remove this?  Have only one kitten array, with basket property?
-- (void) free:(NSArray*)kittens;
+- (void) free:(KWKitten*)kitten;
 
 - (BOOL) vacant:(CGPoint)rect excluding:(KWObject*)obj;
 

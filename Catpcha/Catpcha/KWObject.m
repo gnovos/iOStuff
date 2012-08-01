@@ -23,15 +23,10 @@
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
         touchable = NO;
-        self.needsDisplayOnBoundsChange = YES;
         level = lvl;
-        CGRect rect = CGRectZero;
-        while (CGRectIsEmpty(rect) || !CGRectContainsRect(level.bounds, rect) || ![level vacant:rect.origin excluding:self]) {
-            rect.size = size;
-            rect.origin = [self randomPointIn:level.bounds];
-        }
-        self.frame = rect;
+        self.needsDisplayOnBoundsChange = YES;
         heading = kKWRandomHeading;
+        self.frame = CGRectMake(0, 0, size.width, size.height);
     }
     return self;
 }
@@ -49,10 +44,6 @@
     });
     
     return [keys containsObject:key] || [super needsDisplayForKey:key];
-}
-
-- (CGPoint) randomPointIn:(CGRect)rect {
-    return CGPointMake(arc4random_uniform(rect.size.width), arc4random_uniform(rect.size.height));
 }
 
 - (BOOL) moving   { return !self.touch && self.velocity > KWObjectVelocityMotionless; }

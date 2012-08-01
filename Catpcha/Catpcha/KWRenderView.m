@@ -30,10 +30,8 @@
     
     [[self.layer sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
-    [level.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
-        [self.layer addSublayer:o];
-    }];
-    
+    [self.layer addSublayer:self.level];
+        
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

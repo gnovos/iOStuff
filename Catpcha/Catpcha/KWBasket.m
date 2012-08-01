@@ -27,19 +27,15 @@
 
 - (BOOL) tick:(CGFloat)dt {
     
-    NSMutableArray* escaped = [[NSMutableArray alloc] init];
-    
-    [kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
+    [[kittens copy] enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
         if (kitten.bored) {
-            [escaped addObject:kitten];
+            [kittens removeObject:kitten];
+            [self.level free:kitten];
         } else {
             [kitten tick:dt];
         }
     }];
-    [kittens removeObjectsInArray:escaped];
-    
-    [self.level free:escaped];
-    
+        
     return [super tick:dt];
 }
 
