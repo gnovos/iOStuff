@@ -101,6 +101,11 @@
     return self.stroke;
 }
 
+- (id) path:(CGPathRef)path {
+    CGContextAddPath(ctx, path);
+    return self.stroke;
+}
+
 - (id) to:(CGPoint)to {
     CGContextAddLineToPoint(ctx, to.x, to.y);
     return self.stroke;

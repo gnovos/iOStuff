@@ -18,7 +18,7 @@ typedef enum {
     KWObjectVelocitySuperFast  = 200,
 } KWObjectVelocity;
 
-@interface KWObject : CALayer
+@interface KWObject : CAShapeLayer
 
 @property (nonatomic, assign) BOOL touchable;
 

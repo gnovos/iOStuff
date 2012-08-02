@@ -55,6 +55,14 @@ typedef enum {
 
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:kKWDefaultKittenSize]) {
+        UIBezierPath* shape = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
+        [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f - 10.0f)];
+        [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f + 10.0f)];
+        [shape addLineToPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height / 2.0f)];
+        self.path = shape.CGPath;
+        self.lineWidth = 1.0f;
+        self.strokeColor = [UIColor blueColor].CGColor;
+        
         self.touchable = YES;
         mood = KWKittenMoodBored;
         energy = arc4random_uniform(KWKittenEnergyExcited);
@@ -150,39 +158,26 @@ typedef enum {
                         
     [self turn:dt];
     
-    return [super tick:dt];
-    
-}
-
-- (void) drawInContext:(CGContextRef)ctx {
-    KWGFX* gfx = [[KWGFX alloc] initWithContext:ctx];
-    
-    CGFloat inner = 2.0f;
-    
-    CGRect bounds = CGRectInset(self.bounds, inner, inner);
-    
-    
     UIColor* color = [UIColor blueColor];
+    self.lineDashPattern = nil;
     if (self.touch) {
         color = UIColor.brownColor;
     } else if (self.idle) {
         color = UIColor.lightGrayColor;
+        self.lineDashPattern = @[@2, @2];
     } else if (self.chasing) {
         color = UIColor.redColor;
     } else if (self.captured) {
         color = UIColor.orangeColor;
+        self.lineDashPattern = @[@5, @5];
     }
         
-    [gfx stroke:color];
+    self.strokeColor = color.CGColor;
+        
+    return [super tick:dt];
     
-    if (self.captured) {
-        [gfx dash:10.0f off:3.0f];
-    } else {
-        [[[gfx font:@"Helvetica Bold" size:12.0f] at:KWCGRectCenter(bounds)] text:@">"];
-    }
-    
-    [gfx elipse:bounds];            
 }
+
 
 
 @end

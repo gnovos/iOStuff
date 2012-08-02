@@ -37,5 +37,6 @@
 - (id) stroke;
 - (id) fill;
 - (id) felipse:(CGRect)rect;
+- (id) path:(CGPathRef)path;
 
 @end

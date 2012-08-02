@@ -22,11 +22,13 @@
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
+        self.lineWidth = 1.0f;
+        self.fillColor = nil;
         touchable = NO;
         level = lvl;
         self.needsDisplayOnBoundsChange = YES;
         heading = kKWRandomHeading;
-        self.frame = CGRectMake(0, 0, size.width, size.height);
+        self.bounds = CGRectMake(0, 0, size.width, size.height);
     }
     return self;
 }
@@ -62,10 +64,11 @@
         
         CGPoint p = self.position;
         
-        p.x += dm * cosf(dir);
+        CGPoint bias = level.bias;
+        
+        p.x += (dm * cosf(dir)) + (bias.x * dt);
         p.y += dm * sinf(dir);
         
-        //xxx introduce bias
         
         BOOL vacant = [level vacant:p excluding:self] || ![level vacant:self.position excluding:self];
         

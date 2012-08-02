@@ -11,11 +11,12 @@
 
 @class KWObject, KWKitten;
 
-@interface KWLevel : CALayer
+@interface KWLevel : CAShapeLayer
 
 @property (nonatomic, readonly, assign) int level;
 @property (nonatomic, readonly, assign) NSUInteger timelimit;
 @property (nonatomic, readonly, strong) NSArray* objects;
+@property (nonatomic, assign) CGPoint bias;
 
 - (id) initLevel:(int)lvl;
 

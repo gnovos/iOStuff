@@ -22,6 +22,5 @@ typedef enum {
 - (void) pause;
 
 - (void) add:(void(^)(KWEngineEvent event, id obj))block;
-- (void) bias:(CGPoint)bias;
 
 @end

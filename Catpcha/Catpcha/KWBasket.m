@@ -21,6 +21,10 @@
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:kKWDefaultBasketSize]) {
         kittens = [[NSMutableArray alloc] init];
+        self.path = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:7.0f].CGPath;
+        self.lineWidth = 1.0f;
+        self.strokeColor = [UIColor greenColor].CGColor;
+        self.lineDashPattern = @[@10, @5];
     }
     return self;    
 }
@@ -35,16 +39,13 @@
             [kitten tick:dt];
         }
     }];
+    self.lineDashPhase++;
         
     return [super tick:dt];
 }
 
 - (void) addKitten:(KWKitten*)kitten {
     [kittens addObject:kitten];
-}
-
-- (void) drawInContext:(CGContextRef)ctx {
-    [[[[[KWGFX alloc] initWithContext:ctx] width:2.0f] stroke:[UIColor greenColor]] rect:self.bounds];
 }
 
 @end

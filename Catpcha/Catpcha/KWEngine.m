@@ -15,8 +15,6 @@
     CADisplayLink* loop;
     CFTimeInterval last;
     NSMutableArray* callblocks;
-    
-    CGPoint bias;
 }
 
 @synthesize level;
@@ -63,10 +61,6 @@
 
 - (void) add:(void(^)(KWEngineEvent event, id obj))block {
     [callblocks addObject:[block copy]];
-}
-
-- (void) bias:(CGPoint)attitude {
-    bias = attitude;
 }
 
 

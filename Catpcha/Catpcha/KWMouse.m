@@ -12,6 +12,10 @@
 
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:kKWDefaultMouseSize]) {
+        UIBezierPath* shape = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
+        self.path = shape.CGPath;
+        self.fillColor = [UIColor darkGrayColor].CGColor;        
+        
         self.velocity = KWObjectVelocitySuperFast;
     }
     return self;
@@ -25,23 +29,5 @@
     self.heading += tilt;
     return [super tick:dt];
 }
-
-- (void) drawInContext:(CGContextRef)ctx {
-    KWGFX* gfx = [[KWGFX alloc] initWithContext:ctx];
-    
-    CGFloat inner = 1.0f;
-    
-    CGRect b = CGRectInset(self.bounds, inner, inner);
-    
-//    [[[[[gfx stroke:UIColor.darkGrayColor]
-//        fill:UIColor.darkGrayColor]
-//       line:CGPointMake(0, b.origin.y / 2.0f) to:CGPointMake(0, b.size.height)]
-//      to:CGPointMake(b.size.width, b.size.height)]
-//     to:CGPointMake(0, b.origin.y / 2.0f)];
-    
-    [[gfx fill:UIColor.darkGrayColor] felipse:b];
-        
-}
-
 
 @end

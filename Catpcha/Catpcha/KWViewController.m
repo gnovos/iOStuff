@@ -39,7 +39,8 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self login];
+    //[self login];
+    [self start];//xxxx
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -72,7 +73,7 @@
 		motion.deviceMotionUpdateInterval = 1.0 / 10.0;
         [motion startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion* move, NSError* error) {
             CMAttitude* attitude = move.attitude;
-            [engine bias:CGPointMake(attitude.roll, attitude.pitch)];
+            engine.level.bias = CGPointMake(attitude.roll, attitude.pitch);
          }];
     }
 }
