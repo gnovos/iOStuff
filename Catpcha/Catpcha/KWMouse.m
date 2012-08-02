@@ -17,6 +17,7 @@
         self.fillColor = [UIColor darkGrayColor].CGColor;
                 
         self.velocity = KWObjectVelocitySuperFast;
+        self.allure = 2.0f;
     }
     return self;
 }

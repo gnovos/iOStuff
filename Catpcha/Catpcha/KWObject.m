@@ -11,7 +11,7 @@
 
 @implementation KWObject
 
-@synthesize level, heading, touchable;
+@synthesize level, heading, touchable, allure;
 
 @dynamic touch, velocity;
 
@@ -25,6 +25,7 @@
         self.lineWidth = 1.0f;
         self.fillColor = nil;
         touchable = NO;
+        allure = kKWKittenDefaultAllure;
         level = lvl;
         self.needsDisplayOnBoundsChange = YES;
         heading = kKWRandomHeading;
@@ -92,17 +93,6 @@
     }
     
     return NO;
-}
-
-- (CGFloat) directionOf:(KWObject*)other {
-    CGPoint a = other.position;
-    CGPoint b = self.position;
-    
-    CGFloat dx = a.x - b.x;
-    CGFloat dy = a.y - b.y;
-        
-    CGFloat dir = dx ? tan(dy / dx) : dy < 0 ? kKWAngle270Degrees : kKWAngle90Degrees;
-    return dir;
 }
 
 @end

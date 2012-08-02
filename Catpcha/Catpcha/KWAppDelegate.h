@@ -20,7 +20,8 @@
 
 //add graphics.
 //add sounds
-//sort kittens by something something?
+
+//sort kittens by something something to improve sight?
 
 #import <UIKit/UIKit.h>
 

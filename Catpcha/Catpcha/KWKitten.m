@@ -18,8 +18,8 @@ typedef enum {
     KWKittenStateSleeping,
     KWKittenStateSitting,
     KWKittenStateStalking,
-    KWKittenStateExploring,
     KWKittenStateChasing,
+    KWKittenStateExploring,
     KWKittenStateHeld,
     KWKittenStateCaptured
 } KWKittenState;
@@ -71,7 +71,7 @@ typedef enum {
 - (BOOL) idle      { return state == KWKittenStateSitting || state == KWKittenStateSleeping; }
 - (BOOL) stalking  { return state == KWKittenStateStalking; }
 - (BOOL) exploring { return state == KWKittenStateExploring;}
-- (BOOL) chasing   { return state == KWKittenStateChasing; }
+- (BOOL) chasing   { return chasing != nil && state == KWKittenStateChasing; }
 
 - (BOOL) bored     { return mood <= KWKittenMoodBored; }
 - (BOOL) tired     { return energy <= KWKittenEnergyTired; }
@@ -92,7 +92,7 @@ typedef enum {
         case KWKittenStateExploring:
             return KWObjectVelocityAverage;
             
-        case KWKittenStateChasing:
+        default:
             return KWObjectVelocityFast;
     }
 }
@@ -106,7 +106,7 @@ typedef enum {
 - (void) setBasket:(KWBasket*)bskt {
     basket = bskt;
     if (bskt) {
-        chasing = nil;
+        [self chase:nil];
         mood = KWKittenMoodCaptured + kKWRandom(KWKittenMoodCaptured);
         self.state = KWKittenStateCaptured;
     } else {
@@ -114,45 +114,44 @@ typedef enum {
     }
 }
 
-- (void) turn:(CGFloat)dt {
-    if (chasing) {
-        self.heading += [self directionOf:chasing];
-        self.state = KWKittenStateChasing;
-    }
-}
+- (CGFloat) interest { return kKWRandomPercent; }
 
-- (BOOL) interested { return kKWRandomPercent > kKWKittenInterest;  }
-
-- (void) explore {
-    self.state = KWKittenStateExploring;
-    self.heading += kKWRandomHeading;
-    mood = KWKittenMoodInterested;
-    chasing = nil;
-    [[self.level sight:self] enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isKindOfClass:[KWToy class]] || (obj.moving && [self interested])) {
-            chasing = obj;
-            self.state = KWKittenStateChasing;
-            mood += KWKittenMoodExcited;
-            if ([obj isKindOfClass:[KWToy class]]) {
-                mood += KWKittenMoodExcited;
-            }
-            *stop = YES;            
-        }
-    }];    
+- (void) chase:(KWObject*)chase {
+    chasing = chase;
+    self.state = (chasing != nil) ? KWKittenStateChasing : KWKittenStateExploring;
 }
 
 - (BOOL) tick:(CGFloat)dt {
     if (self.captured) {
-        if (self.bored) {
-            self.basket = nil;
-        }
+        if (self.bored) { self.basket = nil; }
     } else if (self.tired) {
+        [self chase:nil];
         self.state = KWKittenStateSleeping;
-        chasing = nil;
     } else if (self.bored) {
-        [self explore];
+        [self chase:nil];
+        self.state = KWKittenStateExploring;
+        self.heading += kKWRandomHeading;
+        mood = KWKittenMoodInterested;
+    } if (self.chasing) {
+        CGPoint a = chasing.position;
+        CGPoint b = self.position;
+        
+        CGFloat dx = a.x - b.x;
+        CGFloat dy = a.y - b.y;
+        
+        CGFloat dir = radiansToDegrees(tan(dy / dx));
+        
+        self.heading = dir;
+    } else {
+        [[self.level sight:self] enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+            if (obj.allure > self.interest) {
+                [self chase:obj];
+                mood += KWKittenMoodExcited * obj.allure;
+                *stop = YES;
+            }
+        }];
     }
-    
+
     if (self.idle) {
         mood -= MIN(dt, kKWRandomPercent);
         energy += dt;
@@ -161,7 +160,6 @@ typedef enum {
         energy -= MIN(dt, kKWRandomPercent);
     }
 
-    [self turn:dt];
     
     UIColor* color = [UIColor blueColor];
     self.lineDashPattern = nil;
