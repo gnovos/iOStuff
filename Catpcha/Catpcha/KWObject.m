@@ -80,8 +80,12 @@
         
         CGFloat dir = degreesToRadians(heading);
         
-        self.transform = CATransform3DMakeRotation(dir, 0, 0, 1.0f);
-    
+        if (CATransform3DIsIdentity(self.transform)) {
+            self.transform = CATransform3DMakeRotation(dir, 0, 0, 1.0f);
+        } else {
+            self.transform = CATransform3DRotate(self.transform, dir, 0, 0, 1.0f);
+        }
+        
         CGFloat dm = self.velocity * dt;
         
         __block CGPoint p = self.position;

@@ -20,7 +20,7 @@
 ////catching things
 ////crashing into each other
 
-//add toys, mice eating, etc.
+//add toys, etc.
 
 //spash/level screenz (and win screens)
 
@@ -28,6 +28,7 @@
 //multiplayer (steal kittens, dogs to scare away, etceteras)
 
 //add graphics.
+//graphics for play, too
 //add sounds
 
 //sort kittens by something something to improve sight?

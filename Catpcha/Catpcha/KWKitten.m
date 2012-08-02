@@ -180,7 +180,9 @@ typedef enum {
     }
 
     UIColor* color = [UIColor blueColor];
+    self.fillColor = nil;
     self.lineDashPattern = nil;
+    self.transform = CATransform3DIdentity;
     if (self.touch) {
         color = UIColor.brownColor;
     } else if (self.captured) {
@@ -191,9 +193,9 @@ typedef enum {
         self.lineDashPattern = @[@2, @2];
         self.lineDashPattern = @[@5, @5];
     } else if (self.playing) {
-        color = UIColor.magentaColor;
+        self.fillColor = UIColor.yellowColor.CGColor;
         self.lineDashPattern = @[@30, @10];
-        self.lineDashPhase+=2;
+        self.lineDashPhase += 0.5f;
     } else if (self.chasing) {
         color = UIColor.redColor;
     }
