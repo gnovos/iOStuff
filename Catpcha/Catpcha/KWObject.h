@@ -12,10 +12,11 @@
 
 typedef enum {
     KWObjectVelocityMotionless = 0,
+    KWObjectVelocityVerySlow   = 5,
     KWObjectVelocitySlow       = 50,
     KWObjectVelocityAverage    = 100,
     KWObjectVelocityFast       = 150,
-    KWObjectVelocitySuperFast  = 200,
+    KWObjectVelocityVeryFast   = 200,
 } KWObjectVelocity;
 
 @interface KWObject : CAShapeLayer
@@ -23,6 +24,7 @@ typedef enum {
 @property (nonatomic, assign) CGFloat allure;
 
 @property (nonatomic, assign) BOOL touchable;
+@property (nonatomic, assign) BOOL catchable;
 
 @property (nonatomic, weak) UITouch* touch;
 @property (nonatomic, readonly, assign) KWLevel* level;

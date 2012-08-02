@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "KWObject.h"
+#import "KWToy.h"
 
-@interface KWMouse : KWObject
+@interface KWMouse : KWToy
 
 - (id) initWithLevel:(KWLevel*)lvl;
 

@@ -10,5 +10,14 @@
 
 @implementation KWToy
 
+- (id) initWithLevel:(KWLevel *)lvl andSize:(CGSize)size {
+    if (self = [super initWithLevel:lvl andSize:size]) {
+        self.allure = 0.8f;
+        self.catchable = YES;
+    }
+    return self;
+    
+}
+
 
 @end

@@ -17,6 +17,7 @@
 typedef enum {
     KWKittenStateSleeping,
     KWKittenStateSitting,
+    KWKittenStatePlaying,
     KWKittenStateStalking,
     KWKittenStateChasing,
     KWKittenStateExploring,
@@ -58,7 +59,7 @@ typedef enum {
         [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f + 10.0f)];
         [shape addLineToPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height / 2.0f)];
         self.path = shape.CGPath;
-        self.lineWidth = 1.0f;
+        self.lineWidth = 2.0f;
         self.strokeColor = [UIColor blueColor].CGColor;
         
         self.touchable = YES;
@@ -71,6 +72,7 @@ typedef enum {
 
 - (BOOL) idle      { return state == KWKittenStateSitting || state == KWKittenStateSleeping; }
 - (BOOL) stalking  { return state == KWKittenStateStalking; }
+- (BOOL) playing   { return state == KWKittenStatePlaying; }
 - (BOOL) exploring { return state == KWKittenStateExploring;}
 - (BOOL) chasing   { return chasing != nil && state == KWKittenStateChasing; }
 
@@ -87,6 +89,9 @@ typedef enum {
         case KWKittenStateSleeping:
             return KWObjectVelocityMotionless;
             
+        case KWKittenStatePlaying:
+            return KWObjectVelocityVerySlow;
+            
         case KWKittenStateStalking:
             return KWObjectVelocitySlow;
             
@@ -94,7 +99,7 @@ typedef enum {
             return KWObjectVelocityAverage;
             
         case KWKittenStateChasing:
-            return MAX(KWObjectVelocityFast, arc4random_uniform(KWObjectVelocitySuperFast));
+            return MAX(KWObjectVelocityFast, arc4random_uniform(KWObjectVelocityVeryFast));
     }
 }
 
@@ -122,6 +127,14 @@ typedef enum {
     self.state = (chasing != nil) ? KWKittenStateChasing : KWKittenStateExploring;
 }
 
+- (void) catch {
+    if (chasing) {
+        //catchable
+    }
+    chasing = nil;
+    self.state = KWKittenStatePlaying;
+}
+
 - (BOOL) tick:(CGFloat)dt {
     if (self.captured) {
         if (self.bored) { self.basket = nil; }
@@ -136,8 +149,7 @@ typedef enum {
     } if (self.chasing) {
         if (chasing.moving) {
             if (CGRectIntersectsRect(self.frame, chasing.frame)) {
-                [self chase:nil];
-                //xxx catch
+                [self catch];
             } else {
                 self.heading = [self direction:chasing];
             }

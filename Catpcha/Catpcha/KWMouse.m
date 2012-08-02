@@ -16,7 +16,7 @@
         self.path = shape.CGPath;
         self.fillColor = [UIColor darkGrayColor].CGColor;
                 
-        self.velocity = KWObjectVelocitySuperFast;
+        self.velocity = KWObjectVelocityVeryFast;
         self.allure = 2.0f;
     }
     return self;

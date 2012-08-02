@@ -33,5 +33,7 @@ static const CGSize kKWDefaultBasketSize = { 70, 70 };
 static const CGSize kKWDefaultMouseSize  = { 10, 10 };
 static const CGSize kKWDefaultYarnSize   = { 50, 50 };
 
+#define kKWCheckpointLaunch @"[CHECKPOINT] Launch"
+
 
 #endif

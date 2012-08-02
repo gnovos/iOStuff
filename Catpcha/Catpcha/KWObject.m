@@ -11,7 +11,7 @@
 
 @implementation KWObject
 
-@synthesize level, heading, touchable, allure;
+@synthesize level, heading, touchable, catchable, allure;
 
 @dynamic touch, velocity;
 
@@ -25,15 +25,12 @@
         self.lineWidth = 1.0f;
         self.fillColor = nil;
         touchable = NO;
+        catchable = NO;
         allure = 0.0f;
         level = lvl;
         self.needsDisplayOnBoundsChange = YES;
         heading = kKWRandomHeading;
         self.bounds = CGRectMake(0, 0, size.width, size.height);
-        self.shadowColor = [UIColor blackColor].CGColor;
-        self.shadowOffset = CGSizeMake(2.0, 2.0);
-        self.shadowRadius = 3.0f;
-        self.shadowOpacity = 0.7f;
     }
     return self;
 }

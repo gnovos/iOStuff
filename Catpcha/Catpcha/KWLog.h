@@ -13,7 +13,7 @@
 
 #ifdef DEBUG
 #	define dlog(fmt, ...) alog(fmt, ##__VA_ARGS__);
-#   define elog(err) { if(err) olog(err) }
+#   define elog(err) { if(err) alog(@"[ERROR] %@", err) }
 #   define ulog(fmt, ...)   { UIAlertView *alert = [[UIAlertView alloc] initWithTitle:\
 [NSString stringWithFormat:@"%s\n [line %d] ", __PRETTY_FUNCTION__, __LINE__] \
 message:[NSString stringWithFormat:fmt, ##__VA_ARGS__] \

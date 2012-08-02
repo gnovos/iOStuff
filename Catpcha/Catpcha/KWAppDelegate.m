@@ -7,12 +7,30 @@
 //
 
 #import "KWAppDelegate.h"
+#import "KWApplication.h"
 
 @implementation KWAppDelegate
 
 @synthesize window = _window;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {            
+- (void) checkpoint:(NSString*)checkpoint {
+    @try {
+        [TestFlight passCheckpoint:checkpoint];
+    }
+    @catch (id exception) {
+        elog(exception);
+    }
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    @try {
+        [TestFlight takeOff:@"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"];
+        [TestFlight setDeviceIdentifier:[KWApplication deviceID]];
+        [self checkpoint:kKWCheckpointLaunch];
+    }
+    @catch (id exception) {
+        elog(exception);
+    }
     return YES;
 }
 							
@@ -41,6 +59,10 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (IBAction) launchFeedback {
+    [TestFlight openFeedbackView];
 }
 
 @end

@@ -19,6 +19,7 @@
 
 - (BOOL) idle;
 - (BOOL) stalking;
+- (BOOL) playing;
 - (BOOL) exploring;
 - (BOOL) chasing;
 - (BOOL) captured;
