@@ -150,7 +150,7 @@ static const int kKWTimeLimitLevelCost  = 5;
     [self setNeedsDisplay];
 }
  
-- (void) drop:(KWObject*)object {
+- (void) capture:(KWObject*)object {
     if ([object isKindOfClass:[KWKitten class]]) {
         KWKitten* kitten = (KWKitten*)object;
         [self.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *bstop) {
@@ -159,6 +159,9 @@ static const int kKWTimeLimitLevelCost  = 5;
                 *bstop = YES;
             }
         }];
+    } else if (object.catchable) {
+        [object removeFromSuperlayer];
+        [objects removeObject:object];
     }
 }
 

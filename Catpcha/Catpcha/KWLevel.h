@@ -31,7 +31,7 @@
 
 - (BOOL) complete;
 
-- (void) drop:(KWObject*)object;
+- (void) capture:(KWObject*)object;
 
 - (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj;
 

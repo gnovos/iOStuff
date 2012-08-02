@@ -58,7 +58,7 @@
             if (o.touch == touch) {
                 o.touch = nil;
                 [KWGFX animate:^{ o.position = [touch locationInView:self]; }];
-                [level drop:o];
+                [level capture:o];
             }
         }];
     }];

@@ -27,6 +27,7 @@ typedef enum {
 
 typedef enum {
     KWKittenMoodBored      = 0,
+    KWKittenMoodPlayful    = 3,
     KWKittenMoodInterested = 5,
     KWKittenMoodExcited    = 7,
     KWKittenMoodCaptured   = 10
@@ -63,7 +64,7 @@ typedef enum {
         self.strokeColor = [UIColor blueColor].CGColor;
         
         self.touchable = YES;
-        self.allure = 0.2f;
+        self.allure = 0.05f;
         mood = KWKittenMoodBored;
         energy = arc4random_uniform(KWKittenEnergyExcited);
     }
@@ -129,10 +130,13 @@ typedef enum {
 
 - (void) catch {
     if (chasing) {
-        //catchable
+        if (chasing.catchable) {
+            [self.level capture:chasing];
+        }
+        chasing = nil;
+        mood = KWKittenMoodPlayful + (KWKittenMoodPlayful * kKWRandomPercent);
+        self.state = KWKittenStatePlaying;
     }
-    chasing = nil;
-    self.state = KWKittenStatePlaying;
 }
 
 - (BOOL) tick:(CGFloat)dt {
@@ -175,7 +179,6 @@ typedef enum {
         energy -= MIN(dt, kKWRandomPercent);
     }
 
-    
     UIColor* color = [UIColor blueColor];
     self.lineDashPattern = nil;
     if (self.touch) {
@@ -186,6 +189,11 @@ typedef enum {
     } else if (self.idle) {
         color = UIColor.lightGrayColor;
         self.lineDashPattern = @[@2, @2];
+        self.lineDashPattern = @[@5, @5];
+    } else if (self.playing) {
+        color = UIColor.magentaColor;
+        self.lineDashPattern = @[@30, @10];
+        self.lineDashPhase+=2;
     } else if (self.chasing) {
         color = UIColor.redColor;
     }
