@@ -133,15 +133,17 @@ typedef enum {
         self.heading += kKWRandomHeading;
         mood = KWKittenMoodInterested;
     } if (self.chasing) {
-        CGPoint a = chasing.position;
-        CGPoint b = self.position;
+        CGPoint p = self.position;
+        CGPoint c = chasing.position;
         
-        CGFloat dx = a.x - b.x;
-        CGFloat dy = a.y - b.y;
+        CGFloat slope = (p.x - c.x) / (p.y - c.y);
         
-        CGFloat dir = radiansToDegrees(tan(dy / dx));
+        CGFloat angle = -radiansToDegrees(atanf(slope));
         
-        self.heading = dir;
+        angle += (p.y > c.y) ? -90 : 90;
+        
+        self.heading = angle;
+        
     } else {
         [[self.level sight:self] enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
             if (obj.allure > self.interest) {

@@ -11,6 +11,10 @@
 
 //kitten ai should change with level
 //better ai (chase, staking, better motion states, etc)
+////stalking
+////catching things
+////crashing into each other
+
 //add toys, mice eating, etc.
 
 //spash/level screenz (and win screens)

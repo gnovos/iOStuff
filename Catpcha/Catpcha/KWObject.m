@@ -70,7 +70,6 @@
         p.x += (dm * cosf(dir)) + (bias.x * dt);
         p.y += dm * sinf(dir);
         
-        
         BOOL vacant = [level vacant:p excluding:self] || ![level vacant:self.position excluding:self];
         
         if (CGRectContainsPoint(level.bounds, p) && vacant) {
@@ -91,7 +90,7 @@
             heading += kKWRandomHeading;
         }
     }
-    
+        
     return NO;
 }
 
