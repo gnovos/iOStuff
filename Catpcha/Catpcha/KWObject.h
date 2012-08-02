@@ -35,4 +35,6 @@ typedef enum {
 
 - (BOOL) tick:(CGFloat)dt;
 
+- (CGFloat) direction:(KWObject*)other;
+
 @end

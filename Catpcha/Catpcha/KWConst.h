@@ -18,7 +18,6 @@ static const CGFloat kKWAngle180Degrees = 180.0f;
 static const CGFloat kKWAngle270Degrees = 270.0f;
 static const CGFloat kKWAngle360Degrees = 360.0f;
 
-static const CGFloat kKWKittenDefaultAllure = 0.1f;
 static const CGFloat kKWKittensPerLevel = 3;
 
 #define KWCGRectCenter(x) CGPointMake(CGRectGetMidX(x), CGRectGetMidY(x))

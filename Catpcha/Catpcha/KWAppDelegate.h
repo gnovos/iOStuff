@@ -9,6 +9,8 @@
 //xxx
 //TODO:
 
+//need better collision detect and handle
+
 //kitten ai should change with level
 //better ai (chase, staking, better motion states, etc)
 ////stalking

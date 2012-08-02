@@ -12,7 +12,7 @@
 #import "KWMouse.h"
 #import "KWToy.h"
 
-static const int kKWTimeLimitMaxSeconds = 41 * 60;
+static const int kKWTimeLimitMaxSeconds = 2 * 60;
 
 static const int kKWTimeLimitLevelCost  = 5;
 
@@ -88,7 +88,7 @@ static const int kKWTimeLimitLevelCost  = 5;
         
         
         [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
-            while (!CGRectContainsRect(self.bounds, obj.frame) || ![self vacant:obj.frame.origin excluding:obj]) {
+            while (!CGRectContainsRect(self.bounds, obj.frame) || ![self vacant:obj.frame excluding:obj]) {
                 obj.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
             }
             [self addSublayer:obj];
@@ -127,7 +127,7 @@ static const int kKWTimeLimitLevelCost  = 5;
     [self.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
         if ([o tick:dt]) { [o setNeedsDisplay]; }
         
-        if ([o isKindOfClass:[KWKitten class]]) {            
+        if (o.moving && [o isKindOfClass:[KWKitten class]]) {
             [[self sight:o] enumerateObjectsUsingBlock:^(KWObject* kk, NSUInteger idx, BOOL *lstop) {
                 [path moveToPoint:o.position];
                 [path addLineToPoint:kk.position];
@@ -169,12 +169,12 @@ static const int kKWTimeLimitLevelCost  = 5;
     }]];
 }
 
-- (BOOL) vacant:(CGPoint)p excluding:(KWObject*)obj {
+- (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj {
     
     __block BOOL vacant = YES;
     
     [self.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
-        if (o != obj && CGRectContainsPoint(o.frame, p)) {
+        if (o != obj && CGRectIntersectsRect(rect, o.frame)) {
             vacant = NO;
             *stop = YES;
         }

@@ -62,6 +62,7 @@ typedef enum {
         self.strokeColor = [UIColor blueColor].CGColor;
         
         self.touchable = YES;
+        self.allure = 0.2f;
         mood = KWKittenMoodBored;
         energy = arc4random_uniform(KWKittenEnergyExcited);
     }
@@ -92,8 +93,8 @@ typedef enum {
         case KWKittenStateExploring:
             return KWObjectVelocityAverage;
             
-        default:
-            return KWObjectVelocityFast;
+        case KWKittenStateChasing:
+            return MAX(KWObjectVelocityFast, arc4random_uniform(KWObjectVelocitySuperFast));
     }
 }
 
@@ -133,20 +134,20 @@ typedef enum {
         self.heading += kKWRandomHeading;
         mood = KWKittenMoodInterested;
     } if (self.chasing) {
-        CGPoint p = self.position;
-        CGPoint c = chasing.position;
-        
-        CGFloat slope = (p.x - c.x) / (p.y - c.y);
-        
-        CGFloat angle = -radiansToDegrees(atanf(slope));
-        
-        angle += (p.y > c.y) ? -90 : 90;
-        
-        self.heading = angle;
-        
+        if (chasing.moving) {
+            if (CGRectIntersectsRect(self.frame, chasing.frame)) {
+                [self chase:nil];
+                //xxx catch
+            } else {
+                self.heading = [self direction:chasing];
+            }
+        } else {
+            //xxx stalking?
+            [self chase:nil];
+        }
     } else {
         [[self.level sight:self] enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
-            if (obj.allure > self.interest) {
+            if (obj.moving && obj.allure > self.interest) {
                 [self chase:obj];
                 mood += KWKittenMoodExcited * obj.allure;
                 *stop = YES;

@@ -17,7 +17,7 @@
         self.path = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:7.0f].CGPath;
         self.lineWidth = 1.0f;
         self.strokeColor = [UIColor greenColor].CGColor;
-        self.lineDashPattern = @[@10, @5];
+        self.lineDashPattern = @[@10, @5];        
     }
     return self;    
 }

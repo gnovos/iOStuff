@@ -17,6 +17,7 @@
 @property (nonatomic, readonly, assign) NSUInteger timelimit;
 @property (nonatomic, readonly, strong) NSArray* objects;
 @property (nonatomic, readonly, strong) NSArray* kittens;
+@property (nonatomic, readonly, strong) NSArray* baskets;
 
 @property (nonatomic, assign) CGPoint bias;
 
@@ -32,7 +33,7 @@
 
 - (void) drop:(KWObject*)object;
 
-- (BOOL) vacant:(CGPoint)rect excluding:(KWObject*)obj;
+- (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj;
 
 - (NSArray*) touched:(CGPoint)point;
 
