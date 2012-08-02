@@ -16,6 +16,8 @@
 @property (nonatomic, readonly, assign) int level;
 @property (nonatomic, readonly, assign) NSUInteger timelimit;
 @property (nonatomic, readonly, strong) NSArray* objects;
+@property (nonatomic, readonly, strong) NSArray* kittens;
+
 @property (nonatomic, assign) CGPoint bias;
 
 - (id) initLevel:(int)lvl;
@@ -29,9 +31,6 @@
 - (BOOL) complete;
 
 - (void) drop:(KWObject*)object;
-
-//xxx eventually remove this?  Have only one kitten array, with basket property?
-- (void) free:(KWKitten*)kitten;
 
 - (BOOL) vacant:(CGPoint)rect excluding:(KWObject*)obj;
 

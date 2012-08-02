@@ -14,8 +14,8 @@
     if (self = [super initWithLevel:lvl andSize:kKWDefaultMouseSize]) {
         UIBezierPath* shape = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
         self.path = shape.CGPath;
-        self.fillColor = [UIColor darkGrayColor].CGColor;        
-        
+        self.fillColor = [UIColor darkGrayColor].CGColor;
+                
         self.velocity = KWObjectVelocitySuperFast;
     }
     return self;

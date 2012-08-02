@@ -12,7 +12,7 @@
 #import "KWMouse.h"
 #import "KWToy.h"
 
-static const int kKWTimeLimitMaxSeconds = 1 * 60;
+static const int kKWTimeLimitMaxSeconds = 41 * 60;
 
 static const int kKWTimeLimitLevelCost  = 5;
 
@@ -36,10 +36,21 @@ static const int kKWTimeLimitLevelCost  = 5;
 }
 
 - (NSArray*) objects { return [objects copy]; }
+- (NSArray*) kittens {
+    return [self.objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWObject* obj, NSDictionary *bindings) {
+        return [obj isKindOfClass:[KWKitten class]];
+    }]];
+}
+- (NSArray*) baskets {
+    return [self.objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWObject* obj, NSDictionary *bindings) {
+        return [obj isKindOfClass:[KWBasket class]];
+    }]];
+}
 
 - (id) initLevel:(int)lvl {
     if (self = [self init]) {
         self.needsDisplayOnBoundsChange = YES;
+        self.fillColor = nil;
         self.strokeColor = [UIColor colorWithRed:0.7f green:0.4f blue:0.4f alpha:0.3f].CGColor;
         self.lineDashPattern = @[@5, @15];
         self.lineDashPhase = 0;
@@ -125,6 +136,7 @@ static const int kKWTimeLimitLevelCost  = 5;
         }
     }];
     
+    
     self.path = path.CGPath;
     
     double remaining = self.remaining;
@@ -137,20 +149,13 @@ static const int kKWTimeLimitLevelCost  = 5;
     //xxx rethink how often this is required
     [self setNeedsDisplay];
 }
-
-- (void) free:(KWKitten*)kitten {
-    kitten.captured = NO;
-    [objects addObject:kitten];
-}
  
 - (void) drop:(KWObject*)object {
     if ([object isKindOfClass:[KWKitten class]]) {
         KWKitten* kitten = (KWKitten*)object;
-        [self.objects enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *bstop) {
+        [self.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *bstop) {
             if (CGRectContainsPoint(basket.frame, kitten.position)) {
-                [objects removeObject:kitten];
-                [basket addKitten:kitten];
-                kitten.captured = YES;
+                kitten.basket = basket;
                 *bstop = YES;
             }
         }];

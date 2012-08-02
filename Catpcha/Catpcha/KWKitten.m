@@ -12,8 +12,6 @@
 
 @interface KWKitten ()
 
-@property (nonatomic, assign) BOOL capture;
-
 @end
 
 typedef enum {
@@ -47,7 +45,7 @@ typedef enum {
     KWObject* chasing;
 }
 
-@dynamic capture;
+@synthesize basket;
 
 - (NSString*) description {
     return [[super description] stringByAppendingFormat:@" mood:%d energy:%d chasing:%@", (int)mood, (int)energy, self.chasing ? @"YES" : @"NO"];
@@ -104,12 +102,15 @@ typedef enum {
     state = st;
 }
 
-- (BOOL) captured { return self.capture; }
-- (void) setCaptured:(BOOL)cap {
-    self.capture = cap;
-    if (cap) {
+- (BOOL) captured { return basket != nil; }
+- (void) setBasket:(KWBasket*)bskt {
+    basket = bskt;
+    if (bskt) {
+        chasing = nil;
         mood = KWKittenMoodCaptured + kKWRandom(KWKittenMoodCaptured);
         self.state = KWKittenStateCaptured;
+    } else {
+        self.state = KWKittenStateSitting;
     }
 }
 
@@ -141,35 +142,39 @@ typedef enum {
 }
 
 - (BOOL) tick:(CGFloat)dt {
-    if (self.tired) {
+    if (self.captured) {
+        if (self.bored) {
+            self.basket = nil;
+        }
+    } else if (self.tired) {
         self.state = KWKittenStateSleeping;
         chasing = nil;
     } else if (self.bored) {
         [self explore];
     }
     
-    if (self.idle) {        
+    if (self.idle) {
         mood -= MIN(dt, kKWRandomPercent);
         energy += dt;
     } else {
         mood -= dt * kKWRandomPercent;
         energy -= MIN(dt, kKWRandomPercent);
     }
-                        
+
     [self turn:dt];
     
     UIColor* color = [UIColor blueColor];
     self.lineDashPattern = nil;
     if (self.touch) {
         color = UIColor.brownColor;
+    } else if (self.captured) {
+        color = UIColor.orangeColor;
+        self.lineDashPattern = @[@5, @5];
     } else if (self.idle) {
         color = UIColor.lightGrayColor;
         self.lineDashPattern = @[@2, @2];
     } else if (self.chasing) {
         color = UIColor.redColor;
-    } else if (self.captured) {
-        color = UIColor.orangeColor;
-        self.lineDashPattern = @[@5, @5];
     }
         
     self.strokeColor = color.CGColor;

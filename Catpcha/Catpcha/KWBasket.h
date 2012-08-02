@@ -12,9 +12,6 @@
 
 @interface KWBasket : KWObject
 
-@property (nonatomic, readonly, strong) NSMutableArray* kittens;
-
 - (id) initWithLevel:(KWLevel*)lvl;
-- (void) addKitten:(KWKitten*)kitten;
 
 @end

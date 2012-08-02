@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "KWObject.h"
 
+@class KWBasket;
+
 @interface KWKitten : KWObject
 
-@property (nonatomic, assign) BOOL captured;
+@property (nonatomic, weak) KWBasket* basket;
 
 - (id) initWithLevel:(KWLevel*)lvl;
 
@@ -19,6 +21,7 @@
 - (BOOL) stalking;
 - (BOOL) exploring;
 - (BOOL) chasing;
+- (BOOL) captured;
 
 - (BOOL) bored;
 - (BOOL) tired;

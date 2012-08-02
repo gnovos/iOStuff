@@ -49,7 +49,6 @@
                 [KWGFX animate:^{ o.position = [touch locationInView:self]; }];
             }
         }];
-        
     }];
 }
 
