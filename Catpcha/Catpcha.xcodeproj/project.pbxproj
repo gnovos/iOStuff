@@ -214,6 +214,7 @@
 		0C31C74015AA6F35004D1067 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0CD70BAF15CB3EDE008EF8CB /* Toys */,
 				0CF257B915B621260020B895 /* KWLevel.h */,
 				0CF257BA15B621260020B895 /* KWLevel.m */,
 				0C31C74715AA6F6F004D1067 /* KWObject.h */,
@@ -222,12 +223,6 @@
 				0C31C74215AA6F51004D1067 /* KWBasket.m */,
 				0C31C74415AA6F5F004D1067 /* KWKitten.h */,
 				0C31C74515AA6F5F004D1067 /* KWKitten.m */,
-				0C31C74A15AA6FB2004D1067 /* KWYarn.h */,
-				0C31C74B15AA6FB2004D1067 /* KWYarn.m */,
-				0CFF172315BCDF0400042C67 /* KWToy.h */,
-				0CFF172415BCDF0400042C67 /* KWToy.m */,
-				0CFF172615BCDF1F00042C67 /* KWMouse.h */,
-				0CFF172715BCDF1F00042C67 /* KWMouse.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -254,6 +249,19 @@
 				0C7F61C815B4BC3E00924B64 /* KWEngine.m */,
 			);
 			name = Engine;
+			sourceTree = "<group>";
+		};
+		0CD70BAF15CB3EDE008EF8CB /* Toys */ = {
+			isa = PBXGroup;
+			children = (
+				0C31C74A15AA6FB2004D1067 /* KWYarn.h */,
+				0C31C74B15AA6FB2004D1067 /* KWYarn.m */,
+				0CFF172315BCDF0400042C67 /* KWToy.h */,
+				0CFF172415BCDF0400042C67 /* KWToy.m */,
+				0CFF172615BCDF1F00042C67 /* KWMouse.h */,
+				0CFF172715BCDF1F00042C67 /* KWMouse.m */,
+			);
+			name = Toys;
 			sourceTree = "<group>";
 		};
 		0CF257C115B667EB0020B895 /* Views */ = {

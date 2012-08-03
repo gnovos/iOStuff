@@ -35,7 +35,7 @@
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
+    [[event touchesForView:self] enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
         CGPoint loc = [touch locationInView:self];        
         KWObject* obj = [[level touched:loc] lastObject];
         obj.touch = touch;
@@ -43,7 +43,7 @@
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
+    [[event touchesForView:self] enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
         [level.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *kstop) {
             if (o.touch == touch) {
                 [KWGFX animate:^{ o.position = [touch locationInView:self]; }];
@@ -53,7 +53,7 @@
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
+    [[event touchesForView:self] enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
         [level.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *kstop) {
             if (o.touch == touch) {
                 o.touch = nil;
@@ -65,7 +65,7 @@
 }
 
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [touches enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *stop) {
+    [[event touchesForView:self] enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *stop) {
         [level.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
             if (o.touch == touch) { o.touch = nil; }
         }];

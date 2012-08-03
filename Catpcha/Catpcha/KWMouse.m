@@ -11,9 +11,7 @@
 @implementation KWMouse
 
 - (id) initWithLevel:(KWLevel*)lvl {
-    if (self = [super initWithLevel:lvl andSize:kKWDefaultMouseSize]) {
-        UIBezierPath* shape = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
-        self.path = shape.CGPath;
+    if (self = [super initWithLevel:lvl andSize:KWDefaultMouseSize]) {
         self.fillColor = [UIColor darkGrayColor].CGColor;
                 
         self.velocity = KWObjectVelocityVeryFast;
@@ -22,8 +20,10 @@
     return self;
 }
 
+- (UIBezierPath*) shape { return [UIBezierPath bezierPathWithOvalInRect:self.bounds]; }
+
 - (BOOL) tick:(CGFloat)dt {
-    CGFloat tilt = kKWRandom(kKWAngle23Degrees);
+    CGFloat tilt = KWRandom(KWAngle23Degrees);
     if ((int)tilt % 2 == 0) {
         tilt *= -1;
     }

@@ -13,6 +13,7 @@
 //irate
 
 //need better collision detect and handle
+//handle rapid change on heading cleaner
 
 //kitten ai should change with level
 //better ai (chase, staking, better motion states, etc)
@@ -21,6 +22,8 @@
 ////crashing into each other
 
 //add toys, etc.
+//yarn rolls
+//mice randomly appear on screen
 
 //spash/level screenz (and win screens)
 

@@ -9,12 +9,13 @@
 #import "KWLevel.h"
 #import "KWBasket.h"
 #import "KWKitten.h"
-#import "KWMouse.h"
 #import "KWToy.h"
+#import "KWMouse.h"
+#import "KWYarn.h"
 
-static const int kKWTimeLimitMaxSeconds = 2 * 60;
+static const int KWTimeLimitMaxSeconds = 2 * 60;
 
-static const int kKWTimeLimitLevelCost  = 5;
+static const int KWTimeLimitLevelCost  = 5;
 
 @implementation KWLevel {
         
@@ -71,7 +72,7 @@ static const int kKWTimeLimitLevelCost  = 5;
         [self addSublayer:text];
                 
         level = lvl;
-        timelimit = kKWTimeLimitMaxSeconds - (kKWTimeLimitLevelCost * level);
+        timelimit = KWTimeLimitMaxSeconds - (KWTimeLimitLevelCost * level);
 
         objects = [[NSMutableArray alloc] init];
         
@@ -80,12 +81,11 @@ static const int kKWTimeLimitLevelCost  = 5;
             [objects addObject:[[KWBasket alloc] initWithLevel:self]];
         }
         
-        for (int i = 0; i < level * (kKWRandom(kKWKittensPerLevel) + kKWKittensPerLevel); i++) {
+        for (int i = 0; i < level * (KWRandom(KWKittensPerLevel) + KWKittensPerLevel); i++) {
             [objects addObject:[[KWKitten alloc] initWithLevel:self]];
         }
         
-        [objects addObject:[[KWMouse alloc] initWithLevel:self]];
-        
+        [objects addObject:[[KWYarn alloc] initWithLevel:self]];
         
         [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
             while (!CGRectContainsRect(self.bounds, obj.frame) || ![self vacant:obj.frame excluding:obj]) {
@@ -96,6 +96,17 @@ static const int kKWTimeLimitLevelCost  = 5;
                 
     }
     return self;
+}
+
+- (void) addMouse {
+    KWMouse* mouse = [[KWMouse alloc] initWithLevel:self];
+    
+    while (!CGRectContainsRect(self.bounds, mouse.frame) || ![self vacant:mouse.frame excluding:mouse]) {
+        mouse.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
+    }
+
+    [self addSublayer:mouse];
+    [objects addObject:mouse];
 }
 
 - (NSTimeInterval) remaining {
@@ -135,7 +146,10 @@ static const int kKWTimeLimitLevelCost  = 5;
             }];
         }
     }];
-    
+        
+    if (KWRandomPercent < KWMouseChance * self.kittens.count) {
+        [self addMouse];
+    }
     
     self.path = path.CGPath;
     
@@ -172,6 +186,7 @@ static const int kKWTimeLimitLevelCost  = 5;
     }]];
 }
 
+//xxx rethink this?
 - (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj {
     
     __block BOOL vacant = YES;

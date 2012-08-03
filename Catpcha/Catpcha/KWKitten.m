@@ -54,12 +54,7 @@ typedef enum {
 }
 
 - (id) initWithLevel:(KWLevel*)lvl {
-    if (self = [super initWithLevel:lvl andSize:kKWDefaultKittenSize]) {
-        UIBezierPath* shape = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
-        [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f - 10.0f)];
-        [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f + 10.0f)];
-        [shape addLineToPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height / 2.0f)];
-        self.path = shape.CGPath;
+    if (self = [super initWithLevel:lvl andSize:KWDefaultKittenSize]) {
         self.lineWidth = 2.0f;
         self.strokeColor = [UIColor blueColor].CGColor;
         
@@ -69,6 +64,14 @@ typedef enum {
         energy = arc4random_uniform(KWKittenEnergyExcited);
     }
     return self;
+}
+
+- (UIBezierPath*) shape {
+    UIBezierPath* shape = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
+    [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f - 10.0f)];
+    [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f + 10.0f)];
+    [shape addLineToPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height / 2.0f)];
+    return shape;
 }
 
 - (BOOL) idle      { return state == KWKittenStateSitting || state == KWKittenStateSleeping; }
@@ -114,14 +117,14 @@ typedef enum {
     basket = bskt;
     if (bskt) {
         [self chase:nil];
-        mood = KWKittenMoodCaptured + kKWRandom(KWKittenMoodCaptured);
+        mood = KWKittenMoodCaptured + KWRandom(KWKittenMoodCaptured);
         self.state = KWKittenStateCaptured;
     } else {
         self.state = KWKittenStateSitting;
     }
 }
 
-- (CGFloat) interest { return kKWRandomPercent; }
+- (CGFloat) interest { return KWRandomPercent; }
 
 - (void) chase:(KWObject*)chase {
     chasing = chase;
@@ -134,7 +137,7 @@ typedef enum {
             [self.level capture:chasing];
         }
         chasing = nil;
-        mood = KWKittenMoodPlayful + (KWKittenMoodPlayful * kKWRandomPercent);
+        mood = KWKittenMoodPlayful + (KWKittenMoodPlayful * KWRandomPercent);
         self.state = KWKittenStatePlaying;
     }
 }
@@ -148,7 +151,7 @@ typedef enum {
     } else if (self.bored) {
         [self chase:nil];
         self.state = KWKittenStateExploring;
-        self.heading += kKWRandomHeading;
+        self.heading += KWRandomHeading;
         mood = KWKittenMoodInterested;
     } if (self.chasing) {
         if (chasing.moving) {
@@ -172,11 +175,11 @@ typedef enum {
     }
 
     if (self.idle) {
-        mood -= MIN(dt, kKWRandomPercent);
+        mood -= MIN(dt, KWRandomPercent);
         energy += dt;
     } else {
-        mood -= dt * kKWRandomPercent;
-        energy -= MIN(dt, kKWRandomPercent);
+        mood -= dt * KWRandomPercent;
+        energy -= MIN(dt, KWRandomPercent);
     }
 
     UIColor* color = [UIColor blueColor];

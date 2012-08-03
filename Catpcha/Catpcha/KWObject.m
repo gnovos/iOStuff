@@ -29,11 +29,39 @@
         allure = 0.0f;
         level = lvl;
         self.needsDisplayOnBoundsChange = YES;
-        heading = kKWRandomHeading;
+        heading = KWRandomHeading;
         self.bounds = CGRectMake(0, 0, size.width, size.height);
+        self.path = self.shape.CGPath;
+        [self addObserver:self forKeyPath:@"touch" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:NULL];
+        [self addObserver:self forKeyPath:@"position" options:(NSKeyValueObservingOptionOld) context:NULL];
     }
     return self;
 }
+
+- (UIBezierPath*) shape { return nil; }
+
+- (void) observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
+    if ([@"position" isEqualToString:keyPath] && self.touch) {
+        CGFloat angle = [self angle:self.position end:[[change valueForKey:@"old"] CGPointValue]];
+        self.heading = angle;
+    } else if ([@"touch" isEqualToString:keyPath]) {
+        id last = [change valueForKey:@"old"];
+        id touch = [change valueForKey:@"new"];
+        
+        if (last == [NSNull null]) { last = nil; }
+        if (touch == [NSNull null]) { touch = nil; }
+        
+        if (last == nil || touch != nil) {
+            [self grab];
+        } else if (touch == nil) {            
+            [self drop];
+        }
+    }
+}
+
+- (void) grab {}
+
+- (void) drop {}
 
 + (BOOL) needsDisplayForKey:(NSString *)key {
     
@@ -52,17 +80,20 @@
 
 - (BOOL) moving   { return !self.touch && self.velocity > KWObjectVelocityMotionless; }
 
-- (CGFloat) direction:(KWObject*)other {
-    CGPoint p = self.position;
-    CGPoint q = other.position;
+- (CGFloat) angle:(CGPoint)start end:(CGPoint)end {
     
-    CGFloat slope = (p.x - q.x) / (p.y - q.y);
+    CGFloat slope = (start.x - end.x) / (start.y - end.y);
     
     CGFloat angle = -radiansToDegrees(atanf(slope));
     
-    angle += (p.y > q.y) ? -90 : 90;
-
+    angle += (start.y > end.y) ? -90 : 90;
+    
     return angle;
+
+}
+
+- (CGFloat) direction:(KWObject*)other {
+    return [self angle:self.position end:other.position];
 }
 
 - (BOOL) tick:(CGFloat)dt {
@@ -74,8 +105,8 @@
             }
         }];        
         
-        while (heading < 0 || heading > kKWAngle360Degrees) {
-            heading += heading < 0 ? kKWAngle360Degrees : -kKWAngle360Degrees;
+        while (heading < 0 || heading > KWAngle360Degrees) {
+            heading += heading < 0 ? KWAngle360Degrees : -KWAngle360Degrees;
         }
         
         CGFloat dir = degreesToRadians(heading);
@@ -108,11 +139,11 @@
             if (p.y > CGRectGetMaxY(level.bounds)){
                 p.y = CGRectGetMaxY(level.bounds) - 1.0f;
             }
-            heading += kKWRandomHeading;
+            heading += KWRandomHeading;
         }
 
-        CGRect rect = self.frame;
-        rect.origin = CGPointMake(p.x - self.frame.size.width / 2.0f, p.y - self.frame.size.height / 2.0f);
+//        CGRect rect = self.frame;
+//        rect.origin = CGPointMake(p.x - self.frame.size.width / 2.0f, p.y - self.frame.size.height / 2.0f);
         
         self.position = p;
         

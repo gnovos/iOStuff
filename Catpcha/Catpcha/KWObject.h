@@ -13,6 +13,7 @@
 typedef enum {
     KWObjectVelocityMotionless = 0,
     KWObjectVelocityVerySlow   = 5,
+    KWObjectVelocityRoll       = 20,
     KWObjectVelocitySlow       = 50,
     KWObjectVelocityAverage    = 100,
     KWObjectVelocityFast       = 150,
@@ -33,10 +34,16 @@ typedef enum {
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size;
 
+- (UIBezierPath*) shape;
+
 - (BOOL) moving;
 
 - (BOOL) tick:(CGFloat)dt;
 
 - (CGFloat) direction:(KWObject*)other;
+
+- (void) grab;
+- (void) drop;
+
 
 @end

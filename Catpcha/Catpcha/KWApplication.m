@@ -15,8 +15,8 @@
 
 #import "SSKeychain.h"
 
-#define kKWUDIDService @"org.casuallama.UDID.v1"
-#define kKWUDIDAccount @"catpcha"
+#define KWUDIDService @"org.casuallama.UDID.v1"
+#define KWUDIDAccount @"catpcha"
 
 @implementation KWApplication
 
@@ -25,7 +25,7 @@
     static NSString* udid;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        udid = [SSKeychain passwordForService:kKWUDIDService account:kKWUDIDAccount];
+        udid = [SSKeychain passwordForService:KWUDIDService account:KWUDIDAccount];
         if (udid == nil) {
             NSDictionary* info = [[NSBundle mainBundle] infoDictionary];
             NSString* app = [info objectForKey:@"CFBundleDisplayName"];
@@ -33,7 +33,7 @@
             NSString* build = [info objectForKey:@"CFBundleVersion"];
             
             NSString* xudid = [NSString stringWithFormat:@"[%@] %@/(%@) %@", app, version, build, [self mac]];
-            [SSKeychain setPassword:xudid forService:kKWUDIDService account:kKWUDIDAccount];
+            [SSKeychain setPassword:xudid forService:KWUDIDService account:KWUDIDAccount];
         }
         
     });
@@ -82,7 +82,7 @@
     // Befor going any further...
     if (errorFlag != NULL)
     {
-        NSLog(@"Error: %@", errorFlag);
+        dlog(@"Error: %@", errorFlag);
         return errorFlag;
     }
     

@@ -9,31 +9,38 @@
 #ifndef Catpcha_KWConst_h
 #define Catpcha_KWConst_h
 
-static const CGFloat kKWAngle0Degrees   = 0.0f;
-static const CGFloat kKWAngle15Degrees  = 15.0f;
-static const CGFloat kKWAngle23Degrees  = 23.0f;
-static const CGFloat kKWAngle45Degrees  = 45.0f;
-static const CGFloat kKWAngle90Degrees  = 90.0f;
-static const CGFloat kKWAngle180Degrees = 180.0f;
-static const CGFloat kKWAngle270Degrees = 270.0f;
-static const CGFloat kKWAngle360Degrees = 360.0f;
+static const CGFloat KWAngle0Degrees   = 0.0f;
+static const CGFloat KWAngle15Degrees  = 15.0f;
+static const CGFloat KWAngle23Degrees  = 23.0f;
+static const CGFloat KWAngle45Degrees  = 45.0f;
+static const CGFloat KWAngle90Degrees  = 90.0f;
+static const CGFloat KWAngle180Degrees = 180.0f;
+static const CGFloat KWAngle270Degrees = 270.0f;
+static const CGFloat KWAngle360Degrees = 360.0f;
 
-static const CGFloat kKWKittensPerLevel = 3;
+static const CGFloat KWKittensPerLevel = 3;
 
 #define KWCGRectCenter(x) CGPointMake(CGRectGetMidX(x), CGRectGetMidY(x))
-#define kKWRandom(amount) arc4random_uniform(amount)
-#define kKWRandomHeading kKWRandom(kKWAngle360Degrees)
-#define kKWRandomPercent (kKWRandom(100) / 100.0f)
+#define KWRandom(amount) arc4random_uniform(amount)
+#define KWRandomHeading KWRandom(KWAngle360Degrees)
+#define KWRandomPercent (KWRandom(1000000) / 1000000.0f)
 
-#define degreesToRadians(deg) (deg * M_PI / kKWAngle180Degrees)
-#define radiansToDegrees(rad) (rad * kKWAngle180Degrees / M_PI)
+#define KWMouseChance 0.001f
 
-static const CGSize kKWDefaultKittenSize = { 35, 35 };
-static const CGSize kKWDefaultBasketSize = { 70, 70 };
-static const CGSize kKWDefaultMouseSize  = { 10, 10 };
-static const CGSize kKWDefaultYarnSize   = { 50, 50 };
+#define KWRandomSign ((KWRandom(2) % 2 == 0) ? 1 : -1)
 
-#define kKWCheckpointLaunch @"[CHECKPOINT] Launch"
+#define degreesToRadians(deg) (deg * M_PI / KWAngle180Degrees)
+#define radiansToDegrees(rad) (rad * KWAngle180Degrees / M_PI)
+
+static const CGSize KWDefaultKittenSize = { 35, 35 };
+static const CGSize KWDefaultBasketSize = { 70, 70 };
+static const CGSize KWDefaultMouseSize  = { 10, 10 };
+static const CGSize KWDefaultYarnSize   = { 50, 50 };
+
+static const CGSize KWMinToySize        = { 10, 10 };
+
+
+#define KWCheckpointLaunch @"[CHECKPOINT] Launch"
 
 
 #endif
