@@ -9,8 +9,9 @@
 #import "KWBasket.h"
 #import "KWKitten.h"
 #import "KWLevel.h"
+#import "NSObject+KWO.h"
 
-@implementation KWBasket 
+@implementation KWBasket
 
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:KWDefaultBasketSize]) {
@@ -22,10 +23,20 @@
         self.shadowOffset = CGSizeMake(2.0, 2.0);
         self.shadowRadius = 3.0f;
         self.shadowOpacity = 0.7f;
+        
+        __weak KWObject* slf = self;
+        [self.level observe:@"bias" with:^(NSDictionary* change) {
+            CGSize offset = [[change objectForKey:@"new"] CGSizeValue];
+            offset.width *= 5.0f;
+            offset.height *= 5.0f;
+            slf.shadowOffset = offset;
+        }];
     }
     return self;
 }
 
 - (UIBezierPath*) shape { return [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:7.0f]; }
+
+
 
 @end

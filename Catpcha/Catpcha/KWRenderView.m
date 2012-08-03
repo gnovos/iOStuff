@@ -27,11 +27,8 @@
 }
 
 - (void) reset {
-    
     [[self.layer sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    
     [self.layer addSublayer:self.level];
-        
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

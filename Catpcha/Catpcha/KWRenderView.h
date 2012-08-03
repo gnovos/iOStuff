@@ -11,6 +11,6 @@
 
 @interface KWRenderView : UIView
 
-@property (nonatomic, strong) KWLevel* level;
+@property (nonatomic, weak) KWLevel* level;
 
 @end

@@ -62,7 +62,7 @@
     
     KWRenderView* renderer = self.render;
     [engine add:^(KWEngineEvent event, id level) {
-        if (event == KWEngineEventLevelComplete) {
+        if (event == KWEngineEventLevelBegin) {
             renderer.level = level;            
         }
     }];
@@ -70,7 +70,7 @@
     motion = [[CMMotionManager alloc] init];
     
     if (motion.isDeviceMotionAvailable) {
-		motion.deviceMotionUpdateInterval = 1.0 / 10.0;
+		motion.deviceMotionUpdateInterval = 1.0f / 4.0f;
         [motion startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion* move, NSError* error) {
             CMAttitude* attitude = move.attitude;
             engine.level.bias = CGPointMake(attitude.roll, attitude.pitch);

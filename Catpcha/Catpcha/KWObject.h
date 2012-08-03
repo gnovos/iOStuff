@@ -27,7 +27,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL catchable;
 
 @property (nonatomic, weak) UITouch* touch;
-@property (nonatomic, readonly, assign) KWLevel* level;
+@property (nonatomic, readonly, weak) KWLevel* level;
 @property (nonatomic, assign) CGFloat heading;
 @property (nonatomic, assign) KWObjectVelocity velocity;
 

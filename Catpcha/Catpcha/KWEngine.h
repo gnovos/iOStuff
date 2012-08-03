@@ -10,7 +10,8 @@
 #import "KWLevel.h"
 
 typedef enum {
-    KWEngineEventLevelComplete
+    KWEngineEventLevelComplete,
+    KWEngineEventLevelBegin
 } KWEngineEvent;
 
 @interface KWEngine : NSObject

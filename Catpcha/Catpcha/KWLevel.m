@@ -29,7 +29,15 @@ static const int KWTimeLimitLevelCost  = 5;
     NSMutableArray* objects;
 }
 
-@synthesize level, timelimit, bias;
+@synthesize level, timelimit;
+@dynamic bias;
+
++ (BOOL) needsDisplayForKey:(NSString *)key {
+    static NSArray* keys;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{ keys = @[@"bias"]; });
+    return [keys containsObject:key] || [super needsDisplayForKey:key];
+}
 
 - (NSString*) description {
     return [NSString stringWithFormat:@"level:%d limit:%d/%ds objects:%d",

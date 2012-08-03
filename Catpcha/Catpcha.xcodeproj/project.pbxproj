@@ -35,6 +35,7 @@
 		0C47B23B15BC9B7A00B259B0 /* KWGFX.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B23A15BC9B7A00B259B0 /* KWGFX.m */; };
 		0C7F61C915B4BC3E00924B64 /* KWEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F61C815B4BC3E00924B64 /* KWEngine.m */; };
 		0CD70BB515CB8EFD008EF8CB /* CALayer+KWMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD70BB415CB8EFD008EF8CB /* CALayer+KWMsg.m */; };
+		0CD70BC915CBBFE8008EF8CB /* NSObject+KWO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD70BC815CBBFE8008EF8CB /* NSObject+KWO.m */; };
 		0CF257BB15B621260020B895 /* KWLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF257BA15B621260020B895 /* KWLevel.m */; };
 		0CF257BE15B635F20020B895 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CF257BD15B635F10020B895 /* QuartzCore.framework */; };
 		0CF257C515B668220020B895 /* KWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF257C415B668220020B895 /* KWViewController.m */; };
@@ -88,6 +89,8 @@
 		0C7F61C815B4BC3E00924B64 /* KWEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWEngine.m; sourceTree = "<group>"; };
 		0CD70BB315CB8EFD008EF8CB /* CALayer+KWMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+KWMsg.h"; sourceTree = "<group>"; };
 		0CD70BB415CB8EFD008EF8CB /* CALayer+KWMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+KWMsg.m"; sourceTree = "<group>"; };
+		0CD70BC715CBBFE8008EF8CB /* NSObject+KWO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KWO.h"; sourceTree = "<group>"; };
+		0CD70BC815CBBFE8008EF8CB /* NSObject+KWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KWO.m"; sourceTree = "<group>"; };
 		0CF257B915B621260020B895 /* KWLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWLevel.h; sourceTree = "<group>"; };
 		0CF257BA15B621260020B895 /* KWLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWLevel.m; sourceTree = "<group>"; };
 		0CF257BD15B635F10020B895 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -243,6 +246,8 @@
 				0C15C3C515CB2BA8008A4DA7 /* KWApplication.m */,
 				0CD70BB315CB8EFD008EF8CB /* CALayer+KWMsg.h */,
 				0CD70BB415CB8EFD008EF8CB /* CALayer+KWMsg.m */,
+				0CD70BC715CBBFE8008EF8CB /* NSObject+KWO.h */,
+				0CD70BC815CBBFE8008EF8CB /* NSObject+KWO.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -391,6 +396,7 @@
 				0C15C3C315CB2B5B008A4DA7 /* SSKeychain.m in Sources */,
 				0C15C3C615CB2BA9008A4DA7 /* KWApplication.m in Sources */,
 				0CD70BB515CB8EFD008EF8CB /* CALayer+KWMsg.m in Sources */,
+				0CD70BC915CBBFE8008EF8CB /* NSObject+KWO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

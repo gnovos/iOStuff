@@ -18,7 +18,7 @@ static const CGFloat KWAngle180Degrees = 180.0f;
 static const CGFloat KWAngle270Degrees = 270.0f;
 static const CGFloat KWAngle360Degrees = 360.0f;
 
-static const CGFloat KWKittensPerLevel = 3;
+static const CGFloat KWKittensPerLevel = 2;
 
 #define KWCGRectCenter(x) CGPointMake(CGRectGetMidX(x), CGRectGetMidY(x))
 #define KWRandom(amount) arc4random_uniform(amount)

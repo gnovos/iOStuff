@@ -8,12 +8,20 @@
 
 #import "KWObject.h"
 #import "KWLevel.h"
+#import "NSObject+KWO.h"
 
 @implementation KWObject
 
 @synthesize level, heading, touchable, catchable, allure;
 
 @dynamic touch, velocity;
+
++ (BOOL) needsDisplayForKey:(NSString *)key {
+    static NSArray* keys;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{ keys = @[@"velocity", @"touch",@"capture"]; });
+    return [keys containsObject:key] || [super needsDisplayForKey:key];
+}
 
 - (NSString*) description {
     return [NSString stringWithFormat:@"%@ loc:(%d,%d) v:%d",
@@ -22,6 +30,7 @@
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
+        
         self.lineWidth = 1.0f;
         self.fillColor = nil;
         touchable = NO;
@@ -32,58 +41,40 @@
         heading = KWRandomHeading;
         self.bounds = CGRectMake(0, 0, size.width, size.height);
         self.path = self.shape.CGPath;
-        [self addObserver:self forKeyPath:@"touch" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:NULL];
-        [self addObserver:self forKeyPath:@"position" options:(NSKeyValueObservingOptionOld) context:NULL];
+        
+        __weak KWObject* slf = self;
+        
+        [self observe:@"touch" with:^(NSDictionary *change) {
+            id last = [change valueForKey:@"old"];
+            id touch = [change valueForKey:@"new"];
+            
+            if (last == [NSNull null]) { last = nil; }
+            if (touch == [NSNull null]) { touch = nil; }
+            
+            if (last == nil || touch != nil) {
+                [slf grab];
+            } else if (touch == nil) {
+                [slf drop];
+            }
+        }];
+        
+        [self observe:@"position" with:^(NSDictionary *change) {
+            if ([change valueForKey:@"old"]) {
+                CGPoint loc = slf.position;
+                CGPoint last = [[change valueForKey:@"old"] CGPointValue];
+                CGFloat angle = [slf angle:last end:loc];
+                slf.heading = angle;
+            }
+        }];
     }
     return self;
 }
 
-- (void) dealloc {
-    [self removeObserver:self forKeyPath:@"position"];
-    [self removeObserver:self forKeyPath:@"touch"];
-}
-
 - (UIBezierPath*) shape { return nil; }
-
-- (void) observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
-    if ([@"position" isEqualToString:keyPath] && self.touch) {
-        CGPoint loc = self.position;
-        CGPoint last = [[change valueForKey:@"old"] CGPointValue];
-        CGFloat angle = [self angle:last end:loc];
-        self.heading = angle;        
-    } else if ([@"touch" isEqualToString:keyPath]) {
-        id last = [change valueForKey:@"old"];
-        id touch = [change valueForKey:@"new"];
-        
-        if (last == [NSNull null]) { last = nil; }
-        if (touch == [NSNull null]) { touch = nil; }
-        
-        if (last == nil || touch != nil) {
-            [self grab];
-        } else if (touch == nil) {            
-            [self drop];
-        }
-    }
-}
 
 - (void) grab {}
 
 - (void) drop {}
-
-+ (BOOL) needsDisplayForKey:(NSString *)key {
-    
-    static NSSet* keys;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        keys = [NSSet setWithObjects:
-                @"velocity",
-                @"touch",
-                @"capture",
-                nil];
-    });
-    
-    return [keys containsObject:key] || [super needsDisplayForKey:key];
-}
 
 - (BOOL) moving   { return !self.touch && self.velocity > KWObjectVelocityMotionless; }
 
@@ -135,7 +126,7 @@
         
         CGFloat dm = self.velocity * dt;
         
-        __block CGPoint p = self.position;
+        CGPoint p = self.position;
         
         CGPoint bias = level.bias;
         
@@ -157,10 +148,6 @@
             }
             heading += KWRandomHeading;
         }
-
-        //xxx what is ths?
-//        CGRect rect = self.frame;
-//        rect.origin = CGPointMake(p.x - self.frame.size.width / 2.0f, p.y - self.frame.size.height / 2.0f);
         
         self.position = p;
         
