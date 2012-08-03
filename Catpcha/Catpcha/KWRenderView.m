@@ -52,7 +52,7 @@
     }];
 }
 
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {    
     [[event touchesForView:self] enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
         [level.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *kstop) {
             if (o.touch == touch) {

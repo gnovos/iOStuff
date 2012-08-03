@@ -42,8 +42,10 @@
 
 - (void) observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
     if ([@"position" isEqualToString:keyPath] && self.touch) {
-        CGFloat angle = [self angle:self.position end:[[change valueForKey:@"old"] CGPointValue]];
-        self.heading = -angle;
+        CGPoint loc = self.position;
+        CGPoint last = [[change valueForKey:@"old"] CGPointValue];
+        CGFloat angle = [self angle:last end:loc];
+        self.heading = angle;        
     } else if ([@"touch" isEqualToString:keyPath]) {
         id last = [change valueForKey:@"old"];
         id touch = [change valueForKey:@"new"];
@@ -82,8 +84,17 @@
 
 - (CGFloat) angle:(CGPoint)start end:(CGPoint)end {
     
-    CGFloat slope = (start.x - end.x) / (start.y - end.y);
+    float dx = start.x - end.x;
+    float dy = start.y - end.y;
     
+    CGFloat slope = dx / dy;
+    
+    if (slope == INFINITY) {
+        return KWAngle180Degrees;
+    } else if (slope == -INFINITY) {
+        return KWAngle0Degrees;
+    }
+        
     CGFloat angle = -radiansToDegrees(atanf(slope));
     
     angle += (start.y > end.y) ? -90 : 90;
@@ -142,6 +153,7 @@
             heading += KWRandomHeading;
         }
 
+        //xxx what is ths?
 //        CGRect rect = self.frame;
 //        rect.origin = CGPointMake(p.x - self.frame.size.width / 2.0f, p.y - self.frame.size.height / 2.0f);
         

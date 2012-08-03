@@ -33,9 +33,9 @@
 }
 
 - (void) drop {
-    roll = [[NSDate date] timeIntervalSinceDate:start] * 10.0f;
+    roll = [[NSDate date] timeIntervalSinceDate:start] * 10.0f; //xxx make constant
     start = nil;        
-    self.velocity = KWObjectVelocityRoll;
+    self.velocity = KWObjectVelocityAverage;
 }
 
 - (BOOL) tick:(CGFloat)dt {
@@ -46,10 +46,11 @@
         self.catchable = YES;
         self.touchable = NO;
     } else {
-        roll -= dt;        
-        if (roll < 0) {
+        roll -= dt;
+        if (roll < 0 || self.velocity < dt) {
             self.velocity = KWObjectVelocityMotionless;
         } else {
+            self.velocity -= dt;
             [self shrink:dt];
         }
     }
