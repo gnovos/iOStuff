@@ -59,13 +59,14 @@
         }];
         
         [self observe:@"position" with:^(NSDictionary *change) {
-            if ([change valueForKey:@"old"]) {
+            if (slf.touch && [change valueForKey:@"old"]) {
                 CGPoint loc = slf.position;
                 CGPoint last = [[change valueForKey:@"old"] CGPointValue];
                 CGFloat angle = [slf angle:last end:loc];
                 slf.heading = angle;
             }
         }];
+        
     }
     return self;
 }

@@ -39,8 +39,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    //[self login];
-    [self start];//xxxx
+    [self login];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

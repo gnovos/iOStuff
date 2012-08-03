@@ -56,6 +56,11 @@ static const int KWTimeLimitLevelCost  = 5;
         return [obj isKindOfClass:[KWBasket class]];
     }]];
 }
+- (NSArray*) mice {
+    return [self.objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWObject* obj, NSDictionary *bindings) {
+        return [obj isKindOfClass:[KWMouse class]];
+    }]];
+}
 
 - (id) initLevel:(int)lvl {
     if (self = [self init]) {
@@ -90,11 +95,15 @@ static const int KWTimeLimitLevelCost  = 5;
             [objects addObject:[[KWBasket alloc] initWithLevel:self]];
         }
         
-        for (int i = 0; i < level * (KWRandom(KWKittensPerLevel) + KWKittensPerLevel); i++) {
+        int kitcount = MAX(level, KWRandom(KWKittensPerLevel * level));
+        
+        for (int i = 0; i < kitcount; i++) {
             [objects addObject:[[KWKitten alloc] initWithLevel:self]];
         }
         
-        [objects addObject:[[KWYarn alloc] initWithLevel:self]];
+        if (level % 3 == 0) {
+            [objects addObject:[[KWYarn alloc] initWithLevel:self]];            
+        }
         
         [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
             while (!CGRectContainsRect(self.bounds, obj.frame) || ![self vacant:obj.frame excluding:obj]) {
@@ -153,7 +162,7 @@ static const int KWTimeLimitLevelCost  = 5;
         if ([o tick:dt]) { [o setNeedsDisplay]; }
     }];
     
-    if (KWRandomPercent < KWMouseChance * self.kittens.count) {
+    if (self.mice.count < (self.level / 2.0) && KWRandomPercent < KWMouseChance * self.kittens.count) {
         [self addMouse];
     }
         
@@ -184,8 +193,7 @@ static const int KWTimeLimitLevelCost  = 5;
 
 - (NSArray*) touched:(CGPoint)point {
     return [self.objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWObject* o, NSDictionary *bindings) {
-        float feather = -10.0f;
-        return o.touchable && CGRectContainsPoint(CGRectInset(o.frame, feather, feather), point);
+        return o.touchable && CGRectContainsPoint(CGRectInset(o.frame, KWTouchFeather, KWTouchFeather), point);
     }]];
 }
 
@@ -228,9 +236,7 @@ static const int KWTimeLimitLevelCost  = 5;
                     size.size = seer.frame.size;
                 }
                 
-                //xxx look into making this a constant or less constant?
-                CGRect view = CGRectInset(size, -10.0f, -10.0f);
-                
+                CGRect view = CGRectInset(size, KWTouchFeather, KWTouchFeather);                
                 if (CGRectContainsPoint(view, q)) {
                     [visible addObject:obj];
                 }            

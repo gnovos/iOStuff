@@ -40,6 +40,14 @@ static const CGSize KWDefaultYarnSize   = { 50, 50 };
 static const CGSize KWMinToySize        = { 10, 10 };
 
 
+#define KWNoticePadding 10.0f
+#define KWNoticeFontSize 12.0f
+
+#define KWFlashDuration 1.0f
+#define KWHoverDuration 3.5f
+
+#define KWTouchFeather -10.0f
+
 #define KWCheckpointLaunch @"[CHECKPOINT] Launch"
 
 

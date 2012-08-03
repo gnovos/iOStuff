@@ -8,13 +8,6 @@
 
 #import "CALayer+KWMsg.h"
 
-#define KWNoticePadding 10.0f
-#define KWNoticeFontSize 12.0f
-
-#define KWFlashDuration 1.0f
-#define KWHoverDuration 3.5f
-
-
 @implementation CALayer (KWMsg)
 
 - (UIFont*) font { return [UIFont systemFontOfSize:KWNoticeFontSize]; }
