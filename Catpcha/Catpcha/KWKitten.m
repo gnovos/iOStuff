@@ -59,7 +59,7 @@ typedef enum {
         self.strokeColor = [UIColor blueColor].CGColor;
         
         self.touchable = YES;
-        self.allure = 0.05f;
+        self.allure = 0.005f;
         mood = KWKittenMoodBored;
         energy = arc4random_uniform(KWKittenEnergyExcited);
     }

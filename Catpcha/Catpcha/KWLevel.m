@@ -133,26 +133,14 @@ static const int KWTimeLimitLevelCost  = 5;
         return;
     }
         
-    UIBezierPath* path = [[UIBezierPath alloc] init];
-    
     [self.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
         if ([o tick:dt]) { [o setNeedsDisplay]; }
-        
-        if (o.moving && [o isKindOfClass:[KWKitten class]]) {
-            [[self sight:o] enumerateObjectsUsingBlock:^(KWObject* kk, NSUInteger idx, BOOL *lstop) {
-                [path moveToPoint:o.position];
-                [path addLineToPoint:kk.position];
-                [path closePath];
-            }];
-        }
     }];
-        
+    
     if (KWRandomPercent < KWMouseChance * self.kittens.count) {
         [self addMouse];
     }
-    
-    self.path = path.CGPath;
-    
+        
     double remaining = self.remaining;
     float remain = (0.8f * (1.0f - (remaining / self.timelimit)));
     
