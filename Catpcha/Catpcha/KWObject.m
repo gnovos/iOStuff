@@ -43,7 +43,7 @@
 - (void) observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
     if ([@"position" isEqualToString:keyPath] && self.touch) {
         CGFloat angle = [self angle:self.position end:[[change valueForKey:@"old"] CGPointValue]];
-        self.heading = angle;
+        self.heading = -angle;
     } else if ([@"touch" isEqualToString:keyPath]) {
         id last = [change valueForKey:@"old"];
         id touch = [change valueForKey:@"new"];
