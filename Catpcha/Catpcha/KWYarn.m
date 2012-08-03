@@ -9,6 +9,8 @@
 #import "KWYarn.h"
 #import "KWLevel.h"
 
+#define KWRollTime 10.0f;
+
 @implementation KWYarn {
     NSDate* start;
     CGFloat roll;
@@ -33,7 +35,7 @@
 }
 
 - (void) drop {
-    roll = [[NSDate date] timeIntervalSinceDate:start] * 10.0f; //xxx make constant
+    roll = [[NSDate date] timeIntervalSinceDate:start] * KWRollTime;
     start = nil;        
     self.velocity = KWObjectVelocityFast;
 }

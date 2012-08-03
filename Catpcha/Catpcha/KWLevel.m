@@ -91,9 +91,6 @@ static const int KWTimeLimitLevelCost  = 5;
         objects = [[NSMutableArray alloc] init];
         
         [objects addObject:[[KWBasket alloc] initWithLevel:self]];
-        for (int i = 0; i < level / 3; i++) {
-            [objects addObject:[[KWBasket alloc] initWithLevel:self]];
-        }
         
         int kitcount = MAX(level, KWRandom(KWKittensPerLevel * level));
         

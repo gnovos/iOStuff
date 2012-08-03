@@ -15,15 +15,15 @@
 //need better collision detect and handle
 //handle rapid change on heading cleaner
 
+//screen zooming
+
 //kitten ai should change with level
 //better ai (chase, staking, better motion states, etc)
 ////stalking
-////catching things
-////crashing into each other
+////crashing into each other?
 
 //add toys, etc.
-//yarn rolls
-//mice randomly appear on screen
+//yarn rolls (kittens can bat?) (roll with velocity?) (trail on ground for yarn?)
 
 //spash/level screenz (and win screens)
 
