@@ -35,7 +35,7 @@
 - (void) drop {
     roll = [[NSDate date] timeIntervalSinceDate:start] * 10.0f; //xxx make constant
     start = nil;        
-    self.velocity = KWObjectVelocityAverage;
+    self.velocity = KWObjectVelocityFast;
 }
 
 - (BOOL) tick:(CGFloat)dt {

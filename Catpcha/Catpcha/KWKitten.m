@@ -137,14 +137,17 @@ typedef enum {
             [self.level capture:chasing];
         }
         chasing = nil;
-        mood = KWKittenMoodPlayful + (KWKittenMoodPlayful * KWRandomPercent);
+        mood = KWKittenMoodPlayful * KWRandomPercent;
         self.state = KWKittenStatePlaying;
     }
 }
 
 - (BOOL) tick:(CGFloat)dt {
     if (self.captured) {
-        if (self.bored) { self.basket = nil; }
+        if (self.bored) {
+            self.basket = nil;
+            self.touchable = YES;
+        }
     } else if (self.tired) {
         [self chase:nil];
         self.state = KWKittenStateSleeping;

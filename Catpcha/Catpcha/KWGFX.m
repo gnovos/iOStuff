@@ -24,7 +24,12 @@
         [CATransaction setAnimationDuration:duration];
     } 
     if (completion) {
-        [CATransaction setCompletionBlock:completion];
+        [CATransaction setCompletionBlock:^{
+            [CATransaction begin];
+            [CATransaction setDisableActions:YES];
+            completion();
+            [CATransaction commit];
+        }];
     }
     animation();
     [CATransaction commit];

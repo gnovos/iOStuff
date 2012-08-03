@@ -38,6 +38,11 @@
     return self;
 }
 
+- (void) dealloc {
+    [self removeObserver:self forKeyPath:@"position"];
+    [self removeObserver:self forKeyPath:@"touch"];
+}
+
 - (UIBezierPath*) shape { return nil; }
 
 - (void) observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context {

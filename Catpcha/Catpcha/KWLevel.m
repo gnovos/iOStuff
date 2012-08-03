@@ -12,6 +12,7 @@
 #import "KWToy.h"
 #import "KWMouse.h"
 #import "KWYarn.h"
+#import "CALayer+KWMsg.h"
 
 static const int KWTimeLimitMaxSeconds = 2 * 60;
 
@@ -23,7 +24,7 @@ static const int KWTimeLimitLevelCost  = 5;
     NSUInteger timelimit;
     NSDate* start;
     
-    CATextLayer* text;
+    CATextLayer* background;
 
     NSMutableArray* objects;
 }
@@ -59,17 +60,17 @@ static const int KWTimeLimitLevelCost  = 5;
         self.frame = [UIScreen mainScreen].bounds;
         
         //xxx clean this up
-        text = [[CATextLayer alloc] init];
+        background = [[CATextLayer alloc] init];
         UIFont* bold = [UIFont boldSystemFontOfSize:38.0f];
-        text.alignmentMode = @"center";
-        text.font = (__bridge CFTypeRef)(bold.fontName);
-        text.fontSize = 38.0f;
+        background.alignmentMode = @"center";
+        background.font = (__bridge CFTypeRef)(bold.fontName);
+        background.fontSize = 38.0f;
         CGSize size = [@"Level 99 (000 s)" sizeWithFont:bold];
-        text.bounds = CGRectMake(0, 0, size.width, size.height);
-        text.position = self.position;
-        text.transform = CATransform3DMakeRotation(-M_PI_4, 0, 0, 1.0f);
+        background.bounds = CGRectMake(0, 0, size.width, size.height);
+        background.position = self.position;
+        background.transform = CATransform3DMakeRotation(-M_PI_4, 0, 0, 1.0f);
 
-        [self addSublayer:text];
+        [self addSublayer:background];
                 
         level = lvl;
         timelimit = KWTimeLimitMaxSeconds - (KWTimeLimitLevelCost * level);
@@ -130,6 +131,13 @@ static const int KWTimeLimitLevelCost  = 5;
 - (void) tick:(CGFloat)dt {    
     if (start == nil) {
         start = [NSDate date];
+        [self.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
+            NSString* name = [NSStringFromClass([o class]) substringFromIndex:2];
+            if ([@[@"Yarn", @"Basket"] containsObject:name]) {
+                [self hover:name over:o.position];                
+            }
+        }];
+        
         return;
     }
         
@@ -144,12 +152,9 @@ static const int KWTimeLimitLevelCost  = 5;
     double remaining = self.remaining;
     float remain = (0.8f * (1.0f - (remaining / self.timelimit)));
     
-    text.foregroundColor = [UIColor colorWithRed:0.7f green:0.3f blue:0.3f alpha:0.2f + remain].CGColor;
+    background.foregroundColor = [UIColor colorWithRed:0.7f green:0.3f blue:0.3f alpha:0.2f + remain].CGColor;
 
-    text.string = [NSString stringWithFormat:@"Level %d (%d s)", self.level, (int)remaining];
-    
-    //xxx rethink how often this is required
-    [self setNeedsDisplay];
+    background.string = [NSString stringWithFormat:@"Level %d (%d s)", self.level, (int)remaining];
 }
  
 - (void) capture:(KWObject*)object {
@@ -158,6 +163,8 @@ static const int KWTimeLimitLevelCost  = 5;
         [self.baskets enumerateObjectsUsingBlock:^(KWBasket* basket, NSUInteger idx, BOOL *bstop) {
             if (CGRectContainsPoint(basket.frame, kitten.position)) {
                 kitten.basket = basket;
+                kitten.touchable = NO;
+                [self flash:@"Kitten Captured!" at:kitten.position];
                 *bstop = YES;
             }
         }];
@@ -224,7 +231,6 @@ static const int KWTimeLimitLevelCost  = 5;
     }];
     
     return visible;
-
 }
 
 @end
