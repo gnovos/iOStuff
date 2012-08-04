@@ -13,7 +13,7 @@
 #import "KWAlert.h"
 #import "KWEngine.h"
 
-@interface KWViewController ()
+@interface KWViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) CMMotionManager *motion;
 @property (nonatomic, weak) IBOutlet KWRenderView* render;
@@ -58,7 +58,7 @@
     
     engine = [[KWEngine alloc] init];
     render.level = engine.level;
-    
+        
     KWRenderView* renderer = self.render;
     [engine add:^(KWEngineEvent event, id level) {
         if (event == KWEngineEventLevelBegin) {
@@ -75,6 +75,7 @@
             engine.level.bias = CGPointMake(attitude.roll, attitude.pitch);
          }];
     }
+    
 }
 
 @end

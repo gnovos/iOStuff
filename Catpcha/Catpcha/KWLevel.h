@@ -11,7 +11,7 @@
 
 @class KWObject, KWKitten;
 
-@interface KWLevel : CAShapeLayer
+@interface KWLevel : CAGradientLayer
 
 @property (nonatomic, readonly, assign) int level;
 @property (nonatomic, readonly, assign) NSUInteger timelimit;
@@ -32,8 +32,6 @@
 - (BOOL) complete;
 
 - (void) capture:(KWObject*)object;
-
-- (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj;
 
 - (NSArray*) touched:(CGPoint)point;
 

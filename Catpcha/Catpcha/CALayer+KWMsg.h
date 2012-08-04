@@ -13,4 +13,6 @@
 - (void) flash:(NSString*)message at:(CGPoint)loc;
 - (void) hover:(NSString*)message over:(CGPoint)loc;
 
+- (CATextLayer*) textlayer:(NSString*)message font:(UIFont*)font;
+
 @end

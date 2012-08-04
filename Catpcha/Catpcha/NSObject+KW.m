@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "NSObject+KWO.h"
+#import "NSObject+KW.h"
 #import <objc/runtime.h>
 
 static void* ASSOC_KEY;
@@ -59,5 +59,6 @@ static void* ASSOC_KEY;
     [observers addObject:obz];
 }
 
+- (NSValue*) ptr { return [NSValue valueWithPointer:(__bridge const void *)self]; }
 
 @end

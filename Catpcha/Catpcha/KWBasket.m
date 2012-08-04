@@ -9,7 +9,7 @@
 #import "KWBasket.h"
 #import "KWKitten.h"
 #import "KWLevel.h"
-#import "NSObject+KWO.h"
+#import "NSObject+KW.h"
 
 @implementation KWBasket
 
@@ -27,8 +27,8 @@
         __weak KWObject* slf = self;
         [self.level observe:@"bias" with:^(NSDictionary* change) {
             CGSize offset = [[change objectForKey:@"new"] CGSizeValue];
-            offset.width *= 5.0f;
-            offset.height *= 5.0f;
+            offset.width *= 3.0f;
+            offset.height *= 3.0f;
             slf.shadowOffset = offset;
         }];
     }

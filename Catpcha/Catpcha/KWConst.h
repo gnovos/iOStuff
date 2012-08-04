@@ -32,12 +32,12 @@ static const CGFloat KWKittensPerLevel = 2;
 #define degreesToRadians(deg) (deg * M_PI / KWAngle180Degrees)
 #define radiansToDegrees(rad) (rad * KWAngle180Degrees / M_PI)
 
-static const CGSize KWDefaultKittenSize = { 35, 35 };
-static const CGSize KWDefaultBasketSize = { 70, 70 };
+static const CGSize KWDefaultKittenSize = { 25, 25 };
+static const CGSize KWDefaultBasketSize = { 50, 50 };
 static const CGSize KWDefaultMouseSize  = { 10, 10 };
-static const CGSize KWDefaultYarnSize   = { 50, 50 };
+static const CGSize KWDefaultYarnSize   = { 30, 30 };
 
-static const CGSize KWMinToySize        = { 10, 10 };
+static const CGSize KWMinToySize        = { 5, 5 };
 
 
 #define KWNoticePadding 10.0f

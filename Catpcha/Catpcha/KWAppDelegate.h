@@ -11,6 +11,7 @@
 
 //sharekit
 //irate
+//flurry
 
 //need better collision detect and handle
 //handle rapid change on heading cleaner

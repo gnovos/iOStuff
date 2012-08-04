@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (KWO)
+@interface NSObject (KW)
 
 - (void) observe:(NSString*)keyPath with:(void(^)(NSDictionary* change))block;
+- (NSValue*) ptr;
 
 @end

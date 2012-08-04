@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
+//xxx make more alluring when moving
+//xxx main use for stubborn cats
+
 #import "KWYarn.h"
 #import "KWLevel.h"
 

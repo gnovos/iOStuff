@@ -8,7 +8,7 @@
 
 #import "KWObject.h"
 #import "KWLevel.h"
-#import "NSObject+KWO.h"
+#import "NSObject+KW.h"
 
 @implementation KWObject
 

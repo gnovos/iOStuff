@@ -62,66 +62,78 @@ static const int KWTimeLimitLevelCost  = 5;
     }]];
 }
 
+- (void) setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self setup];
+}
+
+- (void) setup {
+    [[self sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [objects removeAllObjects];
+    
+    UIFont* bold = [UIFont boldSystemFontOfSize:38.0f];
+    background = [self textlayer:@"Level 00 (000 s)" font:bold];
+    background.position = self.position;
+    background.transform = CATransform3DMakeRotation(-M_PI_4, 0, 0, 1.0f);
+    
+    [self addSublayer:background];
+    
+    timelimit = KWTimeLimitMaxSeconds - (KWTimeLimitLevelCost * level);
+        
+    [objects addObject:[[KWBasket alloc] initWithLevel:self]];
+    
+    int kitcount = MAX(level, KWRandom(KWKittensPerLevel * level));
+    
+    for (int i = 0; i < kitcount; i++) {
+        [objects addObject:[[KWKitten alloc] initWithLevel:self]];
+    }
+    
+    if (level % 3 == 0) {
+        [objects addObject:[[KWYarn alloc] initWithLevel:self]];
+    }
+    
+    [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+        while (!CGRectContainsRect(self.bounds, obj.frame) || ![self vacant:obj.frame excluding:obj]) {
+            obj.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
+        }
+        [self addSublayer:obj];
+    }];
+    
+}
+
 - (id) initLevel:(int)lvl {
     if (self = [self init]) {
         self.needsDisplayOnBoundsChange = YES;
-        self.fillColor = nil;
-        self.strokeColor = [UIColor colorWithRed:0.7f green:0.4f blue:0.4f alpha:0.3f].CGColor;
-        self.lineDashPattern = @[@5, @15];
-        self.lineDashPhase = 0;
-        self.lineWidth = 1.0f;
-        self.frame = [UIScreen mainScreen].bounds;
+        self.borderColor = [UIColor orangeColor].CGColor;
+        self.borderWidth = 10.0f;
+//        self.fillColor = nil;
+//        self.strokeColor = [UIColor colorWithRed:0.7f green:0.4f blue:0.4f alpha:0.3f].CGColor;
+//        self.lineDashPattern = @[@5, @15];
+//        self.lineDashPhase = 0;
+//        self.lineWidth = 1.0f;
         
-        //xxx clean this up
-        background = [[CATextLayer alloc] init];
-        UIFont* bold = [UIFont boldSystemFontOfSize:38.0f];
-        background.alignmentMode = @"center";
-        background.font = (__bridge CFTypeRef)(bold.fontName);
-        background.fontSize = 38.0f;
-        CGSize size = [@"Level 99 (000 s)" sizeWithFont:bold];
-        background.bounds = CGRectMake(0, 0, size.width, size.height);
-        background.position = self.position;
-        background.transform = CATransform3DMakeRotation(-M_PI_4, 0, 0, 1.0f);
-
-        [self addSublayer:background];
-                
+        self.colors = @[(id)[UIColor colorWithRed:0.4f green:0.8f blue:0.2f alpha:0.8f].CGColor,
+        (id)[UIColor clearColor].CGColor,
+        (id)[UIColor colorWithRed:0.8f green:0.1f blue:0.2f alpha:0.9f].CGColor];
+        
         level = lvl;
-        timelimit = KWTimeLimitMaxSeconds - (KWTimeLimitLevelCost * level);
-
         objects = [[NSMutableArray alloc] init];
-        
-        [objects addObject:[[KWBasket alloc] initWithLevel:self]];
-        
-        int kitcount = MAX(level, KWRandom(KWKittensPerLevel * level));
-        
-        for (int i = 0; i < kitcount; i++) {
-            [objects addObject:[[KWKitten alloc] initWithLevel:self]];
-        }
-        
-        if (level % 3 == 0) {
-            [objects addObject:[[KWYarn alloc] initWithLevel:self]];            
-        }
-        
-        [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
-            while (!CGRectContainsRect(self.bounds, obj.frame) || ![self vacant:obj.frame excluding:obj]) {
-                obj.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
-            }
-            [self addSublayer:obj];
-        }];
-                
+
     }
     return self;
 }
 
 - (void) addMouse {
-    KWMouse* mouse = [[KWMouse alloc] initWithLevel:self];
-    
-    while (!CGRectContainsRect(self.bounds, mouse.frame) || ![self vacant:mouse.frame excluding:mouse]) {
-        mouse.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
+    if (KWRandomPercent < KWMouseChance * self.kittens.count && self.mice.count == 0) {
+        KWMouse* mouse = [[KWMouse alloc] initWithLevel:self];
+        
+        while (!CGRectContainsRect(self.bounds, mouse.frame) || ![self vacant:mouse.frame excluding:mouse]) {
+            mouse.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
+        }
+        
+        [self addSublayer:mouse];
+        [objects addObject:mouse];
     }
-
-    [self addSublayer:mouse];
-    [objects addObject:mouse];
 }
 
 - (NSTimeInterval) remaining {
@@ -159,15 +171,12 @@ static const int KWTimeLimitLevelCost  = 5;
         if ([o tick:dt]) { [o setNeedsDisplay]; }
     }];
     
-    if (self.mice.count < (self.level / 2.0) && KWRandomPercent < KWMouseChance * self.kittens.count) {
-        [self addMouse];
-    }
+    [self addMouse];
         
     double remaining = self.remaining;
-    float remain = (0.8f * (1.0f - (remaining / self.timelimit)));
+    float danger = (0.8f * (1.0f - (remaining / self.timelimit)));
     
-    background.foregroundColor = [UIColor colorWithRed:0.7f green:0.3f blue:0.3f alpha:0.2f + remain].CGColor;
-
+    background.foregroundColor = [UIColor colorWithRed:0.7f green:0.3f blue:0.3f alpha:0.2f + danger].CGColor;
     background.string = [NSString stringWithFormat:@"Level %d (%d s)", self.level, (int)remaining];
 }
  
