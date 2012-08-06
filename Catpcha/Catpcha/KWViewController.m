@@ -60,17 +60,21 @@
     render.level = engine.level;
         
     KWRenderView* renderer = self.render;
-    [engine add:^(KWEngineEvent event, id level) {
-        if (event == KWEngineEventLevelBegin) {
-            renderer.level = level;            
-        }
+    [engine attach:renderer forEvent:KWEngineEventLevelBegin withHandler:^(KWRenderView* rend, KWLevel* level) {
+        rend.level = level;
     }];
-
+    
+    [engine attach:renderer forEvent:KWEngineEventTick withHandler:^(KWRenderView* rend, NSNumber* dt) {
+        [rend tick:[dt floatValue]];
+    }];
+    
     motion = [[CMMotionManager alloc] init];
     
     if (motion.isDeviceMotionAvailable) {
 		motion.deviceMotionUpdateInterval = 1.0f / 4.0f;
         [motion startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion* move, NSError* error) {
+            NSLog(@"move: x:%f y:%f z:%f", move.userAcceleration.x, move.userAcceleration.y, move.userAcceleration.z);
+            
             CMAttitude* attitude = move.attitude;
             engine.level.bias = CGPointMake(attitude.roll, attitude.pitch);
          }];

@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KWGeometry.h"
 
 @interface KWGFX : NSObject
 
 + (void) animate:(void(^)(void))animation;
-+ (void) animate:(CFTimeInterval)duration animation:(void(^)(void))animation onComplete:(void(^)(void))completion;
++ (void) animate:(NSTimeInterval)duration animation:(void(^)(void))animation onComplete:(void(^)(void))completion;
 
 + (id) current;
 

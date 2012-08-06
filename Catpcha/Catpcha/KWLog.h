@@ -28,16 +28,16 @@ otherButtonTitles:nil]; \
 #   define ulog(...)
 #endif
 
-#define dline     dlog(@".")
+#define dlogine     dlog(@".")
 
-#define dlobj(o)   dlog(#o @"=%@", o)
-#define dlptr(p)   dlog(#p @"=%p", p)
-#define dlint(i)   dlog(#i @"=%d", i)
-#define dlfloat(f) dlog(#f @"=%f", f)
+#define dlogobj(o)   dlog(#o @"=%@", o)
+#define dlogptr(p)   dlog(#p @"=%p", p)
+#define dlogint(i)   dlog(#i @"=%d", i)
+#define dlogfloat(f) dlog(#f @"=%f", f)
 
-#define dlrect(r)  dlog(#r @"={{%f,%f},{%f,%f}}", r.origin.x, r.origin.y, r.size.width, r.size.height)
-#define dlsize(s)  dlog(#s @"={%f,%f}", s.width, s.height)
-#define dlpoint(p) dlog(#p @"={%f,%f}", p.x, p.y)
+#define dlogrect(r)  dlog(#r @"={{%f,%f},{%f,%f}}", r.origin.x, r.origin.y, r.size.width, r.size.height)
+#define dlogsize(s)  dlog(#s @"={%f,%f}", s.width, s.height)
+#define dlogpoint(p) dlog(#p @"={%f,%f}", p.x, p.y)
 
 
 #endif

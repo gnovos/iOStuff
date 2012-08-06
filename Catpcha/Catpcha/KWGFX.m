@@ -17,7 +17,7 @@
     [self animate:0 animation:animation onComplete:nil];
 }
 
-+ (void) animate:(CFTimeInterval)duration animation:(void(^)(void))animation onComplete:(void(^)(void))completion {
++ (void) animate:(NSTimeInterval)duration animation:(void(^)(void))animation onComplete:(void(^)(void))completion {
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
     if (duration > 0) {

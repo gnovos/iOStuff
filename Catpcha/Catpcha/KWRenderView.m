@@ -14,64 +14,53 @@
 #define KWLevelScale 3.0f
 
 #define KWMinZoom 1.0f / KWLevelScale
-#define KWMaxZoom 5.0f
-
-CGFloat CGPointDistanceBetween(CGPoint from, CGPoint to) {
-    CGFloat dx = to.x - from.x;
-    CGFloat dy = to.y - from.y;
-    return hypot(dx, dy);
-};
-
-CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
-    
-    if (CGRectIsNull(rect)) {
-        rect.origin = point;
-    } else {
-        if (point.x < CGRectGetMinX(rect)) {
-            CGFloat dw = CGRectGetMinX(rect) - point.x;
-            rect.origin.x = point.x;
-            rect.size.width += dw;
-        } else if (point.x > CGRectGetMaxX(rect)) {
-            rect.size.width += point.x - CGRectGetMaxX(rect);
-        }
-        if (point.y < CGRectGetMinY(rect)) {
-            CGFloat dh = CGRectGetMinY(rect) - point.y;
-            rect.origin.y = point.y;
-            rect.size.height += dh;
-        } else if (point.y > CGRectGetMaxY(rect)) {
-            rect.size.width += point.y - CGRectGetMaxX(rect);
-        }
-    }
-    
-    return rect;
-}
-
+#define KWMaxZoom 3.0f
 
 @interface KWTouch : NSObject
 @property (nonatomic, assign) CGPoint center;
 @property (nonatomic, assign) CGPoint touch;
 @property (nonatomic, assign) CGFloat distance;
-
+@property (nonatomic, assign) NSTimeInterval timestamp;
 @end
 
 @implementation KWTouch 
 
-- (id) initWithTouch:(CGPoint)touch andCenter:(CGPoint)center {
+- (id) initWithTouch:(UITouch*)touch andCenter:(CGPoint)center {
     if (self = [super init]) {
         self.center = center;
-        self.touch = touch;
-        self.distance = CGPointDistanceBetween(center, self.touch);
+        self.touch = [touch locationInView:touch.view];
+        self.distance = CGLineDistance((CGLine){center, self.touch});
+        self.timestamp = touch.timestamp;
     }
     return self;
 }
 
 @end
 
+typedef struct {
+    CGPoint location;
+    CGPoint velocity;
+    NSTimeInterval timestamp;
+} KWScroller;
+
+typedef enum {
+    KWScrollEdgeNone,
+    KWScrollEdgeTop,
+    KWScrollEdgeTopRight,
+    KWScrollEdgeRight,
+    KWScrollEdgeBottomRight,
+    KWScrollEdgeBottom,
+    KWScrollEdgeBottomLeft,
+    KWScrollEdgeLeft,
+    KWScrollEdgeTopLeft    
+} KWScrollEdge;
+
 @implementation KWRenderView {
     NSMutableDictionary* tracking;
     NSMutableDictionary* paths;
     CGFloat zoom;
-    CGFloat rotation;
+    
+    KWScroller scroller;
 }
 
 @synthesize level;
@@ -90,24 +79,79 @@ CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
 - (void) setLevel:(KWLevel*)lvl {
     level = lvl;
     CGRect frame = self.frame;
+    frame.origin.x = 0;
+    frame.origin.y = 0;
     frame.size.width *= KWLevelScale;
     frame.size.height *= KWLevelScale;
     level.frame = frame;
-    level.position = self.center;
     [self reset];
 }
 
 - (CAScrollLayer*) scroll { return (CAScrollLayer*)self.layer; }
 
+- (KWScrollEdge) scrollTo:(CGRect)visible {
+        
+    CGRect q = [self.level convertRect:visible fromLayer:self.scroll];
+    
+    BOOL top = NO, bottom = NO, left = NO, right = NO;
+    
+    if (q.origin.x < 0) {
+        q.origin.x = 0;
+        left = YES;
+    }
+    
+    if (q.origin.y < 0) {
+        q.origin.y = 0;
+        top = YES;
+    }
+    
+    if (q.origin.x + q.size.width > self.level.bounds.size.width) {
+        q.origin.x = self.level.bounds.size.width - q.size.width;
+        right = YES;
+    }
+    
+    if (q.origin.y + q.size.height > self.level.bounds.size.height) {
+        q.origin.y = self.level.bounds.size.height - q.size.height;
+        bottom = YES;
+    }
+    
+    CGPoint p = [self.scroll convertPoint:q.origin fromLayer:self.level];
+        
+    [KWGFX animate:^{
+        [self.scroll scrollToPoint:p];
+    }];
+        
+    KWScrollEdge strike = KWScrollEdgeNone;
+    
+    if (top && left) {
+        strike = KWScrollEdgeTopLeft;
+    } else if (top && right) {
+        strike = KWScrollEdgeTopRight;
+    } else if (bottom & left) {
+        strike = KWScrollEdgeBottomLeft;
+    } else if (bottom & right) {
+        strike = KWScrollEdgeBottomRight;
+    } else if (top) {
+        strike = KWScrollEdgeTop;
+    } else if (bottom) {
+        strike = KWScrollEdgeBottom;
+    } else if (left) {
+        strike = KWScrollEdgeLeft;
+    } else if (right) {
+        strike = KWScrollEdgeRight;
+    }
+    return strike;
+}
+
+- (void) zoom:(CGFloat)zx {
+    CGFloat scale = MAX(KWMinZoom, MIN(KWMaxZoom, zx));
+    self.scroll.sublayerTransform = CATransform3DMakeScale(scale, scale, 1.0f);
+    [self scrollTo:self.scroll.bounds];
+}
+
 - (void) reset {
-    self.layer.borderWidth = 3.0f;
-    self.layer.borderColor = [UIColor redColor].CGColor;
-    
-    [[self.layer sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    [self.layer addSublayer:self.level];
-    
-    self.level.borderWidth = 5.0f;
-    self.level.borderColor = [UIColor greenColor].CGColor;    
+    [[self.scroll sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [self.scroll addSublayer:self.level];
 }
 
 - (NSSet*) tracked:(UIEvent*)event{
@@ -144,6 +188,51 @@ CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
     }
 }
 
+- (void) tick:(CGFloat)dt {
+        
+    if (scroller.timestamp && !CGPointEqualToPoint(CGPointZero, scroller.velocity)) {
+        CGRect bounds = self.scroll.bounds;
+        bounds.origin.x += scroller.velocity.x * dt;
+        bounds.origin.y += scroller.velocity.y * dt;
+        
+        CGFloat multiplier = 1.5f;
+        
+        scroller.velocity.x -= scroller.velocity.x * dt * multiplier;
+        scroller.velocity.y -= scroller.velocity.y * dt * multiplier;
+        
+        if (ABS(scroller.velocity.x) < 3.0f) { scroller.velocity.x = 0.0f; }
+        if (ABS(scroller.velocity.y) < 3.0f) { scroller.velocity.y = 0.0f; }
+        
+        if (scroller.velocity.x == 0 && scroller.velocity.y == 0) {
+            scroller.timestamp = 0;
+        }
+        
+        KWScrollEdge hit = [self scrollTo:bounds];
+        switch (hit) {
+            case KWScrollEdgeBottom:
+            case KWScrollEdgeTop:
+                scroller.velocity.y *= -1;
+                break;
+            case KWScrollEdgeLeft:
+            case KWScrollEdgeRight:
+                scroller.velocity.x *= -1;
+                break;
+            case KWScrollEdgeTopRight:
+            case KWScrollEdgeBottomRight:
+            case KWScrollEdgeBottomLeft:
+            case KWScrollEdgeTopLeft:
+                scroller.velocity.x *= -1;
+                scroller.velocity.y *= -1;
+                break;
+                
+            default:
+                break;
+        }
+        
+    }
+    
+}
+
 - (void) touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     NSMutableDictionary* path = [self path:event];
     
@@ -151,7 +240,8 @@ CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
     __block int count = 0;
     
     [[event allTouches] enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
-        CGPoint loc = [touch locationInView:self];        
+        CGPoint loc = [self.level convertPoint:[touch locationInView:self] fromLayer:self.scroll];
+        
         KWObject* obj = [[level touched:loc] lastObject];
         if (obj) {
             obj.touch = touch;
@@ -166,12 +256,18 @@ CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
     center.x /= count;
     center.y /= count;
     
-    [[self tracked:event] enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *stop) {
-        [path setObject:[[KWTouch alloc] initWithTouch:[touch locationInView:self] andCenter:center] forKey:[touch ptr]];
+    NSSet* tracked = [self tracked:event];
+    if (tracked.count == 1) {
+        scroller.location = self.scroll.bounds.origin;
+        scroller.timestamp = event.timestamp;
+        scroller.velocity = CGPointZero;
+    }
+    
+    [tracked enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *stop) {
+        [path setObject:[[KWTouch alloc] initWithTouch:touch andCenter:center] forKey:[touch ptr]];
     }];
     
-    zoom = [[self.layer valueForKeyPath:@"sublayerTransform.scale.x"] floatValue];
-    rotation = [[self.layer valueForKeyPath:@"sublayerTransform.rotation.z"] floatValue];
+    zoom = [[self.scroll valueForKeyPath:@"sublayerTransform.scale.x"] floatValue];
 }
 
 - (void) touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -180,7 +276,7 @@ CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
         __block BOOL used = NO;
         [level.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *kstop) {
             if (o.touch == touch) {
-                [KWGFX animate:^{ o.position = [touch locationInView:self]; }];
+                [KWGFX animate:^{ o.position = [self.level convertPoint:[touch locationInView:self] fromLayer:self.scroll]; }];
                 *kstop = used = YES;
             }
         }];
@@ -193,19 +289,18 @@ CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
     NSSet* tracked = [self tracked:event];
     if (tracked.count == 1) {
         UITouch* touch = tracked.anyObject;
-        CGPoint prev = [touch previousLocationInView:self];
-        CGPoint loc = [touch locationInView:self];
         
-        CGPoint p = self.scroll.bounds.origin;
-        
-        p.x += prev.x - loc.x;
-        p.y += prev.y - loc.y;
-        
-        [[self scroll] scrollToPoint:p];
-        //xxx don't scroll past bounds
-    } else {
-        //zoom/rotate
+        CGPoint prev = [self.level convertPoint:[touch previousLocationInView:touch.view] fromLayer:self.scroll];
+        CGPoint loc = [self.level convertPoint:[touch locationInView:touch.view] fromLayer:self.scroll];
                 
+        CGRect bounds = self.scroll.bounds;
+        
+        bounds.origin.x += prev.x - loc.x;
+        bounds.origin.y += prev.y - loc.y;
+        
+        [self scrollTo:bounds];
+                                
+    } else if (tracked.count) {
         NSMutableDictionary* first = [self path:event];
         __block CGPoint center = CGPointZero;
         __block CGFloat origdist = 0.0f;
@@ -222,105 +317,35 @@ CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
         origdist /= tracked.count;
         
         __block CGFloat distance = 0.0f;
-        __block CGFloat rot = 0.0f;
-        __block CGFloat slope = 0.0f;
         [tracked enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *stop) {
             CGPoint loc = [touch locationInView:self];
-            distance += CGPointDistanceBetween(center, loc);
-
-            KWTouch* ktouch = [first objectForKey:[touch ptr]];
-            
-            CGFloat a = CGPointDistanceBetween(ktouch.center, loc);
-            CGFloat b = CGPointDistanceBetween(ktouch.center, ktouch.touch);
-            CGFloat c = CGPointDistanceBetween(loc, ktouch.touch);
-            
-            CGFloat m = (loc.y - ktouch.touch.y) / (loc.x - ktouch.touch.x);
-            slope += m > 0 ? 1 : -1;
-            
-            CGFloat angle = acosf((a * a + b * b - c * c) / (2 * a * b));
-            
-            NSLog(@"a:%f b:%f c:%f angle:%f m:%f", a, b, c, angle, m);
-            
-            rot += angle;
+            distance += CGLineDistance((CGLine){center, loc});
         }];
         distance /= tracked.count;
-        rot /= tracked.count;
-        slope /= tracked.count;
         
-        CGFloat scale = MAX(KWMinZoom, MIN(KWMaxZoom, (distance / origdist) * zoom));
-        
-        if (slope < 0) { rot = -rot; }
-        
-        NSLog(@"r:%f rot:%f slope:%f", rotation, rot, slope);
-                                
-        //[self.layer setValue:[NSNumber numberWithFloat:rotation] forKeyPath:@"sublayerTransform.rotation"];
-        //[self.layer setValue:[NSNumber numberWithFloat:scale] forKeyPath:@"sublayerTransform.scale.x"];
-        //[self.layer setValue:[NSNumber numberWithFloat:scale] forKeyPath:@"sublayerTransform.scale.y"];
-        
-        CATransform3D xform = CATransform3DIdentity;
-        xform = CATransform3DScale(xform, scale, scale, 1.0f);
-        xform = CATransform3DRotate(xform, rotation + rot, 0.0f, 0.0f, 1.0f);
-        self.layer.sublayerTransform = xform;
-        
-        NSLog(@"\n-=-=-\n\n");
-        
+        [self zoom:(distance / origdist) * zoom];
     }
-    
-        
-//    NSLog(@"[moving] %@\n%@\n%@\n%@\n\n-=-=-=-=-\n\n", tracking, touches, event.allTouches, event);
-    
 }
 
-/*
- if (CGRectIsNull(current)) {
- current.origin.x = loc.x;
- current.origin.y = loc.y;
- } else {
- if (loc.x < CGRectGetMinX(current)){
- current.origin.x = loc.x;
- } else if (loc.x > CGRectGetMaxX(current)) {
- current.size.width = loc.x - current.origin.x;
- }
- 
- if (loc.y < CGRectGetMinY(current)) {
- current.origin.y = loc.y;
- } else if (loc.y > CGRectGetMaxY(current)) {
- current.size.height = loc.y - current.origin.y;
- }
- }
- 
- if (CGRectIsNull(last)) {
- last.origin.x = prev.x;
- last.origin.y = prev.y;
- } else {
- if (prev.x < CGRectGetMinX(last)){
- last.origin.x = prev.x;
- } else if (prev.x > CGRectGetMaxX(last)) {
- last.size.width = prev.x - last.origin.x;
- }
- 
- if (prev.y < CGRectGetMinY(last)) {
- last.origin.y = prev.y;
- } else if (prev.y > CGRectGetMaxY(last)) {
- last.size.height = prev.y - last.origin.y;
- }
- }
- 
- */
-
-- (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
+- (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {    
     [[event allTouches] enumerateObjectsUsingBlock:^(UITouch* touch, BOOL *tstop) {
         [self untrack:touch forEvent:event];
         [level.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *kstop) {
             if (o.touch == touch) {
                 o.touch = nil;
-                [KWGFX animate:^{ o.position = [touch locationInView:self]; }];
+                [KWGFX animate:^{ o.position = [self.level convertPoint:[touch locationInView:self] fromLayer:self.scroll]; }];
                 [level capture:o];
             }
         }];
     }];
-//    NSLog(@"[end] %@\n%@\n%@\n%@\n\n-=-=-=-=-\n\n", tracking, touches, event.allTouches, event);
     
+    if (scroller.timestamp) {
+        NSTimeInterval dt =  event.timestamp - scroller.timestamp;
+        CGLine scrolled = CGLineMake(scroller.location, self.scroll.bounds.origin);
+        scroller.velocity.x = CGLineSlopeX(scrolled) / dt;
+        scroller.velocity.y = CGLineSlopeY(scrolled) / dt;
+    }
+
 }
 
 - (void) touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event {

@@ -83,6 +83,7 @@
 		0C31C74815AA6F6F004D1067 /* KWObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWObject.m; sourceTree = "<group>"; };
 		0C31C74A15AA6FB2004D1067 /* KWYarn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWYarn.h; sourceTree = "<group>"; };
 		0C31C74B15AA6FB2004D1067 /* KWYarn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWYarn.m; sourceTree = "<group>"; };
+		0C38659715D050060063EB90 /* KWGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWGeometry.h; sourceTree = "<group>"; };
 		0C47B23915BC9B7A00B259B0 /* KWGFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWGFX.h; sourceTree = "<group>"; };
 		0C47B23A15BC9B7A00B259B0 /* KWGFX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWGFX.m; sourceTree = "<group>"; };
 		0C7F61C715B4BC3E00924B64 /* KWEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWEngine.h; sourceTree = "<group>"; };
@@ -248,6 +249,7 @@
 				0CD70BB415CB8EFD008EF8CB /* CALayer+KWMsg.m */,
 				0CD70BC715CBBFE8008EF8CB /* NSObject+KW.h */,
 				0CD70BC815CBBFE8008EF8CB /* NSObject+KW.m */,
+				0C38659715D050060063EB90 /* KWGeometry.h */,
 			);
 			name = Util;
 			sourceTree = "<group>";

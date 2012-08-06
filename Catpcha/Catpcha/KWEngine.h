@@ -10,6 +10,7 @@
 #import "KWLevel.h"
 
 typedef enum {
+    KWEngineEventTick,
     KWEngineEventLevelComplete,
     KWEngineEventLevelBegin
 } KWEngineEvent;
@@ -22,6 +23,6 @@ typedef enum {
 - (void) stop;
 - (void) pause;
 
-- (void) add:(void(^)(KWEngineEvent event, id obj))block;
+- (void) attach:(id)target forEvent:(KWEngineEvent)event withHandler:(void(^)(id target, id data))handler;
 
 @end

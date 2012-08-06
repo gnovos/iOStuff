@@ -13,4 +13,6 @@
 
 @property (nonatomic, weak) KWLevel* level;
 
+- (void) tick:(CGFloat)dt;
+
 @end

@@ -13,8 +13,8 @@
 
 @implementation KWEngine {        
     CADisplayLink* loop;
-    CFTimeInterval last;
-    NSMutableArray* callblocks;
+    NSTimeInterval last;
+    NSMutableDictionary* handlers;
 }
 
 @synthesize level;
@@ -22,7 +22,7 @@
 - (id) init {
     if (self = [super init]) {
         level = [[KWLevel alloc] initLevel:1];
-        callblocks = [[NSMutableArray alloc] init];
+        handlers = [[NSMutableDictionary alloc] init];
     }
     return self;    
 }
@@ -43,25 +43,38 @@
  
 - (void) loop:(CADisplayLink*)link {
     
-    CFTimeInterval elapsed = link.timestamp - last;
+    NSTimeInterval elapsed = link.timestamp - last;
     
     [KWGFX animate:elapsed animation:^{
         [level tick:elapsed];
+        [[handlers objectForKey:@(KWEngineEventTick)] enumerateObjectsUsingBlock:^(void(^handler)(id dt), NSUInteger idx, BOOL *stop) {
+            handler(@(elapsed));
+        }];
     } onComplete:nil];
             
     last = link.timestamp;
     
     if (level.complete) {
+        [[handlers objectForKey:@(KWEngineEventLevelComplete)] enumerateObjectsUsingBlock:^(void(^handler)(id level), NSUInteger idx, BOOL *stop) {
+            handler(level);
+        }];
+        
         level = [[KWLevel alloc] initLevel:level.level + 1];
-        [callblocks enumerateObjectsUsingBlock:^(void(^block)(KWEngineEvent event, id obj), NSUInteger idx, BOOL *stop) {
-            block(KWEngineEventLevelBegin, level);
+        
+        [[handlers objectForKey:@(KWEngineEventLevelBegin)] enumerateObjectsUsingBlock:^(void(^handler)(id level), NSUInteger idx, BOOL *stop) {
+            handler(level);
         }];
     }
 }
 
-- (void) add:(void(^)(KWEngineEvent event, id obj))block {
-    [callblocks addObject:[block copy]];
+- (void) attach:(id)target forEvent:(KWEngineEvent)event withHandler:(void(^)(id target, id data))handler {
+    __weak id t = target;
+    NSMutableArray* h = [handlers objectForKey:@(event)];
+    if (h == nil) {
+        h = [[NSMutableArray alloc] init];
+        [handlers setObject:h forKey:@(event)];
+    }
+    [h addObject:[^(id data){ handler(t, data); } copy]];
 }
-
 
 @end

@@ -71,8 +71,9 @@ static const int KWTimeLimitLevelCost  = 5;
     [[self sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [objects removeAllObjects];
     
-    UIFont* bold = [UIFont boldSystemFontOfSize:38.0f];
+    UIFont* bold = [UIFont boldSystemFontOfSize:38.0f * 3];
     background = [self textlayer:@"Level 00 (000 s)" font:bold];
+    background.foregroundColor = [UIColor clearColor].CGColor;
     background.position = self.position;
     background.transform = CATransform3DMakeRotation(-M_PI_4, 0, 0, 1.0f);
     
@@ -104,17 +105,15 @@ static const int KWTimeLimitLevelCost  = 5;
 - (id) initLevel:(int)lvl {
     if (self = [self init]) {
         self.needsDisplayOnBoundsChange = YES;
-        self.borderColor = [UIColor orangeColor].CGColor;
-        self.borderWidth = 10.0f;
-//        self.fillColor = nil;
-//        self.strokeColor = [UIColor colorWithRed:0.7f green:0.4f blue:0.4f alpha:0.3f].CGColor;
-//        self.lineDashPattern = @[@5, @15];
-//        self.lineDashPhase = 0;
-//        self.lineWidth = 1.0f;
         
-        self.colors = @[(id)[UIColor colorWithRed:0.4f green:0.8f blue:0.2f alpha:0.8f].CGColor,
-        (id)[UIColor clearColor].CGColor,
-        (id)[UIColor colorWithRed:0.8f green:0.1f blue:0.2f alpha:0.9f].CGColor];
+        id pink = (id)[UIColor colorWithRed:0.9f green:0.5f blue:0.7f alpha:0.8f].CGColor;
+        id paleGreen = (id)[UIColor colorWithRed:0.5f green:0.9f blue:0.4f alpha:0.8f].CGColor;
+        id white = (id)[UIColor whiteColor].CGColor;
+        
+        self.colors = @[pink, paleGreen, white, (id)UIColor.orangeColor.CGColor];
+        self.locations = @[@0.0f, @0.3f, @0.7f, @0.9f];
+        self.startPoint = CGPointMake(0.2f, 0);
+        self.endPoint = CGPointMake(1.0f, 0.8f);
         
         level = lvl;
         objects = [[NSMutableArray alloc] init];
