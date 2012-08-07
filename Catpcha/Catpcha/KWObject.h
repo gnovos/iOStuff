@@ -12,11 +12,11 @@
 
 typedef enum {
     KWObjectVelocityMotionless = 0,
-    KWObjectVelocityVerySlow   = 5,
-    KWObjectVelocitySlow       = 50,
-    KWObjectVelocityAverage    = 100,
-    KWObjectVelocityFast       = 150,
-    KWObjectVelocityVeryFast   = 250,
+    KWObjectVelocityVerySlow   = 15,
+    KWObjectVelocitySlow       = 100,
+    KWObjectVelocityAverage    = 200,
+    KWObjectVelocityFast       = 250,
+    KWObjectVelocityVeryFast   = 350,
 } KWObjectVelocity;
 
 @interface KWObject : CAShapeLayer

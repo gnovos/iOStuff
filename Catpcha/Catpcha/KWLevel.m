@@ -106,14 +106,17 @@ static const int KWTimeLimitLevelCost  = 5;
     if (self = [self init]) {
         self.needsDisplayOnBoundsChange = YES;
         
-        id pink = (id)[UIColor colorWithRed:0.9f green:0.5f blue:0.7f alpha:0.8f].CGColor;
-        id paleGreen = (id)[UIColor colorWithRed:0.5f green:0.9f blue:0.4f alpha:0.8f].CGColor;
-        id white = (id)[UIColor whiteColor].CGColor;
+        id pink = (id)[UIColor colorWithRed:0.9f green:0.5f blue:0.7f alpha:0.3f].CGColor;
+        id pg = (id)[UIColor colorWithRed:0.5f green:0.9f blue:0.4f alpha:0.3f].CGColor;
+        id pb = (id)[UIColor colorWithRed:0.5f green:0.4f blue:0.9f alpha:0.3f].CGColor;
+        id pr = (id)[UIColor colorWithRed:0.9f green:0.2f blue:0.1f alpha:0.4f].CGColor;
+        id pq = (id)[UIColor colorWithRed:KWRandomPercent green:KWRandomPercent blue:KWRandomPercent alpha:0.3f].CGColor;
+        id white = (id)[UIColor colorWithRed:0.9f green:0.95f blue:0.95f alpha:0.4f].CGColor;
         
-        self.colors = @[pink, paleGreen, white, (id)UIColor.orangeColor.CGColor];
-        self.locations = @[@0.0f, @0.3f, @0.7f, @0.9f];
-        self.startPoint = CGPointMake(0.2f, 0);
-        self.endPoint = CGPointMake(1.0f, 0.8f);
+        self.colors = @[pink, white, pg, pq, pink, white, pb, pr, pq];
+        self.locations = @[@0.0f, @0.3f, @0.4f, @0.5f, @0.6f, @0.7f, @0.9f, @0.95f, @1.0f];
+        self.startPoint = CGPointMake(KWRandomPercent, KWRandomPercent);
+        self.endPoint = CGPointMake(KWRandomPercent, KWRandomPercent);
         
         level = lvl;
         objects = [[NSMutableArray alloc] init];

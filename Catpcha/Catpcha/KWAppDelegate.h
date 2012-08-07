@@ -16,8 +16,6 @@
 //need better collision detect and handle
 //handle rapid change on heading cleaner
 
-//screen zooming
-
 //kitten ai should change with level
 //better ai (chase, staking, better motion states, etc)
 ////stalking

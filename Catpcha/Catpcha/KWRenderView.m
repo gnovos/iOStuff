@@ -11,10 +11,10 @@
 #import "KWGFX.h"
 #import "NSObject+KW.h"
 
-#define KWLevelScale 3.0f
+#define KWLevelScale 4.0f
 
 #define KWMinZoom 1.0f / KWLevelScale
-#define KWMaxZoom 3.0f
+#define KWMaxZoom KWLevelScale
 
 @interface KWTouch : NSObject
 @property (nonatomic, assign) CGPoint center;
@@ -70,6 +70,7 @@ typedef enum {
 - (id) initWithCoder:(NSCoder*)decoder { if (self = [super initWithCoder:decoder]) { [self setup]; } return self; }
 - (id) initWithFrame:(CGRect)frame { if (self = [super initWithFrame:frame]) { [self setup]; } return self; }
 - (void) setup {
+    self.backgroundColor = [UIColor colorWithHue:KWRandomPercent saturation:KWRandomPercent brightness:1.0f alpha:1.0f];
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = YES;
     tracking = [[NSMutableDictionary alloc] init];
@@ -84,7 +85,10 @@ typedef enum {
     frame.size.width *= KWLevelScale;
     frame.size.height *= KWLevelScale;
     level.frame = frame;
-    [self reset];
+    
+    [[self.scroll sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [self.scroll addSublayer:self.level];
+    //xxx scroll to right place to see stuff
 }
 
 - (CAScrollLayer*) scroll { return (CAScrollLayer*)self.layer; }
@@ -147,11 +151,6 @@ typedef enum {
     CGFloat scale = MAX(KWMinZoom, MIN(KWMaxZoom, zx));
     self.scroll.sublayerTransform = CATransform3DMakeScale(scale, scale, 1.0f);
     [self scrollTo:self.scroll.bounds];
-}
-
-- (void) reset {
-    [[self.scroll sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    [self.scroll addSublayer:self.level];
 }
 
 - (NSSet*) tracked:(UIEvent*)event{

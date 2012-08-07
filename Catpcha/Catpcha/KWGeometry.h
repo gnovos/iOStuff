@@ -25,6 +25,8 @@ static inline CGFloat CGLineSlope(CGLine line) {
 
 static inline CGFloat CGLineDistance(CGLine line) { return hypot(CGLineSlopeX(line), CGLineSlopeY(line)); };
 
+static inline CGPoint CGRectCenter(CGRect rect) { return CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect)); }
+
 static inline CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
     
     if (CGRectIsNull(rect)) {
