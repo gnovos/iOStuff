@@ -162,7 +162,7 @@ static const int KWTimeLimitLevelCost  = 5;
 
 - (BOOL) timeout { return self.remaining <= 0; }
 
-- (BOOL) complete {
+- (BOOL) solved {
     __block BOOL uncaptured = NO;
     [self.objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if ([obj isKindOfClass:[KWKitten class]] && !((KWKitten*)obj).captured) {
@@ -170,8 +170,11 @@ static const int KWTimeLimitLevelCost  = 5;
             *stop = YES;
         }
     }];
-    
-    return !uncaptured || [self timeout];
+    return !uncaptured;
+}
+
+- (BOOL) complete {
+    return self.solved || self.timeout;
 }
 
 - (void) tick:(CGFloat)dt {    

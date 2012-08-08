@@ -21,6 +21,8 @@ typedef enum {
 
 @interface KWObject : CAShapeLayer
 
+@property (nonatomic, assign) unsigned char oid;
+
 @property (nonatomic, assign) CGFloat allure;
 
 @property (nonatomic, assign) BOOL touchable;

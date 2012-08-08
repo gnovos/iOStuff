@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KWViewController : UIViewController <UIAccelerometerDelegate>
+@interface KWGameViewController : UIViewController <UIAccelerometerDelegate>
 
 @end

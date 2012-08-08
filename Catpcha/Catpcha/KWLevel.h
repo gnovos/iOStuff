@@ -30,6 +30,7 @@
 - (NSTimeInterval) remaining;
 
 - (BOOL) complete;
+- (BOOL) solved;
 
 - (void) capture:(KWObject*)object;
 

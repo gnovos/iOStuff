@@ -6,52 +6,35 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "KWViewController.h"
+#import "KWGameViewController.h"
 #import "KWRenderView.h"
 #import <CoreMotion/CoreMotion.h>
-#import "KWGameManager.h"
 #import "KWAlert.h"
 #import "KWEngine.h"
+#import "CALayer+KWMsg.h"
 
-@interface KWViewController () <UIScrollViewDelegate>
+@interface KWGameViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) CMMotionManager *motion;
 @property (nonatomic, weak) IBOutlet KWRenderView* render;
 
 @end
 
-@implementation KWViewController {
+@implementation KWGameViewController {
     KWEngine* engine;
 }
 
 @synthesize render, motion;
 
-- (void) login {
-    //xxx check if already authenticated?
-    [[KWGameManager instance] authenticate:^{
-        [self start];
-    } failure:^{
-        [KWAlert alert:@"Oh Meow!"
-               message:@"We couldn't authenticate with Game Genter.  :(  Without authenticating with game center you'll find gameplay kinda limited."
-               actions:@{ @"Okay": ^{ [self start]; }, @"Try Again" : ^{ [self login]; } }];
-    }];
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self login];
-}
-
 - (void) viewWillDisappear:(BOOL)animated {
-    [self pause];
+    [engine pause];
     [super viewWillDisappear:animated];
 }
 
-- (void) start { [engine start]; }
-
-- (void) stop { [engine stop]; }
-
-- (void) pause { [engine pause]; }
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [engine unpause];
+}
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -60,6 +43,12 @@
     render.level = engine.level;
         
     KWRenderView* renderer = self.render;
+    
+    [engine attach:self forEvent:KWEngineEventLevelComplete withHandler:^(UIViewController* game, KWLevel* level) {
+        NSString* msg = level.solved ? @"Way to go, you failed to fail!" : @"Wow, you suck...";
+        [self.view.layer hover:msg over:self.view.center];
+    }];
+    
     [engine attach:renderer forEvent:KWEngineEventLevelBegin withHandler:^(KWRenderView* rend, KWLevel* level) {
         rend.level = level;
     }];
@@ -82,6 +71,8 @@
 //            engine.level.bias = CGPointMake(attitude.roll, attitude.pitch);
 //         }];
 //    }
+    
+    [engine start:YES];
     
 }
 

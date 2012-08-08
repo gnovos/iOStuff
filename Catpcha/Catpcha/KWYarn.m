@@ -19,7 +19,7 @@
 
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:KWDefaultYarnSize]) {
-        self.strokeColor = [UIColor cyanColor].CGColor;
+        self.strokeColor = nil;//[UIColor cyanColor].CGColor;
         self.fillColor = [UIColor colorWithRed:0.2f green:0.1f blue:0.8f alpha:0.5f].CGColor;
         self.touchable = YES;
         self.catchable = NO;        

@@ -11,7 +11,7 @@
 #import "KWGFX.h"
 #import "NSObject+KW.h"
 
-#define KWLevelScale 3.0f
+#define KWLevelScale 2.5f
 
 #define KWMinZoom 1.0f / KWLevelScale
 #define KWMaxZoom KWLevelScale
@@ -104,7 +104,7 @@ typedef enum {
     
     BOOL top = NO, bottom = NO, left = NO, right = NO;
     
-    CGFloat padding = 100.0f;
+    CGFloat padding = 200.0f;
     
     if (q.origin.x < -padding) {
         q.origin.x = -padding;
@@ -195,6 +195,7 @@ typedef enum {
 }
 
 - (void) addVelocity:(CGPoint)v {
+    //xxx
     NSLog(@"addv %@", NSStringFromCGPoint(v));
     CGRect bounds = self.scroll.bounds;
     bounds.origin.x += v.x * 100.0f;
