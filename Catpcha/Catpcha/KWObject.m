@@ -30,7 +30,7 @@
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size {
     if (self = [super init]) {
-        
+        self.shouldRasterize = YES;
         self.lineWidth = 1.0f;
         self.fillColor = nil;
         touchable = NO;

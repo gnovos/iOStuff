@@ -6,11 +6,12 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-//xxx make more alluring when moving
+//xxx make more alluring when moving, faster is better
 //xxx main use for stubborn cats
 
 #import "KWYarn.h"
 #import "KWLevel.h"
+#import "KWKitten.h"
 
 #define KWRollTime 10.0f;
 
@@ -24,9 +25,8 @@
         self.strokeColor = [UIColor cyanColor].CGColor;
         self.fillColor = [UIColor colorWithRed:0.2f green:0.1f blue:0.8f alpha:0.5f].CGColor;
         self.touchable = YES;
-        self.catchable = NO;
-        
-        self.allure = 1.0f;
+        self.catchable = NO;        
+        self.allure = 0.05f;
     }
     return self;
 }
@@ -58,6 +58,12 @@
             self.velocity -= dt;
             [self shrink:dt];
         }
+    }
+    
+    if (self.moving) {
+        [self.level.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
+            [kitten show:self];
+        }];
     }
     
     return [super tick:dt];

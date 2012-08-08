@@ -23,6 +23,7 @@
         self.shadowOffset = CGSizeMake(2.0, 2.0);
         self.shadowRadius = 3.0f;
         self.shadowOpacity = 0.7f;
+        self.shouldRasterize = YES;
         
         __weak KWObject* slf = self;
         [self.level observe:@"bias" with:^(NSDictionary* change) {

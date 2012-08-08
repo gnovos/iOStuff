@@ -40,6 +40,7 @@
     popup.shadowColor = [UIColor darkGrayColor].CGColor;
     popup.shadowOffset = CGSizeMake(0, 0);
     popup.shadowRadius = 3.0f;
+    popup.shouldRasterize = YES;
     popup.shadowOpacity = 0.4f;
     
     popup.borderColor = [UIColor colorWithRed:1.0f green:0.6f blue:0.2f alpha:0.9f].CGColor;

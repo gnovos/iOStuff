@@ -27,4 +27,6 @@
 - (BOOL) bored;
 - (BOOL) tired;
 
+- (void) show:(KWObject*)toy;
+
 @end

@@ -142,6 +142,13 @@ typedef enum {
     }
 }
 
+- (void) show:(KWObject*)item {
+    if (!self.tired && item.moving && item.allure > self.interest) {
+        [self chase:item];
+        mood += KWKittenMoodExcited * item.allure;
+    }    
+}
+
 - (BOOL) tick:(CGFloat)dt {
     if (self.captured) {
         if (self.bored) {
@@ -169,11 +176,7 @@ typedef enum {
         }
     } else {
         [[self.level sight:self] enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
-            if (obj.moving && obj.allure > self.interest) {
-                [self chase:obj];
-                mood += KWKittenMoodExcited * obj.allure;
-                *stop = YES;
-            }
+            [self show:obj];
         }];
     }
 

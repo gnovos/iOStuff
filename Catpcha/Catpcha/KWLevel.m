@@ -82,7 +82,7 @@ static const int KWTimeLimitLevelCost  = 5;
     timelimit = KWTimeLimitMaxSeconds - (KWTimeLimitLevelCost * level);
         
     [objects addObject:[[KWBasket alloc] initWithLevel:self]];
-    
+
     int kitcount = MAX(level, KWRandom(KWKittensPerLevel * level));
     
     for (int i = 0; i < kitcount; i++) {
@@ -100,24 +100,42 @@ static const int KWTimeLimitLevelCost  = 5;
         [self addSublayer:obj];
     }];
     
+    CAShapeLayer* fence = [CAShapeLayer layer];
+    fence.frame = self.frame;
+    fence.fillColor = nil;
+    fence.strokeColor = [UIColor colorWithRed:0.5f green:0.3f blue:0.1f alpha:0.7f].CGColor;
+    fence.lineWidth = 3.0f;
+    fence.lineDashPattern = @[@100.0f, @50.0f];
+    fence.path = [UIBezierPath bezierPathWithRoundedRect:self.frame cornerRadius:40.0f].CGPath;
+    
+    [self addSublayer:fence];
+    
+    self.shadowRadius = 20.0f;
+    self.shadowOpacity = 0.65f;
+    self.shouldRasterize = YES;
+    self.shadowOffset = CGSizeMake(0, 0);
+    self.shadowPath = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(self.bounds, -10.0f, -10.0f) cornerRadius:40.0f].CGPath;
+    
 }
 
 - (id) initLevel:(int)lvl {
     if (self = [self init]) {
         self.needsDisplayOnBoundsChange = YES;
         
-        id pink = (id)[UIColor colorWithRed:0.9f green:0.5f blue:0.7f alpha:0.3f].CGColor;
-        id pg = (id)[UIColor colorWithRed:0.5f green:0.9f blue:0.4f alpha:0.3f].CGColor;
-        id pb = (id)[UIColor colorWithRed:0.5f green:0.4f blue:0.9f alpha:0.3f].CGColor;
-        id pr = (id)[UIColor colorWithRed:0.9f green:0.2f blue:0.1f alpha:0.4f].CGColor;
-        id pq = (id)[UIColor colorWithRed:KWRandomPercent green:KWRandomPercent blue:KWRandomPercent alpha:0.3f].CGColor;
-        id white = (id)[UIColor colorWithRed:0.9f green:0.95f blue:0.95f alpha:0.4f].CGColor;
+        id pink = (id)[UIColor colorWithRed:0.9f green:0.5f blue:0.7f alpha:0.7f].CGColor;
+        id pg = (id)[UIColor colorWithRed:0.5f green:0.9f blue:0.4f alpha:0.7f].CGColor;
+        id pb = (id)[UIColor colorWithRed:0.5f green:0.4f blue:0.9f alpha:0.7f].CGColor;
+        id pr = (id)[UIColor colorWithRed:0.9f green:0.2f blue:0.1f alpha:0.7f].CGColor;
+        id pq = (id)[UIColor colorWithRed:KWRandomPercent green:KWRandomPercent blue:KWRandomPercent alpha:0.7f].CGColor;
+        id white = (id)[UIColor colorWithRed:0.9f green:0.95f blue:0.95f alpha:0.7f].CGColor;
         
         self.colors = @[pink, white, pg, pq, pink, white, pb, pr, pq];
         self.locations = @[@0.0f, @0.3f, @0.4f, @0.5f, @0.6f, @0.7f, @0.9f, @0.95f, @1.0f];
         self.startPoint = CGPointMake(KWRandomPercent, KWRandomPercent);
         self.endPoint = CGPointMake(KWRandomPercent, KWRandomPercent);
         
+        self.cornerRadius = 40.0f;
+                
         level = lvl;
         objects = [[NSMutableArray alloc] init];
 
@@ -126,7 +144,7 @@ static const int KWTimeLimitLevelCost  = 5;
 }
 
 - (void) addMouse {
-    if (KWRandomPercent < KWMouseChance * self.kittens.count && self.mice.count == 0) {
+    if (KWRandomPercent < KWMouseChance * self.kittens.count && self.mice.count <= self.kittens.count/ 2.0f) {
         KWMouse* mouse = [[KWMouse alloc] initWithLevel:self];
         
         while (!CGRectContainsRect(self.bounds, mouse.frame) || ![self vacant:mouse.frame excluding:mouse]) {
@@ -178,7 +196,7 @@ static const int KWTimeLimitLevelCost  = 5;
     double remaining = self.remaining;
     float danger = (0.8f * (1.0f - (remaining / self.timelimit)));
     
-    background.foregroundColor = [UIColor colorWithRed:0.7f green:0.3f blue:0.3f alpha:0.2f + danger].CGColor;
+    background.foregroundColor = [UIColor colorWithRed:0.2f + danger green:0.9f blue:0.9f alpha:0.9f].CGColor;
     background.string = [NSString stringWithFormat:@"Level %d (%d s)", self.level, (int)remaining];
 }
  

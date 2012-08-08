@@ -11,7 +11,7 @@
 #import "KWGFX.h"
 #import "NSObject+KW.h"
 
-#define KWLevelScale 4.0f
+#define KWLevelScale 3.0f
 
 #define KWMinZoom 1.0f / KWLevelScale
 #define KWMaxZoom KWLevelScale
@@ -88,7 +88,12 @@ typedef enum {
     
     [[self.scroll sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [self.scroll addSublayer:self.level];
-    //xxx scroll to right place to see stuff
+    
+    KWObject* basket = [self.level.baskets objectAtIndex:0];
+    CGPoint p = basket.position;
+    p.x -= self.scroll.bounds.size.width / 2.0f;
+    p.y -= self.scroll.bounds.size.height / 2.0f;
+    [self scrollTo:(CGRect){ p, basket.bounds.size }];
 }
 
 - (CAScrollLayer*) scroll { return (CAScrollLayer*)self.layer; }
@@ -99,23 +104,25 @@ typedef enum {
     
     BOOL top = NO, bottom = NO, left = NO, right = NO;
     
-    if (q.origin.x < 0) {
-        q.origin.x = 0;
+    CGFloat padding = 100.0f;
+    
+    if (q.origin.x < -padding) {
+        q.origin.x = -padding;
         left = YES;
     }
     
-    if (q.origin.y < 0) {
-        q.origin.y = 0;
+    if (q.origin.y < -padding) {
+        q.origin.y = -padding;
         top = YES;
     }
     
-    if (q.origin.x + q.size.width > self.level.bounds.size.width) {
-        q.origin.x = self.level.bounds.size.width - q.size.width;
+    if (q.origin.x + q.size.width > self.level.bounds.size.width + padding) {
+        q.origin.x = self.level.bounds.size.width + padding - q.size.width;
         right = YES;
     }
     
-    if (q.origin.y + q.size.height > self.level.bounds.size.height) {
-        q.origin.y = self.level.bounds.size.height - q.size.height;
+    if (q.origin.y + q.size.height > self.level.bounds.size.height + padding) {
+        q.origin.y = self.level.bounds.size.height + padding - q.size.height;
         bottom = YES;
     }
     
@@ -206,22 +213,23 @@ typedef enum {
             scroller.timestamp = 0;
         }
         
+        CGFloat bounce = -0.45;
         KWScrollEdge hit = [self scrollTo:bounds];
         switch (hit) {
             case KWScrollEdgeBottom:
             case KWScrollEdgeTop:
-                scroller.velocity.y *= -1;
+                scroller.velocity.y *= bounce;
                 break;
             case KWScrollEdgeLeft:
             case KWScrollEdgeRight:
-                scroller.velocity.x *= -1;
+                scroller.velocity.x *= bounce;
                 break;
             case KWScrollEdgeTopRight:
             case KWScrollEdgeBottomRight:
             case KWScrollEdgeBottomLeft:
             case KWScrollEdgeTopLeft:
-                scroller.velocity.x *= -1;
-                scroller.velocity.y *= -1;
+                scroller.velocity.x *= bounce;
+                scroller.velocity.y *= bounce;
                 break;
                 
             default:

@@ -70,15 +70,16 @@
     
     motion = [[CMMotionManager alloc] init];
     
-    if (motion.isDeviceMotionAvailable) {
-		motion.deviceMotionUpdateInterval = 1.0f / 4.0f;
-        [motion startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion* move, NSError* error) {
-            NSLog(@"move: x:%f y:%f z:%f", move.userAcceleration.x, move.userAcceleration.y, move.userAcceleration.z);
-            
-            CMAttitude* attitude = move.attitude;
-            engine.level.bias = CGPointMake(attitude.roll, attitude.pitch);
-         }];
-    }
+//xxx
+//    if (motion.isDeviceMotionAvailable) {
+//		motion.deviceMotionUpdateInterval = 1.0f / 4.0f;
+//        [motion startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion* move, NSError* error) {
+//            //NSLog(@"move: x:%f y:%f z:%f", move.userAcceleration.x, move.userAcceleration.y, move.userAcceleration.z);
+//            
+//            CMAttitude* attitude = move.attitude;
+//            engine.level.bias = CGPointMake(attitude.roll, attitude.pitch);
+//         }];
+//    }
     
 }
 
