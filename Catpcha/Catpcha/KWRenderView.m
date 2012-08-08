@@ -194,6 +194,14 @@ typedef enum {
     }
 }
 
+- (void) addVelocity:(CGPoint)v {
+    NSLog(@"addv %@", NSStringFromCGPoint(v));
+    CGRect bounds = self.scroll.bounds;
+    bounds.origin.x += v.x * 100.0f;
+    bounds.origin.y += v.y * 100.0f;
+    [self scrollTo:bounds];
+}
+
 - (void) tick:(CGFloat)dt {
         
     if (scroller.timestamp && !CGPointEqualToPoint(CGPointZero, scroller.velocity)) {
@@ -213,7 +221,7 @@ typedef enum {
             scroller.timestamp = 0;
         }
         
-        CGFloat bounce = -0.45;
+        CGFloat bounce = -0.35f;
         KWScrollEdge hit = [self scrollTo:bounds];
         switch (hit) {
             case KWScrollEdgeBottom:

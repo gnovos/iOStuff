@@ -22,7 +22,8 @@
 ////crashing into each other?
 
 //add toys, etc.
-//yarn rolls (kittens can bat?) (roll with velocity?) (trail on ground for yarn?)
+//yarn (kittens can bat?) (trail on ground for yarn?)
+//rex
 
 //spash/level screenz (and win screens)
 

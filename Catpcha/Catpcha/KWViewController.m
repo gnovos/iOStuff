@@ -70,11 +70,13 @@
     
     motion = [[CMMotionManager alloc] init];
     
-//xxx
+//xxx figure this out later
 //    if (motion.isDeviceMotionAvailable) {
 //		motion.deviceMotionUpdateInterval = 1.0f / 4.0f;
 //        [motion startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion* move, NSError* error) {
-//            //NSLog(@"move: x:%f y:%f z:%f", move.userAcceleration.x, move.userAcceleration.y, move.userAcceleration.z);
+//            if (ABS(move.userAcceleration.x) > 0.5 || ABS(move.userAcceleration.y) > 0.5) {
+//                [renderer addVelocity:CGPointMake(move.userAcceleration.x, move.userAcceleration.y)];
+//            }
 //            
 //            CMAttitude* attitude = move.attitude;
 //            engine.level.bias = CGPointMake(attitude.roll, attitude.pitch);
