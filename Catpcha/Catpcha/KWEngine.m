@@ -89,7 +89,9 @@ typedef struct {
     NSMutableDictionary* handlers;
     
     NSUInteger master;
-    NSMutableDictionary* clients;    
+    NSMutableDictionary* clients;
+    
+    GKMatch* match;
 }
 
 @synthesize level;
@@ -242,7 +244,7 @@ typedef struct {
     //xxx
 }
 
-- (void) send:(KWPacket)packet {
+- (void) send:(KWPacket)packet reliable:(BOOL)reliable {
     
     NSMutableData* data = [[NSMutableData alloc] initWithBytes:&packet.header length:sizeof(KWPacketHeader)];
     
@@ -267,7 +269,13 @@ typedef struct {
             [data appendBytes:&packet.payload length:sizeof(KWEventPayload)];
             break;
     }
-    //xxx send data
+    
+    NSError* error;
+    [match sendDataToAllPlayers:data
+                   withDataMode:reliable ? GKMatchSendDataReliable : GKMatchSendDataUnreliable
+                          error:&error];
+    elog(error);
+    
     [self discardPacket:packet];
 }
 
@@ -344,7 +352,7 @@ typedef struct {
     return (KWPacket){ header, payload };
 }
 
-- (void) ping { [self send:[self packet:KWPacketTypePing]]; }
+- (void) ping { [self send:[self packet:KWPacketTypePing] reliable:YES]; }
 
 - (void) handle:(NSData*)data {
     NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
@@ -360,7 +368,7 @@ typedef struct {
     
     switch (header->type) {
         case KWPacketTypePing: {
-            [self send:[self packet:KWPacketTypePong, header->seq, now - header->timestamp]];
+            [self send:[self packet:KWPacketTypePong, header->seq, now - header->timestamp] reliable:YES];
             break;
         }
             
@@ -388,7 +396,7 @@ typedef struct {
                 
                 [candidate.nominations addObject:@(best)];
                 
-                [self send:[self packet:KWPacketTypeNomination, candidate, best]];
+                [self send:[self packet:KWPacketTypeNomination, candidate, best] reliable:YES];
             }
             break;
         }
@@ -425,7 +433,7 @@ typedef struct {
                     master = fastest;
                 }
                 
-                [self send:[self packet:KWPacketTypeVote, master]];
+                [self send:[self packet:KWPacketTypeVote, master] reliable:YES];
             }
             break;
         }
@@ -441,7 +449,7 @@ typedef struct {
             BOOL allVoted = [[clients.allValues valueForKeyPath:@"@sum.voted"] integerValue] == clients.count;
             
             if (allVoted && master == self.playerID.hash) {
-                [self send:[self packet:KWPacketTypeLayout, level.level, level.bounds.size, level.objects]];
+                [self send:[self packet:KWPacketTypeLayout, level.level, level.bounds.size, level.objects] reliable:YES];
             }
             
             break;
