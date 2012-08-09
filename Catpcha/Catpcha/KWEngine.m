@@ -10,6 +10,72 @@
 #import "KWBasket.h"
 #import "KWKitten.h"
 #import "KWLevel.h"
+#import "KWClient.h"
+
+typedef enum {
+    KWPacketTypePing,
+    KWPacketTypePong,
+    KWPacketTypeNomination,
+    KWPacketTypeVote,
+    KWPacketTypeLayout,
+    KWPacketTypeEvent,
+} KWPacketType;
+
+typedef struct {
+    unsigned short pingid;
+    NSTimeInterval pingtime;
+} KWPongPayload;
+
+typedef struct {
+    NSUInteger candidate;
+    unsigned short pingtime;
+} KWNominationPayload;
+
+typedef struct {
+    NSUInteger master;
+} KWVotePayload;
+
+typedef struct {
+    unsigned char oid;
+    unsigned char type;
+    CGRect bounds;
+} KWObjectLayout;
+
+typedef struct {
+    NSUInteger level;
+    CGSize size;
+    NSUInteger count;
+    KWObjectLayout* layouts;
+} KWLayoutPayload;
+
+typedef struct {
+    unsigned char type;
+    void* event;
+} KWEventPayload;
+
+typedef struct {
+    unsigned char oid;
+    CGFloat heading;
+    CGPoint position;
+    short velocity;
+    unsigned char state;
+} KWObjectMotionEvent;
+
+typedef union {
+    KWPongPayload* pong;
+    KWNominationPayload* nomination;
+    KWVotePayload* vote;
+    KWLayoutPayload* layout;
+    KWEventPayload* event;
+} KWPayload;
+
+typedef struct {
+    unsigned short seq;
+    unsigned char type;
+    NSUInteger clientid;
+    NSTimeInterval timestamp;
+    KWPayload payload;
+} KWPacket;
 
 @interface KWEngine ()
 
@@ -22,6 +88,10 @@
     CADisplayLink* loop;
     NSTimeInterval last;
     NSMutableDictionary* handlers;
+    
+    NSUInteger clientid;
+    NSUInteger master;
+    NSMutableDictionary* clients;    
 }
 
 @synthesize level;
@@ -37,8 +107,16 @@
     if (self = [super init]) {
         level = [[KWLevel alloc] initLevel:1];
         handlers = [[NSMutableDictionary alloc] init];
+        master = 0;        
     }
     return self;    
+}
+
+- (void) setPeers:(NSArray*)peers {
+    clients = [[NSMutableDictionary alloc] initWithCapacity:peers.count];
+    [peers enumerateObjectsUsingBlock:^(NSObject* peer, NSUInteger idx, BOOL *stop) {
+        [clients setObject:[[KWClient alloc] initWithClientID:peer.hash] forKey:@(peer.hash)];
+    }];    
 }
 
 - (void) start:(BOOL)paused {
@@ -156,6 +234,194 @@
     } else {
         failure();
     }
+}
+
+
+- (void) discardPacket:(KWPacket)packet {
+    //xxx
+}
+
+- (void) send:(KWPacket)packet {
+    //xxx
+    [self discardPacket:packet];
+}
+
+- (KWPacket) createPacket:(KWPacketType)type, ... {
+    
+    KWPacket packet;
+    
+    static unsigned short seq = 0;
+    
+    packet.timestamp = [[NSDate date] timeIntervalSince1970];
+    packet.type = type;
+    packet.seq = seq++;
+    packet.clientid = clientid;
+    
+    va_list args;
+    va_start(args, type);
+    
+    switch (type) {
+        case KWPacketTypePing:
+            break;
+        case KWPacketTypePong: {
+            packet.payload.pong = malloc(sizeof(KWPongPayload));
+            packet.payload.pong->pingid = va_arg(args, NSUInteger);
+            packet.payload.pong->pingtime = va_arg(args, double);
+            break;
+        }
+        case KWPacketTypeNomination: {
+            packet.payload.nomination = malloc(sizeof(KWNominationPayload));
+            packet.payload.nomination->candidate = va_arg(args, NSUInteger);
+            packet.payload.nomination->pingtime = va_arg(args, double);
+            break;
+        }
+        case KWPacketTypeVote: {
+            packet.payload.vote = malloc(sizeof(KWVotePayload));
+            packet.payload.vote->master = va_arg(args, NSUInteger);
+            break;
+        }
+        case KWPacketTypeLayout: {
+            packet.payload.layout = malloc(sizeof(KWLayoutPayload));
+            packet.payload.layout->level = va_arg(args, NSUInteger);
+            packet.payload.layout->size = va_arg(args, CGSize);
+            
+            NSArray* objects = va_arg(args, NSArray*);
+            packet.payload.layout->count = objects.count;
+            
+            KWObjectLayout* layouts = malloc(sizeof(KWObjectLayout) * objects.count);
+            packet.payload.layout->layouts = layouts;
+            [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+                KWObjectLayout* layout = &layouts[idx];
+                layout->oid = obj.oid;
+                layout->type = obj.type;
+                layout->bounds = obj.bounds;
+            }];
+            
+            break;
+        }
+        case KWPacketTypeEvent: {
+            packet.payload.event = malloc(sizeof(KWEventPayload));
+            //xxx
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    va_end(args);
+    
+    
+    return packet;
+}
+
+- (void) ping { [self send:[self createPacket:KWPacketTypePing]]; }
+
+- (void) handle:(NSData*)data {
+    NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+    
+    KWPacket packet;
+    
+    [data getBytes:&packet length:sizeof(packet)];
+    
+    KWClient* client = [clients objectForKey:@(packet.clientid)];
+    
+    switch (packet.type) {
+        case KWPacketTypePing: {
+            [self send:[self createPacket:KWPacketTypePong, packet.seq, now - packet.timestamp]];
+            break;
+        }
+            
+        case KWPacketTypePong: {
+            [client.pings addObject:@(packet.payload.pong->pingtime)];
+            [client.pings addObject:@(now - packet.timestamp)];
+            __block BOOL enough = YES;
+            [[clients allValues] enumerateObjectsUsingBlock:^(KWClient* c, NSUInteger idx, BOOL *stop) {
+                if (c.pings.count < 6.0f) {
+                    enough = NO;
+                }
+            }];
+            
+            if (enough) {
+                __block KWClient* candidate = nil;
+                __block NSTimeInterval best = now;
+                [[clients allValues] enumerateObjectsUsingBlock:^(KWClient* c, NSUInteger idx, BOOL *stop) {
+                    __block NSTimeInterval avg = [[c.pings valueForKeyPath:@"@avg.self"] doubleValue];
+                    if (avg < best) {
+                        candidate = c;
+                        best = avg;
+                    }
+                }];
+                
+                [candidate.nominations addObject:@(best)];
+                
+                [self send:[self createPacket:KWPacketTypeNomination, candidate, best]];
+            }
+            break;
+        }
+            
+        case KWPacketTypeNomination: {
+            KWClient* nominated = [clients objectForKey:@(packet.payload.nomination->candidate)];
+            [nominated.nominations addObject:@(packet.payload.nomination->pingtime)];
+            
+            __block NSUInteger ncount = 0;
+            [clients.allValues enumerateObjectsUsingBlock:^(KWClient* c, NSUInteger idx, BOOL *stop){
+                ncount += c.nominations.count;
+            }];
+            
+            if (ncount == clients.count) {
+                __block NSUInteger votes = 0;
+                __block NSTimeInterval best = now;
+                __block NSUInteger fastest = 0;
+                [clients.allValues enumerateObjectsUsingBlock:^(KWClient* c, NSUInteger idx, BOOL *stop) {
+                    if (c.nominations.count > votes) {
+                        votes = c.nominations.count;
+                        master = c.clientID;
+                    } else if (c.nominations.count == votes) {
+                        master = 0;
+                    }
+                    NSTimeInterval avg = [[c.nominations valueForKeyPath:@"@avg.self"] doubleValue];
+                    if (avg < best) {
+                        best = avg;
+                        fastest = c.clientID;
+                    }
+                }];
+                
+                if (master == 0) {
+                    master = fastest;
+                }
+                
+                [self send:[self createPacket:KWPacketTypeVote, master]];
+            }
+            break;
+        }
+            
+        case KWPacketTypeVote: {
+            client.voted = YES;
+            if (master && master != packet.payload.vote->master) {
+                //xxx we disagree, so revote
+            }
+            master = packet.payload.vote->master;
+            
+            if ([[clients.allValues valueForKeyPath:@"@sum.voted"] integerValue] == clients.count) {
+                KWLevel* level; //xxx
+                [self send:[self createPacket:KWPacketTypeLayout, level.level, level.bounds.size, level.objects]];
+            }
+            
+            break;
+        }
+            
+        case KWPacketTypeLayout: {
+            //xxx unpack level
+            break;
+        }
+            
+        case KWPacketTypeEvent: {
+            break;
+        }
+    }
+    
+    //return packet?
 }
 
 

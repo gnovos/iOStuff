@@ -55,6 +55,7 @@ typedef enum {
 
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:KWDefaultKittenSize]) {
+        self.type = KWObjectTypeKitten;
         self.lineWidth = 2.0f;
         self.strokeColor = [UIColor blueColor].CGColor;
         

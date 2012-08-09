@@ -11,6 +11,13 @@
 @class KWLevel;
 
 typedef enum {
+    KWObjectTypeBasket,
+    KWObjectTypeKitten,
+    KWObjectTypeMouse,
+    KWObjectTypeYarn,
+} KWObjectType;
+
+typedef enum {
     KWObjectVelocityMotionless = 0,
     KWObjectVelocityVerySlow   = 15,
     KWObjectVelocitySlow       = 100,
@@ -22,6 +29,7 @@ typedef enum {
 @interface KWObject : CAShapeLayer
 
 @property (nonatomic, assign) unsigned char oid;
+@property (nonatomic, assign) KWObjectType type;
 
 @property (nonatomic, assign) CGFloat allure;
 

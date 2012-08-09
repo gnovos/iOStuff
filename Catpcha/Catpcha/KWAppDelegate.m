@@ -10,6 +10,9 @@
 #import "KWApplication.h"
 #import "KWEngine.h"
 
+
+#import "KWNetwork.h"
+
 @implementation KWAppDelegate
 
 @synthesize window = _window;
@@ -24,6 +27,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[KWNetwork alloc] init];
     @try {
         [TestFlight takeOff:@"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"];
         [TestFlight setDeviceIdentifier:[KWApplication deviceID]];

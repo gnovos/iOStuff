@@ -15,6 +15,7 @@
 
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:KWDefaultBasketSize]) {
+        self.type = KWObjectTypeBasket;
         self.lineWidth = 3.0f;
         self.strokeColor = [UIColor greenColor].CGColor;
         self.lineDashPattern = @[@10, @5];

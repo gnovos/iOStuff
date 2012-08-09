@@ -12,6 +12,7 @@
 
 - (id) initWithLevel:(KWLevel*)lvl {
     if (self = [super initWithLevel:lvl andSize:KWDefaultMouseSize]) {
+        self.type = KWObjectTypeMouse;
         self.fillColor = [UIColor darkGrayColor].CGColor;
                 
         self.velocity = KWObjectVelocityVeryFast;
