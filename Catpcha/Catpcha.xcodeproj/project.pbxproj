@@ -40,7 +40,7 @@
 		0CF257BB15B621260020B895 /* KWLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF257BA15B621260020B895 /* KWLevel.m */; };
 		0CF257BE15B635F20020B895 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CF257BD15B635F10020B895 /* QuartzCore.framework */; };
 		0CF257C515B668220020B895 /* KWGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF257C415B668220020B895 /* KWGameViewController.m */; };
-		0CFAC38615D31B8300A6809F /* KWState.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAC38515D31B8300A6809F /* KWState.m */; };
+		0CFAC38A15D352D500A6809F /* KWNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAC38915D352D500A6809F /* KWNetwork.m */; };
 		0CFF172515BCDF0400042C67 /* KWToy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF172415BCDF0400042C67 /* KWToy.m */; };
 		0CFF172815BCDF1F00042C67 /* KWMouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF172715BCDF1F00042C67 /* KWMouse.m */; };
 /* End PBXBuildFile section */
@@ -103,8 +103,8 @@
 		0CF257C015B65ACF0020B895 /* KWConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWConst.h; sourceTree = "<group>"; };
 		0CF257C315B668220020B895 /* KWGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWGameViewController.h; sourceTree = "<group>"; };
 		0CF257C415B668220020B895 /* KWGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWGameViewController.m; sourceTree = "<group>"; };
-		0CFAC38415D31B8300A6809F /* KWState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWState.h; sourceTree = "<group>"; };
-		0CFAC38515D31B8300A6809F /* KWState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWState.m; sourceTree = "<group>"; };
+		0CFAC38815D352D500A6809F /* KWNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWNetwork.h; sourceTree = "<group>"; };
+		0CFAC38915D352D500A6809F /* KWNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWNetwork.m; sourceTree = "<group>"; };
 		0CFF172315BCDF0400042C67 /* KWToy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWToy.h; sourceTree = "<group>"; };
 		0CFF172415BCDF0400042C67 /* KWToy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWToy.m; sourceTree = "<group>"; };
 		0CFF172615BCDF1F00042C67 /* KWMouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWMouse.h; sourceTree = "<group>"; };
@@ -263,8 +263,8 @@
 			children = (
 				0C7F61C715B4BC3E00924B64 /* KWEngine.h */,
 				0C7F61C815B4BC3E00924B64 /* KWEngine.m */,
-				0CFAC38415D31B8300A6809F /* KWState.h */,
-				0CFAC38515D31B8300A6809F /* KWState.m */,
+				0CFAC38815D352D500A6809F /* KWNetwork.h */,
+				0CFAC38915D352D500A6809F /* KWNetwork.m */,
 			);
 			name = Engine;
 			sourceTree = "<group>";
@@ -410,7 +410,7 @@
 				0CD70BC915CBBFE8008EF8CB /* NSObject+KW.m in Sources */,
 				0C67C03C15D1F287008CC702 /* KWLaunchViewController.m in Sources */,
 				0C67C03F15D1FAA1008CC702 /* KWInterstitialViewController.m in Sources */,
-				0CFAC38615D31B8300A6809F /* KWState.m in Sources */,
+				0CFAC38A15D352D500A6809F /* KWNetwork.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
