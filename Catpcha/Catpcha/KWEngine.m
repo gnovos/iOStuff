@@ -63,21 +63,18 @@ typedef struct {
     unsigned char state;
 } KWObjectMotionEvent;
 
-typedef union {
-    KWPongPayload* pong;
-    KWNominationPayload* nomination;
-    KWVotePayload* vote;
-    KWLayoutPayload* layout;
-    KWEventPayload* event;
-} KWPayload;
-
 typedef struct {
     unsigned short seq;
     unsigned char type;
     NSUInteger clientid;
     NSTimeInterval timestamp;
-    KWPayload payload;
+} KWPacketHeader;
+
+typedef struct {
+    KWPacketHeader header;
+    void* payload;
 } KWPacket;
+
 
 @interface KWEngine ()
 
@@ -89,7 +86,8 @@ typedef struct {
 @implementation KWEngine {        
     CADisplayLink* loop;
     NSTimeInterval last;
-    NSMutableDictionary* handlers;    
+    NSMutableDictionary* handlers;
+    
     NSUInteger master;
     NSMutableDictionary* clients;    
 }
@@ -245,20 +243,45 @@ typedef struct {
 }
 
 - (void) send:(KWPacket)packet {
-    //xxx
+    
+    NSMutableData* data = [[NSMutableData alloc] initWithBytes:&packet.header length:sizeof(KWPacketHeader)];
+    
+    switch (packet.header.type) {
+        case KWPacketTypePong:
+            [data appendBytes:&packet.payload length:sizeof(KWPongPayload)];
+            break;
+        case KWPacketTypeNomination:
+            [data appendBytes:&packet.payload length:sizeof(KWNominationPayload)];
+            break;
+        case KWPacketTypeVote:
+            [data appendBytes:&packet.payload length:sizeof(KWVotePayload)];
+            break;
+        case KWPacketTypeLayout:
+            [data appendBytes:&packet.payload length:sizeof(KWLayoutPayload)];
+            KWLayoutPayload* layout = packet.payload;
+            for (int i = 0; i < layout->count; i++) {
+                [data appendBytes:&layout->layouts[i] length:sizeof(KWObjectLayout)];
+            }
+            break;
+        case KWPacketTypeEvent:
+            [data appendBytes:&packet.payload length:sizeof(KWEventPayload)];
+            break;
+    }
+    //xxx send data
     [self discardPacket:packet];
 }
 
 - (KWPacket) packet:(KWPacketType)type, ... {
     
-    KWPacket packet;
+    KWPacketHeader header;
+    void* payload;
     
     static unsigned short seq = 0;
     
-    packet.timestamp = [[NSDate date] timeIntervalSince1970];
-    packet.type = type;
-    packet.seq = seq++;
-    packet.clientid = self.playerID.hash;
+    header.timestamp = [[NSDate date] timeIntervalSince1970];
+    header.type = type;
+    header.seq = seq++;
+    header.clientid = self.playerID.hash;
     
     va_list args;
     va_start(args, type);
@@ -267,32 +290,36 @@ typedef struct {
         case KWPacketTypePing:
             break;
         case KWPacketTypePong: {
-            packet.payload.pong = malloc(sizeof(KWPongPayload));
-            packet.payload.pong->pingid = va_arg(args, NSUInteger);
-            packet.payload.pong->pingtime = va_arg(args, double);
+            payload = malloc(sizeof(KWPongPayload));
+            KWPongPayload* pong = payload;
+            pong->pingid = va_arg(args, NSUInteger);
+            pong->pingtime = va_arg(args, double);
             break;
         }
         case KWPacketTypeNomination: {
-            packet.payload.nomination = malloc(sizeof(KWNominationPayload));
-            packet.payload.nomination->candidate = va_arg(args, NSUInteger);
-            packet.payload.nomination->pingtime = va_arg(args, double);
+            payload = malloc(sizeof(KWNominationPayload));
+            KWNominationPayload* nomination = payload;
+            nomination->candidate = va_arg(args, NSUInteger);
+            nomination->pingtime = va_arg(args, double);
             break;
         }
         case KWPacketTypeVote: {
-            packet.payload.vote = malloc(sizeof(KWVotePayload));
-            packet.payload.vote->master = va_arg(args, NSUInteger);
+            payload = malloc(sizeof(KWVotePayload));
+            KWVotePayload* vote = payload;
+            vote->master = va_arg(args, NSUInteger);
             break;
         }
         case KWPacketTypeLayout: {
-            packet.payload.layout = malloc(sizeof(KWLayoutPayload));
-            packet.payload.layout->level = va_arg(args, NSUInteger);
-            packet.payload.layout->size = va_arg(args, CGSize);
+            payload = malloc(sizeof(KWLayoutPayload));
+            KWLayoutPayload* layout = payload;
+            layout->level = va_arg(args, NSUInteger);
+            layout->size = va_arg(args, CGSize);
             
             NSArray* objects = va_arg(args, NSArray*);
-            packet.payload.layout->count = objects.count;
+            layout->count = objects.count;
             
             KWObjectLayout* layouts = malloc(sizeof(KWObjectLayout) * objects.count);
-            packet.payload.layout->layouts = layouts;
+            layout->layouts = layouts;
             [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
                 KWObjectLayout* layout = &layouts[idx];
                 layout->oid = obj.oid;
@@ -303,7 +330,7 @@ typedef struct {
             break;
         }
         case KWPacketTypeEvent: {
-            packet.payload.event = malloc(sizeof(KWEventPayload));
+            payload = malloc(sizeof(KWEventPayload));
             //xxx
             break;
         }
@@ -314,8 +341,7 @@ typedef struct {
     
     va_end(args);
     
-    
-    return packet;
+    return (KWPacket){ header, payload };
 }
 
 - (void) ping { [self send:[self packet:KWPacketTypePing]]; }
@@ -323,21 +349,25 @@ typedef struct {
 - (void) handle:(NSData*)data {
     NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
     
-    KWPacket packet;
+    void* packet;
     
-    [data getBytes:&packet length:sizeof(packet)];
+    [data getBytes:&packet length:data.length];
     
-    KWClient* client = [clients objectForKey:@(packet.clientid)];
+    KWPacketHeader* header = (KWPacketHeader*)packet;
+    packet += sizeof(KWPacketHeader);
     
-    switch (packet.type) {
+    KWClient* client = [clients objectForKey:@(header->clientid)];
+    
+    switch (header->type) {
         case KWPacketTypePing: {
-            [self send:[self packet:KWPacketTypePong, packet.seq, now - packet.timestamp]];
+            [self send:[self packet:KWPacketTypePong, header->seq, now - header->timestamp]];
             break;
         }
             
         case KWPacketTypePong: {
-            [client.pings addObject:@(packet.payload.pong->pingtime)];
-            [client.pings addObject:@(now - packet.timestamp)];
+            KWPongPayload* pong = packet;
+            [client.pings addObject:@(pong->pingtime)];
+            [client.pings addObject:@(now - header->timestamp)];
             __block BOOL enough = YES;
             [[clients allValues] enumerateObjectsUsingBlock:^(KWClient* c, NSUInteger idx, BOOL *stop) {
                 if (c.pings.count < 6.0f) {
@@ -364,8 +394,9 @@ typedef struct {
         }
             
         case KWPacketTypeNomination: {
-            KWClient* nominated = [clients objectForKey:@(packet.payload.nomination->candidate)];
-            [nominated.nominations addObject:@(packet.payload.nomination->pingtime)];
+            KWNominationPayload* nomination = packet;
+            KWClient* nominated = [clients objectForKey:@(nomination->candidate)];
+            [nominated.nominations addObject:@(nomination->pingtime)];
             
             __block NSUInteger ncount = 0;
             [clients.allValues enumerateObjectsUsingBlock:^(KWClient* c, NSUInteger idx, BOOL *stop){
@@ -400,13 +431,16 @@ typedef struct {
         }
             
         case KWPacketTypeVote: {
+            KWVotePayload* vote = packet;
             client.voted = YES;
-            if (master && master != packet.payload.vote->master) {
+            if (master && master != vote->master) {
                 //xxx we disagree, so revote
             }
-            master = packet.payload.vote->master;
+            master = vote->master;
             
-            if ([[clients.allValues valueForKeyPath:@"@sum.voted"] integerValue] == clients.count) {
+            BOOL allVoted = [[clients.allValues valueForKeyPath:@"@sum.voted"] integerValue] == clients.count;
+            
+            if (allVoted && master == self.playerID.hash) {
                 [self send:[self packet:KWPacketTypeLayout, level.level, level.bounds.size, level.objects]];
             }
             
@@ -414,16 +448,19 @@ typedef struct {
         }
             
         case KWPacketTypeLayout: {
-            NSUInteger count = packet.payload.layout->count;
+            KWLayoutPayload* layout = packet;
+            NSUInteger count = layout->count;
 
-            //xxx need to init this empty
-            KWLevel* lvl = [[KWLevel alloc] initLevel:packet.payload.layout->level withSize:packet.payload.layout->size];
+            KWLevel* lvl = [[KWLevel alloc] initLevel:layout->level withSize:layout->size];
+            
+            packet += sizeof(KWLayoutPayload);
+            layout->layouts = packet;
             
             for (int i = 0; i < count; i++) {
-                KWObjectLayout* layout = &packet.payload.layout->layouts[i];
+                KWObjectLayout* olayout = &layout->layouts[i];
                 KWObject* obj = nil;
                 
-                switch (layout->type) {
+                switch (olayout->type) {
                     case KWObjectTypeBasket:
                         obj = [[KWBasket alloc] initWithLevel:lvl];
                         break;
@@ -438,8 +475,8 @@ typedef struct {
                         break;
                 }
                 
-                obj.oid = layout->oid;
-                obj.bounds = layout->bounds;
+                obj.oid = olayout->oid;
+                obj.bounds = olayout->bounds;
                 
                 [lvl addObject:obj];
             }
@@ -450,6 +487,7 @@ typedef struct {
         }
             
         case KWPacketTypeEvent: {
+            //xxx
             break;
         }
     }
