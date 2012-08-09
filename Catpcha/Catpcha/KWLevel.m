@@ -64,12 +64,11 @@ static const int KWTimeLimitLevelCost  = 5;
 
 - (void) setFrame:(CGRect)frame {
     [super setFrame:frame];
-    [self setup];
+    [self reset];
 }
 
-- (void) setup {
+- (void) reset {
     [[self sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    [objects removeAllObjects];
     
     UIFont* bold = [UIFont boldSystemFontOfSize:38.0f * 3];
     background = [self textlayer:@"Level 00 (000 s)" font:bold];
@@ -78,27 +77,6 @@ static const int KWTimeLimitLevelCost  = 5;
     background.transform = CATransform3DMakeRotation(-M_PI_4, 0, 0, 1.0f);
     
     [self addSublayer:background];
-    
-    timelimit = KWTimeLimitMaxSeconds - (KWTimeLimitLevelCost * level);
-        
-    [objects addObject:[[KWBasket alloc] initWithLevel:self]];
-
-    int kitcount = MAX(level, KWRandom(KWKittensPerLevel * level));
-    
-    for (int i = 0; i < kitcount; i++) {
-        [objects addObject:[[KWKitten alloc] initWithLevel:self]];
-    }
-    
-    if (level % 3 == 0) {
-        [objects addObject:[[KWYarn alloc] initWithLevel:self]];
-    }
-    
-    [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
-        while (!CGRectContainsRect(self.bounds, obj.frame) || ![self vacant:obj.frame excluding:obj]) {
-            obj.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
-        }
-        [self addSublayer:obj];
-    }];
     
     CAShapeLayer* fence = [CAShapeLayer layer];
     fence.frame = self.frame;
@@ -116,11 +94,45 @@ static const int KWTimeLimitLevelCost  = 5;
     self.shadowOffset = CGSizeMake(0, 0);
     self.shadowPath = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(self.bounds, -10.0f, -10.0f) cornerRadius:40.0f].CGPath;
     
+    [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+        [self addSublayer:obj];
+    }];   
 }
 
-- (id) initLevel:(int)lvl {
+- (void) populate {
+    
+    [objects removeAllObjects];
+    
+    [objects addObject:[[KWBasket alloc] initWithLevel:self]];
+
+    int kitcount = MAX(level, KWRandom(KWKittensPerLevel * level));
+    
+    for (int i = 0; i < kitcount; i++) {
+        [objects addObject:[[KWKitten alloc] initWithLevel:self]];
+    }
+    
+    if (level % 3 == 0) {
+        [objects addObject:[[KWYarn alloc] initWithLevel:self]];
+    }
+    
+    [objects enumerateObjectsUsingBlock:^(KWObject* obj, NSUInteger idx, BOOL *stop) {
+        while (!CGRectContainsRect(self.bounds, obj.frame) || ![self vacant:obj.frame excluding:obj]) {
+            obj.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
+        }
+    }];
+    
+    [self reset];
+        
+}
+
+- (void) addObject:(KWObject*)object { [objects addObject:object]; }
+
+- (id) initLevel:(int)lvl withSize:(CGSize)size {
     if (self = [self init]) {
         self.needsDisplayOnBoundsChange = YES;
+        self.bounds = (CGRect){ self.bounds.origin, size };
+        
+        timelimit = KWTimeLimitMaxSeconds - (KWTimeLimitLevelCost * level);
         
         id pink = (id)[UIColor colorWithRed:0.9f green:0.5f blue:0.7f alpha:0.7f].CGColor;
         id pg = (id)[UIColor colorWithRed:0.5f green:0.9f blue:0.4f alpha:0.7f].CGColor;

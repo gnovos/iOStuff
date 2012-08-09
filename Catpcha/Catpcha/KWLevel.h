@@ -21,7 +21,11 @@
 
 @property (nonatomic, assign) CGPoint bias;
 
-- (id) initLevel:(int)lvl;
+- (id) initLevel:(int)lvl withSize:(CGSize)size;
+
+- (void) populate;
+
+- (void) addObject:(KWObject*)object;
 
 - (void) tick:(CGFloat)dt;
 

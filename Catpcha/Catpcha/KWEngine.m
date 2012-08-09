@@ -7,10 +7,12 @@
 //
 
 #import "KWEngine.h"
-#import "KWBasket.h"
-#import "KWKitten.h"
-#import "KWLevel.h"
 #import "KWClient.h"
+#import "KWBasket.h"
+#import "KWLevel.h"
+#import "KWKitten.h"
+#import "KWYarn.h"
+#import "KWMouse.h"
 
 typedef enum {
     KWPacketTypePing,
@@ -87,9 +89,7 @@ typedef struct {
 @implementation KWEngine {        
     CADisplayLink* loop;
     NSTimeInterval last;
-    NSMutableDictionary* handlers;
-    
-    NSUInteger clientid;
+    NSMutableDictionary* handlers;    
     NSUInteger master;
     NSMutableDictionary* clients;    
 }
@@ -105,7 +105,8 @@ typedef struct {
 
 - (id) init {
     if (self = [super init]) {
-        level = [[KWLevel alloc] initLevel:1];
+        level = [[KWLevel alloc] initLevel:1 withSize:UIScreen.mainScreen.bounds.size];
+        [level populate];
         handlers = [[NSMutableDictionary alloc] init];
         master = 0;        
     }
@@ -113,7 +114,8 @@ typedef struct {
 }
 
 - (void) setPeers:(NSArray*)peers {
-    clients = [[NSMutableDictionary alloc] initWithCapacity:peers.count];
+    clients = [[NSMutableDictionary alloc] initWithCapacity:peers.count + 1];
+    [clients setObject:[[KWClient alloc] initWithClientID:self.playerID.hash] forKey:@(self.playerID.hash)];
     [peers enumerateObjectsUsingBlock:^(NSObject* peer, NSUInteger idx, BOOL *stop) {
         [clients setObject:[[KWClient alloc] initWithClientID:peer.hash] forKey:@(peer.hash)];
     }];    
@@ -150,7 +152,8 @@ typedef struct {
             handler(level);
         }];
         
-        level = [[KWLevel alloc] initLevel:level.level + 1];
+        level = [[KWLevel alloc] initLevel:level.level + 1 withSize:UIScreen.mainScreen.bounds.size];
+        [level populate];
         
         [[handlers objectForKey:@(KWEngineEventLevelBegin)] enumerateObjectsUsingBlock:^(void(^handler)(id level), NSUInteger idx, BOOL *stop) {
             handler(level);
@@ -246,7 +249,7 @@ typedef struct {
     [self discardPacket:packet];
 }
 
-- (KWPacket) createPacket:(KWPacketType)type, ... {
+- (KWPacket) packet:(KWPacketType)type, ... {
     
     KWPacket packet;
     
@@ -255,7 +258,7 @@ typedef struct {
     packet.timestamp = [[NSDate date] timeIntervalSince1970];
     packet.type = type;
     packet.seq = seq++;
-    packet.clientid = clientid;
+    packet.clientid = self.playerID.hash;
     
     va_list args;
     va_start(args, type);
@@ -315,7 +318,7 @@ typedef struct {
     return packet;
 }
 
-- (void) ping { [self send:[self createPacket:KWPacketTypePing]]; }
+- (void) ping { [self send:[self packet:KWPacketTypePing]]; }
 
 - (void) handle:(NSData*)data {
     NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
@@ -328,7 +331,7 @@ typedef struct {
     
     switch (packet.type) {
         case KWPacketTypePing: {
-            [self send:[self createPacket:KWPacketTypePong, packet.seq, now - packet.timestamp]];
+            [self send:[self packet:KWPacketTypePong, packet.seq, now - packet.timestamp]];
             break;
         }
             
@@ -355,7 +358,7 @@ typedef struct {
                 
                 [candidate.nominations addObject:@(best)];
                 
-                [self send:[self createPacket:KWPacketTypeNomination, candidate, best]];
+                [self send:[self packet:KWPacketTypeNomination, candidate, best]];
             }
             break;
         }
@@ -391,7 +394,7 @@ typedef struct {
                     master = fastest;
                 }
                 
-                [self send:[self createPacket:KWPacketTypeVote, master]];
+                [self send:[self packet:KWPacketTypeVote, master]];
             }
             break;
         }
@@ -404,15 +407,45 @@ typedef struct {
             master = packet.payload.vote->master;
             
             if ([[clients.allValues valueForKeyPath:@"@sum.voted"] integerValue] == clients.count) {
-                KWLevel* level; //xxx
-                [self send:[self createPacket:KWPacketTypeLayout, level.level, level.bounds.size, level.objects]];
+                [self send:[self packet:KWPacketTypeLayout, level.level, level.bounds.size, level.objects]];
             }
             
             break;
         }
             
         case KWPacketTypeLayout: {
-            //xxx unpack level
+            NSUInteger count = packet.payload.layout->count;
+
+            //xxx need to init this empty
+            KWLevel* lvl = [[KWLevel alloc] initLevel:packet.payload.layout->level withSize:packet.payload.layout->size];
+            
+            for (int i = 0; i < count; i++) {
+                KWObjectLayout* layout = &packet.payload.layout->layouts[i];
+                KWObject* obj = nil;
+                
+                switch (layout->type) {
+                    case KWObjectTypeBasket:
+                        obj = [[KWBasket alloc] initWithLevel:lvl];
+                        break;
+                    case KWObjectTypeKitten:
+                        obj = [[KWKitten alloc] initWithLevel:lvl];
+                        break;
+                    case KWObjectTypeMouse:
+                        obj = [[KWMouse alloc] initWithLevel:lvl];
+                        break;
+                    case KWObjectTypeYarn:
+                        obj = [[KWYarn alloc] initWithLevel:lvl];
+                        break;
+                }
+                
+                obj.oid = layout->oid;
+                obj.bounds = layout->bounds;
+                
+                [lvl addObject:obj];
+            }
+            
+            level = lvl;
+            
             break;
         }
             
@@ -421,7 +454,6 @@ typedef struct {
         }
     }
     
-    //return packet?
 }
 
 

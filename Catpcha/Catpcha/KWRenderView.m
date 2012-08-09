@@ -89,7 +89,7 @@ typedef enum {
     [[self.scroll sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [self.scroll addSublayer:self.level];
     
-    KWObject* basket = [self.level.baskets objectAtIndex:0];
+    KWObject* basket = [self.level.baskets lastObject];
     CGPoint p = basket.position;
     p.x -= self.scroll.bounds.size.width / 2.0f;
     p.y -= self.scroll.bounds.size.height / 2.0f;
