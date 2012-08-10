@@ -32,9 +32,7 @@
     if (self = [super init]) {
         static char oids = 0;
         self.oid = oids++;
-        
-        NSLog(@"[%d] %@", self.oid, self);
-        
+                
         self.shouldRasterize = YES;
         self.lineWidth = 1.0f;
         self.fillColor = nil;

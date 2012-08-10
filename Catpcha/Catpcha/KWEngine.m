@@ -66,7 +66,6 @@ typedef struct {
 typedef struct {
     unsigned short seq;
     unsigned char type;
-    NSUInteger clientid;
     NSTimeInterval timestamp;
 } KWPacketHeader;
 
@@ -113,14 +112,6 @@ typedef struct {
     return self;    
 }
 
-- (void) setPeers:(NSArray*)peers {
-    clients = [[NSMutableDictionary alloc] initWithCapacity:peers.count + 1];
-    [clients setObject:[[KWClient alloc] initWithClientID:self.playerID.hash] forKey:@(self.playerID.hash)];
-    [peers enumerateObjectsUsingBlock:^(NSObject* peer, NSUInteger idx, BOOL *stop) {
-        [clients setObject:[[KWClient alloc] initWithClientID:peer.hash] forKey:@(peer.hash)];
-    }];    
-}
-
 - (void) start:(BOOL)paused {
     if (loop == nil) {
         loop = [CADisplayLink displayLinkWithTarget:self selector:@selector(loop:)];
@@ -130,8 +121,16 @@ typedef struct {
     }
 }
 
-- (void) stop { [loop invalidate]; loop = nil; }
-- (void) pause { loop.paused = YES; }
+- (void) stop {
+    [self save];
+    [loop invalidate];
+    loop = nil;
+}
+
+- (void) pause {
+    [self save];
+    loop.paused = YES;
+}
 - (void) unpause { loop.paused = NO; }
 
 - (void) loop:(CADisplayLink*)link {
@@ -240,7 +239,7 @@ typedef struct {
 }
 
 
-- (void) discardPacket:(KWPacket)packet {
+- (void) discard:(KWPacket)packet {
     //xxx
 }
 
@@ -276,7 +275,7 @@ typedef struct {
                           error:&error];
     elog(error);
     
-    [self discardPacket:packet];
+    [self discard:packet];
 }
 
 - (KWPacket) packet:(KWPacketType)type, ... {
@@ -289,7 +288,6 @@ typedef struct {
     header.timestamp = [[NSDate date] timeIntervalSince1970];
     header.type = type;
     header.seq = seq++;
-    header.clientid = self.playerID.hash;
     
     va_list args;
     va_start(args, type);
@@ -354,7 +352,27 @@ typedef struct {
 
 - (void) ping { [self send:[self packet:KWPacketTypePing] reliable:YES]; }
 
-- (void) handle:(NSData*)data {
+- (void) match:(GKMatch*)m didFailWithError:(NSError*)error { elog(error); }
+- (BOOL) match:(GKMatch*)m shouldReinvitePlayer:(NSString*)player { return YES; }
+- (void) match:(GKMatch*)m player:(NSString*)player didChangeState:(GKPlayerConnectionState)state {
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        clients = [[NSMutableDictionary alloc] init];
+        [clients setObject:[[KWClient alloc] initWithClientID:self.playerID.hash] forKey:@(self.playerID.hash)];
+    });
+    
+    if (state == GKPlayerStateConnected) {
+        [clients setObject:[[KWClient alloc] initWithClientID:player.hash] forKey:@(player.hash)];        
+    } else if (state == GKPlayerStateDisconnected) {
+        [clients removeObjectForKey:@(player.hash)];
+    }
+    
+    if (m.expectedPlayerCount == 0) {
+        //xxx start pinging;
+    }
+}
+
+- (void) match:(GKMatch*)match didReceiveData:(NSData*)data fromPlayer:(NSString*)player {
     NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
     
     void* packet;
@@ -364,7 +382,7 @@ typedef struct {
     KWPacketHeader* header = (KWPacketHeader*)packet;
     packet += sizeof(KWPacketHeader);
     
-    KWClient* client = [clients objectForKey:@(header->clientid)];
+    KWClient* client = [clients objectForKey:@(player.hash)];
     
     switch (header->type) {
         case KWPacketTypePing: {
@@ -376,6 +394,7 @@ typedef struct {
             KWPongPayload* pong = packet;
             [client.pings addObject:@(pong->pingtime)];
             [client.pings addObject:@(now - header->timestamp)];
+            
             __block BOOL enough = YES;
             [[clients allValues] enumerateObjectsUsingBlock:^(KWClient* c, NSUInteger idx, BOOL *stop) {
                 if (c.pings.count < 6.0f) {
@@ -396,7 +415,7 @@ typedef struct {
                 
                 [candidate.nominations addObject:@(best)];
                 
-                [self send:[self packet:KWPacketTypeNomination, candidate, best] reliable:YES];
+                [self send:[self packet:KWPacketTypeNomination, candidate.clientID, best] reliable:YES];
             }
             break;
         }

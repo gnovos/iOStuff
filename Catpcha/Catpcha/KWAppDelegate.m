@@ -35,25 +35,11 @@
     return YES;
 }
 							
-- (void)applicationWillResignActive:(UIApplication *)application {
-    //xxx pause
-    [KWEngine.instance save];
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    //xxx pause
-    [KWEngine.instance save];
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    //xxx unpause
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    //xxx unpause
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application { [KWEngine.instance save]; }
+- (void)applicationWillResignActive:(UIApplication*)application    { [KWEngine.instance pause]; }
+- (void)applicationDidEnterBackground:(UIApplication*)application  { [KWEngine.instance pause]; }
+- (void)applicationWillEnterForeground:(UIApplication*)application { [KWEngine.instance unpause]; }
+- (void)applicationDidBecomeActive:(UIApplication*)application     { [KWEngine.instance unpause]; }
+- (void)applicationWillTerminate:(UIApplication *)application      { [KWEngine.instance stop]; }
 
 - (IBAction) launchFeedback { [TestFlight openFeedbackView]; }
 

@@ -16,7 +16,7 @@ typedef enum {
     KWEngineEventLevelBegin
 } KWEngineEvent;
 
-@interface KWEngine : NSObject
+@interface KWEngine : NSObject <GKMatchDelegate>
 
 @property (nonatomic, readonly, strong) KWLevel* level;
 
