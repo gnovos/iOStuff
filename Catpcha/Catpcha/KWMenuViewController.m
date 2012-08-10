@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "KWLaunchViewController.h"
+#import "KWMenuViewController.h"
 #import "KWAlert.h"
 #import "KWEngine.h"
 
-@interface KWLaunchViewController ()
+@interface KWMenuViewController ()
 
 @end
 
-@implementation KWLaunchViewController
+@implementation KWMenuViewController
 
 - (void) login {
     //xxx check if already authenticated?

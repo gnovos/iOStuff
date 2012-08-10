@@ -240,7 +240,25 @@ typedef struct {
 
 
 - (void) discard:(KWPacket)packet {
-    //xxx
+    
+    switch (packet.header.type) {
+        case KWPacketTypeLayout: {
+            KWLayoutPayload* layout = packet.payload;
+            free(&layout->layouts);
+            free(packet.payload);
+            break;
+        }
+            
+        case KWPacketTypeEvent: {
+            free(packet.payload);
+            break;
+        }
+            
+        default: {
+            free(packet.payload);
+            break;
+        }
+    }
 }
 
 - (void) send:(KWPacket)packet reliable:(BOOL)reliable {

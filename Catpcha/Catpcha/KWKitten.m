@@ -144,7 +144,7 @@ typedef enum {
 }
 
 - (void) show:(KWObject*)item {
-    if (!self.tired && item.moving && item.allure > self.interest) {
+    if (!self.tired && !self.playing && item.moving && item.allure > self.interest) {
         [self chase:item];
         mood += KWKittenMoodExcited * item.allure;
     }    

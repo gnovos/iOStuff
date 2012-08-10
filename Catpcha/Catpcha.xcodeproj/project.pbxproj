@@ -32,7 +32,7 @@
 		0C31C74915AA6F6F004D1067 /* KWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C74815AA6F6F004D1067 /* KWObject.m */; };
 		0C31C74C15AA6FB2004D1067 /* KWYarn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31C74B15AA6FB2004D1067 /* KWYarn.m */; };
 		0C47B23B15BC9B7A00B259B0 /* KWGFX.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B23A15BC9B7A00B259B0 /* KWGFX.m */; };
-		0C67C03C15D1F287008CC702 /* KWLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C67C03B15D1F287008CC702 /* KWLaunchViewController.m */; };
+		0C67C03C15D1F287008CC702 /* KWMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C67C03B15D1F287008CC702 /* KWMenuViewController.m */; };
 		0C67C03F15D1FAA1008CC702 /* KWInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C67C03E15D1FAA1008CC702 /* KWInterstitialViewController.m */; };
 		0C7F61C915B4BC3E00924B64 /* KWEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F61C815B4BC3E00924B64 /* KWEngine.m */; };
 		0CD1FB1815D4375800E7BF45 /* KWClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD1FB1715D4375800E7BF45 /* KWClient.m */; };
@@ -86,8 +86,8 @@
 		0C38659715D050060063EB90 /* KWGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KWGeometry.h; sourceTree = "<group>"; };
 		0C47B23915BC9B7A00B259B0 /* KWGFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWGFX.h; sourceTree = "<group>"; };
 		0C47B23A15BC9B7A00B259B0 /* KWGFX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWGFX.m; sourceTree = "<group>"; };
-		0C67C03A15D1F287008CC702 /* KWLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWLaunchViewController.h; sourceTree = "<group>"; };
-		0C67C03B15D1F287008CC702 /* KWLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWLaunchViewController.m; sourceTree = "<group>"; };
+		0C67C03A15D1F287008CC702 /* KWMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWMenuViewController.h; sourceTree = "<group>"; };
+		0C67C03B15D1F287008CC702 /* KWMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWMenuViewController.m; sourceTree = "<group>"; };
 		0C67C03D15D1FAA1008CC702 /* KWInterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWInterstitialViewController.h; sourceTree = "<group>"; };
 		0C67C03E15D1FAA1008CC702 /* KWInterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWInterstitialViewController.m; sourceTree = "<group>"; };
 		0C7F61C715B4BC3E00924B64 /* KWEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWEngine.h; sourceTree = "<group>"; };
@@ -285,8 +285,8 @@
 		0CF257C115B667EB0020B895 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0C67C03A15D1F287008CC702 /* KWLaunchViewController.h */,
-				0C67C03B15D1F287008CC702 /* KWLaunchViewController.m */,
+				0C67C03A15D1F287008CC702 /* KWMenuViewController.h */,
+				0C67C03B15D1F287008CC702 /* KWMenuViewController.m */,
 				0CF257C315B668220020B895 /* KWGameViewController.h */,
 				0CF257C415B668220020B895 /* KWGameViewController.m */,
 				0C062A5415B6716D00BB1CB2 /* KWRenderView.h */,
@@ -408,7 +408,7 @@
 				0C15C3C615CB2BA9008A4DA7 /* KWApplication.m in Sources */,
 				0CD70BB515CB8EFD008EF8CB /* CALayer+KWMsg.m in Sources */,
 				0CD70BC915CBBFE8008EF8CB /* NSObject+KW.m in Sources */,
-				0C67C03C15D1F287008CC702 /* KWLaunchViewController.m in Sources */,
+				0C67C03C15D1F287008CC702 /* KWMenuViewController.m in Sources */,
 				0C67C03F15D1FAA1008CC702 /* KWInterstitialViewController.m in Sources */,
 				0CD1FB1815D4375800E7BF45 /* KWClient.m in Sources */,
 			);

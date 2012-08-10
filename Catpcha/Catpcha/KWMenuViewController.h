@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KWLaunchViewController : UIViewController
+@interface KWMenuViewController : UIViewController
 
 @end

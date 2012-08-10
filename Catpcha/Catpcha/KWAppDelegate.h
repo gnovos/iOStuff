@@ -21,7 +21,7 @@
 ////stalking
 ////crashing into each other?
 
-//add toys, etc.
+//add more toys, catnip, etc.
 //yarn (kittens can bat?) (trail on ground for yarn?)
 //rex
 
