@@ -209,7 +209,7 @@ static const int KWTimeLimitLevelCost  = 5;
     [self addMouse];
         
     double remaining = self.remaining;
-    float danger = (0.8f * (1.0f - (remaining / self.timelimit)));
+    CGFloat danger = (0.8f * (1.0f - (remaining / self.timelimit)));
     
     background.foregroundColor = [UIColor colorWithRed:0.2f + danger green:0.9f blue:0.9f alpha:0.9f].CGColor;
     background.string = [NSString stringWithFormat:@"Level %d (%d s)", self.level, (int)remaining];

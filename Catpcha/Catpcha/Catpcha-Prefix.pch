@@ -13,6 +13,7 @@
     #import <Foundation/Foundation.h>
     #import <QuartzCore/QuartzCore.h>
     #import <GameKit/GameKit.h>
+    #import <GLKit/GLKit.h>
 
     #import "KWLog.h"
     #import "KWConst.h"

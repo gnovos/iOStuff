@@ -39,6 +39,7 @@ static const CGSize KWDefaultYarnSize   = { 70, 70 };
 
 static const CGSize KWMinToySize        = { 5, 5 };
 
+#define M_TAU ( 2 * M_PI)
 
 #define KWNoticePadding 10.0f
 #define KWNoticeFontSize 12.0f

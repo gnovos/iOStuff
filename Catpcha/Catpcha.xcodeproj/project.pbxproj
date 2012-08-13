@@ -37,6 +37,17 @@
 		0C7F61C915B4BC3E00924B64 /* KWEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F61C815B4BC3E00924B64 /* KWEngine.m */; };
 		0C9828D515D89D3B0099E649 /* KWObstacle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828D415D89D3B0099E649 /* KWObstacle.m */; };
 		0C9828D815D89D510099E649 /* KWPuppy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828D715D89D510099E649 /* KWPuppy.m */; };
+		0C9828DC15D89DA10099E649 /* KWSpecial.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828DB15D89DA10099E649 /* KWSpecial.m */; };
+		0C9828DF15D89DB50099E649 /* KWRex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828DE15D89DB50099E649 /* KWRex.m */; };
+		0C9828F315D96AF90099E649 /* KWShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828E815D96AF80099E649 /* KWShape.m */; };
+		0C9828F415D96AF90099E649 /* KWTriangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828EA15D96AF80099E649 /* KWTriangle.m */; };
+		0C9828F515D96AF90099E649 /* KWRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828EC15D96AF80099E649 /* KWRectangle.m */; };
+		0C9828F615D96AF90099E649 /* KWEllipse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828EE15D96AF80099E649 /* KWEllipse.m */; };
+		0C9828F715D96AF90099E649 /* KWPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828F015D96AF80099E649 /* KWPolygon.m */; };
+		0C9828F815D96AF90099E649 /* KWSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828F215D96AF80099E649 /* KWSprite.m */; };
+		0C9828FB15D96DFF0099E649 /* KWScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828FA15D96DFE0099E649 /* KWScene.m */; };
+		0C98290015D96E900099E649 /* KWAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828FD15D96E8D0099E649 /* KWAnimation.m */; };
+		0C98290115D96E900099E649 /* KWSpriteAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828FF15D96E8F0099E649 /* KWSpriteAnimation.m */; };
 		0CD1FB1815D4375800E7BF45 /* KWClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD1FB1715D4375800E7BF45 /* KWClient.m */; };
 		0CD70BB515CB8EFD008EF8CB /* CALayer+KWMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD70BB415CB8EFD008EF8CB /* CALayer+KWMsg.m */; };
 		0CD70BC915CBBFE8008EF8CB /* NSObject+KW.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD70BC815CBBFE8008EF8CB /* NSObject+KW.m */; };
@@ -98,6 +109,28 @@
 		0C9828D415D89D3B0099E649 /* KWObstacle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWObstacle.m; sourceTree = "<group>"; };
 		0C9828D615D89D510099E649 /* KWPuppy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWPuppy.h; sourceTree = "<group>"; };
 		0C9828D715D89D510099E649 /* KWPuppy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWPuppy.m; sourceTree = "<group>"; };
+		0C9828DA15D89DA10099E649 /* KWSpecial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWSpecial.h; sourceTree = "<group>"; };
+		0C9828DB15D89DA10099E649 /* KWSpecial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWSpecial.m; sourceTree = "<group>"; };
+		0C9828DD15D89DB50099E649 /* KWRex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWRex.h; sourceTree = "<group>"; };
+		0C9828DE15D89DB50099E649 /* KWRex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWRex.m; sourceTree = "<group>"; };
+		0C9828E715D96AF80099E649 /* KWShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWShape.h; sourceTree = "<group>"; };
+		0C9828E815D96AF80099E649 /* KWShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWShape.m; sourceTree = "<group>"; };
+		0C9828E915D96AF80099E649 /* KWTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWTriangle.h; sourceTree = "<group>"; };
+		0C9828EA15D96AF80099E649 /* KWTriangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWTriangle.m; sourceTree = "<group>"; };
+		0C9828EB15D96AF80099E649 /* KWRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWRectangle.h; sourceTree = "<group>"; };
+		0C9828EC15D96AF80099E649 /* KWRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWRectangle.m; sourceTree = "<group>"; };
+		0C9828ED15D96AF80099E649 /* KWEllipse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWEllipse.h; sourceTree = "<group>"; };
+		0C9828EE15D96AF80099E649 /* KWEllipse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWEllipse.m; sourceTree = "<group>"; };
+		0C9828EF15D96AF80099E649 /* KWPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWPolygon.h; sourceTree = "<group>"; };
+		0C9828F015D96AF80099E649 /* KWPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWPolygon.m; sourceTree = "<group>"; };
+		0C9828F115D96AF80099E649 /* KWSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWSprite.h; sourceTree = "<group>"; };
+		0C9828F215D96AF80099E649 /* KWSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWSprite.m; sourceTree = "<group>"; };
+		0C9828F915D96DFE0099E649 /* KWScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWScene.h; sourceTree = "<group>"; };
+		0C9828FA15D96DFE0099E649 /* KWScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWScene.m; sourceTree = "<group>"; };
+		0C9828FC15D96E8C0099E649 /* KWAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWAnimation.h; sourceTree = "<group>"; };
+		0C9828FD15D96E8D0099E649 /* KWAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWAnimation.m; sourceTree = "<group>"; };
+		0C9828FE15D96E8E0099E649 /* KWSpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWSpriteAnimation.h; sourceTree = "<group>"; };
+		0C9828FF15D96E8F0099E649 /* KWSpriteAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWSpriteAnimation.m; sourceTree = "<group>"; };
 		0CD1FB1615D4375800E7BF45 /* KWClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWClient.h; sourceTree = "<group>"; };
 		0CD1FB1715D4375800E7BF45 /* KWClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWClient.m; sourceTree = "<group>"; };
 		0CD70BB315CB8EFD008EF8CB /* CALayer+KWMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+KWMsg.h"; sourceTree = "<group>"; };
@@ -233,6 +266,7 @@
 		0C31C74015AA6F35004D1067 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0C9828D915D89D850099E649 /* Special */,
 				0C9828D115D89D020099E649 /* Obstacles */,
 				0CD70BAF15CB3EDE008EF8CB /* Toys */,
 				0CF257B915B621260020B895 /* KWLevel.h */,
@@ -268,6 +302,7 @@
 		0C7F61C515B4BC2400924B64 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				0C9828E015D89DE20099E649 /* Renderer */,
 				0C7F61C715B4BC3E00924B64 /* KWEngine.h */,
 				0C7F61C815B4BC3E00924B64 /* KWEngine.m */,
 				0CD1FB1615D4375800E7BF45 /* KWClient.h */,
@@ -285,6 +320,50 @@
 				0C9828D715D89D510099E649 /* KWPuppy.m */,
 			);
 			name = Obstacles;
+			sourceTree = "<group>";
+		};
+		0C9828D915D89D850099E649 /* Special */ = {
+			isa = PBXGroup;
+			children = (
+				0C9828DA15D89DA10099E649 /* KWSpecial.h */,
+				0C9828DB15D89DA10099E649 /* KWSpecial.m */,
+				0C9828DD15D89DB50099E649 /* KWRex.h */,
+				0C9828DE15D89DB50099E649 /* KWRex.m */,
+			);
+			name = Special;
+			sourceTree = "<group>";
+		};
+		0C9828E015D89DE20099E649 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				0C9B3F5215D974B500A93A3F /* Shapes */,
+				0C9828F915D96DFE0099E649 /* KWScene.h */,
+				0C9828FA15D96DFE0099E649 /* KWScene.m */,
+				0C9828FC15D96E8C0099E649 /* KWAnimation.h */,
+				0C9828FD15D96E8D0099E649 /* KWAnimation.m */,
+				0C9828FE15D96E8E0099E649 /* KWSpriteAnimation.h */,
+				0C9828FF15D96E8F0099E649 /* KWSpriteAnimation.m */,
+				0C9828E715D96AF80099E649 /* KWShape.h */,
+				0C9828E815D96AF80099E649 /* KWShape.m */,
+				0C9828F115D96AF80099E649 /* KWSprite.h */,
+				0C9828F215D96AF80099E649 /* KWSprite.m */,
+			);
+			name = Renderer;
+			sourceTree = "<group>";
+		};
+		0C9B3F5215D974B500A93A3F /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				0C9828E915D96AF80099E649 /* KWTriangle.h */,
+				0C9828EA15D96AF80099E649 /* KWTriangle.m */,
+				0C9828EB15D96AF80099E649 /* KWRectangle.h */,
+				0C9828EC15D96AF80099E649 /* KWRectangle.m */,
+				0C9828ED15D96AF80099E649 /* KWEllipse.h */,
+				0C9828EE15D96AF80099E649 /* KWEllipse.m */,
+				0C9828EF15D96AF80099E649 /* KWPolygon.h */,
+				0C9828F015D96AF80099E649 /* KWPolygon.m */,
+			);
+			name = Shapes;
 			sourceTree = "<group>";
 		};
 		0CD70BAF15CB3EDE008EF8CB /* Toys */ = {
@@ -431,6 +510,17 @@
 				0CD1FB1815D4375800E7BF45 /* KWClient.m in Sources */,
 				0C9828D515D89D3B0099E649 /* KWObstacle.m in Sources */,
 				0C9828D815D89D510099E649 /* KWPuppy.m in Sources */,
+				0C9828DC15D89DA10099E649 /* KWSpecial.m in Sources */,
+				0C9828DF15D89DB50099E649 /* KWRex.m in Sources */,
+				0C9828F315D96AF90099E649 /* KWShape.m in Sources */,
+				0C9828F415D96AF90099E649 /* KWTriangle.m in Sources */,
+				0C9828F515D96AF90099E649 /* KWRectangle.m in Sources */,
+				0C9828F615D96AF90099E649 /* KWEllipse.m in Sources */,
+				0C9828F715D96AF90099E649 /* KWPolygon.m in Sources */,
+				0C9828F815D96AF90099E649 /* KWSprite.m in Sources */,
+				0C9828FB15D96DFF0099E649 /* KWScene.m in Sources */,
+				0C98290015D96E900099E649 /* KWAnimation.m in Sources */,
+				0C98290115D96E900099E649 /* KWSpriteAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,11 +12,10 @@
 //spash/level screenz (and win screens)
 
 //game kit (and milestones, etc)
-//multiplayer (steal kittens, dogs to scare away, etceteras)
+//multiplayer co-op (work together, larger field) vs head2head (steal kittens, dogs to scare away, etceteras)
 
 //switch to opengl
 
-//sharekit
 //irate
 //flurry
 

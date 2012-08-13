@@ -84,8 +84,8 @@
 
 - (CGFloat) angle:(CGPoint)start end:(CGPoint)end {
     
-    float dx = start.x - end.x;
-    float dy = start.y - end.y;
+    CGFloat dx = start.x - end.x;
+    CGFloat dy = start.y - end.y;
     
     CGFloat slope = dx / dy;
     
