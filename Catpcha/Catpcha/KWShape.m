@@ -2,113 +2,107 @@
 #import "KWShape.h"
 #import "KWAnimation.h"
 
+@interface KWShape ()
+
+@property (nonatomic, weak) KWShape* parent;
+@property (nonatomic, strong) GLKTextureInfo* texture;
+
+@end
+
 @implementation KWShape {
-    NSMutableData* vertexData;
-    NSMutableData* vertexColorData;
-    NSMutableData* textureCoordinateData;
+    KWVertex* vertices;
+    
+    KWVertex* txvertices;
+    
+    NSMutableArray* animations;
+    
+    NSMutableArray* children;
+        
+    GLKVector2 velocity;
+    GLKVector2 acceleration;
+    
+    CGFloat angularVelocity;
+    CGFloat angularAcceleration;
 }
 
-@synthesize color,
-useConstantColor,
-position,
-velocity,
-acceleration,
-rotation,
-angularVelocity,
-angularAcceleration,
-scale,
-children,
-parent,
-texture,
-animations,
-spriteAnimation;
-
-- (id) init {
+- (id) initWithVertices:(KWVertex*)vdata {
     if (self = [super init]) {
-        useConstantColor = YES;
-        color = GLKVector4Make(1,1,1,1);
-        texture = nil;
-        position = GLKVector2Make(0,0);
-        rotation = 0;
-        scale = GLKVector2Make(1,1);
+        vertices = vdata;
+                
+        self.position = GLKVector2Make(0,0);
+        self.scale = GLKVector2Make(1,1);
+        self.rotation = 0;
+        self.color = GLKVector4Make(1,1,1,1);
+        
         children = [[NSMutableArray alloc] init];
         animations = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (NSUInteger) count { return 0; }
-
-- (GLKVector2*) vertices {
-    if (vertexData == nil) {
-        vertexData = [NSMutableData dataWithLength:sizeof(GLKVector2) * self.count];
-    }
-    return [vertexData mutableBytes];
-}
-
-- (GLKVector4*) vertexColors {
-    if (vertexColorData == nil) {
-        vertexColorData = [NSMutableData dataWithLength:sizeof(GLKVector4) * self.count];
-    }
-    return [vertexColorData mutableBytes];
-}
-
-- (GLKVector2*) textureCoordinates {
-    if (textureCoordinateData == nil) {
-        textureCoordinateData = [NSMutableData dataWithLength:sizeof(GLKVector2) * self.count];
-    }
-    return [textureCoordinateData mutableBytes];
-}
-
-- (GLKMatrix4) modelviewMatrix {
-    GLKMatrix4 modelviewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(position.x, position.y, 0),
-                                                    GLKMatrix4MakeRotation(rotation, 0, 0, 1));
-    modelviewMatrix = GLKMatrix4Multiply(modelviewMatrix, GLKMatrix4MakeScale(scale.x, scale.y, 1));
+- (void) setTextureImage:(UIImage*)image {
+    NSError* error;
+    self.texture = [GLKTextureLoader textureWithCGImage:image.CGImage
+                                           options:@{GLKTextureLoaderOriginBottomLeft : @YES}
+                                             error:&error];
+    elog(error);
     
-    if (parent != nil) {
-        modelviewMatrix = GLKMatrix4Multiply(parent.modelviewMatrix, modelviewMatrix);
+    txvertices = [KWVertex build:^(KWVertex* vx) {
+        [vx append:GLKVector2Make(1,0)];
+        [vx append:GLKVector2Make(1,1)];
+        [vx append:GLKVector2Make(0,1)];
+        [vx append:GLKVector2Make(0,0)];
+    }];    
+}
+
+- (GLKMatrix4) matrix {
+    
+    GLKMatrix4 matrix = GLKMatrix4MakeTranslation(self.position.x, self.position.y, 0);
+
+    matrix = GLKMatrix4Multiply(matrix, GLKMatrix4MakeRotation(self.rotation, 0, 0, 1));
+    matrix = GLKMatrix4Multiply(matrix, GLKMatrix4MakeScale(self.scale.x, self.scale.y, 1));
+    
+    if (self.parent) {
+        matrix = GLKMatrix4Multiply(self.parent.matrix, matrix);
     }
     
-    return modelviewMatrix;
+    return matrix;
 }
 
 - (void) update:(NSTimeInterval)dt {
+    
     angularVelocity += angularAcceleration * dt;
-    rotation += angularVelocity * dt;
+    self.rotation += angularVelocity * dt;
     
-    GLKVector2 changeInVelocity = GLKVector2MultiplyScalar(self.acceleration, dt);
-    self.velocity = GLKVector2Add(self.velocity, changeInVelocity);
+    GLKVector2 changeInVelocity = GLKVector2MultiplyScalar(acceleration, dt);
+    velocity = GLKVector2Add(velocity, changeInVelocity);
     
-    GLKVector2 distanceTraveled = GLKVector2MultiplyScalar(self.velocity, dt);
+    GLKVector2 distanceTraveled = GLKVector2MultiplyScalar(velocity, dt);
     self.position = GLKVector2Add(self.position, distanceTraveled);
     
     [animations enumerateObjectsUsingBlock:^(KWAnimation *animation, NSUInteger idx, BOOL *stop) {
-        [animation animateShape:self dt:dt];
+        [animation animate:self dt:dt];
     }];
     
     [animations filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWAnimation *animation, NSDictionary *bindings) {
         return animation.elapsed <= animation.duration;
     }]];
-    
-    [spriteAnimation update:dt];
 }
 
 - (void) renderInScene:(KWScene*)scene {
-    GLKBaseEffect *effect = [[GLKBaseEffect alloc] init];
-    if (useConstantColor) {
-        effect.useConstantColor = YES;
-        effect.constantColor = self.color;
-    }
-    if (self.texture != nil) {
+    GLKBaseEffect* effect = [[GLKBaseEffect alloc] init];    
+    effect.useConstantColor = YES;
+    effect.constantColor = self.color;
+    
+    GLKTextureInfo* texture = self.texture;
+    
+    if (texture) {
         effect.texture2d0.envMode = GLKTextureEnvModeReplace;
         effect.texture2d0.target = GLKTextureTarget2D;
-        if (self.spriteAnimation != nil)
-            effect.texture2d0.name = self.spriteAnimation.frame.name;
-        else
-            effect.texture2d0.name = self.texture.name;
+        effect.texture2d0.name = texture.name;
     }
     
-    effect.transform.modelviewMatrix = self.modelviewMatrix;
+    effect.transform.modelviewMatrix = self.matrix;
     effect.transform.projectionMatrix = scene.projection;
     [effect prepareToDraw];
     
@@ -116,26 +110,18 @@ spriteAnimation;
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, self.vertices);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices.data);
     
-    if (!useConstantColor) {
-        glEnableVertexAttribArray(GLKVertexAttribColor);
-        glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, self.vertexColors);
-    }
-    
-    if (texture != nil) {
+    if (texture) {
         glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, self.textureCoordinates);
+        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, txvertices.data);
     }
     
-    glDrawArrays(GL_TRIANGLE_FAN, 0, self.count);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, vertices.count);
     
     glDisableVertexAttribArray(GLKVertexAttribPosition);
-    if (!useConstantColor) {
-        glDisableVertexAttribArray(GLKVertexAttribColor);
-    }
     
-    if (self.texture != nil) {
+    if (texture) {
         glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
     }
     
@@ -144,12 +130,6 @@ spriteAnimation;
     [children enumerateObjectsUsingBlock:^(KWShape* shape, NSUInteger idx, BOOL *stop) {
         [shape renderInScene:scene];
     }];
-}
-
-- (void) setTextureImage:(UIImage*)image {
-    NSError* error;
-    texture = [GLKTextureLoader textureWithCGImage:image.CGImage options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:GLKTextureLoaderOriginBottomLeft] error:&error];
-    elog(error);
 }
 
 - (void) addChild:(KWShape*)child {
@@ -166,15 +146,15 @@ spriteAnimation;
     animationsBlock();
     
     KWAnimation *animation = [[KWAnimation alloc] init];
-    animation.delta = (KWDelta) {
+    animation.delta = KWDeltaMake(
         GLKVector2Subtract(self.position, currentPosition),
         GLKVector2Subtract(self.scale, currentScale),
         self.rotation - currentRotation,
         GLKVector4Subtract(self.color, currentColor)
-    };
+    );
     
     animation.duration = duration;
-    [self.animations addObject:animation];
+    [animations addObject:animation];
     
     self.position = currentPosition;
     self.scale = currentScale;

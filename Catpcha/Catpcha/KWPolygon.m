@@ -1,21 +1,15 @@
 
 #import "KWPolygon.h"
 
-@implementation KWPolygon {
-    NSUInteger sides;
-}
-
-- (id) initWithSides:(NSUInteger)count andRadius:(CGFloat)radius {
-    if (self = [super init]) {
-        sides = count;
+@implementation KWPolygon
+- (id) initWithSides:(NSUInteger)sides andRadius:(CGFloat)radius {
+    if (self = [super initWithVertices:[KWVertex build:^(KWVertex *vx) {
         for (int i = 0; i < sides; i++){
             CGFloat theta = ((CGFloat)i) / sides * M_TAU;
-            self.vertices[i] = GLKVector2Make(cos(theta) * radius, sin(theta) * radius);
-        }
+            [vx append:GLKVector2Make(cos(theta) * radius, sin(theta) * radius)];
+        }}]]) {
     }
     return self;
 }
-
-- (NSUInteger) count { return sides; }
 
 @end
