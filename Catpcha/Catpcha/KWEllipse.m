@@ -8,11 +8,11 @@
 
 - (id) initWithRadius:(CGPoint)radius { return [self initWithRadius:radius atResolution:KW_ELLIPSE_RESOLUTION]; }
 - (id) initWithRadius:(CGPoint)radius atResolution:(NSUInteger)resolution {
-    if (self = [super initWithVertices:[KWVertex build:^(KWVertex *vx) {
+    if (self = [super init]) {
         for (int i = 0; i < resolution; i++){
             CGFloat theta = ((CGFloat)i) / resolution * M_TAU;
-            [vx append:GLKVector2Make(cos(theta) * radius.x, sin(theta) * radius.y)];
-        }}]]) {
+            [self.vertices append:GLKVector2Make(cos(theta) * radius.x, sin(theta) * radius.y)];
+        }
     }
     return self;
 }

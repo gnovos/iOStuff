@@ -10,9 +10,8 @@
 @end
 
 @implementation KWShape {
-    KWVertex* vertices;
     
-    KWVertex* txvertices;
+    KWVertex* texvertx;
     
     NSMutableArray* animations;
     
@@ -25,9 +24,9 @@
     CGFloat angularAcceleration;
 }
 
-- (id) initWithVertices:(KWVertex*)vdata {
+- (id) init {
     if (self = [super init]) {
-        vertices = vdata;
+        _vertices = [[KWVertex alloc] init];
                 
         self.position = GLKVector2Make(0,0);
         self.scale = GLKVector2Make(1,1);
@@ -47,7 +46,7 @@
                                              error:&error];
     elog(error);
     
-    txvertices = [KWVertex build:^(KWVertex* vx) {
+    texvertx = [KWVertex build:^(KWVertex* vx) {
         [vx append:GLKVector2Make(1,0)];
         [vx append:GLKVector2Make(1,1)];
         [vx append:GLKVector2Make(0,1)];
@@ -110,14 +109,14 @@
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices.data);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, self.vertices.data);
     
     if (texture) {
         glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, txvertices.data);
+        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, texvertx.data);
     }
     
-    glDrawArrays(GL_TRIANGLE_FAN, 0, vertices.count);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, self.vertices.count);
     
     glDisableVertexAttribArray(GLKVertexAttribPosition);
     

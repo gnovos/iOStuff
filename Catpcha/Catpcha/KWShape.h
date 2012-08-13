@@ -4,12 +4,12 @@
 
 @interface KWShape : NSObject
 
+@property (nonatomic, strong, readonly) KWVertex* vertices;
+
 @property (nonatomic, assign) GLKVector2 position;
 @property (nonatomic, assign) GLKVector2 scale;
 @property (nonatomic, assign) CGFloat rotation;
 @property (nonatomic, assign) GLKVector4 color;
-
-- (id) initWithVertices:(KWVertex*)vdata;
 
 - (void) setTextureImage:(UIImage*)image;
 
