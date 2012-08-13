@@ -1,6 +1,7 @@
 
 #import "KWScene.h"
 #import "KWVertex.h"
+#import "KWTexture.h"
 
 @interface KWShape : NSObject
 
@@ -11,7 +12,7 @@
 @property (nonatomic, assign) CGFloat rotation;
 @property (nonatomic, assign) GLKVector4 color;
 
-- (void) setTextureImage:(UIImage*)image;
+- (id) initWithTexture:(KWTexture*)tex;
 
 - (void) update:(NSTimeInterval)dt;
 - (void) renderInScene:(KWScene*)scene;

@@ -4,6 +4,6 @@
 
 @interface KWPolygon : KWShape
 
-- (id) initWithSides:(NSUInteger)numSides andRadius:(CGFloat)radius;
+- (id) initWithTexture:(KWTexture*)texture andSides:(NSUInteger)numSides withRadius:(CGFloat)radius;
 
 @end

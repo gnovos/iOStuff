@@ -4,7 +4,7 @@
 
 @interface KWEllipse : KWShape
 
-- (id) initWithRadius:(CGPoint)radius;
-- (id) initWithRadius:(CGPoint)radius atResolution:(NSUInteger)resolution;
+- (id) initWithTexture:(KWTexture*)texture andRadius:(CGPoint)radius;
+- (id) initWithTexture:(KWTexture*)texture andRadius:(CGPoint)radius atResolution:(NSUInteger)resolution;
 
 @end

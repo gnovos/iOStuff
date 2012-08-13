@@ -3,8 +3,8 @@
 
 @implementation KWTriangle
 
-- (id) init {
-    if (self = [self init]) {
+- (id) initWithTexture:(KWTexture *)tex {
+    if (self = [self initWithTexture:tex]) {
         [self.vertices append:GLKVector2Make(-1, -1)];
         [self.vertices append:GLKVector2Make( 1, -1)];
         [self.vertices append:GLKVector2Make( 0,  1)];        

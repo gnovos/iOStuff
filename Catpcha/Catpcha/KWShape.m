@@ -5,13 +5,12 @@
 @interface KWShape ()
 
 @property (nonatomic, weak) KWShape* parent;
-@property (nonatomic, strong) GLKTextureInfo* texture;
 
 @end
 
 @implementation KWShape {
     
-    KWVertex* texvertx;
+    KWTexture* texture;
     
     NSMutableArray* animations;
     
@@ -24,8 +23,9 @@
     CGFloat angularAcceleration;
 }
 
-- (id) init {
+- (id) initWithTexture:(KWTexture*)tex {
     if (self = [super init]) {
+        texture = tex;
         _vertices = [[KWVertex alloc] init];
                 
         self.position = GLKVector2Make(0,0);
@@ -37,21 +37,6 @@
         animations = [[NSMutableArray alloc] init];
     }
     return self;
-}
-
-- (void) setTextureImage:(UIImage*)image {
-    NSError* error;
-    self.texture = [GLKTextureLoader textureWithCGImage:image.CGImage
-                                           options:@{GLKTextureLoaderOriginBottomLeft : @YES}
-                                             error:&error];
-    elog(error);
-    
-    texvertx = [KWVertex build:^(KWVertex* vx) {
-        [vx append:GLKVector2Make(1,0)];
-        [vx append:GLKVector2Make(1,1)];
-        [vx append:GLKVector2Make(0,1)];
-        [vx append:GLKVector2Make(0,0)];
-    }];    
 }
 
 - (GLKMatrix4) matrix {
@@ -89,16 +74,16 @@
 }
 
 - (void) renderInScene:(KWScene*)scene {
+    
+    //xxx cache this
     GLKBaseEffect* effect = [[GLKBaseEffect alloc] init];    
     effect.useConstantColor = YES;
     effect.constantColor = self.color;
-    
-    GLKTextureInfo* texture = self.texture;
-    
+        
     if (texture) {
         effect.texture2d0.envMode = GLKTextureEnvModeReplace;
         effect.texture2d0.target = GLKTextureTarget2D;
-        effect.texture2d0.name = texture.name;
+        effect.texture2d0.name = texture.info.name;
     }
     
     effect.transform.modelviewMatrix = self.matrix;
@@ -113,7 +98,7 @@
     
     if (texture) {
         glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, texvertx.data);
+        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, texture.vertices.data);
     }
     
     glDrawArrays(GL_TRIANGLE_FAN, 0, self.vertices.count);

@@ -3,6 +3,6 @@
 
 @interface KWRectangle : KWShape
 
-- (id) initWithSize:(CGSize)size;
+- (id) initWithTexture:(KWTexture*)texture andSize:(CGSize)size;
 
 @end
