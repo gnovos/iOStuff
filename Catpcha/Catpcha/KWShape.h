@@ -5,8 +5,7 @@
 
 @interface KWShape : NSObject
 
-@property (nonatomic, strong, readonly) KWVertex* vertices;
-
+@property (nonatomic, strong) KWVertex* vertices;
 @property (nonatomic, assign) GLKVector2 position;
 @property (nonatomic, assign) GLKVector2 scale;
 @property (nonatomic, assign) CGFloat rotation;
@@ -15,8 +14,11 @@
 - (id) initWithTexture:(KWTexture*)tex;
 
 - (void) update:(NSTimeInterval)dt;
-- (void) renderInScene:(KWScene*)scene;
-- (void) addChild:(KWShape*)child;
+- (void) render;
+
+- (void) add:(KWShape*)child;
+- (void) remove:(KWShape*)child;
+
 - (void) animateWithDuration:(NSTimeInterval)duration animations:(void(^)(void))animations;
 
 @end

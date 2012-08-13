@@ -21,7 +21,7 @@
         dt -= elapsed - duration;
     }
     
-    CGFloat fractionOfDuration = dt/duration;
+    CGFloat fractionOfDuration = dt / duration;
     
     GLKVector2 positionIncrement = GLKVector2MultiplyScalar(delta.position, fractionOfDuration);
     shape.position = GLKVector2Add(shape.position, positionIncrement);

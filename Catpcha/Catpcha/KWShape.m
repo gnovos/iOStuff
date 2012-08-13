@@ -2,20 +2,23 @@
 #import "KWShape.h"
 #import "KWAnimation.h"
 
+static GLKMatrix4 projection;
+
 @interface KWShape ()
 
 @property (nonatomic, weak) KWShape* parent;
+@property (nonatomic, strong) NSMutableArray* children;
+@property (nonatomic, assign) GLKMatrix4 matrix;
 
 @end
 
 @implementation KWShape {
-    
+   
+    GLKBaseEffect* effect;
     KWTexture* texture;
     
     NSMutableArray* animations;
-    
-    NSMutableArray* children;
-        
+            
     GLKVector2 velocity;
     GLKVector2 acceleration;
     
@@ -25,21 +28,51 @@
 
 - (id) initWithTexture:(KWTexture*)tex {
     if (self = [super init]) {
+        
+        static dispatch_once_t once;
+        dispatch_once(&once, ^{
+            projection = GLKMatrix4MakeOrtho(-3.0, 3.0f, -2.0f, 2.0f, 1.0f, -1.0f);
+        });
+        
+        self.children = [[NSMutableArray alloc] init];
+        self.vertices = [[KWVertex alloc] init];
+
+        animations = [[NSMutableArray alloc] init];
+        
         texture = tex;
-        _vertices = [[KWVertex alloc] init];
-                
+        
         self.position = GLKVector2Make(0,0);
         self.scale = GLKVector2Make(1,1);
         self.rotation = 0;
         self.color = GLKVector4Make(1,1,1,1);
+                
+        [self updateMatrix];
         
-        children = [[NSMutableArray alloc] init];
-        animations = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (GLKMatrix4) matrix {
+- (void) setParent:(KWShape*)parent {
+    _parent = parent;
+    [self updateMatrix];
+}
+
+- (void) setPosition:(GLKVector2)position {
+    _position = position;
+    [self updateMatrix];
+}
+
+- (void) setRotation:(CGFloat)rotation {
+    _rotation = rotation;
+    [self updateMatrix];
+}
+
+- (void) setScale:(GLKVector2)scale {
+    _scale = scale;
+    [self updateMatrix];
+}
+
+- (void) updateMatrix {
     
     GLKMatrix4 matrix = GLKMatrix4MakeTranslation(self.position.x, self.position.y, 0);
 
@@ -50,7 +83,27 @@
         matrix = GLKMatrix4Multiply(self.parent.matrix, matrix);
     }
     
-    return matrix;
+    self.matrix = matrix;
+    
+    effect = [[GLKBaseEffect alloc] init];
+    if (texture) {
+        effect.texture2d0.envMode = GLKTextureEnvModeReplace;
+        effect.texture2d0.target = GLKTextureTarget2D;
+        effect.texture2d0.name = texture.info.name;
+    } else {
+        effect.useConstantColor = YES;
+        effect.constantColor = self.color;
+    }
+    
+    effect.transform.modelviewMatrix = self.matrix;
+    effect.transform.projectionMatrix = projection;
+    
+    [effect prepareToDraw];
+
+    
+    [[self.children copy] enumerateObjectsUsingBlock:^(KWShape* child, NSUInteger idx, BOOL *stop) {
+        [child updateMatrix];
+    }];
 }
 
 - (void) update:(NSTimeInterval)dt {
@@ -73,23 +126,8 @@
     }]];
 }
 
-- (void) renderInScene:(KWScene*)scene {
-    
-    //xxx cache this
-    GLKBaseEffect* effect = [[GLKBaseEffect alloc] init];    
-    effect.useConstantColor = YES;
-    effect.constantColor = self.color;
+- (void) render {
         
-    if (texture) {
-        effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-        effect.texture2d0.target = GLKTextureTarget2D;
-        effect.texture2d0.name = texture.info.name;
-    }
-    
-    effect.transform.modelviewMatrix = self.matrix;
-    effect.transform.projectionMatrix = scene.projection;
-    [effect prepareToDraw];
-    
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
@@ -111,14 +149,22 @@
     
     glDisable(GL_BLEND);
     
-    [children enumerateObjectsUsingBlock:^(KWShape* shape, NSUInteger idx, BOOL *stop) {
-        [shape renderInScene:scene];
+    [[self.children copy] enumerateObjectsUsingBlock:^(KWShape* shape, NSUInteger idx, BOOL *stop) {
+        [shape render];
     }];
 }
 
-- (void) addChild:(KWShape*)child {
+- (void) add:(KWShape*)child {
+    if (child.parent) {
+        [child.parent remove:child];
+    }
     child.parent = self;
-    [children addObject:child];
+    [self.children addObject:child];
+}
+
+- (void) remove:(KWShape*)child {
+    [child.parent.children removeObject:child];
+    child.parent = nil;
 }
 
 - (void) animateWithDuration:(NSTimeInterval)duration animations:(void(^)(void))animationsBlock {

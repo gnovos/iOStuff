@@ -29,6 +29,7 @@
             [vx append:GLKVector2Make(0,0)];
         }];
         
+                
     }
     return self;
 }
