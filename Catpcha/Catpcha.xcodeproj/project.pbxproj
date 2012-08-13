@@ -35,6 +35,8 @@
 		0C67C03C15D1F287008CC702 /* KWMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C67C03B15D1F287008CC702 /* KWMenuViewController.m */; };
 		0C67C03F15D1FAA1008CC702 /* KWInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C67C03E15D1FAA1008CC702 /* KWInterstitialViewController.m */; };
 		0C7F61C915B4BC3E00924B64 /* KWEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F61C815B4BC3E00924B64 /* KWEngine.m */; };
+		0C9828D515D89D3B0099E649 /* KWObstacle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828D415D89D3B0099E649 /* KWObstacle.m */; };
+		0C9828D815D89D510099E649 /* KWPuppy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9828D715D89D510099E649 /* KWPuppy.m */; };
 		0CD1FB1815D4375800E7BF45 /* KWClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD1FB1715D4375800E7BF45 /* KWClient.m */; };
 		0CD70BB515CB8EFD008EF8CB /* CALayer+KWMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD70BB415CB8EFD008EF8CB /* CALayer+KWMsg.m */; };
 		0CD70BC915CBBFE8008EF8CB /* NSObject+KW.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD70BC815CBBFE8008EF8CB /* NSObject+KW.m */; };
@@ -92,6 +94,10 @@
 		0C67C03E15D1FAA1008CC702 /* KWInterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWInterstitialViewController.m; sourceTree = "<group>"; };
 		0C7F61C715B4BC3E00924B64 /* KWEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWEngine.h; sourceTree = "<group>"; };
 		0C7F61C815B4BC3E00924B64 /* KWEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWEngine.m; sourceTree = "<group>"; };
+		0C9828D315D89D3B0099E649 /* KWObstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWObstacle.h; sourceTree = "<group>"; };
+		0C9828D415D89D3B0099E649 /* KWObstacle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWObstacle.m; sourceTree = "<group>"; };
+		0C9828D615D89D510099E649 /* KWPuppy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWPuppy.h; sourceTree = "<group>"; };
+		0C9828D715D89D510099E649 /* KWPuppy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWPuppy.m; sourceTree = "<group>"; };
 		0CD1FB1615D4375800E7BF45 /* KWClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWClient.h; sourceTree = "<group>"; };
 		0CD1FB1715D4375800E7BF45 /* KWClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWClient.m; sourceTree = "<group>"; };
 		0CD70BB315CB8EFD008EF8CB /* CALayer+KWMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+KWMsg.h"; sourceTree = "<group>"; };
@@ -227,6 +233,7 @@
 		0C31C74015AA6F35004D1067 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0C9828D115D89D020099E649 /* Obstacles */,
 				0CD70BAF15CB3EDE008EF8CB /* Toys */,
 				0CF257B915B621260020B895 /* KWLevel.h */,
 				0CF257BA15B621260020B895 /* KWLevel.m */,
@@ -267,6 +274,17 @@
 				0CD1FB1715D4375800E7BF45 /* KWClient.m */,
 			);
 			name = Engine;
+			sourceTree = "<group>";
+		};
+		0C9828D115D89D020099E649 /* Obstacles */ = {
+			isa = PBXGroup;
+			children = (
+				0C9828D315D89D3B0099E649 /* KWObstacle.h */,
+				0C9828D415D89D3B0099E649 /* KWObstacle.m */,
+				0C9828D615D89D510099E649 /* KWPuppy.h */,
+				0C9828D715D89D510099E649 /* KWPuppy.m */,
+			);
+			name = Obstacles;
 			sourceTree = "<group>";
 		};
 		0CD70BAF15CB3EDE008EF8CB /* Toys */ = {
@@ -411,6 +429,8 @@
 				0C67C03C15D1F287008CC702 /* KWMenuViewController.m in Sources */,
 				0C67C03F15D1FAA1008CC702 /* KWInterstitialViewController.m in Sources */,
 				0CD1FB1815D4375800E7BF45 /* KWClient.m in Sources */,
+				0C9828D515D89D3B0099E649 /* KWObstacle.m in Sources */,
+				0C9828D815D89D510099E649 /* KWPuppy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

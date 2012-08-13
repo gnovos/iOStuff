@@ -9,6 +9,7 @@
 #import "KWLevel.h"
 
 typedef enum {
+    KWEngineEventMatchBegin,
     KWEngineEventTick,
     KWEngineEventLevelComplete,
     KWEngineEventLevelBegin
@@ -19,6 +20,8 @@ typedef enum {
 @property (nonatomic, readonly, strong) KWLevel* level;
 
 + (id) instance;
+
+- (void) setMatch:(GKMatch*)gkmatch;
 
 - (void) start:(BOOL)paused;
 - (void) stop;

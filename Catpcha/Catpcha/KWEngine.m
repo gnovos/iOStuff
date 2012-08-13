@@ -112,6 +112,21 @@ typedef struct {
     return self;    
 }
 
+- (void) setMatch:(GKMatch*)gkmatch {
+    if (match) {
+        match.delegate = nil;
+        //xxx end old match
+    }
+    match = gkmatch;
+    match.delegate = self;
+    //    if (!self.matchStarted && match.expectedPlayerCount == 0)
+    //    {
+    //        self.matchStarted = YES;
+    //        // Insert application-specific code to begin the match.
+    //    }
+    //wait for match to start
+}
+
 - (void) start:(BOOL)paused {
     if (loop == nil) {
         loop = [CADisplayLink displayLinkWithTarget:self selector:@selector(loop:)];
