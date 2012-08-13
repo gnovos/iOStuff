@@ -2,31 +2,30 @@
 #import "KWSpriteAnimation.h"
 
 @implementation KWSpriteAnimation {
-    NSArray *frames;
+    NSMutableArray* frames;
     CGFloat timePerFrame;
-    CGFloat elapsedTime;
+    CGFloat elapsed;
 }
 
-- (id) initWithTimePerFrame:(CGFloat)time framesNamed:(NSArray *)frameNames {
-  if (self = [super init]) {
-    elapsedTime = 0;
-    timePerFrame = time;
-    frames = [NSMutableArray arrayWithCapacity:[frameNames count]];
-    for (NSString *name in frameNames)
-      [(NSMutableArray*)frames addObject:
-      [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:name].CGImage 
-                                   options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:GLKTextureLoaderOriginBottomLeft] 
-                                     error:nil]];
-  }
-  return self;
+- (id) initWithTimePerFrame:(CGFloat)time framesNamed:(NSArray*)names {
+    if (self = [super init]) {
+        elapsed = 0;
+        timePerFrame = time;
+        frames = [NSMutableArray arrayWithCapacity:[names count]];
+        for (NSString* name in names) {
+            [frames addObject:[GLKTextureLoader textureWithCGImage:[UIImage imageNamed:name].CGImage
+                                                           options:@{ GLKTextureLoaderOriginBottomLeft: @YES }
+                                                             error:NULL]];
+        }
+    }
+    return self;
 }
 
-- (void) update:(NSTimeInterval)dt {
-  elapsedTime += dt;
-}
+- (void) update:(NSTimeInterval)dt { elapsed += dt; }
 
-- (GLKTextureInfo*) currentFrame {
-  return [frames objectAtIndex:((int)(elapsedTime/timePerFrame))%[frames count]];
+- (GLKTextureInfo*) frame {
+    NSInteger index = ((int)(elapsed/timePerFrame)) % [frames count];
+    return [frames objectAtIndex:index];
 }
 
 @end

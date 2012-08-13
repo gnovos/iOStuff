@@ -5,13 +5,12 @@
 @implementation KWSprite
 
 - (id) initWithImage:(UIImage*)image pointRatio:(CGFloat)ratio {
-    if (self = [super init]) {
-        CGSize size = image.size;
-        size.width /= ratio;
-        size.height /= ratio;
-        
-        self.size = size;
-        
+
+    CGSize size = image.size;
+    size.width /= ratio;
+    size.height /= ratio;
+
+    if (self = [super initWithSize:size]) {
         [self setTextureImage:image];
         self.textureCoordinates[0] = GLKVector2Make(1,0);
         self.textureCoordinates[1] = GLKVector2Make(1,1);

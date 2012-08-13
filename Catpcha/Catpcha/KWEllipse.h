@@ -4,6 +4,7 @@
 
 @interface KWEllipse : KWShape
 
-@property (nonatomic, assign) CGPoint radius;
+- (id) initWithRadius:(CGPoint)radius;
+- (id) initWithRadius:(CGPoint)radius atResolution:(NSUInteger)resolution;
 
 @end

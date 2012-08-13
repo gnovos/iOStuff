@@ -2,13 +2,9 @@
 #import "KWScene.h"
 #import "KWSpriteAnimation.h"
 
-@interface KWShape : NSObject {
-    NSMutableData* vertexData;
-    NSMutableData* vertexColorData;
-    NSMutableData* textureCoordinateData;
-}
+@interface KWShape : NSObject
 
-@property (nonatomic, assign, readonly) NSUInteger numVertices;
+@property (nonatomic, assign, readonly) NSUInteger count;
 @property (nonatomic, assign, readonly) GLKVector2* vertices;
 @property (nonatomic, assign, readonly) GLKVector4* vertexColors;
 @property (nonatomic, assign, readonly) GLKVector2* textureCoordinates;

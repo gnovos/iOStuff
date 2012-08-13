@@ -4,24 +4,22 @@
 
 #define KW_ELLIPSE_RESOLUTION 64
 
-@implementation KWEllipse
+@implementation KWEllipse { NSUInteger resolution; }
 
-- (NSUInteger) numVertices {
-    return KW_ELLIPSE_RESOLUTION;
-}
+- (id) initWithRadius:(CGPoint)radius { return [self initWithRadius:radius atResolution:KW_ELLIPSE_RESOLUTION]; }
 
-- (void) updateVertices {
-    CGPoint radius = self.radius;
-    for (int i = 0; i < KW_ELLIPSE_RESOLUTION; i++){
-        CGFloat theta = ((CGFloat)i) / KW_ELLIPSE_RESOLUTION * M_TAU;
-        self.vertices[i] = GLKVector2Make(cos(theta) * radius.x, sin(theta) * radius.y);
+- (id) initWithRadius:(CGPoint)radius atResolution:(NSUInteger)res {
+    if (self = [super init]) {
+        resolution = res;
+        for (int i = 0; i < resolution; i++){
+            CGFloat theta = ((CGFloat)i) / resolution * M_TAU;
+            self.vertices[i] = GLKVector2Make(cos(theta) * radius.x, sin(theta) * radius.y);
+        }
     }
+    return self;
 }
 
-- (void) setRadius:(CGPoint)radius {
-    _radius = radius;
-    [self updateVertices];
-}
+- (NSUInteger) count { return resolution; }
 
 
 @end

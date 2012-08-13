@@ -1,16 +1,18 @@
 
 #import "KWShape.h"
 
+typedef struct {
+    GLKVector2 position;
+    GLKVector2 scale;
+    CGFloat rotation;
+    GLKVector4 color;
+} KWDelta;
+
 @interface KWAnimation : NSObject
 
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign, readonly) NSTimeInterval elapsed;
-
-//xxx delta object
-@property (nonatomic, assign) GLKVector2 dpos;
-@property (nonatomic, assign) GLKVector2 dscale;
-@property (nonatomic, assign) CGFloat drot;
-@property (nonatomic, assign) GLKVector4 dcolor;
+@property (nonatomic, assign) KWDelta delta;
 
 - (void) animateShape:(KWShape*)shape dt:(NSTimeInterval)dt;
 

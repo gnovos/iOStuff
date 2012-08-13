@@ -3,6 +3,6 @@
 
 @implementation KWTriangle
 
-- (NSUInteger) numVertices { return 3; }
+- (NSUInteger) count { return 3; }
 
 @end

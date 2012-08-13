@@ -2,7 +2,11 @@
 #import "KWShape.h"
 #import "KWAnimation.h"
 
-@implementation KWShape
+@implementation KWShape {
+    NSMutableData* vertexData;
+    NSMutableData* vertexColorData;
+    NSMutableData* textureCoordinateData;
+}
 
 @synthesize color,
 useConstantColor,
@@ -33,27 +37,25 @@ spriteAnimation;
     return self;
 }
 
-- (NSUInteger) numVertices {
-    return 0;
-}
+- (NSUInteger) count { return 0; }
 
 - (GLKVector2*) vertices {
     if (vertexData == nil) {
-        vertexData = [NSMutableData dataWithLength:sizeof(GLKVector2) * self.numVertices];
+        vertexData = [NSMutableData dataWithLength:sizeof(GLKVector2) * self.count];
     }
     return [vertexData mutableBytes];
 }
 
 - (GLKVector4*) vertexColors {
     if (vertexColorData == nil) {
-        vertexColorData = [NSMutableData dataWithLength:sizeof(GLKVector4) * self.numVertices];
+        vertexColorData = [NSMutableData dataWithLength:sizeof(GLKVector4) * self.count];
     }
     return [vertexColorData mutableBytes];
 }
 
 - (GLKVector2*) textureCoordinates {
     if (textureCoordinateData == nil) {
-        textureCoordinateData = [NSMutableData dataWithLength:sizeof(GLKVector2) * self.numVertices];
+        textureCoordinateData = [NSMutableData dataWithLength:sizeof(GLKVector2) * self.count];
     }
     return [textureCoordinateData mutableBytes];
 }
@@ -101,7 +103,7 @@ spriteAnimation;
         effect.texture2d0.envMode = GLKTextureEnvModeReplace;
         effect.texture2d0.target = GLKTextureTarget2D;
         if (self.spriteAnimation != nil)
-            effect.texture2d0.name = [self.spriteAnimation currentFrame].name;
+            effect.texture2d0.name = self.spriteAnimation.frame.name;
         else
             effect.texture2d0.name = self.texture.name;
     }
@@ -126,7 +128,7 @@ spriteAnimation;
         glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, self.textureCoordinates);
     }
     
-    glDrawArrays(GL_TRIANGLE_FAN, 0, self.numVertices);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, self.count);
     
     glDisableVertexAttribArray(GLKVertexAttribPosition);
     if (!useConstantColor) {
@@ -164,10 +166,13 @@ spriteAnimation;
     animationsBlock();
     
     KWAnimation *animation = [[KWAnimation alloc] init];
-    animation.dpos = GLKVector2Subtract(self.position, currentPosition);
-    animation.dscale = GLKVector2Subtract(self.scale, currentScale);
-    animation.drot = self.rotation - currentRotation;
-    animation.dcolor = GLKVector4Subtract(self.color, currentColor);
+    animation.delta = (KWDelta) {
+        GLKVector2Subtract(self.position, currentPosition),
+        GLKVector2Subtract(self.scale, currentScale),
+        self.rotation - currentRotation,
+        GLKVector4Subtract(self.color, currentColor)
+    };
+    
     animation.duration = duration;
     [self.animations addObject:animation];
     

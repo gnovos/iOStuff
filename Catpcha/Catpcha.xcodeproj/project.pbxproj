@@ -336,17 +336,12 @@
 		0C9828E015D89DE20099E649 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				0C9B3F5315D97FDF00A93A3F /* Animation */,
 				0C9B3F5215D974B500A93A3F /* Shapes */,
-				0C9828F915D96DFE0099E649 /* KWScene.h */,
-				0C9828FA15D96DFE0099E649 /* KWScene.m */,
-				0C9828FC15D96E8C0099E649 /* KWAnimation.h */,
-				0C9828FD15D96E8D0099E649 /* KWAnimation.m */,
-				0C9828FE15D96E8E0099E649 /* KWSpriteAnimation.h */,
-				0C9828FF15D96E8F0099E649 /* KWSpriteAnimation.m */,
 				0C9828E715D96AF80099E649 /* KWShape.h */,
 				0C9828E815D96AF80099E649 /* KWShape.m */,
-				0C9828F115D96AF80099E649 /* KWSprite.h */,
-				0C9828F215D96AF80099E649 /* KWSprite.m */,
+				0C9828F915D96DFE0099E649 /* KWScene.h */,
+				0C9828FA15D96DFE0099E649 /* KWScene.m */,
 			);
 			name = Renderer;
 			sourceTree = "<group>";
@@ -364,6 +359,19 @@
 				0C9828F015D96AF80099E649 /* KWPolygon.m */,
 			);
 			name = Shapes;
+			sourceTree = "<group>";
+		};
+		0C9B3F5315D97FDF00A93A3F /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				0C9828FC15D96E8C0099E649 /* KWAnimation.h */,
+				0C9828FD15D96E8D0099E649 /* KWAnimation.m */,
+				0C9828FE15D96E8E0099E649 /* KWSpriteAnimation.h */,
+				0C9828FF15D96E8F0099E649 /* KWSpriteAnimation.m */,
+				0C9828F115D96AF80099E649 /* KWSprite.h */,
+				0C9828F215D96AF80099E649 /* KWSprite.m */,
+			);
+			name = Animation;
 			sourceTree = "<group>";
 		};
 		0CD70BAF15CB3EDE008EF8CB /* Toys */ = {

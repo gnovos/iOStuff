@@ -3,6 +3,6 @@
 
 @interface KWRectangle : KWShape
 
-@property (nonatomic, assign) CGSize size;
+- (id) initWithSize:(CGSize)size;
 
 @end

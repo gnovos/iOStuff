@@ -1,8 +1,8 @@
 
 @interface KWSpriteAnimation : NSObject
 
-- (id) initWithTimePerFrame:(CGFloat)timePerFrame framesNamed:(NSArray*)frameNames;
+- (id) initWithTimePerFrame:(CGFloat)timePerFrame framesNamed:(NSArray*)names;
 - (void) update:(NSTimeInterval)dt;
-- (GLKTextureInfo*) currentFrame;
+- (GLKTextureInfo*) frame;
 
 @end

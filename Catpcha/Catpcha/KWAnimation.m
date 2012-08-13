@@ -3,16 +3,15 @@
 
 @implementation KWAnimation
 
-@synthesize elapsed, duration, dpos, dscale, drot, dcolor;
+@synthesize elapsed, duration, delta;
 
 - (id) init {
     if (self = [super init]) {
         elapsed = 0;
         duration = 0;
-        dpos = GLKVector2Make(0,0);
-        drot = 0;
-        dscale = GLKVector2Make(0,0);
-        dcolor = GLKVector4Make(0,0,0,0);
+        delta = (KWDelta) {
+            GLKVector2Make(0,0), GLKVector2Make(0,0), 0, GLKVector4Make(0,0,0,0)
+        };
     }
     return self;
 }
@@ -26,16 +25,16 @@
     
     CGFloat fractionOfDuration = dt/duration;
     
-    GLKVector2 positionIncrement = GLKVector2MultiplyScalar(dpos, fractionOfDuration);
+    GLKVector2 positionIncrement = GLKVector2MultiplyScalar(delta.position, fractionOfDuration);
     shape.position = GLKVector2Add(shape.position, positionIncrement);
     
-    GLKVector4 colorIncrement = GLKVector4MultiplyScalar(dcolor, fractionOfDuration);
+    GLKVector4 colorIncrement = GLKVector4MultiplyScalar(delta.color, fractionOfDuration);
     shape.color = GLKVector4Add(shape.color, colorIncrement);
     
-    GLKVector2 scaleIncrement = GLKVector2MultiplyScalar(dscale, fractionOfDuration);
+    GLKVector2 scaleIncrement = GLKVector2MultiplyScalar(delta.scale, fractionOfDuration);
     shape.scale = GLKVector2Add(shape.scale, scaleIncrement);
     
-    shape.rotation += drot * fractionOfDuration;
+    shape.rotation += delta.rotation * fractionOfDuration;
 }
 
 @end
