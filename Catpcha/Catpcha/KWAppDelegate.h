@@ -9,6 +9,13 @@
 //xxx
 //TODO:
 
+//spash/level screenz (and win screens)
+
+//game kit (and milestones, etc)
+//multiplayer (steal kittens, dogs to scare away, etceteras)
+
+//switch to opengl
+
 //sharekit
 //irate
 //flurry
@@ -25,18 +32,11 @@
 //yarn (kittens can bat?) (trail on ground for yarn?)
 //rex
 
-//spash/level screenz (and win screens)
-
-//game kit (and milestones, etc)
-//multiplayer (steal kittens, dogs to scare away, etceteras)
-
 //add graphics.
 //graphics for play, too
 //add sounds
 
 //sort kittens by something something to improve sight?
-
-#import <UIKit/UIKit.h>
 
 @interface KWAppDelegate : UIResponder <UIApplicationDelegate>
 

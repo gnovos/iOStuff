@@ -61,7 +61,7 @@ typedef struct {
     CGPoint position;
     short velocity;
     unsigned char state;
-} KWObjectMotionEvent;
+} KWObjectUpdateEvent;
 
 typedef struct {
     unsigned short seq;
@@ -183,9 +183,10 @@ typedef struct {
 }
 
 - (void) save {
-    [GKAchievement reportAchievements:self.achievements.allValues withCompletionHandler:^(NSError *error) {
-        elog(error);
-    }];
+    //xxx this is beta 6?
+//    [GKAchievement reportAchievements:self.achievements.allValues withCompletionHandler:^(NSError *error) {
+//        elog(error);
+//    }];
 }
 
 - (void) loadPlayer:(void(^)(void))success {
@@ -199,6 +200,7 @@ typedef struct {
     }];
 }
 
+//xxx
 //- (void) score {
 //    GKLeaderboard* board = [GKLeaderboard ]
 //loadCategoriesWithCompletionHandler:(void (^)(NSArray *categories, NSArray *titles, NSError *error))completionHandler
@@ -212,29 +214,30 @@ typedef struct {
     [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) { elog(error); }];
 }
 
-- (void) authenticate:(void(^)(void))success failure:(void(^)(void))failure {
+- (void) authenticate:(void(^)(void))success failure:(void(^)(NSError* error))failure {
     Class gcClass = (NSClassFromString(@"GKLocalPlayer"));
     NSString *reqSysVer = @"4.1";
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     BOOL osVersionSupported = ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending);
     
     if (gcClass && osVersionSupported) {
-        GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+        GKLocalPlayer *localPlayer = GKLocalPlayer.localPlayer;
         self.playerID = localPlayer.isAuthenticated ? localPlayer.playerID : nil;
         if (self.playerID) {
             [self loadPlayer:success];
         } else {
-            [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error) {
-                self.playerID = localPlayer.isAuthenticated ? localPlayer.playerID : nil;
+            [GKLocalPlayer.localPlayer authenticateWithCompletionHandler:^(NSError* error) {
+                elog(error);
+                self.playerID = GKLocalPlayer.localPlayer.isAuthenticated ? GKLocalPlayer.localPlayer.playerID : nil;
                 if (self.playerID) {
                     [self loadPlayer:success];
                 } else {
-                    failure();
+                    failure(error);
                 }
             }];
         }
     } else {
-        failure();
+        failure([[NSError alloc] initWithDomain:@"KWUnsupportedVersion" code:401 userInfo:@{}]);
     }
 }
 
@@ -367,8 +370,6 @@ typedef struct {
     
     return (KWPacket){ header, payload };
 }
-
-- (void) ping { [self send:[self packet:KWPacketTypePing] reliable:YES]; }
 
 - (void) match:(GKMatch*)m didFailWithError:(NSError*)error { elog(error); }
 - (BOOL) match:(GKMatch*)m shouldReinvitePlayer:(NSString*)player { return YES; }
@@ -532,12 +533,12 @@ typedef struct {
         }
             
         case KWPacketTypeEvent: {
-            //xxx
+            //xxx update tree with new data
             break;
         }
     }
-    
 }
 
+- (void) ping { [self send:[self packet:KWPacketTypePing] reliable:YES]; }
 
 @end

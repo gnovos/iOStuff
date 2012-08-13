@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "KWGeometry.h"
 
 @interface KWGFX : NSObject

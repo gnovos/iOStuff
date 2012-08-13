@@ -6,9 +6,7 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "KWLevel.h"
-#import <GameKit/GameKit.h>
 
 typedef enum {
     KWEngineEventTick,
@@ -29,7 +27,7 @@ typedef enum {
 
 - (void) attach:(id)target forEvent:(KWEngineEvent)event withHandler:(void(^)(id target, id data))handler;
 
-- (void) authenticate:(void(^)(void))success failure:(void(^)(void))failure;
+- (void) authenticate:(void(^)(void))success failure:(void(^)(NSError* error))failure;
 - (void) save;
 
 @end

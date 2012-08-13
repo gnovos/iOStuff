@@ -12,8 +12,6 @@
 
 @implementation KWAppDelegate
 
-@synthesize window = _window;
-
 - (void) checkpoint:(NSString*)checkpoint {
     @try {
         [TestFlight passCheckpoint:checkpoint];

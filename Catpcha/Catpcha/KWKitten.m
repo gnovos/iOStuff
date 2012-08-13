@@ -172,7 +172,7 @@ typedef enum {
                 self.heading = [self direction:chasing];
             }
         } else {
-            //xxx stalking?
+            //xxx slow to stalking speed?
             [self chase:nil];
         }
     } else {

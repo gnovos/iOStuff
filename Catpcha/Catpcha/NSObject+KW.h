@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface NSObject (KW)
 
 - (void) observe:(NSString*)keyPath with:(void(^)(NSDictionary* change))block;

@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @class KWLevel;
 
 typedef enum {

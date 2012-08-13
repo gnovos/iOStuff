@@ -238,7 +238,7 @@ static const int KWTimeLimitLevelCost  = 5;
     }]];
 }
 
-//xxx rethink this?
+//xxx rethink how to do this more efficiently?
 - (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj {
     
     __block BOOL vacant = YES;

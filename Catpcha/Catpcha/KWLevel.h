@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "KWObject.h"
 
 @class KWObject, KWKitten;

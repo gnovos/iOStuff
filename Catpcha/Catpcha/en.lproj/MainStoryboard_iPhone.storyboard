@@ -36,6 +36,9 @@ Hold on while I check out your Game Center stuff blah blah... </string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="singlePlayer" destination="AeK-HQ-fgb" eventType="touchUpInside" id="dX9-fo-52q"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GBq-5m-PAb">
                                 <rect key="frame" x="111" y="303" width="99" height="44"/>
@@ -48,6 +51,9 @@ Hold on while I check out your Game Center stuff blah blah... </string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="multiPlayer" destination="AeK-HQ-fgb" eventType="touchUpInside" id="KyE-GF-mLq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
