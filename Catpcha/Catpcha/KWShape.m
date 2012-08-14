@@ -18,7 +18,7 @@ static GLKMatrix4 projection;
     KWTexture* texture;
     
     NSMutableArray* animations;
-            
+    
     GLKVector2 velocity;
     GLKVector2 acceleration;
     
@@ -35,49 +35,37 @@ static GLKMatrix4 projection;
         });
         
         self.children = [[NSMutableArray alloc] init];
-        self.vertices = [[KWVertex alloc] init];
+        _vertices = [[KWVertex alloc] init];
 
         animations = [[NSMutableArray alloc] init];
         
         texture = tex;
         
-        self.position = GLKVector2Make(0,0);
-        self.scale = GLKVector2Make(1,1);
-        self.rotation = 0;
-        self.color = GLKVector4Make(1,1,1,1);
+        self.delta = KWDeltaMake(GLKVector2Make(0,0), GLKVector2Make(1,1), 0, GLKVector4Make(1,1,1,1));
                 
-        [self updateMatrix];
-        
     }
     return self;
 }
 
+- (void) setDelta:(KWDelta)dx {
+    _delta = dx;
+    [self updateMatrix];
+}
+
 - (void) setParent:(KWShape*)parent {
+    [_parent remove:self];
     _parent = parent;
-    [self updateMatrix];
-}
-
-- (void) setPosition:(GLKVector2)position {
-    _position = position;
-    [self updateMatrix];
-}
-
-- (void) setRotation:(CGFloat)rotation {
-    _rotation = rotation;
-    [self updateMatrix];
-}
-
-- (void) setScale:(GLKVector2)scale {
-    _scale = scale;
     [self updateMatrix];
 }
 
 - (void) updateMatrix {
     
-    GLKMatrix4 matrix = GLKMatrix4MakeTranslation(self.position.x, self.position.y, 0);
+    KWDelta delta = self.delta;
+    
+    GLKMatrix4 matrix = GLKMatrix4MakeTranslation(delta.position.x, delta.position.y, 0);
 
-    matrix = GLKMatrix4Multiply(matrix, GLKMatrix4MakeRotation(self.rotation, 0, 0, 1));
-    matrix = GLKMatrix4Multiply(matrix, GLKMatrix4MakeScale(self.scale.x, self.scale.y, 1));
+    matrix = GLKMatrix4Multiply(matrix, GLKMatrix4MakeRotation(delta.rotation, 0, 0, 1));
+    matrix = GLKMatrix4Multiply(matrix, GLKMatrix4MakeScale(delta.scale.x, delta.scale.y, 1));
     
     if (self.parent) {
         matrix = GLKMatrix4Multiply(self.parent.matrix, matrix);
@@ -92,14 +80,13 @@ static GLKMatrix4 projection;
         effect.texture2d0.name = texture.info.name;
     } else {
         effect.useConstantColor = YES;
-        effect.constantColor = self.color;
+        effect.constantColor = delta.color;
     }
     
     effect.transform.modelviewMatrix = self.matrix;
     effect.transform.projectionMatrix = projection;
     
     [effect prepareToDraw];
-
     
     [[self.children copy] enumerateObjectsUsingBlock:^(KWShape* child, NSUInteger idx, BOOL *stop) {
         [child updateMatrix];
@@ -108,14 +95,16 @@ static GLKMatrix4 projection;
 
 - (void) update:(NSTimeInterval)dt {
     
+    KWDelta delta = self.delta;
+    
     angularVelocity += angularAcceleration * dt;
-    self.rotation += angularVelocity * dt;
+    delta.rotation += angularVelocity * dt;
     
     GLKVector2 changeInVelocity = GLKVector2MultiplyScalar(acceleration, dt);
     velocity = GLKVector2Add(velocity, changeInVelocity);
     
     GLKVector2 distanceTraveled = GLKVector2MultiplyScalar(velocity, dt);
-    self.position = GLKVector2Add(self.position, distanceTraveled);
+    delta.position = GLKVector2Add(delta.position, distanceTraveled);
     
     [animations enumerateObjectsUsingBlock:^(KWAnimation *animation, NSUInteger idx, BOOL *stop) {
         [animation animate:self dt:dt];
@@ -124,6 +113,8 @@ static GLKMatrix4 projection;
     [animations filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWAnimation *animation, NSDictionary *bindings) {
         return animation.elapsed <= animation.duration;
     }]];
+    
+    self.delta = delta;
 }
 
 - (void) render {
@@ -155,9 +146,6 @@ static GLKMatrix4 projection;
 }
 
 - (void) add:(KWShape*)child {
-    if (child.parent) {
-        [child.parent remove:child];
-    }
     child.parent = self;
     [self.children addObject:child];
 }
@@ -168,28 +156,26 @@ static GLKMatrix4 projection;
 }
 
 - (void) animateWithDuration:(NSTimeInterval)duration animations:(void(^)(void))animationsBlock {
-    GLKVector2 currentPosition = self.position;
-    GLKVector2 currentScale = self.scale;
-    GLKVector4 currentColor = self.color;
-    CGFloat currentRotation = self.rotation;
-    
+    KWDelta current = self.delta;    
     animationsBlock();
+    KWDelta delta = self.delta;
     
-    KWAnimation *animation = [[KWAnimation alloc] init];
-    animation.delta = KWDeltaMake(
-        GLKVector2Subtract(self.position, currentPosition),
-        GLKVector2Subtract(self.scale, currentScale),
-        self.rotation - currentRotation,
-        GLKVector4Subtract(self.color, currentColor)
-    );
+    KWAnimation *animation = [[KWAnimation alloc] initWithDelta:KWDeltaMake(
+        GLKVector2Subtract(delta.position, current.position),
+        GLKVector2Subtract(delta.scale, current.scale),
+        delta.rotation - current.rotation,
+        GLKVector4Subtract(delta.color, current.color)
+    )];
     
     animation.duration = duration;
     [animations addObject:animation];
     
-    self.position = currentPosition;
-    self.scale = currentScale;
-    self.color = currentColor;
-    self.rotation = currentRotation;
+    delta.position = current.position;
+    delta.scale = current.scale;
+    delta.color = current.color;
+    delta.rotation = current.rotation;
+    
+    self.delta = delta;
 }
 
 @end
