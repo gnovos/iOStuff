@@ -10,7 +10,11 @@
 
 @interface KWGeometry : NSObject
 
-+ (KWGeometry*) build:(void(^)(KWGeometry* vx))builder;
+@property (nonatomic, assign) GLuint drawmode;
+
+- (id) initWithBlock:(void(^)(KWGeometry* vx))builder;
+
+- (void) build:(void(^)(KWGeometry* vx))builder;
 
 - (void) vertex:(GLKVector2)vertex;
 - (void) color:(GLKVector4)color;

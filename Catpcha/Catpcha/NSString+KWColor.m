@@ -56,6 +56,8 @@
             }        
         }
     }
+    
+    NSLog(@"%@ r:%f g:%f b:%f a:%f", self, r, g, b, a);
 
     return GLKVector4Make(r, g, b, a);
 }

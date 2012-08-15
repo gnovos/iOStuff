@@ -22,11 +22,11 @@
                                                  error:&error];
         elog(error);
         
-        _geometry = [KWGeometry build:^(KWGeometry* vx) {
-            [vx vertex:GLKVector2Make(1,0)];
-            [vx vertex:GLKVector2Make(1,1)];
-            [vx vertex:GLKVector2Make(0,1)];
-            [vx vertex:GLKVector2Make(0,0)];
+        _geometry = [[KWGeometry alloc] initWithBlock:^(KWGeometry *vx) {
+            [vx vertex:GLKVector2Make(1.0f, 0.0f)];
+            [vx vertex:GLKVector2Make(1.0f, 1.0f)];
+            [vx vertex:GLKVector2Make(0.0f, 1.0f)];
+            [vx vertex:GLKVector2Make(0.0f, 0.0f)];
         }];
     }
     return self;

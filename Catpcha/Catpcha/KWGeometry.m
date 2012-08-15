@@ -13,6 +13,15 @@
     NSUInteger ccount;
     NSMutableData* vertices;
     NSMutableData* colors;
+    
+}
+
+- (id) initWithBlock:(void(^)(KWGeometry* vx))builder {
+    if (self = [super init]) {
+        self.drawmode = GL_TRIANGLE_FAN;
+        builder(self);
+    }
+    return self;
 }
 
 - (id) init {
@@ -24,10 +33,8 @@
     return self;
 }
 
-+ (KWGeometry*) build:(void(^)(KWGeometry* vx))builder {
-    KWGeometry* vx = [[KWGeometry alloc] init];
-    builder(vx);
-    return vx;
+- (void) build:(void(^)(KWGeometry* vx))builder {
+    builder(self);
 }
 
 - (void) vertex:(GLKVector2)vertex {
@@ -36,7 +43,7 @@
 }
 
 - (void) color:(GLKVector4)color {
-    [vertices appendBytes:&color length:sizeof(color)];
+    [colors appendBytes:&color length:sizeof(color)];
     ccount++;
 }
 

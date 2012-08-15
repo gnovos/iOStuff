@@ -6,10 +6,13 @@
 - (id) initWithTexture:(KWTexture*)texture andSize:(CGSize)size {
     if (self = [super initWithTexture:texture]) {
         _size = size;
-        [self.geometry vertex:GLKVector2Make( size.width/2.0f, -size.height/2.0f)];
-        [self.geometry vertex:GLKVector2Make( size.width/2.0f,  size.height/2.0f)];
-        [self.geometry vertex:GLKVector2Make(-size.width/2.0f,  size.height/2.0f)];
-        [self.geometry vertex:GLKVector2Make(-size.width/2.0f, -size.height/2.0f)];
+        [self.geometry build:^(KWGeometry* vx) {
+            vx.drawmode = GL_TRIANGLE_STRIP;
+            [vx vertex:GLKVector2Make(-size.width/2.0f, -size.height/2.0f)];
+            [vx vertex:GLKVector2Make( size.width/2.0f, -size.height/2.0f)];
+            [vx vertex:GLKVector2Make(-size.width/2.0f,  size.height/2.0f)];
+            [vx vertex:GLKVector2Make( size.width/2.0f,  size.height/2.0f)];
+        }];
     }
     return self;
 }

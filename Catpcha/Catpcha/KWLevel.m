@@ -136,27 +136,18 @@ static const int KWTimeLimitLevelCost  = 5;
 
 - (id) initLevel:(int)lvl withSize:(CGSize)size {
     if (self = [super initWithTexture:nil andSize:size]) {
-        self.moment.color = GLKVector4Make(KWRandomPercent, KWRandomPercent, KWRandomPercent, 1.0f);
-
-        timelimit = KWTimeLimitMaxSeconds - (KWTimeLimitLevelCost * level);
-        
-//        id pink = (id)[UIColor colorWithRed:0.9f green:0.5f blue:0.7f alpha:0.7f].CGColor;
-//        id pg = (id)[UIColor colorWithRed:0.5f green:0.9f blue:0.4f alpha:0.7f].CGColor;
-//        id pb = (id)[UIColor colorWithRed:0.5f green:0.4f blue:0.9f alpha:0.7f].CGColor;
-//        id pr = (id)[UIColor colorWithRed:0.9f green:0.2f blue:0.1f alpha:0.7f].CGColor;
-//        id pq = (id)[UIColor colorWithRed:KWRandomPercent green:KWRandomPercent blue:KWRandomPercent alpha:0.7f].CGColor;
-//        id white = (id)[UIColor colorWithRed:0.9f green:0.95f blue:0.95f alpha:0.7f].CGColor;
-
-//xxxz
-//        self.colors = @[pink, white, pg, pq, pink, white, pb, pr, pq];
-//        self.locations = @[@0.0f, @0.3f, @0.4f, @0.5f, @0.6f, @0.7f, @0.9f, @0.95f, @1.0f];
-//        self.startPoint = CGPointMake(KWRandomPercent, KWRandomPercent);
-//        self.endPoint = CGPointMake(KWRandomPercent, KWRandomPercent);
-//        
-//        self.cornerRadius = 40.0f;
-        
         level = lvl;
 
+        self.moment.color = GLKVector4Make(KWRandomPercent, KWRandomPercent, KWRandomPercent, 1.0f);
+        
+        [self.geometry build:^(KWGeometry *vx) {
+            [vx color:pink];
+            [vx color:white];
+            [vx color:paleblue];
+            [vx color:palegreen];
+        }];
+
+        timelimit = KWTimeLimitMaxSeconds - (KWTimeLimitLevelCost * level);
     }
     return self;
 }

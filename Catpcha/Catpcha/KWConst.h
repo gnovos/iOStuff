@@ -52,6 +52,10 @@ static const GLKVector4 red      = { 1.0f, 0.0f, 0.0f, 1.0f };
 static const GLKVector4 green    = { 0.0f, 1.0f, 0.0f, 1.0f };
 static const GLKVector4 blue     = { 0.0f, 0.0f, 1.0f, 1.0f };
 
+static const GLKVector4 pink      = { 0.9f, 0.5f, 0.7f, 0.7f };
+static const GLKVector4 palegreen = { 0.5f, 0.9f, 0.4f, 0.7f };
+static const GLKVector4 paleblue  = { 0.5f, 0.4f, 0.9f, 0.7f };
+static const GLKVector4 palered   = { 0.9f, 0.2f, 0.1f, 0.7f };
 
 #define M_TAU ( 2 * M_PI)
 

@@ -1,8 +1,6 @@
 
 #import "KWShape.h"
 
-static GLKBaseEffect* texeffect;
-static GLKBaseEffect* coeffect;
 static GLKBaseEffect* vxeffect;
 
 @interface KWShape ()
@@ -13,24 +11,19 @@ static GLKBaseEffect* vxeffect;
 @end
 
 @implementation KWShape {
-    KWTexture* texture;    
-}
-
-+(void)initialize {
-    texeffect = [[GLKBaseEffect alloc] init];
-    texeffect.texture2d0.envMode = GLKTextureEnvModeReplace;
-    texeffect.texture2d0.target  = GLKTextureTarget2D;
-
-    coeffect  = [[GLKBaseEffect alloc] init];
-    coeffect.useConstantColor = YES;
-    
-    vxeffect  = [[GLKBaseEffect alloc] init];
-
+    KWTexture* texture;
+    GLKBaseEffect* texeffect;
 }
 
 - (id) initWithTexture:(KWTexture*)tex {
-    if (self = [super init]) {        
+    if (self = [super init]) {
         texture = tex;
+        if (texture) {
+            texeffect = [[GLKBaseEffect alloc] init];
+            texeffect.texture2d0.envMode = GLKTextureEnvModeReplace;
+            texeffect.texture2d0.target  = GLKTextureTarget2D;
+            texeffect.texture2d0.name = texture.info.name;            
+        }
         _shapes = [[NSMutableArray alloc] init];
         _geometry = [[KWGeometry alloc] init];
         _moment = [[KWMoment alloc] init];
@@ -71,18 +64,37 @@ static GLKBaseEffect* vxeffect;
         
 }
 
+- (GLKBaseEffect*) coeffect {
+    static GLKBaseEffect* coeffect;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        coeffect = [[GLKBaseEffect alloc] init];
+        coeffect.useConstantColor = YES;
+    });
+    return coeffect;
+}
+
+- (GLKBaseEffect*) vxeffect {
+    static GLKBaseEffect* vxeffect;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        vxeffect = [[GLKBaseEffect alloc] init];
+        vxeffect.useConstantColor = NO;
+    });
+    return vxeffect;
+}
+
 - (void) prepare:(GLKMatrix4)projection {
     
     GLKBaseEffect* effect;
     
     if (texture) {        
-        texeffect.texture2d0.name = texture.info.name;
         effect = texeffect;
     } else if (self.geometry.ccount) {
-        effect = vxeffect;
+        effect = self.vxeffect;
     } else {
-        coeffect.constantColor = self.moment.color;
-        effect = coeffect;
+        self.coeffect.constantColor = self.moment.color;
+        effect = self.coeffect;
     }
     
     effect.transform.modelviewMatrix = self.matrix;
@@ -94,18 +106,20 @@ static GLKBaseEffect* vxeffect;
 //xxx batch renders
 - (void) render:(GLKMatrix4)projection {
     [self prepare:projection];
-        
+    
+    KWGeometry* geometry = self.geometry;
+    
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, self.geometry.vertices);
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, geometry.vertices);
     
-    BOOL vcolors = self.geometry.ccount > 0;
+    BOOL vcolors = geometry.ccount > 0;
     
     if (vcolors) {
         glEnableVertexAttribArray(GLKVertexAttribColor);
-        glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, self.geometry.colors);
+        glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, geometry.colors);
     }
     
     if (texture) {
@@ -113,7 +127,7 @@ static GLKBaseEffect* vxeffect;
         glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, texture.geometry.vertices);
     }
     
-    glDrawArrays(GL_TRIANGLE_FAN, 0, self.geometry.vcount);
+    glDrawArrays(geometry.drawmode, 0, geometry.vcount);
     
     if (texture) {
         glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
