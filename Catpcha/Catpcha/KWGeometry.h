@@ -1,54 +1,24 @@
 //
-//  Header.h
+//  KWVertex.h
 //  Catpcha
 //
-//  Created by Mason on 8/6/12.
+//  Created by Mason on 8/13/12.
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#ifndef Catpcha_KWGemometry_h
-#define Catpcha_KWGemometry_h
+#import <Foundation/Foundation.h>
 
-typedef struct { CGPoint from; CGPoint to; } CGLine;
+@interface KWGeometry : NSObject
 
-static inline CGLine  CGLineMake(CGPoint from, CGPoint to) { return (CGLine){from, to}; }
-static inline CGFloat CGLineSlopeX(CGLine line) { return line.to.x - line.from.x; }
-static inline CGFloat CGLineSlopeY(CGLine line) { return line.to.y - line.from.y; }
-static inline CGFloat CGLineSlope(CGLine line) {
-    CGFloat mx = CGLineSlopeX(line);
-    CGFloat my = CGLineSlopeY(line);
-    if (mx == 0) {
-        return 0;
-    }
-    return my / mx;
-}
++ (KWGeometry*) build:(void(^)(KWGeometry* vx))builder;
 
-static inline CGFloat CGLineDistance(CGLine line) { return hypot(CGLineSlopeX(line), CGLineSlopeY(line)); };
+- (void) vertex:(GLKVector2)vertex;
+- (void) color:(GLKVector4)color;
 
-static inline CGPoint CGRectCenter(CGRect rect) { return CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect)); }
+- (GLKVector2*)vertices;
+- (NSUInteger)vcount;
 
-static inline CGRect CGRectEnvelope(CGRect rect, CGPoint point) {
-    
-    if (CGRectIsNull(rect)) {
-        rect.origin = point;
-    } else {
-        if (point.x < CGRectGetMinX(rect)) {
-            CGFloat dw = CGRectGetMinX(rect) - point.x;
-            rect.origin.x = point.x;
-            rect.size.width += dw;
-        } else if (point.x > CGRectGetMaxX(rect)) {
-            rect.size.width += point.x - CGRectGetMaxX(rect);
-        }
-        if (point.y < CGRectGetMinY(rect)) {
-            CGFloat dh = CGRectGetMinY(rect) - point.y;
-            rect.origin.y = point.y;
-            rect.size.height += dh;
-        } else if (point.y > CGRectGetMaxY(rect)) {
-            rect.size.width += point.y - CGRectGetMaxX(rect);
-        }
-    }
-    
-    return rect;
-}
+- (GLKVector4*)colors;
+- (NSUInteger)ccount;
 
-#endif
+@end

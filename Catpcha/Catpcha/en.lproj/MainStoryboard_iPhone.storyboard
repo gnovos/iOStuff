@@ -64,31 +64,6 @@ Hold on while I check out your Game Center stuff blah blah... </string>
             </objects>
             <point key="canvasLocation" x="317" y="-7"/>
         </scene>
-        <!--Game View Controller-->
-        <scene sceneID="5">
-            <objects>
-                <viewController storyboardIdentifier="Renderer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2" customClass="KWGameViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bnc-bF-4xt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qET-7Q-biM" customClass="KWRenderView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.80392163989999998" blue="0.78039222959999999" alpha="1" colorSpace="deviceRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="uXj-UZ-mJn"/>
-                    <connections>
-                        <outlet property="render" destination="qET-7Q-biM" id="SjS-sJ-C9a"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="798" y="-7"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="TfW-m0-35G">
             <objects>
@@ -107,31 +82,21 @@ Hold on while I check out your Game Center stuff blah blah... </string>
             </objects>
             <point key="canvasLocation" x="-163" y="-7"/>
         </scene>
-        <!--Interstitial View Controller-->
-        <scene sceneID="2fN-u1-CgB">
+        <!--Renderer-->
+        <scene sceneID="V9H-fO-xxb">
             <objects>
-                <viewController storyboardIdentifier="Interstitial" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CAt-cG-z1e" customClass="KWInterstitialViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fE6-sn-Alc">
+                <glkViewController storyboardIdentifier="Renderer" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" preferredFramesPerSecond="30" id="hkq-7g-Myc" userLabel="Renderer" customClass="KWRenderer" sceneMemberID="viewController">
+                    <glkView key="view" autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" id="uwt-vv-63S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" text="" textAlignment="center" adjustsFontSizeToFit="NO" autoshrinkMode="none" preferredMaxLayoutWidth="227" id="iXq-5W-Tap">
-                                <rect key="frame" x="47" y="158" width="227" height="164"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="highlightedColor"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="message" destination="iXq-5W-Tap" id="xSe-cy-tJN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jlz-SG-Nbm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="hkq-7g-Myc" id="f6T-be-zFM"/>
+                        </connections>
+                    </glkView>
+                </glkViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GCO-Mo-Pyw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-166" y="637"/>
+            <point key="canvasLocation" x="799" y="-7"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

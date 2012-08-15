@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "KWGeometry.h"
+#import "KWCalc.h"
 
 @interface KWGFX : NSObject
 

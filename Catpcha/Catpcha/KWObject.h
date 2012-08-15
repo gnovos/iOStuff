@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
+#import "KWRectangle.h"
+
 @class KWLevel;
 
 typedef enum {
@@ -24,7 +26,7 @@ typedef enum {
     KWObjectVelocityVeryFast   = 350,
 } KWObjectVelocity;
 
-@interface KWObject : CAShapeLayer
+@interface KWObject : KWRectangle
 
 @property (nonatomic, assign) unsigned char oid;
 @property (nonatomic, assign) KWObjectType type;
@@ -41,7 +43,7 @@ typedef enum {
 
 - (id) initWithLevel:(KWLevel*)lvl andSize:(CGSize)size;
 
-- (UIBezierPath*) shape;
+//xxxz - (UIBezierPath*) shape;
 
 - (BOOL) moving;
 

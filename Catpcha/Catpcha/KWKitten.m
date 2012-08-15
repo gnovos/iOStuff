@@ -54,10 +54,11 @@ typedef enum {
 }
 
 - (id) initWithLevel:(KWLevel*)lvl {
-    if (self = [super initWithLevel:lvl andSize:KWDefaultKittenSize]) {
+    if (self = [super initWithLevel:lvl andSize:KWKittenSize]) {
         self.type = KWObjectTypeKitten;
-        self.lineWidth = 2.0f;
-        self.strokeColor = [UIColor blueColor].CGColor;
+        //xxxxz
+//        self.lineWidth = 2.0f;
+//        self.strokeColor = [UIColor blueColor].CGColor;
         
         self.touchable = YES;
         self.allure = 0.005f;
@@ -67,13 +68,14 @@ typedef enum {
     return self;
 }
 
-- (UIBezierPath*) shape {
-    UIBezierPath* shape = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
-    [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f - 10.0f)];
-    [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f + 10.0f)];
-    [shape addLineToPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height / 2.0f)];
-    return shape;
-}
+//xxxz
+//- (UIBezierPath*) shape {
+//    UIBezierPath* shape = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
+//    [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f - 10.0f)];
+//    [shape addLineToPoint:CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f + 10.0f)];
+//    [shape addLineToPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height / 2.0f)];
+//    return shape;
+//}
 
 - (BOOL) idle      { return state == KWKittenStateSitting || state == KWKittenStateSleeping; }
 - (BOOL) stalking  { return state == KWKittenStateStalking; }
@@ -162,15 +164,16 @@ typedef enum {
     } else if (self.bored) {
         [self chase:nil];
         self.state = KWKittenStateExploring;
-        self.heading += KWRandomHeading;
+        self.heading += KWRandomDegrees;
         mood = KWKittenMoodInterested;
     } if (self.chasing) {
         if (chasing.moving) {
-            if (CGRectIntersectsRect(self.frame, chasing.frame)) {
-                [self catch];
-            } else {
-                self.heading = [self direction:chasing];
-            }
+//xxxz
+//            if (CGRectIntersectsRect(self.frame, chasing.frame)) {
+//                [self catch];
+//            } else {
+//                self.heading = [self direction:chasing];
+//            }
         } else {
             //xxx slow to stalking speed?
             [self chase:nil];
@@ -189,29 +192,30 @@ typedef enum {
         energy -= MIN(dt, KWRandomPercent);
     }
 
-    UIColor* color = [UIColor blueColor];
-    self.fillColor = nil;
-    self.lineDashPattern = nil;
-    self.transform = CATransform3DIdentity;
-    if (self.touch) {
-        color = UIColor.brownColor;
-    } else if (self.captured) {
-        color = UIColor.orangeColor;
-        self.lineDashPattern = @[@5, @5];
-    } else if (self.idle) {
-        color = UIColor.lightGrayColor;
-        self.lineDashPattern = @[@2, @2];
-        self.lineDashPattern = @[@5, @5];
-    } else if (self.playing) {
-        self.fillColor = UIColor.yellowColor.CGColor;
-        self.lineDashPattern = @[@30, @10];
-        self.lineDashPhase += 0.5f;
-    } else if (self.chasing) {
-        color = UIColor.redColor;
-    }
-        
-    self.strokeColor = color.CGColor;
-        
+//xxxz    
+//    UIColor* color = [UIColor blueColor];
+//    self.fillColor = nil;
+//    self.lineDashPattern = nil;
+//    self.transform = CATransform3DIdentity;
+//    if (self.touch) {
+//        color = UIColor.brownColor;
+//    } else if (self.captured) {
+//        color = UIColor.orangeColor;
+//        self.lineDashPattern = @[@5, @5];
+//    } else if (self.idle) {
+//        color = UIColor.lightGrayColor;
+//        self.lineDashPattern = @[@2, @2];
+//        self.lineDashPattern = @[@5, @5];
+//    } else if (self.playing) {
+//        self.fillColor = UIColor.yellowColor.CGColor;
+//        self.lineDashPattern = @[@30, @10];
+//        self.lineDashPhase += 0.5f;
+//    } else if (self.chasing) {
+//        color = UIColor.redColor;
+//    }
+//        
+//    self.strokeColor = color.CGColor;
+//        
     return [super tick:dt];
     
 }

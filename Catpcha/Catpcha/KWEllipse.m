@@ -11,7 +11,7 @@
     if (self = [super initWithTexture:texture]) {
         for (int i = 0; i < resolution; i++){
             CGFloat theta = ((CGFloat)i) / resolution * M_TAU;
-            [self.vertices append:GLKVector2Make(cos(theta) * radius.x, sin(theta) * radius.y)];
+            [self.geometry vertex:GLKVector2Make(cos(theta) * radius.x, sin(theta) * radius.y)];
         }
     }
     return self;

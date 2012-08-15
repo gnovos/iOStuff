@@ -11,17 +11,17 @@
 @implementation KWMouse
 
 - (id) initWithLevel:(KWLevel*)lvl {
-    if (self = [super initWithLevel:lvl andSize:KWDefaultMouseSize]) {
+    if (self = [super initWithLevel:lvl andSize:KWMouseSize]) {
         self.type = KWObjectTypeMouse;
-        self.fillColor = [UIColor darkGrayColor].CGColor;
-                
-        self.velocity = KWObjectVelocityVeryFast;
-        self.allure = 2.0f;
+///xxxxz
+//        self.fillColor = [UIColor darkGrayColor].CGColor;                
+//        self.velocity = KWObjectVelocityVeryFast;
+//        self.allure = 2.0f;
     }
     return self;
 }
 
-- (UIBezierPath*) shape { return [UIBezierPath bezierPathWithOvalInRect:self.bounds]; }
+//xxxz- (UIBezierPath*) shape { return [UIBezierPath bezierPathWithOvalInRect:self.bounds]; }
 
 - (BOOL) tick:(CGFloat)dt {
     CGFloat tilt = KWRandom(KWAngle23Degrees);

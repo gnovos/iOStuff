@@ -1,33 +1,22 @@
 
 #import "KWRenderer.h"
-#import "KWVertex.h"
+#import "KWGeometry.h"
 #import "KWTexture.h"
-
-typedef struct {
-    GLKVector2 position;
-    GLKVector2 scale;
-    CGFloat rotation;
-    GLKVector4 color;
-} KWDelta;
-
-static inline KWDelta KWDeltaMake(GLKVector2 position, GLKVector2 scale, CGFloat rotation, GLKVector4 color) {
-    KWDelta delta; delta.position = position; delta.scale = scale; delta.rotation = rotation; delta.color = color;
-    return delta;
-}
+#import "KWMoment.h"
 
 @interface KWShape : NSObject
 
-@property (nonatomic, strong, readonly) KWVertex* vertices;
-@property (nonatomic, assign) KWDelta delta;
+@property (nonatomic, strong, readonly) NSMutableArray* shapes;
+@property (nonatomic, strong, readonly) KWGeometry* geometry;
+@property (nonatomic, strong, readonly) KWMoment* moment;
 
 - (id) initWithTexture:(KWTexture*)tex;
 
 - (void) update:(NSTimeInterval)dt;
-- (void) render;
+- (void) render:(GLKMatrix4)projection;
 
 - (void) add:(KWShape*)child;
 - (void) remove:(KWShape*)child;
-
-- (void) animateWithDuration:(NSTimeInterval)duration animations:(void(^)(void))animations;
+- (void) removeAll;
 
 @end

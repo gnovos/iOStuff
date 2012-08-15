@@ -48,7 +48,8 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self login];
+//xxxz    [self login];
+    [self start];
 }
 
 - (void) requestMatch:(NSArray*)players {

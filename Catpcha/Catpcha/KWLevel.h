@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "KWObject.h"
+#import "KWRectangle.h"
 
 @class KWObject, KWKitten;
 
-@interface KWLevel : CAGradientLayer
+@interface KWLevel : KWRectangle
 
 @property (nonatomic, readonly, assign) int level;
 @property (nonatomic, readonly, assign) NSUInteger timelimit;
@@ -23,8 +23,6 @@
 - (id) initLevel:(int)lvl withSize:(CGSize)size;
 
 - (void) populate;
-
-- (void) addObject:(KWObject*)object;
 
 - (void) tick:(CGFloat)dt;
 

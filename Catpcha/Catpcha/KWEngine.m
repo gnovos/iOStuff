@@ -104,8 +104,9 @@ typedef struct {
 
 - (id) init {
     if (self = [super init]) {
-        level = [[KWLevel alloc] initLevel:1 withSize:UIScreen.mainScreen.bounds.size];
-        [level populate];
+//xxxz
+//        level = [[KWLevel alloc] initLevel:1 withSize:UIScreen.mainScreen.bounds.size];
+//        [level populate];
         handlers = [[NSMutableDictionary alloc] init];
         master = 0;        
     }
@@ -366,7 +367,7 @@ typedef struct {
                 KWObjectLayout* layout = &layouts[idx];
                 layout->oid = obj.oid;
                 layout->type = obj.type;
-                layout->bounds = obj.bounds;
+//xxxz                layout->bounds = obj.bounds;
             }];
             
             break;
@@ -502,7 +503,7 @@ typedef struct {
             BOOL allVoted = [[clients.allValues valueForKeyPath:@"@sum.voted"] integerValue] == clients.count;
             
             if (allVoted && master == self.playerID.hash) {
-                [self send:[self packet:KWPacketTypeLayout, level.level, level.bounds.size, level.objects] reliable:YES];
+//xxxz                [self send:[self packet:KWPacketTypeLayout, level.level, level.bounds.size, level.objects] reliable:YES];
             }
             
             break;
@@ -537,9 +538,9 @@ typedef struct {
                 }
                 
                 obj.oid = olayout->oid;
-                obj.bounds = olayout->bounds;
+//xxxz                obj.bounds = olayout->bounds;
                 
-                [lvl addObject:obj];
+                [lvl add:obj];
             }
             
             level = lvl;

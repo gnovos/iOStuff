@@ -18,10 +18,11 @@
 }
 
 - (id) initWithLevel:(KWLevel*)lvl {
-    if (self = [super initWithLevel:lvl andSize:KWDefaultYarnSize]) {
+    if (self = [super initWithLevel:lvl andSize:KWYarnSize]) {
         self.type = KWObjectTypeYarn;
-        self.strokeColor = nil;//[UIColor cyanColor].CGColor;
-        self.fillColor = [UIColor colorWithRed:0.2f green:0.1f blue:0.8f alpha:0.5f].CGColor;
+//xxxz        
+//        self.strokeColor = nil;//[UIColor cyanColor].CGColor;
+//        self.fillColor = [UIColor colorWithRed:0.2f green:0.1f blue:0.8f alpha:0.5f].CGColor;
         self.touchable = YES;
         self.catchable = NO;        
         self.allure = 0.05f;
@@ -29,7 +30,7 @@
     return self;
 }
 
-- (UIBezierPath*) shape { return [UIBezierPath bezierPathWithOvalInRect:self.bounds]; }
+//xxxz- (UIBezierPath*) shape { return [UIBezierPath bezierPathWithOvalInRect:self.bounds]; }
 
 - (void) grab {
     start = [NSDate date];    
@@ -42,35 +43,36 @@
 }
 
 - (BOOL) tick:(CGFloat)dt {
-    
-    CGSize size = self.bounds.size;
-    if (size.width < KWMinToySize.width || size.height < KWMinToySize.height) {
-        self.fillColor = UIColor.cyanColor.CGColor;
-        self.catchable = YES;
-        self.touchable = NO;
-    } else {
-        roll -= dt;
-        if (roll < 0 || self.velocity < dt) {
-            self.velocity = KWObjectVelocityMotionless;
-        } else {
-            self.velocity -= dt;
-            [self shrink:dt];
-        }
-    }
-    
-    if (self.moving) {
-        [self.level.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
-            [kitten show:self];
-        }];
-    }
-    
-    return [super tick:dt];
+//xxxz    
+//    CGSize size = self.bounds.size;
+//    if (size.width < KWMinToySize.width || size.height < KWMinToySize.height) {
+//        self.fillColor = UIColor.cyanColor.CGColor;
+//        self.catchable = YES;
+//        self.touchable = NO;
+//    } else {
+//        roll -= dt;
+//        if (roll < 0 || self.velocity < dt) {
+//            self.velocity = KWObjectVelocityMotionless;
+//        } else {
+//            self.velocity -= dt;
+//            [self shrink:dt];
+//        }
+//    }
+//    
+//    if (self.moving) {
+//        [self.level.kittens enumerateObjectsUsingBlock:^(KWKitten* kitten, NSUInteger idx, BOOL *stop) {
+//            [kitten show:self];
+//        }];
+//    }
+//    
+//    return [super tick:dt];
 }
 
 - (void) shrink:(CGFloat)dt {
-    self.transform = CATransform3DIdentity;
-    self.frame = CGRectInset(self.frame, dt, dt);
-    self.path = self.shape.CGPath;
+//xxxz    
+//    self.transform = CATransform3DIdentity;
+//    self.frame = CGRectInset(self.frame, dt, dt);
+//    self.path = self.shape.CGPath;
 }
 
 @end

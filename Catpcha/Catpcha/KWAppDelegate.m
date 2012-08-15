@@ -10,6 +10,8 @@
 #import "KWApplication.h"
 #import "KWEngine.h"
 
+#import "NSString+KWColor.h"
+
 @implementation KWAppDelegate
 
 - (void) checkpoint:(NSString*)checkpoint {
