@@ -25,4 +25,7 @@ typedef struct {
 @property (nonatomic, strong, readonly) KWGeometry* geometry;
 @property (nonatomic, strong, readonly) GLKTextureInfo* info;
 
+- (id) initWithImage:(UIImage*)image andMap:(NSDictionary*)texmap;
+- (id) initWithString:(NSString*)string dimensions:(CGSize)dimensions alignment:(UITextAlignment)alignment fontName:(NSString*)name fontSize:(CGFloat)size;
+
 @end

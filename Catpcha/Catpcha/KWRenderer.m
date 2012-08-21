@@ -152,6 +152,7 @@ typedef enum {
     //    }
     //[engine start:YES];
     
+    //xxx remove this later
     KWLevel* level = [[KWLevel alloc] initLevel:1 withSize:CGSizeMake(bounds.size.width * 0.9f, bounds.size.height * 0.9f)];
     
     [level populate];
@@ -355,7 +356,15 @@ typedef enum {
     
 }
 
-//- (void) touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
+- (void) touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
+    NSLog(@"t:%@ e:%@", touches, event);
+    
+    UITouch* touch = [touches anyObject];
+    CGPoint touchLocation = [touch locationInView:touch.view];
+    touchLocation = CGPointMake(touchLocation.x, 320 - touchLocation.y);
+    
+    
+    
 //    NSMutableDictionary* path = [self path:event];
 //    
 //    __block CGPoint center = CGPointZero;
@@ -390,7 +399,7 @@ typedef enum {
 //    }];
 //    
 //    zoom = [[self.scroll valueForKeyPath:@"sublayerTransform.scale.x"] floatValue];
-//}
+}
 //
 //- (void) touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
 //    

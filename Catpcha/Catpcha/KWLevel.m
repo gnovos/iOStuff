@@ -51,12 +51,6 @@ static const int KWTimeLimitLevelCost  = 5;
     }]];
 }
 
-//xxxz
-//- (void) setFrame:(CGRect)frame {
-//    [super setFrame:frame];
-//    [self reset];
-//}
-
 - (void) reset {
 //xxxz    
 //    [[self sublayers] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
@@ -153,15 +147,9 @@ static const int KWTimeLimitLevelCost  = 5;
 }
 
 - (void) addMouse {
-    if (KWRandomPercent < KWMouseChance * self.kittens.count && self.mice.count <= self.kittens.count/ 2.0f) {
+    if (KWRandomPercent < KWMouseChance * self.kittens.count && self.mice.count <= self.kittens.count / 2.0f) {
         KWMouse* mouse = [[KWMouse alloc] initWithLevel:self];
-//xxxz        
-//        while (!CGRectContainsRect(self.bounds, mouse.frame) || ![self vacant:mouse.frame excluding:mouse]) {
-//            mouse.position = CGPointMake(arc4random_uniform(self.bounds.size.width), arc4random_uniform(self.bounds.size.height));
-//        }
-//        
-//        [self addSublayer:mouse];
-//        [objects addObject:mouse];
+        [self yield:mouse];
     }
 }
 
@@ -235,22 +223,6 @@ static const int KWTimeLimitLevelCost  = 5;
 //    return [self.objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(KWObject* o, NSDictionary *bindings) {
 //        return o.touchable && CGRectContainsPoint(CGRectInset(o.frame, KWTouchFeather, KWTouchFeather), point);
 //    }]];
-}
-
-//xxx rethink how to do this more efficiently?
-- (BOOL) vacant:(CGRect)rect excluding:(KWObject*)obj {
-    
-    __block BOOL vacant = YES;
-    
-    [self.objects enumerateObjectsUsingBlock:^(KWObject* o, NSUInteger idx, BOOL *stop) {
-//xxxz        
-//        if (o != obj && CGRectIntersectsRect(rect, o.frame)) {
-//            vacant = NO;
-//            *stop = YES;
-//        }
-    }];
-    
-    return vacant;
 }
 
 - (NSArray*) sight:(KWObject*)seer {
