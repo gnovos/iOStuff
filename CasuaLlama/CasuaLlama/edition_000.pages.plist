@@ -4,39 +4,51 @@
 <array>
 	<dict>
 		<key>content</key>
-		<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 1&lt;br/&gt;&lt;a href=&quot;http://www.casuallama.org&quot;&gt;Click me!!&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;</string>
+		<string>CasuaLlama|1</string>
 		<key>type</key>
-		<string>web</string>
+		<string>pdf</string>
+	</dict>
+	<dict>
+		<key>content</key>
+		<string>CasuaLlama|2</string>
+		<key>type</key>
+		<string>type</string>
+	</dict>
+	<dict>
+		<key>content</key>
+		<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a web body! page 1&lt;br/&gt;&lt;a href=&quot;http://www.casuallama.org&quot;&gt;Click me!!&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;</string>
+		<key>type</key>
+		<string>html</string>
 	</dict>
 	<dict>
 		<key>content</key>
 		<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 2&lt;a href=&quot;tel:4152722917&quot;&gt;No, click me!!&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;</string>
 		<key>type</key>
-		<string>web</string>
+		<string>html</string>
 	</dict>
 	<dict>
 		<key>content</key>
 		<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 3 415-272-2917&lt;/body&gt;&lt;/html&gt;</string>
 		<key>type</key>
-		<string>web</string>
+		<string>html</string>
 	</dict>
 	<dict>
 		<key>content</key>
 		<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 4 mason@chipped.net&lt;/body&gt;&lt;/html&gt;</string>
 		<key>type</key>
-		<string>web</string>
+		<string>html</string>
 	</dict>
 	<dict>
 		<key>content</key>
 		<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 5&lt;/body&gt;&lt;/html&gt;</string>
 		<key>type</key>
-		<string>web</string>
+		<string>html</string>
 	</dict>
 	<dict>
 		<key>content</key>
 		<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 6&lt;/body&gt;&lt;/html&gt;</string>
 		<key>type</key>
-		<string>web</string>
+		<string>html</string>
 	</dict>
 </array>
 </plist>

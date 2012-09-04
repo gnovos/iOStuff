@@ -20,6 +20,9 @@
 		0CEA0BE715E2A7820000107C /* edition_000.pages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CEA0BE615E2A7820000107C /* edition_000.pages.plist */; };
 		0CEA0BEC15E2ABB60000107C /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CEA0BEB15E2ABB60000107C /* image.png */; };
 		0CEA0BF315E2B34D0000107C /* LLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA0BF215E2B34D0000107C /* LLTableViewCell.m */; };
+		0CF3E87715F560F4004C189E /* CasuaLlama.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0CF3E87615F560F4004C189E /* CasuaLlama.pdf */; };
+		0CFE982315F562A30000749A /* LLPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFE982015F562A30000749A /* LLPDFView.m */; };
+		0CFE982815F56C550000749A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFE982715F56C550000749A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,11 @@
 		0CEA0BEB15E2ABB60000107C /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = ../../../../Downloads/image.png; sourceTree = "<group>"; };
 		0CEA0BF115E2B34D0000107C /* LLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLTableViewCell.h; sourceTree = "<group>"; };
 		0CEA0BF215E2B34D0000107C /* LLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLTableViewCell.m; sourceTree = "<group>"; };
+		0CF3E87615F560F4004C189E /* CasuaLlama.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = CasuaLlama.pdf; sourceTree = "<group>"; };
+		0CFE981F15F562A30000749A /* LLPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLPDFView.h; sourceTree = "<group>"; };
+		0CFE982015F562A30000749A /* LLPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLPDFView.m; sourceTree = "<group>"; };
+		0CFE982615F567820000749A /* LLMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLMacro.h; sourceTree = "<group>"; };
+		0CFE982715F56C550000749A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,9 +57,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CCA9C4A15E0BC1800B334CA /* CoreGraphics.framework in Frameworks */,
+				0CFE982815F56C550000749A /* QuartzCore.framework in Frameworks */,
 				0CCA9C4615E0BC1800B334CA /* UIKit.framework in Frameworks */,
 				0CCA9C4815E0BC1800B334CA /* Foundation.framework in Frameworks */,
-				0CCA9C4A15E0BC1800B334CA /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,7 @@
 		0CCA9C4415E0BC1800B334CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CFE982715F56C550000749A /* QuartzCore.framework */,
 				0CCA9C4515E0BC1800B334CA /* UIKit.framework */,
 				0CCA9C4715E0BC1800B334CA /* Foundation.framework */,
 				0CCA9C4915E0BC1800B334CA /* CoreGraphics.framework */,
@@ -106,6 +116,7 @@
 				0CCA9C4D15E0BC1800B334CA /* CasuaLlama-Info.plist */,
 				0CCA9C4E15E0BC1800B334CA /* InfoPlist.strings */,
 				0CCA9C5115E0BC1800B334CA /* main.m */,
+				0CFE982615F567820000749A /* LLMacro.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -113,6 +124,7 @@
 		0CEA0BE115E2A6F80000107C /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0CF3E87615F560F4004C189E /* CasuaLlama.pdf */,
 				0CEA0BEB15E2ABB60000107C /* image.png */,
 				0CEA0BE415E2A7640000107C /* editions.data.plist */,
 				0CEA0BE615E2A7820000107C /* edition_000.pages.plist */,
@@ -132,6 +144,8 @@
 		0CEA0BE315E2A7160000107C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0CFE981F15F562A30000749A /* LLPDFView.h */,
+				0CFE982015F562A30000749A /* LLPDFView.m */,
 				0CEA0BD915E0D2BD0000107C /* LLViewController.h */,
 				0CEA0BDA15E0D2BD0000107C /* LLViewController.m */,
 				0CEA0BF115E2B34D0000107C /* LLTableViewCell.h */,
@@ -205,6 +219,7 @@
 				0CEA0BE515E2A7640000107C /* editions.data.plist in Resources */,
 				0CEA0BE715E2A7820000107C /* edition_000.pages.plist in Resources */,
 				0CEA0BEC15E2ABB60000107C /* image.png in Resources */,
+				0CF3E87715F560F4004C189E /* CasuaLlama.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +234,7 @@
 				0CCA9C5615E0BC1800B334CA /* LLAppDelegate.m in Sources */,
 				0CEA0BDB15E0D2BD0000107C /* LLViewController.m in Sources */,
 				0CEA0BF315E2B34D0000107C /* LLTableViewCell.m in Sources */,
+				0CFE982315F562A30000749A /* LLPDFView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

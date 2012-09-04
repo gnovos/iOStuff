@@ -8,12 +8,14 @@
 
 #import "LLViewController.h"
 #import "LLTableViewCell.h"
+#import "LLPDFView.h"
 
 @interface LLViewController ()
 
 @property (nonatomic, strong) NSArray* data;
 @property (nonatomic, weak) IBOutlet UITableView* table;
 @property (nonatomic, weak) IBOutlet UIWebView* web;
+@property (nonatomic, weak) IBOutlet LLPDFView* pdf;
 
 @property (nonatomic, strong) NSArray* pageData;
 @property (nonatomic, strong) NSMutableArray* pages;
@@ -23,11 +25,12 @@
 
 @implementation LLViewController
 
-- (void) didReceiveMemoryWarning { [super didReceiveMemoryWarning]; }
+LL_INIT_VIEW_CONTROLLER
 
-- (id) initWithNibName:(NSString*)nib bundle:(NSBundle*)bundle { if (self = [super initWithNibName:nib bundle:bundle]) { [self build]; } return self; }
-- (id) initWithCoder:(NSCoder*)decoder { if (self = [super initWithCoder:decoder]) { [self build]; } return self; }
-- (id) init { if (self = [super init]) { [self build]; } return self; }
+- (void) setup {
+    self.app = [LLAppDelegate instance];
+    [self configure];
+}
 - (void) configure {}
 
 - (NSArray*) autoload:(NSString*)type {
@@ -48,9 +51,17 @@
     return data;
 }
 
-- (void) build {
-    self.app = [LLAppDelegate instance];
-    [self configure];
+- (void) configureViews:(UIInterfaceOrientation)orientation {
+    CGSize size = self.view.bounds.size;
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        size.width /= 2.0f;
+    }
+
+    self.web.scrollView.scrollEnabled = NO;
+    self.web.scrollView.contentSize = size;
+
+    self.pdf.scrollEnabled = NO;
+    self.pdf.contentSize = size;
 }
 
 - (UIViewController*) page:(int)page {
@@ -90,10 +101,31 @@
         [self.view addSubview:self.book.view];
         [self.book didMoveToParentViewController:self];
         self.view.gestureRecognizers = self.book.gestureRecognizers;
-        
         [self reloadPages:self.interfaceOrientation];
     }
-    
+}
+
+- (void) loadContent:(NSString*)content ofType:(NSString*)type {
+    if ([@"pdf" isEqualToString:type]) {
+        NSArray* split = [content componentsSeparatedByString:@"|"];
+        NSString* pdf = [split objectAtIndex:0];
+        NSURL* url;
+        if ([pdf hasSuffix:@"pdf"]) {
+            url = [NSURL URLWithString:pdf];
+        } else {
+            url = [[NSBundle bundleForClass:[self class]] URLForResource:pdf withExtension:@"pdf"];
+        }
+        
+        NSUInteger page = split.count > 1 ? [[split lastObject] unsignedIntegerValue] : 0;        
+        [self.pdf loadPDF:url atPage:page];
+        [self.view bringSubviewToFront:self.pdf];
+    } else if ([@"url" isEqualToString:type]) {
+        [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:content]]];
+        [self.view bringSubviewToFront:self.web];
+    } else {
+        [self.web loadHTMLString:content baseURL:nil];
+        [self.view bringSubviewToFront:self.web];
+    }
 }
 
 - (UIViewController*) blank:(UIColor*)color {
@@ -119,18 +151,18 @@
     
     [self.pages removeAllObjects];
     [self.pageData enumerateObjectsUsingBlock:^(NSDictionary* def, NSUInteger idx, BOOL *stop) {
-        LLViewController* page = [self.storyboard instantiateViewControllerWithIdentifier:[def objectForKey:@"type"]];
-        [page loadView];
-        CGSize size = self.view.bounds.size;
-        if (!blanks) {
-            size.width /= 2.0f;
+        NSString* view = [def objectForKey:@"view"];
+        if (!view) {
+            view = @"page";
         }
-        page.web.scrollView.contentSize = size;
-        page.web.scrollView.directionalLockEnabled = YES;
-        [page.web loadHTMLString:[def objectForKey:@"content"] baseURL:nil];
+        LLViewController* page = [self.storyboard instantiateViewControllerWithIdentifier:view];
+        [page loadView];
+        [page configureViews:orientation];
+        [page loadContent:[def objectForKey:@"content"] ofType:[def objectForKey:@"type"]];
         [self.pages addObject:page];
         if (blanks) {
-            [self.pages addObject:[self blank:UIColor.orangeColor]];
+            //xxx transparent reverse page?
+            [self.pages addObject:[self blank:UIColor.blueColor]];
         }
     }];
     
