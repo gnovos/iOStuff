@@ -51,7 +51,8 @@
     if (note) { [self handle:[note.alertAction lowercaseString] info:note.userInfo]; }
         
     self.root.delegate = self;
-    return YES;
+    
+    return YES && [self checkpoint:@"launch complete"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application { }
@@ -90,8 +91,9 @@
     [nav setNavigationBarHidden:root animated:animated];
 }
 
-- (void) checkpoint:(NSString*)checkpoint {
+- (BOOL) checkpoint:(NSString*)checkpoint {
     [TestFlight passCheckpoint:checkpoint];
+    return YES;
 }
 
 
