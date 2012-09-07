@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>author</key>
+	<string>Mason</string>
+	<key>subtitle</key>
+	<string>subtitle</string>
+	<key>category</key>
+	<string>editions</string>
+	<key>cover</key>
+	<string>cover</string>
+	<key>assets</key>
+	<dict>
+		<key>cover</key>
+		<string>http://casuallama.org/wordpress/wp-content/uploads/2012/07/20120716-135328.jpg</string>
+	</dict>
+	<key>pages</key>
+	<array>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|1</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|2</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|3</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|4</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|5</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|6</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|7</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|8</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|9</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>CasuaLlama|10</string>
+			<key>type</key>
+			<string>pdf</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a web body! page 1&lt;br/&gt;&lt;a href=&quot;http://www.casuallama.org&quot;&gt;Click me!!&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;</string>
+			<key>type</key>
+			<string>html</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 2&lt;a href=&quot;tel:4152722917&quot;&gt;No, click me!!&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;</string>
+			<key>type</key>
+			<string>html</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 3 415-272-2917&lt;/body&gt;&lt;/html&gt;</string>
+			<key>type</key>
+			<string>html</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 4 mason@chipped.net&lt;/body&gt;&lt;/html&gt;</string>
+			<key>type</key>
+			<string>html</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 5&lt;/body&gt;&lt;/html&gt;</string>
+			<key>type</key>
+			<string>html</string>
+		</dict>
+		<dict>
+			<key>content</key>
+			<string>&lt;html&gt;&lt;body&gt;Hi, I&apos;m a body! page 6&lt;/body&gt;&lt;/html&gt;</string>
+			<key>type</key>
+			<string>html</string>
+		</dict>
+	</array>
+</dict>
+</plist>

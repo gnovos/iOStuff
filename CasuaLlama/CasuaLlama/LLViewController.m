@@ -116,7 +116,7 @@ LL_INIT_VIEW_CONTROLLER
             url = [[NSBundle bundleForClass:[self class]] URLForResource:pdf withExtension:@"pdf"];
         }
         
-        NSUInteger page = split.count > 1 ? [[split lastObject] unsignedIntegerValue] : 0;        
+        NSUInteger page = split.count > 1 ? [[split lastObject] intValue] : 0;
         [self.pdf loadPDF:url atPage:page];
         [self.view bringSubviewToFront:self.pdf];
     } else if ([@"url" isEqualToString:type]) {

@@ -12,7 +12,10 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <QuartzCore/QuartzCore.h>
+    #import <NewsstandKit/NewsstandKit.h>
 #endif
 
 #import "LLAppDelegate.h"
 #import "LLMacro.h"
+#import "TestFlight.h"
+#import "LLog.h"

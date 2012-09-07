@@ -10,10 +10,19 @@
 
 @implementation LLAppDelegate
 
-@synthesize settings;
-
 + (id) instance { return [[UIApplication sharedApplication] delegate]; }
 
+- (void) configure {
+    [TestFlight takeOff:@"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"];
+    
+    UIRemoteNotificationType notifications = (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeNewsstandContentAvailability);
+    [self.application registerForRemoteNotificationTypes:notifications];
+        
+    _settings = [NSUserDefaults standardUserDefaults];
+    [_settings synchronize];    
+}
+
+- (UIApplication*) application { return [UIApplication sharedApplication]; }
 - (NSURL*) documents { return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]; }
 - (UINavigationController*) root { return (UINavigationController*)self.window.rootViewController; }
 - (void) raise:(NSError*)error { [[NSException exceptionWithName:@"LLFatalException" reason:[error localizedDescription] userInfo:[error userInfo]] raise]; }
@@ -35,14 +44,12 @@
     }
 }
 
-- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
+- (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
+    [self configure];
+    
     UILocalNotification* note = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (note) { [self handle:[note.alertAction lowercaseString] info:note.userInfo]; }
-    
-    settings = [NSUserDefaults standardUserDefaults];
-    [settings synchronize];
-    
-    [self notify];
+        
     self.root.delegate = self;
     return YES;
 }
@@ -66,11 +73,11 @@
 }
 
 - (void) open:(NSURL*)url {
-    [[UIApplication sharedApplication] openURL:url];
+    [self.application openURL:url];
 }
 
 - (void) notify {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];    
+    [self.application cancelAllLocalNotifications];
 }
 
 - (void)navigationController:(UINavigationController*)nav willShowViewController:(UIViewController*)vc animated:(BOOL)animated {
