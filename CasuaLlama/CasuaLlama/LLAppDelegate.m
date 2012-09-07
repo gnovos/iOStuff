@@ -19,7 +19,7 @@
     [self.application registerForRemoteNotificationTypes:notifications];
         
     _settings = [NSUserDefaults standardUserDefaults];
-    [_settings synchronize];    
+    [_settings synchronize];
 }
 
 - (UIApplication*) application { return [UIApplication sharedApplication]; }
@@ -89,6 +89,11 @@
     BOOL root = [nav.viewControllers objectAtIndex:0] == vc;
     [nav setNavigationBarHidden:root animated:animated];
 }
+
+- (void) checkpoint:(NSString*)checkpoint {
+    [TestFlight passCheckpoint:checkpoint];
+}
+
 
 
 @end

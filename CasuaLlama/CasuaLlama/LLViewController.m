@@ -264,4 +264,12 @@ LL_INIT_VIEW_CONTROLLER
 }
 
 
+- (IBAction) feedback {
+    [TestFlight openFeedbackView];
+}
+
+- (void) sendFeedback:(NSString*)feedback {
+    [TestFlight submitFeedback:feedback];
+}
+
 @end
