@@ -1,0 +1,510 @@
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to InitialMigration (20120907224925)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "crypted_password" varchar(40), "salt" varchar(40), "remember_token" varchar(255), "remember_token_expires_at" datetime, "name" varchar(255), "email_address" varchar(255), "administrator" boolean DEFAULT 'f', "created_at" datetime, "updated_at" datetime, "state" varchar(255) DEFAULT 'inactive', "key_timestamp" datetime) 
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35m (0.2ms)[0m  CREATE INDEX "index_users_on_state" ON "users" ("state")
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120907224925')[0m
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.4ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_users_on_state')
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2012-09-07 15:52:09 -0700
+Processing by FrontController#index as HTML
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/dryml/taglibs/core.dryml in 0.02s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/buttons/buttons.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/buttons/create_button.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/buttons/delete-button.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/buttons/remote_method_button.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/buttons/transition_button.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/buttons/transition_link.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/buttons/update_button.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/cache/cache.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/cache/nested_cache.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/cache/swept_cache.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/cards/card.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/cards/cards.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/cards/search_card.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/editors/click_editor.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/editors/editors.dryml in 0.02s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/editors/live_editor.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/forms/error_messages.dryml in 0.06s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/forms/form.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/forms/formlet.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/forms/forms.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/forms/submit.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/a.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/aside.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/doctype.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/empty_tag.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/footer.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/header.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/html.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/if_ie.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/image.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/javascript.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/section.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/section_group.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/stylesheet.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/html/table.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/i18n/ht.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/i18n/human_collection_name.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/i18n/i18n.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/i18n/model_name_human.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/i18n/t.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/after_submit.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/check_many.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/collection_input.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/hidden_field.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/hot_input.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/input.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/input_all.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/input_for.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/input_for_date.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/input_for_enum_string.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/input_many.dryml in 0.05s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/inputs.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/name_one.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/or_cancel.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/select_input.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/select_many.dryml in 0.05s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/select_menu.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/select_one.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/sortable_input_many.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/inputs/sti_type_input.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/lists/collection.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/lists/empty_collection_message.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/lists/feckless_fieldset.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/lists/field_list.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/lists/field_list_v1.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/lists/labelled_item_list.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/lists/lists.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/lists/with_fields.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/pages/account.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/pages/account_disabled.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/pages/flash_message.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/pages/forgot_password.dryml in 0.02s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/pages/login.dryml in 0.05s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/pages/not_found_page.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/pages/page_nav.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/pages/pages.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/pages/permission_denied_page.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/plus/collection_preview.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/plus/filter_menu.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/plus/gravatar.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/plus/live_search.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/plus/plus.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/plus/search_filter.dryml in 0.04s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/plus/sortable_collection.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/plus/table_plus.dryml in 0.02s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/a_or_an.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/collection_name.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/comma_list.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/count.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/links_for_collection.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/name.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/nil_view.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/record_flags.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/type_name.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/view.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/view_for.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/views.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/views/you.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_rapid/taglibs/hobo_rapid.dryml in 0.69s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery/taglibs/hobo_jquery.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/accordion-list.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/accordion.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/accordion_collection.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/autocomplete.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/combobox.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/datepicker.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/dialog_box.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/name_one.dryml in 0.00s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/tabs.dryml in 0.01s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/toggle.dryml in 0.03s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_jquery_ui/taglibs/hobo_jquery_ui.dryml in 0.08s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_clean/taglibs/nav.dryml in 0.03s
+  DRYML: Compiled /Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo_clean/taglibs/hobo_clean.dryml in 0.06s
+  DRYML: Compiled app/views/taglibs/auto/rapid/cards.dryml in 0.01s
+  DRYML: Compiled app/views/taglibs/auto/rapid/pages.dryml in 0.11s
+  DRYML: Compiled app/views/taglibs/auto/rapid/forms.dryml in 0.03s
+  DRYML: Compiled app/views/taglibs/application.dryml in 0.00s
+  DRYML: Compiled app/views/taglibs/front_site.dryml in 0.99s
+  DRYML: Compiled app/views/front/index.dryml in 1.04s
+Compiled application.css  (0ms)  (pid 40810)
+Compiled feckless-fieldset.css  (0ms)  (pid 40810)
+Compiled hobo-rapid.css  (0ms)  (pid 40810)
+Compiled hobo_rapid.css  (29ms)  (pid 40810)
+Compiled hobo_jquery.css  (0ms)  (pid 40810)
+Compiled combobox.css  (0ms)  (pid 40810)
+Compiled hobo_jquery_ui.css  (14ms)  (pid 40810)
+Compiled jquery-ui/redmond.css  (400ms)  (pid 40810)
+Compiled reset.css  (0ms)  (pid 40810)
+Compiled clean.css  (50ms)  (pid 40810)
+Compiled rapid-ui.css  (0ms)  (pid 40810)
+Compiled hobo_clean.css  (90ms)  (pid 40810)
+Compiled front.css  (756ms)  (pid 40810)
+Compiled jquery.js  (4ms)  (pid 40810)
+Compiled jquery_ujs.js  (46ms)  (pid 40810)
+Compiled jquery-ui.js  (2ms)  (pid 40810)
+Compiled application.js  (156ms)  (pid 40810)
+Compiled hobo_rapid.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-a.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-before-unload.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-click-editor.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-delete-button.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-filter-menu.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-form.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-formlet.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-hot-input.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-input-many.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-live-editor.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-live-search.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-search-results.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-select-many.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-sortable-collection.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-sortable-input-many.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq-spinner.js  (0ms)  (pid 40810)
+Compiled hobo-jquery/hjq.js  (0ms)  (pid 40810)
+Compiled jquery.form.js  (0ms)  (pid 40810)
+Compiled jquery.getPath.js  (0ms)  (pid 40810)
+Compiled hobo_jquery.js  (625ms)  (pid 40810)
+Compiled combobox.js  (0ms)  (pid 40810)
+Compiled hobo-jquery-ui/hjq-accordion.js  (0ms)  (pid 40810)
+Compiled hobo-jquery-ui/hjq-autocomplete.js  (0ms)  (pid 40810)
+Compiled hobo-jquery-ui/hjq-combobox.js  (0ms)  (pid 40810)
+Compiled hobo-jquery-ui/hjq-datepicker.js  (0ms)  (pid 40810)
+Compiled hobo-jquery-ui/hjq-dialog.js  (0ms)  (pid 40810)
+Compiled hobo-jquery-ui/hjq-tabs.js  (0ms)  (pid 40810)
+Compiled hobo-jquery-ui/hjq-toggle.js  (0ms)  (pid 40810)
+Compiled hobo_jquery_ui.js  (241ms)  (pid 40810)
+Compiled hobo_clean.js  (0ms)  (pid 40810)
+Compiled front.js  (1146ms)  (pid 40810)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users" LIMIT 30[0m
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM "users" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "users" [0m
+  Rendered front/index.dryml (3356.4ms)
+Completed 200 OK in 3370ms (Views: 3367.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /front.css - 200 OK (24ms)
+
+
+Started GET "/assets/feckless-fieldset.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /feckless-fieldset.css - 200 OK (4ms)
+
+
+Started GET "/assets/hobo-rapid.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-rapid.css - 200 OK (4ms)
+
+
+Started GET "/assets/hobo_rapid.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo_rapid.css - 200 OK (8ms)
+
+
+Started GET "/assets/hobo_jquery.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo_jquery.css - 200 OK (4ms)
+
+
+Started GET "/assets/combobox.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /combobox.css - 200 OK (4ms)
+
+
+Started GET "/assets/hobo_jquery_ui.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo_jquery_ui.css - 200 OK (7ms)
+
+
+Started GET "/assets/jquery-ui/redmond.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /jquery-ui/redmond.css - 200 OK (3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /application.css - 200 OK (2ms)
+
+
+Started GET "/assets/reset.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /reset.css - 200 OK (6ms)
+
+
+Started GET "/assets/clean.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /clean.css - 200 OK (4ms)
+
+
+Started GET "/assets/rapid-ui.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /rapid-ui.css - 200 OK (4ms)
+
+
+Started GET "/assets/hobo_clean.css?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo_clean.css - 200 OK (6ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /jquery.js - 200 OK (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /jquery_ujs.js - 200 OK (5ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /jquery-ui.js - 200 OK (26ms)
+
+
+Started GET "/assets/hobo_rapid.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo_rapid.js - 200 OK (6ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-before-unload.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-before-unload.js - 200 OK (4ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-a.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-a.js - 200 OK (6ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /application.js - 200 OK (68ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-click-editor.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-click-editor.js - 200 OK (4ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-filter-menu.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-filter-menu.js - 200 OK (10ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-form.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-form.js - 200 OK (16ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-delete-button.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-delete-button.js - 200 OK (6ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-formlet.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-formlet.js - 200 OK (9ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-hot-input.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-hot-input.js - 200 OK (12ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-live-editor.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-live-editor.js - 200 OK (14ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-live-search.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-live-search.js - 200 OK (5ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-search-results.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-search-results.js - 200 OK (6ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-input-many.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-input-many.js - 200 OK (6ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-sortable-input-many.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-sortable-input-many.js - 200 OK (9ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-spinner.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-spinner.js - 200 OK (6ms)
+
+
+Started GET "/assets/hobo-jquery/hjq.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq.js - 200 OK (8ms)
+
+
+Started GET "/assets/jquery.form.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /jquery.form.js - 200 OK (4ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-select-many.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-select-many.js - 200 OK (3ms)
+
+
+Started GET "/assets/hobo-jquery/hjq-sortable-collection.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery/hjq-sortable-collection.js - 200 OK (3ms)
+
+
+Started GET "/assets/jquery.getPath.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /jquery.getPath.js - 200 OK (7ms)
+
+
+Started GET "/assets/hobo_jquery.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo_jquery.js - 200 OK (72ms)
+
+
+Started GET "/assets/hobo-jquery-ui/hjq-autocomplete.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery-ui/hjq-autocomplete.js - 200 OK (4ms)
+
+
+Started GET "/assets/hobo-jquery-ui/hjq-combobox.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery-ui/hjq-combobox.js - 200 OK (4ms)
+
+
+Started GET "/assets/combobox.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /combobox.js - 200 OK (3ms)
+
+
+Started GET "/assets/hobo-jquery-ui/hjq-accordion.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery-ui/hjq-accordion.js - 200 OK (5ms)
+
+
+Started GET "/assets/hobo-jquery-ui/hjq-datepicker.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery-ui/hjq-datepicker.js - 200 OK (3ms)
+
+
+Started GET "/assets/hobo-jquery-ui/hjq-dialog.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery-ui/hjq-dialog.js - 200 OK (3ms)
+
+
+Started GET "/assets/hobo-jquery-ui/hjq-tabs.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery-ui/hjq-tabs.js - 200 OK (2ms)
+
+
+Started GET "/assets/hobo-jquery-ui/hjq-toggle.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo-jquery-ui/hjq-toggle.js - 200 OK (3ms)
+
+
+Started GET "/assets/hobo_clean.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo_clean.js - 200 OK (3ms)
+
+
+Started GET "/assets/front.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /front.js - 200 OK (34ms)
+
+
+Started GET "/assets/hobo_jquery_ui.js?body=1" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /hobo_jquery_ui.js - 200 OK (12ms)
+
+
+Started GET "/assets/300-ACD3E6-fff.png" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /300-ACD3E6-fff.png - 200 OK (12ms)
+
+
+Started GET "/assets/50-ACD3E6-fff.png" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /50-ACD3E6-fff.png - 200 OK (63ms)
+
+
+Started GET "/assets/spinner.gif" for 127.0.0.1 at 2012-09-07 15:52:13 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /spinner.gif - 200 OK (9ms)
+
+
+Started GET "/assets/101-3B5F87-ACD3E6.png" for 127.0.0.1 at 2012-09-07 15:52:14 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /101-3B5F87-ACD3E6.png - 200 OK (7ms)
+
+
+Started GET "/assets/30-DBE1E5-FCFEF5.png" for 127.0.0.1 at 2012-09-07 15:52:14 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /30-DBE1E5-FCFEF5.png - 200 OK (8ms)
+
+
+Started GET "/assets/jquery-ui/redmond/ui-icons_469bdd_256x240.png" for 127.0.0.1 at 2012-09-07 15:52:14 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /jquery-ui/redmond/ui-icons_469bdd_256x240.png - 200 OK (14ms)
+
+
+Started GET "/assets/jquery-ui/redmond/ui-bg_inset-hard_100_fcfdfd_1x100.png" for 127.0.0.1 at 2012-09-07 15:52:14 -0700
+RailsDevTweaks: Skipping ActionDispatch::Reloader hooks for this request.
+Served asset /jquery-ui/redmond/ui-bg_inset-hard_100_fcfdfd_1x100.png - 200 OK (6ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2012-09-07 15:52:17 -0700
+Processing by UsersController#create as HTML
+  Parameters: {"page_path"=>"/", "authenticity_token"=>"qpyDDNsiyP/qDnaVw+REvbP6kwwEYa4sps6vZZN5LKc="}
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mUser Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."name" IS NULL LIMIT 1[0m
+  [1m[35mUser Exists (0.0ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email_address" IS NULL LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+
+***** Debugger requested, but was not available (ensure ruby-debug is listed in Gemfile/installed as gem): Start server with --debugger to enable *****
+
+Could not log "process_action.action_controller" event. NoMethodError: private method `status_code' called for #<ActionDispatch::ExceptionWrapper:0x007f95a8486fa8>
+
+Hobo::Error (new style url  does not match old style url /users/. obj: #<User id: nil, crypted_password: nil, salt: nil, remember_token: nil, remember_token_expires_at: nil, name: nil, email_address: nil, administrator: false, created_at: nil, updated_at: nil, state: "inactive", key_timestamp: nil>.  args: [].  backtrace: ["/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo/lib/hobo/controller/model.rb:411:in `destination_after_submit'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo/lib/hobo/controller/model.rb:607:in `create_response'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/bundler/gems/hobo-713bb0c2cdc6/hobo/lib/hobo/controller/model.rb:552:in `hobo_create'", "/Users/freemason/workspace/iOStuff/flowt/app/controllers/users_controller.rb:11:in `create'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_controller/metal/implicit_render.rb:4:in `send_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/abstract_controller/base.rb:167:in `process_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_controller/metal/rendering.rb:10:in `process_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/abstract_controller/callbacks.rb:18:in `block in process_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/callbacks.rb:458:in `_run__1424216394283916903__process_action__3028612501967435787__callbacks'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/callbacks.rb:405:in `__run_callback'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/callbacks.rb:81:in `run_callbacks'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/abstract_controller/callbacks.rb:17:in `process_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_controller/metal/rescue.rb:29:in `process_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/notifications.rb:123:in `block in instrument'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/notifications/instrumenter.rb:20:in `instrument'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/notifications.rb:123:in `instrument'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_controller/metal/instrumentation.rb:29:in `process_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_controller/metal/params_wrapper.rb:207:in `process_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activerecord-3.2.7/lib/active_record/railties/controller_runtime.rb:18:in `process_action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/abstract_controller/base.rb:121:in `process'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/abstract_controller/rendering.rb:45:in `process'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_controller/metal.rb:203:in `dispatch'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_controller/metal.rb:246:in `block in action'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/routing/route_set.rb:73:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/routing/route_set.rb:73:in `dispatch'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/routing/route_set.rb:36:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/journey-1.0.4/lib/journey/router.rb:68:in `block in call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/journey-1.0.4/lib/journey/router.rb:56:in `each'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/journey-1.0.4/lib/journey/router.rb:56:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/routing/route_set.rb:600:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/etag.rb:23:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/conditionalget.rb:35:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/head.rb:14:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/params_parser.rb:21:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/flash.rb:242:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/session/abstract/id.rb:205:in `context'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/session/abstract/id.rb:200:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/cookies.rb:338:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activerecord-3.2.7/lib/active_record/query_cache.rb:64:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activerecord-3.2.7/lib/active_record/connection_adapters/abstract/connection_pool.rb:473:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/callbacks.rb:405:in `_run__1614513319660529163__call__1766089032828780778__callbacks'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/callbacks.rb:405:in `__run_callback'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/callbacks.rb:385:in `_run_call_callbacks'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/callbacks.rb:81:in `run_callbacks'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/callbacks.rb:27:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/rails-dev-tweaks-0.6.1/lib/rails_dev_tweaks/granular_autoload/middleware.rb:34:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/remote_ip.rb:31:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/railties-3.2.7/lib/rails/rack/logger.rb:26:in `call_app'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/railties-3.2.7/lib/rails/rack/logger.rb:16:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/request_id.rb:22:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/methodoverride.rb:21:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/runtime.rb:17:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/activesupport-3.2.7/lib/active_support/cache/strategy/local_cache.rb:72:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/lock.rb:15:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/static.rb:62:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/railties-3.2.7/lib/rails/engine.rb:479:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/railties-3.2.7/lib/rails/application.rb:220:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/content_length.rb:14:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/railties-3.2.7/lib/rails/rack/log_tailer.rb:17:in `call'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/thin-1.4.1/lib/thin/connection.rb:80:in `block in pre_process'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/thin-1.4.1/lib/thin/connection.rb:78:in `catch'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/thin-1.4.1/lib/thin/connection.rb:78:in `pre_process'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/thin-1.4.1/lib/thin/connection.rb:53:in `process'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/thin-1.4.1/lib/thin/connection.rb:38:in `receive_data'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/eventmachine-0.12.10/lib/eventmachine.rb:256:in `run_machine'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/eventmachine-0.12.10/lib/eventmachine.rb:256:in `run'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/thin-1.4.1/lib/thin/backends/base.rb:63:in `start'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@flowt/gems/thin-1.4.1/lib/thin/server.rb:159:in `start'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/handler/thin.rb:13:in `run'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/rack-1.4.1/lib/rack/server.rb:265:in `start'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/railties-3.2.7/lib/rails/commands/server.rb:70:in `start'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/railties-3.2.7/lib/rails/commands.rb:55:in `block in <top (required)>'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/railties-3.2.7/lib/rails/commands.rb:50:in `tap'", "/Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/railties-3.2.7/lib/rails/commands.rb:50:in `<top (required)>'", "script/rails:6:in `require'", "script/rails:6:in `<main>'"]):
+  app/controllers/users_controller.rb:11:in `create'
+
+
+  Rendered /Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.8ms)
+  Rendered /Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+  Rendered /Users/freemason/.rvm/gems/ruby-1.9.3-p194@global/gems/actionpack-3.2.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (20.6ms)
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to InitialMigration (20120907224925)
+  [1m[35m (0.4ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_info('index_users_on_state')[0m
+Connecting to database specified by database.yml
