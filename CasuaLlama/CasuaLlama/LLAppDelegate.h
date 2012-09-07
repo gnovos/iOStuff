@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LLLibrary.h"
 
 @interface LLAppDelegate : UIResponder <UIApplicationDelegate, UINavigationControllerDelegate>
 
 + (LLAppDelegate*) instance;
-
-@property (nonatomic, strong) IBOutlet UIWindow* window;
-@property (nonatomic, strong) NSUserDefaults* settings;
 
 - (NSURL*) documents;
 
@@ -21,7 +19,15 @@
 - (void) raise:(NSError*)error;
 - (void) open:(NSURL*)url;
 
+- (UIStoryboard*) storyboard;
+- (UIViewController*) root;
+- (UINavigationController*) nav;
+- (UIApplication*) application;
+
 - (void) notify;
 
+@property (nonatomic, strong) IBOutlet UIWindow* window;
+@property (nonatomic, strong) NSUserDefaults* settings;
+@property (nonatomic, strong) LLLibrary* library;
 
 @end

@@ -19,7 +19,7 @@
 }
 
 - (void) setValue:(id)value forUndefinedKey:(NSString*)key {
-    //xxx NSLog(@"Undefined: %@", key);
+    vlog(@"KVC Undefined Key: %@", key);
 }
 
 - (void) setTitle:(NSString*)title { self.textLabel.text = title; }

@@ -12,19 +12,31 @@
 
 + (id) instance { return [[UIApplication sharedApplication] delegate]; }
 
-- (void) configure {
+- (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
     [TestFlight takeOff:@"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"];
     
-    UIRemoteNotificationType notifications = (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeNewsstandContentAvailability);
-    [self.application registerForRemoteNotificationTypes:notifications];
-        
     _settings = [NSUserDefaults standardUserDefaults];
     [_settings synchronize];
+    
+    UIRemoteNotificationType types = (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeNewsstandContentAvailability);
+    [self.application registerForRemoteNotificationTypes:types];
+    
+    self.library = [[LLLibrary alloc] init];
+        
+    UILocalNotification* note = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (note) { [self handle:[note.alertAction lowercaseString] info:note.userInfo]; }
+    
+    self.nav.delegate = self;
+    
+    return YES && [self checkpoint:@"launch complete"];
 }
+
+- (UIStoryboard*) storyboard { return self.root.storyboard; }
+- (UIViewController*) root { return self.window.rootViewController; }
+- (UINavigationController*) nav { return (UINavigationController*)self.root; }
 
 - (UIApplication*) application { return [UIApplication sharedApplication]; }
 - (NSURL*) documents { return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]; }
-- (UINavigationController*) root { return (UINavigationController*)self.window.rootViewController; }
 - (void) raise:(NSError*)error { [[NSException exceptionWithName:@"LLFatalException" reason:[error localizedDescription] userInfo:[error userInfo]] raise]; }
 
 - (void) alert:(NSString*)action message:(NSString*)message {
@@ -42,17 +54,6 @@
     } else {
         [self handle:[note.alertAction lowercaseString] info:note.userInfo];
     }
-}
-
-- (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
-    [self configure];
-    
-    UILocalNotification* note = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (note) { [self handle:[note.alertAction lowercaseString] info:note.userInfo]; }
-        
-    self.root.delegate = self;
-    
-    return YES && [self checkpoint:@"launch complete"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application { }

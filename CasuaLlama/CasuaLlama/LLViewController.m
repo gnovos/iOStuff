@@ -29,6 +29,9 @@ LL_INIT_VIEW_CONTROLLER
 
 - (void) setup {
     self.app = [LLAppDelegate instance];
+    self.app.application.statusBarHidden = NO;
+    self.app.application.statusBarStyle = UIStatusBarStyleBlackTranslucent;
+
     [self configure];
 }
 - (void) configure {}
@@ -271,5 +274,14 @@ LL_INIT_VIEW_CONTROLLER
 - (void) sendFeedback:(NSString*)feedback {
     [TestFlight submitFeedback:feedback];
 }
+
+- (void) fade:(NSString*)to duration:(NSTimeInterval)duration {
+    UIViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:to];
+        
+    [UIView transitionFromView:self.view toView:vc.view duration:duration options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
+        [self.app.nav setViewControllers:@[ vc ] animated:NO];
+    }];
+}
+
 
 @end

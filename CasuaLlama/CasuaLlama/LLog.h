@@ -12,7 +12,7 @@
 
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
-#define tlog(fmt, ...) TFLog(@"%s [%d] " fmt, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#define tlog(fmt, ...) TFLog(@"%s [%d] " fmt, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
 #define loginfo(fmt, ...)    DDLogInfo   (@"%s [%d] " fmt, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #define logwarn(fmt, ...)    DDLogWarn   (@"%s [%d] " fmt, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
@@ -20,10 +20,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #define logverbose(fmt, ...) DDLogVerbose(@"%s [%d] " fmt, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
 #ifdef DEBUG
-#	define dlog(fmt, ...) loginfo   (fmt, ##__VA_ARGS__)
-#   define vlog(fmt, ...) logverbose(fmt, ##__VA_ARGS__)
-#   define wlog(fmt, ...) logwarn   (fmt, ##__VA_ARGS__)
-#   define elog(err)      if(err)   logerror(@"[ERROR] %@", err)
+#	define dlog(fmt, ...) loginfo   (fmt, ##__VA_ARGS__);
+#   define vlog(fmt, ...) logverbose(fmt, ##__VA_ARGS__);
+#   define wlog(fmt, ...) logwarn   (fmt, ##__VA_ARGS__);
+#   define elog(err)      if(err)   logerror(@"[ERROR] %@", err);
 
 #   define ulog(fmt, ...) \
 UIAlertView* alert = [[UIAlertView alloc] \
@@ -35,23 +35,23 @@ otherButtonTitles:nil]; \
 [alert show]; \
 
 #else
-#   define vlog(fmt, ...) tlog(fmt, ##__VA_ARGS__)
-#   define wlog(fmt, ...) tlog(fmt, ##__VA_ARGS__)
-#   define elog(err)      tlog(@"[ERROR] %@", err)
-#   define dlog(fmt, ...) tlog(fmt, ##__VA_ARGS__)
-#   define ulog(fmt, ...) tlog(fmt, ##__VA_ARGS__)
+#   define vlog(fmt, ...) tlog(fmt, ##__VA_ARGS__);
+#   define wlog(fmt, ...) tlog(fmt, ##__VA_ARGS__);
+#   define elog(err)      tlog(@"[ERROR] %@", err);
+#   define dlog(fmt, ...) tlog(fmt, ##__VA_ARGS__);
+#   define ulog(fmt, ...) tlog(fmt, ##__VA_ARGS__);
 #endif
 
-#define dlogine      dlog(@"*")
+#define dlogline      dlog(@"*");
 
-#define dlogobj(o)   dlog(#o @"=%@", o)
-#define dlogptr(p)   dlog(#p @"=%p", p)
-#define dlogint(i)   dlog(#i @"=%d", i)
-#define dlogfloat(f) dlog(#f @"=%f", f)
+#define dlogobj(o)   dlog(#o @"=%@", o);
+#define dlogptr(p)   dlog(#p @"=%p", p);
+#define dlogint(i)   dlog(#i @"=%d", i);
+#define dlogfloat(f) dlog(#f @"=%f", f);
 
-#define dlogrect(r)  dlog(#r @"={{%f,%f},{%f,%f}}", r.origin.x, r.origin.y, r.size.width, r.size.height)
-#define dlogsize(s)  dlog(#s @"={%f,%f}", s.width, s.height)
-#define dlogpoint(p) dlog(#p @"={%f,%f}", p.x, p.y)
+#define dlogrect(r)  dlog(#r @"={{%f,%f},{%f,%f}}", r.origin.x, r.origin.y, r.size.width, r.size.height);
+#define dlogsize(s)  dlog(#s @"={%f,%f}", s.width, s.height);
+#define dlogpoint(p) dlog(#p @"={%f,%f}", p.x, p.y);
 
 
 @interface LLog : NSObject

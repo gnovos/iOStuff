@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString* oid;
 
 - (void) configure;
+- (void) fade:(NSString*)to duration:(NSTimeInterval)duration;
 
 @end

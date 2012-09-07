@@ -12,6 +12,8 @@
 
 + (id) instance;
 
+- (void) update:(void(^)(void))completion;
+
 @property (nonatomic, copy) void(^handler)(NKIssue* issue, NSString* asset, double progress);
 
 @end

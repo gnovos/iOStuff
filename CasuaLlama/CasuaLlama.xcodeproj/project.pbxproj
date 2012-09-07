@@ -18,6 +18,7 @@
 		0C45B8F415FA6F36000C8583 /* LLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C45B8F315FA6F36000C8583 /* LLog.m */; };
 		0C45B8F715FA71C9000C8583 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C45B8F515FA71C9000C8583 /* libTestFlight.a */; };
 		0C45B8FA15FA7541000C8583 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C45B8F915FA7541000C8583 /* libz.dylib */; };
+		0C45B8FD15FA7F06000C8583 /* LLSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C45B8FC15FA7F06000C8583 /* LLSplashViewController.m */; };
 		0CCA9C4615E0BC1800B334CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCA9C4515E0BC1800B334CA /* UIKit.framework */; };
 		0CCA9C4815E0BC1800B334CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCA9C4715E0BC1800B334CA /* Foundation.framework */; };
 		0CCA9C4A15E0BC1800B334CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCA9C4915E0BC1800B334CA /* CoreGraphics.framework */; };
@@ -59,6 +60,8 @@
 		0C45B8F515FA71C9000C8583 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		0C45B8F615FA71C9000C8583 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		0C45B8F915FA7541000C8583 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		0C45B8FB15FA7F06000C8583 /* LLSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSplashViewController.h; sourceTree = "<group>"; };
+		0C45B8FC15FA7F06000C8583 /* LLSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSplashViewController.m; sourceTree = "<group>"; };
 		0CCA9C4115E0BC1800B334CA /* CasuaLlama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CasuaLlama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CCA9C4515E0BC1800B334CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0CCA9C4715E0BC1800B334CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -230,6 +233,8 @@
 				0CEA0BDA15E0D2BD0000107C /* LLViewController.m */,
 				0CEA0BF115E2B34D0000107C /* LLTableViewCell.h */,
 				0CEA0BF215E2B34D0000107C /* LLTableViewCell.m */,
+				0C45B8FB15FA7F06000C8583 /* LLSplashViewController.h */,
+				0C45B8FC15FA7F06000C8583 /* LLSplashViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -339,6 +344,7 @@
 				0C45B8EF15FA65E7000C8583 /* ContextFilterLogFormatter.m in Sources */,
 				0C45B8F015FA65E7000C8583 /* DispatchQueueLogFormatter.m in Sources */,
 				0C45B8F415FA6F36000C8583 /* LLog.m in Sources */,
+				0C45B8FD15FA7F06000C8583 /* LLSplashViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

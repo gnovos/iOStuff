@@ -25,10 +25,12 @@ LL_INIT_SINGELTON
     return self;
 }
 
-- (void) update {
+- (void) update:(void(^)(void))completion {
     [library.downloadingAssets enumerateObjectsUsingBlock:^(NKAssetDownload* asset, NSUInteger idx, BOOL *stop) {
         [asset downloadWithDelegate:self];
     }];
+    
+    dispatch_queue_t q = dispatch_get_current_queue();
     
     //xxx do this instead of MK or somesuch?
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -47,6 +49,9 @@ LL_INIT_SINGELTON
                 [self download:nil from:content forIssue:issue];                
             }
         }];
+        if (completion) {
+            dispatch_async(q, completion);
+        }
     });
 }
 
