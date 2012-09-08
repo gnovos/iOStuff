@@ -6,9 +6,129 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Issue"><ht key="issue.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
     <nav-item with="&User"><ht key="user.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
+
+
+
+
+<!-- ====== Issue Pages ====== -->
+
+<def tag="index-page" for="Issue">
+  <page merge title="#{ht 'issue.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page issue" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="issue.index.heading">
+            <model-name-human model="&model"/>
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="issue.collection.count" count="&collection_count">
+            <count summary/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="issue.actions.new">New Issue</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Issue">
+  <page merge title="#{ht 'issue.new.title', :default=>[' New Issue'] }">
+    <body: class="new-page issue" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="issue.new.heading">
+            New Issue
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'issue.actions.create', :default=>['Create Issue']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Issue">
+  <page merge title="#{ht 'issue.show.title', :default=>['Issue'], :name => name(:no_wrapper => true) }">
+
+    <body: class="show-page issue" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="issue.show.heading" name="#{name(:no_wrapper => true)}">
+                Issue <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="issue.actions.edit" name="#{name(:no_wrapper => true)}">
+                Edit Issue
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Issue">
+  <page merge title="#{ht 'issue.edit.title', :default=>['Edit Issue'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page issue" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="issue.edit.heading" name="#{name(:no_wrapper => true)}">
+            Edit Issue
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'issue.actions.delete', :default=>['Remove This Issue']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
 
 
 

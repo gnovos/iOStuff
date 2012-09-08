@@ -13,7 +13,8 @@ module Flowt
   class Application < Rails::Application
     config.assets.precompile += %w(admin.css admin.js)
     
-  config.hobo.dryml_only_templates = true
+    config.hobo.dryml_only_templates = true
+    config.hobo.dont_emit_deprecated_routes = true
 
     
     config.generators do |g|

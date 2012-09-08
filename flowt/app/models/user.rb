@@ -73,5 +73,9 @@ class User < ActiveRecord::Base
   def view_permitted?(field)
     true
   end
-  # attr_accessible :title, :body
+  attr_accessible :name, :email_address, :password, :password_confirmation
+
+  def validate_password
+    errors.add(:password, I18n.t("hobo.messages.validate_password", :default => "must be at least 6 characters long")) if new_password_required? && (password.nil? || password.length < 6)
+  end
 end
