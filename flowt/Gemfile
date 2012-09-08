@@ -39,12 +39,14 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 gem 'debugger'
-#gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'rr'
+gem 'machinist'
+gem 'factory_girl'
+gem 'factory_girl_rails'
 
 gem 'hobo', :git => 'git://github.com/tablatom/hobo'
 gem 'rspec-rails', '>= 2.5.0', :group => [:test, :development]
 gem 'shoulda', :group => :test
-gem 'factory_girl', :group => :test
 gem 'hobo_rapid', :git => 'git://github.com/tablatom/hobo'
 gem 'hobo_jquery', :git => 'git://github.com/tablatom/hobo'
 gem 'hobo_jquery_ui', :git => 'git://github.com/tablatom/hobo'

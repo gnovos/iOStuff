@@ -5,10 +5,6 @@
 Flowt::Application.routes.draw do
 
 
-  # Resource routes for controller issues
-  resources :issues
-
-
   # Resource routes for controller users
   resources :users, :only => [:edit, :show, :create, :update, :destroy] do
     collection do
