@@ -5,6 +5,18 @@
 Flowt::Application.routes.draw do
 
 
+  # Resource routes for controller edition_assets
+  resources :edition_assets
+
+
+  # Resource routes for controller edition_pages
+  resources :edition_pages
+
+
+  # Resource routes for controller editions
+  resources :editions
+
+
   # Resource routes for controller users
   resources :users, :only => [:edit, :show, :create, :update, :destroy] do
     collection do

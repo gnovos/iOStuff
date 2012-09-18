@@ -6,6 +6,9 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Edition"><ht key="edition.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&EditionAsset"><ht key="edition_asset.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&EditionPage"><ht key="edition_page.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
     <nav-item with="&User"><ht key="user.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
@@ -88,7 +91,7 @@
               </ht>
             </h2>
 
-            <record-flags fields="" param/>
+            <record-flags fields="administrator" param/>
 
             <a action="edit" if="&can_edit?" param="edit-link">
               <ht key="user.actions.edit" name="#{name(:no_wrapper => true)}">
@@ -98,6 +101,7 @@
           </header>
 
           <section param="content-body">
+            <field-list fields="email_address, state" param/>
           </section>
     </content:>
 

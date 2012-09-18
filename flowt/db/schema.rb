@@ -11,7 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907224925) do
+ActiveRecord::Schema.define(:version => 20120908011706) do
+
+  create_table "edition_assets", :force => true do |t|
+    t.string   "identifier"
+    t.string   "url"
+    t.integer  "edition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "edition_pages", :force => true do |t|
+    t.integer  "index"
+    t.string   "content"
+    t.string   "type"
+    t.integer  "edition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "editions", :force => true do |t|
+    t.string   "title"
+    t.string   "subtitle"
+    t.date     "date"
+    t.string   "identifier"
+    t.string   "author"
+    t.string   "cover"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "crypted_password",          :limit => 40

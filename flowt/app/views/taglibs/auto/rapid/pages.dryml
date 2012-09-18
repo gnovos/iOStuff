@@ -6,9 +6,370 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Edition"><ht key="edition.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&EditionAsset"><ht key="edition_asset.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&EditionPage"><ht key="edition_page.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
     <nav-item with="&User"><ht key="user.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
+
+
+
+
+<!-- ====== EditionAsset Pages ====== -->
+
+<def tag="index-page" for="EditionAsset">
+  <page merge title="#{ht 'edition_asset.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page edition-asset" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="edition_asset.index.heading">
+            <model-name-human model="&model"/>
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="edition_asset.collection.count" count="&collection_count">
+            <count summary/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="edition_asset.actions.new">New Edition asset</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="EditionAsset">
+  <page merge title="#{ht 'edition_asset.new.title', :default=>[' New Edition asset'] }">
+    <body: class="new-page edition-asset" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="edition_asset.new.heading">
+            New Edition asset
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'edition_asset.actions.create', :default=>['Create Edition asset']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="EditionAsset">
+  <page merge title="#{ht 'edition_asset.show.title', :default=>['Edition asset'], :name => name(:no_wrapper => true) }">
+
+    <body: class="show-page edition-asset" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="edition_asset.show.heading" name="#{name(:no_wrapper => true)}">
+                Edition asset <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="edition_asset.actions.edit" name="#{name(:no_wrapper => true)}">
+                Edit Edition asset
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="EditionAsset">
+  <page merge title="#{ht 'edition_asset.edit.title', :default=>['Edit Edition asset'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page edition-asset" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="edition_asset.edit.heading" name="#{name(:no_wrapper => true)}">
+            Edit Edition asset
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'edition_asset.actions.delete', :default=>['Remove This Edition asset']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
+
+
+
+
+<!-- ====== EditionPage Pages ====== -->
+
+<def tag="index-page" for="EditionPage">
+  <page merge title="#{ht 'edition_page.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page edition-page" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="edition_page.index.heading">
+            <model-name-human model="&model"/>
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="edition_page.collection.count" count="&collection_count">
+            <count summary/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="edition_page.actions.new">New Edition page</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="EditionPage">
+  <page merge title="#{ht 'edition_page.new.title', :default=>[' New Edition page'] }">
+    <body: class="new-page edition-page" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="edition_page.new.heading">
+            New Edition page
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'edition_page.actions.create', :default=>['Create Edition page']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="EditionPage">
+  <page merge title="#{ht 'edition_page.show.title', :default=>['Edition page'], :name => name(:no_wrapper => true) }">
+
+    <body: class="show-page edition-page" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="edition_page.show.heading" name="#{name(:no_wrapper => true)}">
+                Edition page <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="edition_page.actions.edit" name="#{name(:no_wrapper => true)}">
+                Edit Edition page
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+            <view:content param="description" />
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="EditionPage">
+  <page merge title="#{ht 'edition_page.edit.title', :default=>['Edit Edition page'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page edition-page" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="edition_page.edit.heading" name="#{name(:no_wrapper => true)}">
+            Edit Edition page
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'edition_page.actions.delete', :default=>['Remove This Edition page']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
+
+
+
+
+<!-- ====== Edition Pages ====== -->
+
+<def tag="index-page" for="Edition">
+  <page merge title="#{ht 'edition.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page edition" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="edition.index.heading">
+            <model-name-human model="&model"/>
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="edition.collection.count" count="&collection_count">
+            <count summary/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="edition.actions.new">New Edition</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Edition">
+  <page merge title="#{ht 'edition.new.title', :default=>[' New Edition'] }">
+    <body: class="new-page edition" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="edition.new.heading">
+            New Edition
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'edition.actions.create', :default=>['Create Edition']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Edition">
+  <page merge title="#{ht 'edition.show.title', :default=>['Edition'], :name => name(:no_wrapper => true) }">
+
+    <body: class="show-page edition" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="edition.show.heading" name="#{name(:no_wrapper => true)}">
+                Edition <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="edition.actions.edit" name="#{name(:no_wrapper => true)}">
+                Edit Edition
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Edition">
+  <page merge title="#{ht 'edition.edit.title', :default=>['Edit Edition'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page edition" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="edition.edit.heading" name="#{name(:no_wrapper => true)}">
+            Edit Edition
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'edition.actions.delete', :default=>['Remove This Edition']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
 
 
 
@@ -88,7 +449,7 @@
               </ht>
             </h2>
 
-            <record-flags fields="" param/>
+            <record-flags fields="administrator" param/>
 
             <a action="edit" if="&can_edit?" param="edit-link">
               <ht key="user.actions.edit" name="#{name(:no_wrapper => true)}">
@@ -98,6 +459,7 @@
           </header>
 
           <section param="content-body">
+            <field-list fields="email_address, state" param/>
           </section>
     </content:>
 
