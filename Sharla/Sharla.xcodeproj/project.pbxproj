@@ -19,6 +19,14 @@
 		0C798C5116091F7600E0DEB0 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C798C4F16091F7600E0DEB0 /* MainStoryboard_iPhone.storyboard */; };
 		0C798C5416091F7600E0DEB0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C798C5216091F7600E0DEB0 /* MainStoryboard_iPad.storyboard */; };
 		0C798C5716091F7600E0DEB0 /* LLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C798C5616091F7600E0DEB0 /* LLViewController.m */; };
+		0CB26E9A160A82B800AA61FB /* LLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26E99160A82B800AA61FB /* LLView.m */; };
+		0CB26EA4160A832600AA61FB /* LLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26EA3160A832600AA61FB /* LLayer.m */; };
+		0CB26EA7160A834000AA61FB /* LLTextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26EA6160A834000AA61FB /* LLTextLayer.m */; };
+		0CB26EAA160A835200AA61FB /* LLImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26EA9160A835200AA61FB /* LLImageLayer.m */; };
+		0CB26EAD160A836900AA61FB /* LLDrawLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26EAC160A836900AA61FB /* LLDrawLayer.m */; };
+		0CB26EB0160A837C00AA61FB /* LLocationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26EAF160A837C00AA61FB /* LLocationLayer.m */; };
+		0CB26EB3160A839000AA61FB /* LLVideoLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26EB2160A839000AA61FB /* LLVideoLayer.m */; };
+		0CB26EB6160A83A200AA61FB /* LLinkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26EB5160A83A200AA61FB /* LLinkLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +47,22 @@
 		0C798C5316091F7600E0DEB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		0C798C5516091F7600E0DEB0 /* LLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLViewController.h; sourceTree = "<group>"; };
 		0C798C5616091F7600E0DEB0 /* LLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLViewController.m; sourceTree = "<group>"; };
+		0CB26E98160A82B800AA61FB /* LLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLView.h; sourceTree = "<group>"; };
+		0CB26E99160A82B800AA61FB /* LLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLView.m; sourceTree = "<group>"; };
+		0CB26EA2160A832600AA61FB /* LLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLayer.h; sourceTree = "<group>"; };
+		0CB26EA3160A832600AA61FB /* LLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLayer.m; sourceTree = "<group>"; };
+		0CB26EA5160A834000AA61FB /* LLTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLTextLayer.h; sourceTree = "<group>"; };
+		0CB26EA6160A834000AA61FB /* LLTextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLTextLayer.m; sourceTree = "<group>"; };
+		0CB26EA8160A835200AA61FB /* LLImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLImageLayer.h; sourceTree = "<group>"; };
+		0CB26EA9160A835200AA61FB /* LLImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLImageLayer.m; sourceTree = "<group>"; };
+		0CB26EAB160A836900AA61FB /* LLDrawLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLDrawLayer.h; sourceTree = "<group>"; };
+		0CB26EAC160A836900AA61FB /* LLDrawLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLDrawLayer.m; sourceTree = "<group>"; };
+		0CB26EAE160A837C00AA61FB /* LLocationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLocationLayer.h; sourceTree = "<group>"; };
+		0CB26EAF160A837C00AA61FB /* LLocationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLocationLayer.m; sourceTree = "<group>"; };
+		0CB26EB1160A839000AA61FB /* LLVideoLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLVideoLayer.h; sourceTree = "<group>"; };
+		0CB26EB2160A839000AA61FB /* LLVideoLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLVideoLayer.m; sourceTree = "<group>"; };
+		0CB26EB4160A83A200AA61FB /* LLinkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLinkLayer.h; sourceTree = "<group>"; };
+		0CB26EB5160A83A200AA61FB /* LLinkLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLinkLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +109,7 @@
 		0C798C3D16091F7600E0DEB0 /* Sharla */ = {
 			isa = PBXGroup;
 			children = (
+				0CB26E97160A827200AA61FB /* UI */,
 				0C798C4616091F7600E0DEB0 /* LLAppDelegate.h */,
 				0C798C4716091F7600E0DEB0 /* LLAppDelegate.m */,
 				0C798C4F16091F7600E0DEB0 /* MainStoryboard_iPhone.storyboard */,
@@ -108,6 +133,37 @@
 				0C798C4D16091F7600E0DEB0 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0CB26E97160A827200AA61FB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0CB26E9B160A82BC00AA61FB /* Layers */,
+				0CB26E98160A82B800AA61FB /* LLView.h */,
+				0CB26E99160A82B800AA61FB /* LLView.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		0CB26E9B160A82BC00AA61FB /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				0CB26EA2160A832600AA61FB /* LLayer.h */,
+				0CB26EA3160A832600AA61FB /* LLayer.m */,
+				0CB26EA5160A834000AA61FB /* LLTextLayer.h */,
+				0CB26EA6160A834000AA61FB /* LLTextLayer.m */,
+				0CB26EA8160A835200AA61FB /* LLImageLayer.h */,
+				0CB26EA9160A835200AA61FB /* LLImageLayer.m */,
+				0CB26EAB160A836900AA61FB /* LLDrawLayer.h */,
+				0CB26EAC160A836900AA61FB /* LLDrawLayer.m */,
+				0CB26EAE160A837C00AA61FB /* LLocationLayer.h */,
+				0CB26EAF160A837C00AA61FB /* LLocationLayer.m */,
+				0CB26EB1160A839000AA61FB /* LLVideoLayer.h */,
+				0CB26EB2160A839000AA61FB /* LLVideoLayer.m */,
+				0CB26EB4160A83A200AA61FB /* LLinkLayer.h */,
+				0CB26EB5160A83A200AA61FB /* LLinkLayer.m */,
+			);
+			name = Layers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +237,14 @@
 				0C798C4416091F7600E0DEB0 /* main.m in Sources */,
 				0C798C4816091F7600E0DEB0 /* LLAppDelegate.m in Sources */,
 				0C798C5716091F7600E0DEB0 /* LLViewController.m in Sources */,
+				0CB26E9A160A82B800AA61FB /* LLView.m in Sources */,
+				0CB26EA4160A832600AA61FB /* LLayer.m in Sources */,
+				0CB26EA7160A834000AA61FB /* LLTextLayer.m in Sources */,
+				0CB26EAA160A835200AA61FB /* LLImageLayer.m in Sources */,
+				0CB26EAD160A836900AA61FB /* LLDrawLayer.m in Sources */,
+				0CB26EB0160A837C00AA61FB /* LLocationLayer.m in Sources */,
+				0CB26EB3160A839000AA61FB /* LLVideoLayer.m in Sources */,
+				0CB26EB6160A83A200AA61FB /* LLinkLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +335,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sharla/Sharla-Prefix.pch";
 				INFOPLIST_FILE = "Sharla/Sharla-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -282,6 +347,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sharla/Sharla-Prefix.pch";
 				INFOPLIST_FILE = "Sharla/Sharla-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -306,6 +372,7 @@
 				0C798C5C16091F7600E0DEB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

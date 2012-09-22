@@ -29,7 +29,7 @@ LL_INIT_VIEW_CONTROLLER
 
 - (void) setup {
     self.app = [LLAppDelegate instance];
-    self.app.application.statusBarHidden = NO;
+//    self.app.application.statusBarHidden = NO;
     self.app.application.statusBarStyle = UIStatusBarStyleBlackTranslucent;
 
     [self configure];
