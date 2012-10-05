@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CAE3D05161D35B600821812 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAE3D04161D35B600821812 /* UIKit.framework */; };
+		0CAE3D07161D35B600821812 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAE3D06161D35B600821812 /* Foundation.framework */; };
+		0CAE3D09161D35B600821812 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAE3D08161D35B600821812 /* CoreGraphics.framework */; };
+		0CAE3D0F161D35B600821812 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CAE3D0D161D35B600821812 /* InfoPlist.strings */; };
+		0CAE3D11161D35B600821812 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE3D10161D35B600821812 /* main.m */; };
+		0CAE3D15161D35B600821812 /* LLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE3D14161D35B600821812 /* LLAppDelegate.m */; };
+		0CAE3D17161D35B600821812 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CAE3D16161D35B600821812 /* Default.png */; };
+		0CAE3D19161D35B600821812 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CAE3D18161D35B600821812 /* Default@2x.png */; };
+		0CAE3D1B161D35B600821812 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CAE3D1A161D35B600821812 /* Default-568h@2x.png */; };
+		0CAE3D1E161D35B600821812 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CAE3D1C161D35B600821812 /* MainStoryboard.storyboard */; };
+		0CAE3D21161D35B600821812 /* LLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE3D20161D35B600821812 /* LLViewController.m */; };
+		0CAE3D28161D360400821812 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAE3D27161D360400821812 /* AVFoundation.framework */; };
+		0CAE3D2A161D361100821812 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAE3D29161D361100821812 /* MediaPlayer.framework */; };
+		0CAE3D2D161D371A00821812 /* LLWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE3D2C161D371A00821812 /* LLWaveformView.m */; };
+		0CAE3D2F161D38B700821812 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAE3D2E161D38B700821812 /* CoreAudio.framework */; };
+		0CAE3D31161D38C000821812 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAE3D30161D38C000821812 /* CoreMedia.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0CAE3D00161D35B600821812 /* Plightnin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Plightnin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CAE3D04161D35B600821812 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0CAE3D06161D35B600821812 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0CAE3D08161D35B600821812 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0CAE3D0C161D35B600821812 /* Plightnin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Plightnin-Info.plist"; sourceTree = "<group>"; };
+		0CAE3D0E161D35B600821812 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0CAE3D10161D35B600821812 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0CAE3D12161D35B600821812 /* Plightnin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Plightnin-Prefix.pch"; sourceTree = "<group>"; };
+		0CAE3D13161D35B600821812 /* LLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLAppDelegate.h; sourceTree = "<group>"; };
+		0CAE3D14161D35B600821812 /* LLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLAppDelegate.m; sourceTree = "<group>"; };
+		0CAE3D16161D35B600821812 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		0CAE3D18161D35B600821812 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		0CAE3D1A161D35B600821812 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0CAE3D1D161D35B600821812 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		0CAE3D1F161D35B600821812 /* LLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLViewController.h; sourceTree = "<group>"; };
+		0CAE3D20161D35B600821812 /* LLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLViewController.m; sourceTree = "<group>"; };
+		0CAE3D27161D360400821812 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0CAE3D29161D361100821812 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0CAE3D2B161D371A00821812 /* LLWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLWaveformView.h; sourceTree = "<group>"; };
+		0CAE3D2C161D371A00821812 /* LLWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLWaveformView.m; sourceTree = "<group>"; };
+		0CAE3D2E161D38B700821812 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		0CAE3D30161D38C000821812 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0CAE3CFD161D35B600821812 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CAE3D31161D38C000821812 /* CoreMedia.framework in Frameworks */,
+				0CAE3D2F161D38B700821812 /* CoreAudio.framework in Frameworks */,
+				0CAE3D2A161D361100821812 /* MediaPlayer.framework in Frameworks */,
+				0CAE3D28161D360400821812 /* AVFoundation.framework in Frameworks */,
+				0CAE3D05161D35B600821812 /* UIKit.framework in Frameworks */,
+				0CAE3D07161D35B600821812 /* Foundation.framework in Frameworks */,
+				0CAE3D09161D35B600821812 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0CAE3CF5161D35B600821812 = {
+			isa = PBXGroup;
+			children = (
+				0CAE3D0A161D35B600821812 /* Plightnin */,
+				0CAE3D03161D35B600821812 /* Frameworks */,
+				0CAE3D01161D35B600821812 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0CAE3D01161D35B600821812 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0CAE3D00161D35B600821812 /* Plightnin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0CAE3D03161D35B600821812 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CAE3D30161D38C000821812 /* CoreMedia.framework */,
+				0CAE3D2E161D38B700821812 /* CoreAudio.framework */,
+				0CAE3D29161D361100821812 /* MediaPlayer.framework */,
+				0CAE3D27161D360400821812 /* AVFoundation.framework */,
+				0CAE3D04161D35B600821812 /* UIKit.framework */,
+				0CAE3D06161D35B600821812 /* Foundation.framework */,
+				0CAE3D08161D35B600821812 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0CAE3D0A161D35B600821812 /* Plightnin */ = {
+			isa = PBXGroup;
+			children = (
+				0CAE3D13161D35B600821812 /* LLAppDelegate.h */,
+				0CAE3D14161D35B600821812 /* LLAppDelegate.m */,
+				0CAE3D1C161D35B600821812 /* MainStoryboard.storyboard */,
+				0CAE3D1F161D35B600821812 /* LLViewController.h */,
+				0CAE3D20161D35B600821812 /* LLViewController.m */,
+				0CAE3D0B161D35B600821812 /* Supporting Files */,
+				0CAE3D2B161D371A00821812 /* LLWaveformView.h */,
+				0CAE3D2C161D371A00821812 /* LLWaveformView.m */,
+			);
+			path = Plightnin;
+			sourceTree = "<group>";
+		};
+		0CAE3D0B161D35B600821812 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0CAE3D0C161D35B600821812 /* Plightnin-Info.plist */,
+				0CAE3D0D161D35B600821812 /* InfoPlist.strings */,
+				0CAE3D10161D35B600821812 /* main.m */,
+				0CAE3D12161D35B600821812 /* Plightnin-Prefix.pch */,
+				0CAE3D16161D35B600821812 /* Default.png */,
+				0CAE3D18161D35B600821812 /* Default@2x.png */,
+				0CAE3D1A161D35B600821812 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0CAE3CFF161D35B600821812 /* Plightnin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0CAE3D24161D35B600821812 /* Build configuration list for PBXNativeTarget "Plightnin" */;
+			buildPhases = (
+				0CAE3CFC161D35B600821812 /* Sources */,
+				0CAE3CFD161D35B600821812 /* Frameworks */,
+				0CAE3CFE161D35B600821812 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Plightnin;
+			productName = Plightnin;
+			productReference = 0CAE3D00161D35B600821812 /* Plightnin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0CAE3CF7161D35B600821812 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = LL;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = CasuaLlama;
+			};
+			buildConfigurationList = 0CAE3CFA161D35B600821812 /* Build configuration list for PBXProject "Plightnin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0CAE3CF5161D35B600821812;
+			productRefGroup = 0CAE3D01161D35B600821812 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0CAE3CFF161D35B600821812 /* Plightnin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0CAE3CFE161D35B600821812 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CAE3D0F161D35B600821812 /* InfoPlist.strings in Resources */,
+				0CAE3D17161D35B600821812 /* Default.png in Resources */,
+				0CAE3D19161D35B600821812 /* Default@2x.png in Resources */,
+				0CAE3D1B161D35B600821812 /* Default-568h@2x.png in Resources */,
+				0CAE3D1E161D35B600821812 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0CAE3CFC161D35B600821812 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CAE3D11161D35B600821812 /* main.m in Sources */,
+				0CAE3D15161D35B600821812 /* LLAppDelegate.m in Sources */,
+				0CAE3D21161D35B600821812 /* LLViewController.m in Sources */,
+				0CAE3D2D161D371A00821812 /* LLWaveformView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0CAE3D0D161D35B600821812 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0CAE3D0E161D35B600821812 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0CAE3D1C161D35B600821812 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0CAE3D1D161D35B600821812 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0CAE3D22161D35B600821812 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0CAE3D23161D35B600821812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0CAE3D25161D35B600821812 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Plightnin/Plightnin-Prefix.pch";
+				INFOPLIST_FILE = "Plightnin/Plightnin-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0CAE3D26161D35B600821812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Plightnin/Plightnin-Prefix.pch";
+				INFOPLIST_FILE = "Plightnin/Plightnin-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0CAE3CFA161D35B600821812 /* Build configuration list for PBXProject "Plightnin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CAE3D22161D35B600821812 /* Debug */,
+				0CAE3D23161D35B600821812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0CAE3D24161D35B600821812 /* Build configuration list for PBXNativeTarget "Plightnin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CAE3D25161D35B600821812 /* Debug */,
+				0CAE3D26161D35B600821812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0CAE3CF7161D35B600821812 /* Project object */;
+}

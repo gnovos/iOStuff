@@ -19,6 +19,9 @@
 		0C45B8F715FA71C9000C8583 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C45B8F515FA71C9000C8583 /* libTestFlight.a */; };
 		0C45B8FA15FA7541000C8583 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C45B8F915FA7541000C8583 /* libz.dylib */; };
 		0C45B8FD15FA7F06000C8583 /* LLSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C45B8FC15FA7F06000C8583 /* LLSplashViewController.m */; };
+		0C5C94A9160D82FB00F956D9 /* LLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C94A8160D82FB00F956D9 /* LLView.m */; };
+		0C5C94BE160D845D00F956D9 /* LLAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C94B3160D845D00F956D9 /* LLAlert.m */; };
+		0C5C94F0160D8C8900F956D9 /* LLOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5C94EF160D8C8900F956D9 /* LLOverlay.m */; };
 		0C6B37F3160D5FF500D05078 /* casuallama-cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C6B37F2160D5FF500D05078 /* casuallama-cover.jpg */; };
 		0C6B37F5160D602C00D05078 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6B37F4160D602C00D05078 /* Default.png */; };
 		0C6B37F7160D603200D05078 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6B37F6160D603200D05078 /* Default@2x.png */; };
@@ -42,7 +45,7 @@
 		0CF3E87715F560F4004C189E /* CasuaLlama.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0CF3E87615F560F4004C189E /* CasuaLlama.pdf */; };
 		0CFE982315F562A30000749A /* LLPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFE982015F562A30000749A /* LLPDFView.m */; };
 		0CFE982815F56C550000749A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFE982715F56C550000749A /* QuartzCore.framework */; };
-		0CFE982D15F7FD760000749A /* LLLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFE982C15F7FD760000749A /* LLLibrary.m */; };
+		0CFE982D15F7FD760000749A /* LLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFE982C15F7FD760000749A /* LLibrary.m */; };
 		0CFE984215F93F7C0000749A /* NewsstandKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFE984115F93F7B0000749A /* NewsstandKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +72,12 @@
 		0C45B8F915FA7541000C8583 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0C45B8FB15FA7F06000C8583 /* LLSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSplashViewController.h; sourceTree = "<group>"; };
 		0C45B8FC15FA7F06000C8583 /* LLSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSplashViewController.m; sourceTree = "<group>"; };
+		0C5C94A7160D82FB00F956D9 /* LLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLView.h; sourceTree = "<group>"; };
+		0C5C94A8160D82FB00F956D9 /* LLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLView.m; sourceTree = "<group>"; };
+		0C5C94B2160D845D00F956D9 /* LLAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LLAlert.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0C5C94B3160D845D00F956D9 /* LLAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LLAlert.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0C5C94EE160D8C8900F956D9 /* LLOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLOverlay.h; sourceTree = "<group>"; };
+		0C5C94EF160D8C8900F956D9 /* LLOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLOverlay.m; sourceTree = "<group>"; };
 		0C6B37F2160D5FF500D05078 /* casuallama-cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "casuallama-cover.jpg"; sourceTree = "<group>"; };
 		0C6B37F4160D602C00D05078 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		0C6B37F6160D603200D05078 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
@@ -100,8 +109,8 @@
 		0CFE982015F562A30000749A /* LLPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLPDFView.m; sourceTree = "<group>"; };
 		0CFE982615F567820000749A /* LLMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLMacro.h; sourceTree = "<group>"; };
 		0CFE982715F56C550000749A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		0CFE982B15F7FD760000749A /* LLLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLLibrary.h; sourceTree = "<group>"; };
-		0CFE982C15F7FD760000749A /* LLLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLLibrary.m; sourceTree = "<group>"; };
+		0CFE982B15F7FD760000749A /* LLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLibrary.h; sourceTree = "<group>"; };
+		0CFE982C15F7FD760000749A /* LLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLibrary.m; sourceTree = "<group>"; };
 		0CFE984115F93F7B0000749A /* NewsstandKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewsstandKit.framework; path = System/Library/Frameworks/NewsstandKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -163,6 +172,17 @@
 			name = TestFlight;
 			sourceTree = "<group>";
 		};
+		0C5C94AA160D830800F956D9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0CEA0BD915E0D2BD0000107C /* LLViewController.h */,
+				0CEA0BDA15E0D2BD0000107C /* LLViewController.m */,
+				0C45B8FB15FA7F06000C8583 /* LLSplashViewController.h */,
+				0C45B8FC15FA7F06000C8583 /* LLSplashViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		0C6B37FA160D67D700D05078 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,10 +228,10 @@
 			children = (
 				0CFE983A15F932170000749A /* Library */,
 				0CEA0BE215E2A70A0000107C /* Application */,
-				0CEA0BE315E2A7160000107C /* View */,
+				0C5C94AA160D830800F956D9 /* Controllers */,
+				0CEA0BE315E2A7160000107C /* Views */,
 				0CEA0BE115E2A6F80000107C /* Data */,
-				0CEA0BF015E2B17C0000107C /* Util */,
-				0CCA9C4C15E0BC1800B334CA /* Supporting Files */,
+				0CEA0BF015E2B17C0000107C /* Lib */,
 			);
 			path = CasuaLlama;
 			sourceTree = "<group>";
@@ -247,44 +267,47 @@
 		0CEA0BE215E2A70A0000107C /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				0C5C94B2160D845D00F956D9 /* LLAlert.h */,
+				0C5C94B3160D845D00F956D9 /* LLAlert.m */,
 				0CCA9C5415E0BC1800B334CA /* LLAppDelegate.h */,
 				0CCA9C5515E0BC1800B334CA /* LLAppDelegate.m */,
 			);
 			name = Application;
 			sourceTree = "<group>";
 		};
-		0CEA0BE315E2A7160000107C /* View */ = {
+		0CEA0BE315E2A7160000107C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0C5C94A7160D82FB00F956D9 /* LLView.h */,
+				0C5C94A8160D82FB00F956D9 /* LLView.m */,
 				0CFE981F15F562A30000749A /* LLPDFView.h */,
 				0CFE982015F562A30000749A /* LLPDFView.m */,
-				0CEA0BD915E0D2BD0000107C /* LLViewController.h */,
-				0CEA0BDA15E0D2BD0000107C /* LLViewController.m */,
 				0CEA0BF115E2B34D0000107C /* LLTableViewCell.h */,
 				0CEA0BF215E2B34D0000107C /* LLTableViewCell.m */,
-				0C45B8FB15FA7F06000C8583 /* LLSplashViewController.h */,
-				0C45B8FC15FA7F06000C8583 /* LLSplashViewController.m */,
+				0C5C94EE160D8C8900F956D9 /* LLOverlay.h */,
+				0C5C94EF160D8C8900F956D9 /* LLOverlay.m */,
 			);
-			name = View;
+			name = Views;
 			sourceTree = "<group>";
 		};
-		0CEA0BF015E2B17C0000107C /* Util */ = {
+		0CEA0BF015E2B17C0000107C /* Lib */ = {
 			isa = PBXGroup;
 			children = (
 				0CFE982615F567820000749A /* LLMacro.h */,
 				0C45B8F215FA6F36000C8583 /* LLog.h */,
 				0C45B8F315FA6F36000C8583 /* LLog.m */,
+				0CCA9C4C15E0BC1800B334CA /* Supporting Files */,
 				0C45B8F815FA71D0000C8583 /* TestFlight */,
 				0C45B8D815FA65D2000C8583 /* LumberJack */,
 			);
-			name = Util;
+			name = Lib;
 			sourceTree = "<group>";
 		};
 		0CFE983A15F932170000749A /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				0CFE982B15F7FD760000749A /* LLLibrary.h */,
-				0CFE982C15F7FD760000749A /* LLLibrary.m */,
+				0CFE982B15F7FD760000749A /* LLibrary.h */,
+				0CFE982C15F7FD760000749A /* LLibrary.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -371,7 +394,7 @@
 				0CEA0BDB15E0D2BD0000107C /* LLViewController.m in Sources */,
 				0CEA0BF315E2B34D0000107C /* LLTableViewCell.m in Sources */,
 				0CFE982315F562A30000749A /* LLPDFView.m in Sources */,
-				0CFE982D15F7FD760000749A /* LLLibrary.m in Sources */,
+				0CFE982D15F7FD760000749A /* LLibrary.m in Sources */,
 				0C45B8EA15FA65E7000C8583 /* DDAbstractDatabaseLogger.m in Sources */,
 				0C45B8EB15FA65E7000C8583 /* DDASLLogger.m in Sources */,
 				0C45B8EC15FA65E7000C8583 /* DDFileLogger.m in Sources */,
@@ -381,6 +404,9 @@
 				0C45B8F015FA65E7000C8583 /* DispatchQueueLogFormatter.m in Sources */,
 				0C45B8F415FA6F36000C8583 /* LLog.m in Sources */,
 				0C45B8FD15FA7F06000C8583 /* LLSplashViewController.m in Sources */,
+				0C5C94A9160D82FB00F956D9 /* LLView.m in Sources */,
+				0C5C94BE160D845D00F956D9 /* LLAlert.m in Sources */,
+				0C5C94F0160D8C8900F956D9 /* LLOverlay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

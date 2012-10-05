@@ -1,16 +1,16 @@
 //
-//  LLLibrary.m
+//  LLibrary.m
 //  CasuaLlama
 //
 //  Created by Mason on 9/5/12.
 //  Copyright (c) 2012 CasuaLlama. All rights reserved.
 //
 
-#import "LLLibrary.h"
+#import "LLibrary.h"
 
 #define kLLRESOURCE_URL @"http://cassuallama.org/api/v1/editons/"
 
-@implementation LLLibrary {
+@implementation LLibrary {
     NKLibrary* library;    
     NSURL* resources;
 }

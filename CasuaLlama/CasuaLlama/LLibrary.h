@@ -1,5 +1,5 @@
 //
-//  LLLibrary.h
+//  LLibrary.h
 //  CasuaLlama
 //
 //  Created by Mason on 9/5/12.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LLLibrary : NSObject <NSURLConnectionDownloadDelegate>
+@interface LLibrary : NSObject <NSURLConnectionDownloadDelegate>
 
 + (id) instance;
 

@@ -110,7 +110,6 @@
     UIRemoteNotificationType types = (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeNewsstandContentAvailability);
     [self.application registerForRemoteNotificationTypes:types];
     
-    self.library = [[LLibrary alloc] init];
         
     UILocalNotification* note = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (note) { [self handle:[note.alertAction lowercaseString] info:note.userInfo]; }
@@ -171,12 +170,12 @@
     [self.application cancelAllLocalNotifications];
 }
 
-- (void)navigationController:(UINavigationController*)nav willShowViewController:(UIViewController*)vc animated:(BOOL)animated {
+- (void) navigationController:(UINavigationController*)nav willShowViewController:(UIViewController*)vc animated:(BOOL)animated {
     BOOL root = [nav.viewControllers objectAtIndex:0] == vc;
     [nav setNavigationBarHidden:root animated:animated];
 }
 
-- (void)navigationController:(UINavigationController*)nav didShowViewController:(UIViewController*)vc animated:(BOOL)animated {
+- (void) navigationController:(UINavigationController*)nav didShowViewController:(UIViewController*)vc animated:(BOOL)animated {
     BOOL root = [nav.viewControllers objectAtIndex:0] == vc;
     [nav setNavigationBarHidden:root animated:animated];
 }

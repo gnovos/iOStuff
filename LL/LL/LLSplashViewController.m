@@ -19,11 +19,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self.app.library update:^{
-        [self fade:@"editions" duration:1.4f];
-    }];
-    
+        
 }
 
 @end

@@ -6,9 +6,6 @@
 //  Copyright (c) 2012 CasuaLlama. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "LLibrary.h"
-
 @interface LLAppDelegate : UIResponder <UIApplicationDelegate, UINavigationControllerDelegate>
 
 + (LLAppDelegate*) instance;
@@ -30,6 +27,5 @@
 
 @property (nonatomic, strong) IBOutlet UIWindow* window;
 @property (nonatomic, strong) NSUserDefaults* settings;
-@property (nonatomic, strong) LLibrary* library;
 
 @end
