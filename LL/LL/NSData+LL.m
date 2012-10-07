@@ -13,6 +13,7 @@
 @implementation NSData (LL)
 
 - (BOOL) empty { return self.length == 0; }
+- (BOOL) unempty { return !self.empty; }
 - (NSUInteger) count { return self.length; }
 - (NSUInteger) size { return self.length; }
 
@@ -246,9 +247,9 @@ static unsigned char base64DecodeLookup[256] =
 	return outputBuffer;
 }
 
-+ (NSData *)dataFromBase64String:(NSString *)aString
++ (NSData*) dataFromBase64String:(NSString*)str
 {
-    NSData *data = [aString dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *data = [str dataUsingEncoding:NSASCIIStringEncoding];
     size_t outputLength;
     void *outputBuffer = [NSData decode:[data bytes] length:[data length] outputLength:&outputLength];
     NSData *result = [[NSData alloc] initWithBytes:outputBuffer length:outputLength];
@@ -256,7 +257,7 @@ static unsigned char base64DecodeLookup[256] =
     return result;
 }
 
-- (NSString *)base64EncodedString
+- (NSString*) base64EncodedString
 {
 	size_t outputLength;
 	char *outputBuffer = [NSData encode:[self bytes] length:[self length] separateLines:YES outputLength: &outputLength];
@@ -266,7 +267,7 @@ static unsigned char base64DecodeLookup[256] =
 	return result;
 }
 
-- (NSString*) MD5Hash
+- (NSString*) md5
 {
     unsigned char digest[CC_MD5_DIGEST_LENGTH];
     CC_MD5(self.bytes, self.length, digest);

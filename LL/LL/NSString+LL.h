@@ -22,6 +22,8 @@
 - (NSArray*) split:(NSString*)delimiter;
 
 - (BOOL) empty;
-- (BOOL) notEmpty;
+- (BOOL) unempty;
+- (NSUInteger) count;
+- (NSUInteger) size;
 
 @end

@@ -9,6 +9,7 @@
 @interface NSSet (LL)
 
 - (BOOL) empty;
+- (BOOL) unempty;
 - (NSUInteger) size;
 - (NSUInteger) length;
 

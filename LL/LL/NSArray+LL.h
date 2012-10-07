@@ -11,6 +11,7 @@
 @interface NSArray (LL)
 
 - (BOOL) empty;
+- (BOOL) unempty;
 - (NSUInteger) size;
 - (NSUInteger) length;
 

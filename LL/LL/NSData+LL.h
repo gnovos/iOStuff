@@ -9,12 +9,13 @@
 @interface NSData (LL)
 
 - (BOOL) empty;
+- (BOOL) unempty;
 - (NSUInteger) count;
 - (NSUInteger) size;
 
-+ (NSData *)dataFromBase64String:(NSString *)aString;
-- (NSString *)base64EncodedString;
++ (NSData*) dataFromBase64String:(NSString *)aString;
+- (NSString*) base64EncodedString;
 
-- (NSString*) MD5Hash;
+- (NSString*) md5;
 
 @end

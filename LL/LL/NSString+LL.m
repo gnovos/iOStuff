@@ -11,6 +11,11 @@
 
 @implementation NSString (LL)
 
+- (BOOL) empty { return self.length == 0 || [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0; }
+- (BOOL) unempty { return !self.empty; }
+- (NSUInteger) count { return self.length; }
+- (NSUInteger) size { return self.length; }
+
 + (NSString*) digest:(unsigned char*)digest length:(int)length {
     NSMutableString* hex = [NSMutableString string];
     for (int i = 0; i < length; i++) {
@@ -109,16 +114,5 @@
 - (NSString*) trim:(NSString*)characters {
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:characters]];
 }
-
-- (BOOL) empty {
-    return self.length == 0 || [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0;
-}
-
-- (BOOL) notEmpty {
-    return !self.empty;
-}
-
-
-
 
 @end

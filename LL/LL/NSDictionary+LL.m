@@ -11,6 +11,7 @@
 @implementation NSDictionary (LL)
 
 - (BOOL) empty { return self.count == 0; }
+- (BOOL) unempty { return !self.empty; }
 - (NSUInteger) length { return self.count; }
 - (NSUInteger) size { return self.count; }
 

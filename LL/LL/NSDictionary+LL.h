@@ -6,11 +6,10 @@
 //  Copyright (c) 2012 CasuaLlama. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface NSDictionary (LL)
 
 - (BOOL) empty;
+- (BOOL) unempty;
 - (NSUInteger) size;
 - (NSUInteger) length;
 
