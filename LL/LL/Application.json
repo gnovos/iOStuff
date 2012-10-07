@@ -9,12 +9,12 @@
         
         "projects" : {
             "public" : [
-              { "name" : "Apricot", "people" : [ "$(people.mason)", "$(people.lorien)" ] },
-              { "name" : "Zebra",   "people" : [ "~people.mason", "~people.bill" ] }
-              { "name" : "MVP",     "people" : [ "~people.hollin", "~projects.private[0].people[0]" ] }
+              { "name" : "Apricot", "people" : [ "#{people.mason}", "#{people.lorien}" ] },
+              { "name" : "Zebra",   "people" : [ "#{people.mason}", "#{people.bill}" ] }
+              { "name" : "MVP",     "people" : [ "#{people.hollin}", "#{projects.private[0].people[0]}" ] }
             ],
             "private" : [
-              { "name" : "Meow",    "people" : [ "~people.mason" ] }
+              { "name" : "Meow",    "people" : [ "#{people.mason}" ] }
             ]
         }
     },
@@ -38,7 +38,7 @@
             "table" : {
                 "sections" : [{ "title"  : "Public Projects",
                                 "rows"   : {
-                                  "source" : "$(projects.public)"
+                                  "source" : "#{projects.public}"
                                   "cell"   : "dark cell",
                                 },
                                 "action" : {
@@ -48,7 +48,7 @@
                               },
                               { "title" : "Private Projects",
                                 "rows"   : {
-                                  "source" : "projects.private"
+                                  "source" : "#{projects.private}"
                                   "cell"   : "light cell",
                                 },
                                 "action" : {

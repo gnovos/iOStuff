@@ -19,6 +19,13 @@
     return hex;
 }
 
++ (NSString *)uuid {
+    CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, uuidRef);
+    CFRelease(uuidRef);
+    return uuidString;
+}
+
 - (NSString*) md5 {
     const char *cStr = [self UTF8String];
     unsigned char digest[CC_MD5_DIGEST_LENGTH];
@@ -97,6 +104,10 @@
 
 - (NSArray*) split:(NSString*)delimiter {
     return [self componentsSeparatedByString:delimiter];
+}
+
+- (NSString*) trim:(NSString*)characters {
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:characters]];
 }
 
 - (BOOL) empty {

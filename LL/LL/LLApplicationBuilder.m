@@ -7,25 +7,38 @@
 //
 
 #import "LLApplicationBuilder.h"
-#import "NSDictionary+LL.h"
+#import "NSObject+LL.h"
+#import "NSString+LL.h"
 
 @implementation LLApplicationBuilder
 
 - (void) build:(NSDictionary*)spec {
+    static NSRegularExpression* matcher;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        matcher = [NSRegularExpression regularExpressionWithPattern:@"^#\\{(.*)\\}$" options:0 error:NULL];
+    });
+    
     self.data = [NSMutableDictionary dictionary];
+    
     NSDictionary* data = [spec objectForKey:@"data"];
+    
+    NSDictionary* current = self.data;
     
     [data walk:^(NSString* key, id value) {
         if ([value isKindOfClass:NSString.class]) {
+            NSString* path = [value match:matcher];
+            if (path) {
+                //lookup
+            } else {
+                [current setValue:value forKey:key];
+            }
+        } else if ([value isKindOfClass:NSDictionary.class]) {
+        } else if ([value isKindOfClass:NSArray.class]) {
             
         }
     }];
     
 }
-
-- (void) interpolate:(NSDictionary*)dict {
-    
-}
-
 
 @end

@@ -10,4 +10,7 @@
 
 + (UIImage*) imageFromPath:(NSString*)path;
 
+- (NSData*) jpgData;
+- (NSData*) pngData;
+
 @end

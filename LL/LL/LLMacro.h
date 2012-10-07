@@ -25,4 +25,6 @@
 - (id) initWithCoder:(NSCoder*)decoder { if (self = [super initWithCoder:decoder]) { [self setup]; } return self; } \
 - (id) init { if (self = [super init]) { [self setup]; } return self; }
 
+#define ns(fmt, ...) [NSString stringWithFormat:fmt, ##__VA_ARGS__]
+
 #endif

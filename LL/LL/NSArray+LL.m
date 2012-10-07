@@ -1,20 +1,19 @@
 //
-//  NSDictionary+LLUtil.m
+//  NSArray+LL.m
 //  LL
 //
 //  Created by Mason on 10/7/12.
 //  Copyright (c) 2012 CasuaLlama. All rights reserved.
 //
 
-#import "NSDictionary+LL.h"
+#import "NSArray+LL.h"
 
-@implementation NSDictionary (LL)
+@implementation NSArray (LL)
 
 - (BOOL) empty { return self.count == 0; }
 - (NSUInteger) length { return self.count; }
 - (NSUInteger) size { return self.count; }
 
-- (BOOL) hasKey:(id)key { return [self objectForKey:key] != nil; }
-- (BOOL) containsKey:(id)key { return [self hasKey:key]; }
+- (id) firstObject { return self.count == 0 ? nil : [self objectAtIndex:0]; }
 
 @end

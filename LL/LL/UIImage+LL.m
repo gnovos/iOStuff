@@ -21,4 +21,8 @@
     return image;
 }
 
+- (NSData*) jpgData { return UIImageJPEGRepresentation(self, 1.0); }
+
+- (NSData*) pngData { return UIImagePNGRepresentation(self); }
+
 @end

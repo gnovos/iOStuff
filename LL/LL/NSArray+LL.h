@@ -1,5 +1,5 @@
 //
-//  NSDictionary+LLUtil.h
+//  NSArray+LL.h
 //  LL
 //
 //  Created by Mason on 10/7/12.
@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (LL)
+@interface NSArray (LL)
 
 - (BOOL) empty;
 - (NSUInteger) size;
 - (NSUInteger) length;
 
-- (BOOL) hasKey:(id)key;
-- (BOOL) containsKey:(id)key;
+- (id) firstObject;
 
 @end
