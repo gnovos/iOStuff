@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Blazing Cloud. All rights reserved.
 //
 
-#import "UILabel+LLText.h"
+#import "UILabel+LL.h"
 
-@implementation UILabel (LLText)
+@implementation UILabel (LL)
 
 - (void) fitToText {
     

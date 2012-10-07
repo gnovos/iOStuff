@@ -13,6 +13,24 @@
 #include <net/if.h>
 #include <net/if_dl.h>
 
+/*
+ data = {
+ 
+ "text"    : { "text" : "url to file or text" },
+ "image"   : { "path" : "url or bundle name" },
+ "web"     : { "path" : "url or inline" },
+ "pdf"     : { "path" : "url or bundle name", "page" : "page number or missing" },
+ "map"     : { },
+ 
+ "table"   : { "view"     : "name or default (or missing)",
+ "sections" : [{ "title" : "string or null/false (or missing)", "rows"  : [objs]}]},
+ 
+ "book"    : { "view" : "name or default (or missing)", "pages" : [objs] },
+ "gallery" : { "view" : "name or default (or missing)", "items" : [objs] }
+ 
+ }
+ */
+
 @implementation LLAppDelegate
 
 + (id) instance { return [[UIApplication sharedApplication] delegate]; }
@@ -114,7 +132,7 @@
     UILocalNotification* note = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (note) { [self handle:[note.alertAction lowercaseString] info:note.userInfo]; }
     
-    self.nav.delegate = self;
+    //self.nav.delegate = self;
         
     return YES && [self checkpoint:@"launch complete"];
 }

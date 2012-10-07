@@ -6,10 +6,8 @@
 //  Copyright (c) 2012 Blazing Cloud. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@interface UIScrollView (LL)
 
-@interface UIScrollView (MMFitToContent)
-
-- (void) fitToContentWithPadding:(CGFloat)padding;
+- (void) fitToContent;
 
 @end

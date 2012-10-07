@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Blazing Cloud. All rights reserved.
 //
 
-#import "UIColor+LLHex.h"
+#import "UIColor+LL.h"
 
-@implementation UIColor (LLHex)
+@implementation UIColor (LL)
 
 + (UIColor*) colorWithHex:(NSString*)hexcolor {
     NSString *cleanString = [hexcolor stringByReplacingOccurrencesOfString:@"#" withString:@""];

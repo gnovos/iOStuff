@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Blazing Cloud. All rights reserved.
 //
 
-@interface UIImage (LLImage)
+@interface UIImage (LL)
 
 + (UIImage*) imageFromPath:(NSString*)path;
 

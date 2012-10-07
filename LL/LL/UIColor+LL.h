@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Blazing Cloud. All rights reserved.
 //
 
-@interface UIColor (LLHex)
+@interface UIColor (LL)
 
 + (UIColor*) colorWithHex:(NSString*)hexcolor;
 

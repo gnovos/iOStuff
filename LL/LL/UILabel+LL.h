@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Blazing Cloud. All rights reserved.
 //
 
-@interface UILabel (LLText)
+@interface UILabel (LL)
 
 - (void) fitToText;
 

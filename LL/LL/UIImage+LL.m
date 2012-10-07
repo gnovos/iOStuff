@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Blazing Cloud. All rights reserved.
 //
 
-#import "UIImage+LLImage.h"
+#import "UIImage+LL.h"
 
-@implementation UIImage (LLImage)
+@implementation UIImage (LL)
 
 + (UIImage*) imageFromPath:(NSString*)path {
     UIImage* image = nil;

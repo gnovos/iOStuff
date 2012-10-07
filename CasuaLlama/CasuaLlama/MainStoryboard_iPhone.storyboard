@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C54" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OTh-z2-Eke">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OTh-z2-Eke">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
@@ -162,6 +162,28 @@
     <resources>
         <image name="casuallama-launch.jpg" width="320" height="480"/>
     </resources>
+    <classes>
+        <class className="LLPDFView" superclassName="LLView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LLPDFView.h"/>
+        </class>
+        <class className="LLSplashViewController" superclassName="LLViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LLSplashViewController.h"/>
+        </class>
+        <class className="LLTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LLTableViewCell.h"/>
+        </class>
+        <class className="LLView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LLView.h"/>
+        </class>
+        <class className="LLViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LLViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="pdf" candidateClass="LLPDFView"/>
+                <relationship kind="outlet" name="table" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="web" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
