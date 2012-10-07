@@ -122,27 +122,7 @@
 
 
 - (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
-    
-    NSDictionary* d = @{
-      @"foo"   : @"bar",
-      @"array" : @[ @"first", @"second", @{
-        @"asubhashk1" : @"asubhashv1",
-        @"asubhashk2" : @"asubhashv2"
-      }, @"third", @100 ],
-      @"sub"   : @{
-        @"subhashk1" : @"subhashv1",
-        @"subhashk2" : @"subhashv2",
-        @"subarray"  : @[ @3, @5, @7, @9, @"subaval", @[ @"subsuba", @[@"subsubsuba"], @{ @"deepkey" : @"deepval" }] ]
-      }
-    };
-    
-    [d walk:^(NSString* key, id value) {
-        NSLog(@"\nkey:   %@\nvalue: %@\n\n", key, value);
-    }];
-    
-    sleep(100);
-    abort();
-    
+        
     [TestFlight takeOff:@"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"];
     
     _settings = [NSUserDefaults standardUserDefaults];

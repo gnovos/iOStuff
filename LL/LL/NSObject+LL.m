@@ -50,21 +50,57 @@
 }
 
 - (void) setValue:(id)value forPath:(NSString*)path {
-    NSArray* split = [path split:@"."];
-    __block id current = self;
-    [split enumerateObjectsUsingBlock:^(NSString* key, NSUInteger idx, BOOL *stop) {
-        if (idx == split.count - 1) {
-            
-        } else {
-            if ([current isKindOfClass:NSArray.class]) {
-                NSInteger index = [[key trim:@"[]"] intValue];
-                current = [current objectAtIndex:index];
-            } else if ([current isKindOfClass:NSDictionary.class]) {
-                current = [current valueForKey:key];
-            }            
-        }
-    }];
+    NSArray* split = [path split:@".["];
     
+    NSString* key = nil;
+    id current = self;
+    for (int i = 0; i < split.count - 1; i++) {
+        key = [[split objectAtIndex:i] trim:@"[]"];
+        
+        if ([current isKindOfClass:NSMutableArray.class]) {
+            NSInteger index = [key intValue];
+            if (index >= [current count]) {
+                int missing = (1 + index - [current count]);
+                for (int fill = 0; fill < missing; fill++){
+                    [current addObject:[NSNull null]];
+                }
+            }
+            
+            id next = [current objectAtIndex:index];
+            if ([next isEqual:[NSNull null]]) {
+                NSString* nextKey = [split objectAtIndex:i + 1];
+                if ([nextKey hasSuffix:@"]"]) {
+                    next = [NSMutableArray array];
+                    [current setObject:next atIndex:index];
+                } else {
+                    next = [NSMutableDictionary dictionary];
+                    [current setObject:next atIndex:index];
+                }                
+            }
+            current = next;
+        } else if ([current isKindOfClass:NSMutableDictionary.class]) {
+            id next = [current valueForKey:key];
+            if (next == nil) {
+                NSString* nextKey = [split objectAtIndex:i + 1];
+                if ([nextKey hasSuffix:@"]"]) {
+                    next = [NSMutableArray array];
+                    [current setObject:next forKey:key];
+                } else {
+                    next = [NSMutableDictionary dictionary];
+                    [current setObject:next forKey:key];
+                }                
+            }
+            current = next;
+        }
+    }
+    
+    key = [split.lastObject trim:@"[]"];
+    if ([current isKindOfClass:NSMutableArray.class]) {
+        NSInteger index = [key intValue];
+        [current setObject:value atIndex:index];
+    } else if ([current isKindOfClass:NSMutableDictionary.class]) {
+        [current setValue:value forKey:key];
+    }
     
 }
 

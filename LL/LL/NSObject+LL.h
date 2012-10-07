@@ -9,6 +9,7 @@
 @interface NSObject (LL)
 
 - (id) valueForPath:(NSString*)path;
+- (void) setValue:(id)value forPath:(NSString*)path;
 
 - (void) walk:(void(^)(NSString* key, id value))block;
 - (void) walk:(void(^)(NSString* key, id value))block withPrefix:(NSString*)prefix;

@@ -107,8 +107,8 @@
     return captures;
 }
 
-- (NSArray*) split:(NSString*)delimiter {
-    return [self componentsSeparatedByString:delimiter];
+- (NSArray*) split:(NSString*)delimiters {
+    return [self componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:delimiters]];
 }
 
 - (NSString*) trim:(NSString*)characters {
