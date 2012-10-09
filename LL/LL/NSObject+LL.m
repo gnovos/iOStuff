@@ -20,13 +20,18 @@
 - (void) postNotice:(NSString*)notification { [self postNotice:notification withObject:nil]; }
 - (void) postNotice:(NSString*)notification withObject:(id)object { [[NSNotificationCenter defaultCenter] postNotificationName:notification object:object]; }
 
-- (NSRegularExpression*) expander {
-    static NSRegularExpression* matcher;
+- (id) expand:(id)value {
+    static NSRegularExpression* expander;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        matcher = [NSRegularExpression regularExpressionWithPattern:@"^#\\{(.*)\\}$" options:0 error:NULL];
+        expander = [NSRegularExpression regularExpressionWithPattern:@"^#\\{(.*)\\}$" options:0 error:NULL];
     });
-    return matcher;
+    
+    NSString* path = nil;
+    if ((path = [[value str] match:expander]) != nil) {
+        value = [self valueForPath:path root:self];
+    }
+    return value;
 }
 
 - (id) valueForPath:(NSString*)path {
@@ -34,10 +39,6 @@
 }
 
 - (id) valueForPath:(NSString*)path root:(id)root {
-    __block NSString* subpath = [path match:self.expander];
-    if (subpath) {
-        path = subpath;
-    }    
     NSArray* split = [path split:@".["];
     __block id value = self;
     [split enumerateObjectsUsingBlock:^(NSString* key, NSUInteger idx, BOOL *stop) {
@@ -47,19 +48,19 @@
             value = [value objectAtIndex:index];
         } else if ([value isKindOfClass:NSDictionary.class]) {
             value = [value valueForKey:key];
-        } else if ((subpath = [[value str] match:self.expander]) != nil) {
-            value = [root valueForPath:subpath root:root];
+        } else {
+            value = [root expand:value];
         }
     }];
     
-    if ((subpath = [[value str] match:self.expander]) != nil) {
-        value = [root valueForPath:subpath root:root];
-    }
-    
-    return value;
+    return [root expand:value];
 }
 
 - (void) setValue:(id)value forPath:(NSString*)path {
+    [self setValue:value forPath:path root:self];
+}
+
+- (void) setValue:(id)value forPath:(NSString*)path root:(id)root {
     NSArray* split = [path split:@".["];
     
     NSString* key = nil;
@@ -107,9 +108,9 @@
     key = [split.lastObject trim:@"[]"];
     if ([current isKindOfClass:NSMutableArray.class]) {
         NSInteger index = [key intValue];
-        [current setObject:value atIndex:index];
+        [current setObject:[root expand:value] atIndex:index];
     } else if ([current isKindOfClass:NSMutableDictionary.class]) {
-        [current setValue:value forKey:key];
+        [current setValue:[root expand:value] forKey:key];
     }
     
 }
@@ -126,11 +127,7 @@
             if ([value isKindOfClass:NSDictionary.class] || [value isKindOfClass:NSArray.class]) {
                 [value walk:block withPrefix:key root:self];
             } else {
-                NSString* path = nil;
-                if ((path = [[value str] match:self.expander]) != nil) {
-                    value = [root valueForPath:path];
-                }
-                block(key, value);
+                block(key, [root expand:value]);
             }
         }];
     } else if ([self isKindOfClass:NSArray.class]) {
@@ -139,12 +136,7 @@
             if ([value isKindOfClass:NSDictionary.class] || [value isKindOfClass:NSArray.class]) {
                 [value walk:block withPrefix:key root:root];
             } else {
-                NSString* path = nil;
-                if ((path = [[value str] match:self.expander]) != nil) {
-                    value = [root valueForPath:path];
-                }
-                
-                block(key, value);
+                block(key, [root expand:value]);
             }            
         }];
     } else {

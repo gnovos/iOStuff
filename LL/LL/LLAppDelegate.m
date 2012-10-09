@@ -127,7 +127,7 @@
       @"foo" : @"bar",
       @"alpha" : @{ @"a" : @"b", @"arr" : @[ @10, @15, @20 ] },
       @"numer" : @{ @"1" : @"2" },
-      @"exp"   : @{ @"e1" : @"#{foo}", @"e2" : @"#{alpha.arr}", @"e3" : @"#{alpha.arr[2]}" },
+      @"exp"   : @{ @"e1" : @"#{foo}", @"e2" : @"#{numer.1}", @"e3" : @"#{alpha.arr[2]}" },
     };
     
     NSMutableDictionary* op = [NSMutableDictionary dictionary];
@@ -138,6 +138,19 @@
     }];
     
     NSLog(@"\nd was %@\n\nop is %@\n\n", d, op);
+    
+    [op setValue:[@{ @"a" : @"b" } mutableCopy] forPath:@"fooz.bar"];
+    
+    NSLog(@"\nd was%@\n\n", op);
+    
+    [op setValue:@"xxxx" forPath:@"fooz.bar.c"];
+    
+    NSLog(@"\nd was%@\n\n", op);
+    
+    [op setValue:@"#{fooz.bar.c}" forPath:@"yyyy"];
+    
+    NSLog(@"\nd was%@\n\n", op);
+
     
     sleep(100);
     abort();
