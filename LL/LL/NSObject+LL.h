@@ -12,7 +12,7 @@
 - (void) setValue:(id)value forPath:(NSString*)path;
 
 - (void) walk:(void(^)(NSString* key, id value))block;
-- (void) walk:(void(^)(NSString* key, id value))block withData:(id)data;
+- (void) walk:(void(^)(NSString* key, id value))block referencing:(id)data;
 
 - (void) listenFor:(NSString*)notification andInvoke:(void(^)(NSNotification *note))nvok;
 - (void) listenFor:(NSString*)notification andPerform:(SEL)selector;
