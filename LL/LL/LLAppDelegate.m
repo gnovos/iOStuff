@@ -122,7 +122,26 @@
 
 
 - (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
-        
+    
+    NSDictionary* d = @{
+      @"foo" : @"bar",
+      @"alpha" : @{ @"a" : @"b", @"arr" : @[ @10, @15, @20 ] },
+      @"numer" : @{ @"1" : @"2" },
+      @"exp"   : @{ @"e1" : @"#{foo}", @"e2" : @"#{alpha.arr}", @"e3" : @"#{alpha.arr[2]}" },
+    };
+    
+    NSMutableDictionary* op = [NSMutableDictionary dictionary];
+    
+    [d walk:^(NSString* key, id value) {
+        NSLog(@"\nkey:   %@\nvalue: %@\n\n", key, value);
+        [op setValue:value forPath:key];
+    }];
+    
+    NSLog(@"\nd was %@\n\nop is %@\n\n", d, op);
+    
+    sleep(100);
+    abort();
+    
     [TestFlight takeOff:@"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"];
     
     _settings = [NSUserDefaults standardUserDefaults];

@@ -25,5 +25,4 @@
 - (void) setBorderColor:(UIColor*)color;
 - (void) setBorderRounding:(CGFloat)radius;
 
-
 @end

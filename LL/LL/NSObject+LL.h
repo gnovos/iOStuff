@@ -12,7 +12,6 @@
 - (void) setValue:(id)value forPath:(NSString*)path;
 
 - (void) walk:(void(^)(NSString* key, id value))block;
-- (void) walk:(void(^)(NSString* key, id value))block withPrefix:(NSString*)prefix;
 
 - (void) listenFor:(NSString*)notification andInvoke:(void(^)(NSNotification *note))nvok;
 - (void) listenFor:(NSString*)notification andPerform:(SEL)selector;

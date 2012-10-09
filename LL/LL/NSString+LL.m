@@ -48,10 +48,10 @@
 - (BOOL) matches:(id)pattern {
     NSRegularExpression* regexp;
     if ([pattern isKindOfClass:NSRegularExpression.class]) {
-        regexp = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
+        regexp = pattern;
         
     } else {
-        regexp = [NSRegularExpression regularExpressionWithPattern:[pattern stringValue] options:0 error:NULL];
+        regexp = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
     }
 
     return [regexp numberOfMatchesInString:self options:0 range:NSMakeRange(0, self.length)] > 0;
@@ -61,10 +61,10 @@
     
     NSRegularExpression* regexp;
     if ([pattern isKindOfClass:NSRegularExpression.class]) {
-        regexp = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
+        regexp = pattern;
         
     } else {
-        regexp = [NSRegularExpression regularExpressionWithPattern:[pattern stringValue] options:0 error:NULL];        
+        regexp = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
     }
     
     NSTextCheckingResult* match = [regexp firstMatchInString:self options:0 range:NSMakeRange(0, self.length)];
@@ -84,10 +84,10 @@
     NSRegularExpression* regexp;
     
     if ([pattern isKindOfClass:NSRegularExpression.class]) {
-        regexp = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
+        regexp = pattern;
         
     } else {
-        regexp = [NSRegularExpression regularExpressionWithPattern:[pattern stringValue] options:0 error:NULL];
+        regexp = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
     }
     
     NSMutableArray* captures = [[NSMutableArray alloc] init];

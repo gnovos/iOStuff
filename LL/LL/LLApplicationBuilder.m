@@ -33,9 +33,6 @@
             } else {
                 [current setValue:value forKey:key];
             }
-        } else if ([value isKindOfClass:NSDictionary.class]) {
-        } else if ([value isKindOfClass:NSArray.class]) {
-            
         }
     }];
     
