@@ -10,7 +10,7 @@
         "projects" : {
             "public" : [
               { "name" : "Apricot", "people" : [ "#{people.mason}", "#{people.lorien}" ] },
-              { "name" : "Zebra",   "people" : [ "#{people.mason}", "#{people.bill}" ] }
+              { "name" : "Zebra",   "people" : [ "#{people.mason}", "#{people.bill}" ] },
               { "name" : "MVP",     "people" : [ "#{people.hollin}", "#{projects.private[0].people[0]}" ] }
             ],
             "private" : [
@@ -38,8 +38,8 @@
             "table" : {
                 "sections" : [{ "title"  : "Public Projects",
                                 "rows"   : {
-                                  "source" : "#{projects.public}"
-                                  "cell"   : "dark cell",
+                                  "source" : "#{projects.public}",
+                                  "cell"   : "dark cell"
                                 },
                                 "action" : {
                                   "type" : "push",
@@ -48,16 +48,16 @@
                               },
                               { "title" : "Private Projects",
                                 "rows"   : {
-                                  "source" : "#{projects.private}"
-                                  "cell"   : "light cell",
+                                  "source" : "#{projects.private}",
+                                  "cell"   : "light cell"
                                 },
                                 "action" : {
                                   "type" : "alert",
                                   "message" : "You cannot view details of private projects."
                                 }
-                              }],
+                              }]
                 }
-            },
+            
         },
     
         "person cell" : {
@@ -67,22 +67,22 @@
             "template" : "projects",
             "nav"      : { "background" : "color or image",
                            "items" : [ { "position" : "right",
-                                         "image"    : "settings"
+                                         "image"    : "settings",
                                          "action"   : {
                                            "type" : "push",
                                            "view" : "settings"
-                                         }}]},
+                                         }}]
+            },
             "table" : {
                 "sections" : [{ "rows"   : {
-                                  "cell"   : "person cell",
+                                  "cell"   : "person cell"
                                 },
                                 "action" : {
                                   "type" : "push",
                                   "view" : "detail"
                                 }
-                              }],
+                              }]
             }
-          },
         },
 
         "detail" : {

@@ -13,4 +13,6 @@
 @property (nonatomic, strong) NSDictionary* data;
 @property (nonatomic, strong) NSDictionary* views;
 
+- (void) build:(NSDictionary*)spec;
+
 @end

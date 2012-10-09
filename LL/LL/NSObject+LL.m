@@ -24,7 +24,7 @@
     static NSRegularExpression* expander;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        expander = [NSRegularExpression regularExpressionWithPattern:@"^#\\{(.*)\\}$" options:0 error:NULL];
+        expander = [NSRegularExpression regularExpressionWithPattern:@"^\\#\\{(.*)\\}$" options:0 error:NULL];
     });
     
     NSString* path = nil;
@@ -119,13 +119,17 @@
     [self walk:block withPrefix:nil root:self];
 }
 
+- (void) walk:(void(^)(NSString* key, id value))block withData:(id)data {
+    [self walk:block withPrefix:nil root:data];
+}
+
 - (void) walk:(void(^)(NSString* key, id value))block withPrefix:(NSString*)prefix root:(id)root {
     
     if ([self isKindOfClass:NSDictionary.class]) {
         [((NSDictionary*)self) enumerateKeysAndObjectsUsingBlock:^(NSString* key, id value, BOOL *stop) {
             key = prefix ? [prefix stringByAppendingFormat:@".%@", key] : key;
             if ([value isKindOfClass:NSDictionary.class] || [value isKindOfClass:NSArray.class]) {
-                [value walk:block withPrefix:key root:self];
+                [value walk:block withPrefix:key root:root];
             } else {
                 block(key, [root expand:value]);
             }

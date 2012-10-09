@@ -14,6 +14,7 @@
 #include <net/if_dl.h>
 
 #import "NSObject+LL.h"
+#import "LLApplicationBuilder.h"
 
 /*
  data = {
@@ -122,38 +123,11 @@
 
 
 - (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
-    
-    NSDictionary* d = @{
-      @"foo" : @"bar",
-      @"alpha" : @{ @"a" : @"b", @"arr" : @[ @10, @15, @20 ] },
-      @"numer" : @{ @"1" : @"2" },
-      @"exp"   : @{ @"e1" : @"#{foo}", @"e2" : @"#{numer.1}", @"e3" : @"#{alpha.arr[2]}" },
-    };
-    
-    NSMutableDictionary* op = [NSMutableDictionary dictionary];
-    
-    [d walk:^(NSString* key, id value) {
-        NSLog(@"\nkey:   %@\nvalue: %@\n\n", key, value);
-        [op setValue:value forPath:key];
-    }];
-    
-    NSLog(@"\nd was %@\n\nop is %@\n\n", d, op);
-    
-    [op setValue:[@{ @"a" : @"b" } mutableCopy] forPath:@"fooz.bar"];
-    
-    NSLog(@"\nd was%@\n\n", op);
-    
-    [op setValue:@"xxxx" forPath:@"fooz.bar.c"];
-    
-    NSLog(@"\nd was%@\n\n", op);
-    
-    [op setValue:@"#{fooz.bar.c}" forPath:@"yyyy"];
-    
-    NSLog(@"\nd was%@\n\n", op);
-
-    
-    sleep(100);
-    abort();
+    LLApplicationBuilder* app = [[LLApplicationBuilder alloc] init];
+    NSURL* url = [[NSBundle mainBundle] URLForResource:@"Application" withExtension:@"json"];
+    NSData* data = [NSData dataWithContentsOfURL:url];
+    NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:NULL];
+    [app build:dict];
     
     [TestFlight takeOff:@"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"];
     
