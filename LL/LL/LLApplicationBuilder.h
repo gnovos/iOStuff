@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 CasuaLlama. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "LLViewController.h"
 
 @interface LLApplicationBuilder : NSObject
 
@@ -14,5 +14,7 @@
 @property (nonatomic, strong) NSDictionary* views;
 
 - (void) build:(NSString*)resource;
+
+- (LLViewController*) create:(NSString*)view;
 
 @end

@@ -28,7 +28,22 @@
     [[spec objectForKey:@"views"] walk:^(NSString* key, id value) {
         [self.views setValue:value forPath:key];
     } referencing:self.data];
+}
+
+- (LLViewController*) create:(NSString*)name {
+    UIStoryboard* storyboard = nil;
     
+    NSDictionary* view = [self.views valueForPath:name];
+    
+    NSString* viewname = [view valueForPath:@"template"];
+    if (viewname != nil) {
+        viewname = name;
+    }
+    
+    LLViewController* vc = [storyboard instantiateViewControllerWithIdentifier:viewname];
+    //xxx set objects
+    
+    return vc;
 }
 
 @end

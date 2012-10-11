@@ -9,6 +9,7 @@
 #import "LLViewController.h"
 #import "LLTableViewCell.h"
 #import "LLPDFView.h"
+#import "UIView+LL.h"
 
 @interface LLViewController ()
 
@@ -33,7 +34,7 @@ LL_INIT_VIEW_CONTROLLER
     frame.origin.y = 0;
     self.app.window.frame = frame;
 
-    [self configure];
+    [self configure];    
 }
 - (void) configure {}
 

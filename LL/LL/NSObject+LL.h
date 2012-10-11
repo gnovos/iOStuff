@@ -8,6 +8,79 @@
 
 @interface NSObject (LL)
 
+typedef enum {
+    
+    LLPropertyTypeChar             = 'c',
+    LLPropertyTypeInt              = 'i',
+    LLPropertyTypeShort            = 's',
+    LLPropertyTypeLong             = 'l',
+    LLPropertyTypeLongLong         = 'q',
+    LLPropertyTypeUnsignedChar     = 'C',
+    LLPropertyTypeUnsignedInt      = 'I',
+    LLPropertyTypeUnsignedShort    = 'S',
+    LLPropertyTypeUnsignedLong     = 'L',
+    LLPropertyTypeUnsignedLongLong = 'Q',
+    LLPropertyTypeFloat            = 'f',
+    LLPropertyTypeDouble           = 'd',
+    LLPropertyTypeBool             = 'B',
+    LLPropertyTypeVoid             = 'v',
+    LLPropertyTypeCString          = '*',
+    LLPropertyTypeClass            = '#',
+    LLPropertyTypeSelector         = ':',
+    LLPropertyTypeCArray           = '[',
+    LLPropertyTypeStruct           = '{',
+    LLPropertyTypeUnion            = '(',
+    LLPropertyTypeBitfield         = 'b',
+    LLPropertyTypePointer          = '^',
+    LLPropertyTypeObject           = '@',
+    LLPropertyTypeUnknown          = '?'
+    
+} LLPropertyType;
+
+- (void) setLLID:(NSString*)llid;
+- (NSString*) LLID;
+
++ (NSArray*) properties;
+
++ (BOOL) isDynamicProperty:(NSString*)selector;
+
++ (NSString*) lookupPropertyName:(SEL)selector;
++ (Class) classForProperty:(NSString*)propertyName;
++ (char) encodedPropertyType:(NSString*)propertyName;
+
++ (BOOL) isSetter:(SEL)selector;
++ (BOOL) isGetter:(SEL)selector;
+
++ (BOOL) isObjectProperty:(NSString*)property;
++ (BOOL) isPrimitiveProperty:(NSString*)property;
++ (BOOL) hasProperty:(NSString*)property;
++ (BOOL) hasPropertyForSelector:(SEL)selector;
+
++ (NSString*) propertyTypeString:(NSString*)propertyName;
+
++ (void) createPropertyMethodsForSelector:(SEL)selector;
++ (void) createMethodsForProperty:(NSString*)property;
+
+- (NSArray*) properties;
+- (NSString*) lookupPropertyName:(SEL)selector;
+- (Class) classForProperty:(NSString*)propertyName;
+- (char) encodedPropertyType:(NSString*)propertyName;
+
+- (BOOL) isSetter:(SEL)selector;
+- (BOOL) isGetter:(SEL)selector;
+
+- (BOOL) isObjectProperty:(NSString*)property;
+- (BOOL) isPrimitiveProperty:(NSString*)property;
+
+- (NSString*) propertyTypeString:(NSString*)propertyName;
+
+- (void) encodeProperties:(NSCoder*)coder;
+- (void) decodeProperties:(NSCoder*)decoder;
+
+- (void) setValue:(id)value forDynamicProperty:(NSString *)property;
+- (id) getValueForDynamicProperty:(NSString *)property;
+- (NSMutableDictionary*) dynamicProperties;
+
 - (id) valueForPath:(NSString*)path;
 - (void) setValue:(id)value forPath:(NSString*)path;
 

@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 CasuaLlama. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface LLViewController : UIViewController <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (nonatomic, weak) LLAppDelegate* app;
