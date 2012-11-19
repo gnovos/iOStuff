@@ -18,7 +18,6 @@
     #import "KWLog.h"
     #import "KWConst.h"
     #import "KWGFX.h"
-    #import "TestFlight.h"
 
     #import "NSString+KWColor.h"
 #endif

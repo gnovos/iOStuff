@@ -11,24 +11,32 @@
 
 #define alog(fmt, ...) NSLog(@"%s [%d] " fmt, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
+#define tlog(fmt, ...) TFLog(@"%s [%d] " fmt, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
 #ifdef DEBUG
-#	define dlog(fmt, ...) alog(fmt, ##__VA_ARGS__);
-#   define elog(err) { if(err) alog(@"[ERROR] %@", err) }
-#   define ulog(fmt, ...)   { UIAlertView *alert = [[UIAlertView alloc] initWithTitle:\
-[NSString stringWithFormat:@"%s\n [line %d] ", __PRETTY_FUNCTION__, __LINE__] \
+#	define dlog(fmt, ...) alog   (fmt, ##__VA_ARGS__);
+#   define vlog(fmt, ...) alog(fmt, ##__VA_ARGS__);
+#   define wlog(fmt, ...) alog   (fmt, ##__VA_ARGS__);
+#   define elog(err)      if(err)   alog(@"[ERROR] %@", err);
+
+#   define ulog(fmt, ...) \
+UIAlertView* alert = [[UIAlertView alloc] \
+initWithTitle:[NSString stringWithFormat:@"%s\n [line %d] ", __PRETTY_FUNCTION__, __LINE__] \
 message:[NSString stringWithFormat:fmt, ##__VA_ARGS__] \
 delegate:nil \
 cancelButtonTitle:@"Ok" \
 otherButtonTitles:nil]; \
 [alert show]; \
-}
+
 #else
-#   define dlog(...)
-#   define elog(...)
-#   define ulog(...)
+#   define vlog(fmt, ...) tlog(fmt, ##__VA_ARGS__);
+#   define wlog(fmt, ...) tlog(fmt, ##__VA_ARGS__);
+#   define elog(err)      tlog(@"[ERROR] %@", err);
+#   define dlog(fmt, ...) tlog(fmt, ##__VA_ARGS__);
+#   define ulog(fmt, ...) tlog(fmt, ##__VA_ARGS__);
 #endif
 
-#define dlogine     dlog(@".")
+#define dlogline      dlog(@"*");
 
 #define dlogobj(o)   dlog(#o @"=%@", o)
 #define dlogptr(p)   dlog(#p @"=%p", p)

@@ -1,12 +1,14 @@
 //
-//  KWApplication.m
+//  KWAnalytics.m
 //  Catpcha
 //
-//  Created by Mason on 8/2/12.
+//  Created by Mason on 11/19/12.
 //  Copyright (c) 2012 Masonsoft. All rights reserved.
 //
 
-#import "KWApplication.h"
+#import "KWAnalytics.h"
+#import "TestFlight.h"
+#import "Flurry.h"
 
 #include <sys/socket.h>
 #include <sys/sysctl.h>
@@ -15,10 +17,13 @@
 
 #import "SSKeychain.h"
 
+@implementation KWAnalytics
+
+#define KWFlurryAPIKey @"KGPXKF962BYXMPMWPSYC"
+#define KWTestFlightAPIKey @"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"
+
 #define KWUDIDService @"org.casuallama.UDID.v1"
 #define KWUDIDAccount @"catpcha"
-
-@implementation KWApplication
 
 + (NSString*) deviceID {
     
@@ -105,6 +110,76 @@
     
     return macAddressString;
 }
+
++ (void) checkpoint:(NSString*)checkpoint {
+    @try {
+        [TestFlight passCheckpoint:checkpoint];
+    }
+    @catch (id exception) {
+        elog(exception);
+    }
+}
+
+
++ (void) init {
+    @try {
+        [TestFlight takeOff:KWTestFlightAPIKey];
+        [TestFlight setDeviceIdentifier:[self deviceID]];
+    }
+    @catch (id exception) {
+        elog(exception);
+    }
+    
+    @try {
+        [Flurry setShowErrorInLogEnabled:YES];
+        [Flurry setDebugLogEnabled:YES];
+        [Flurry startSession:KWFlurryAPIKey];
+        
+        [Flurry setSessionReportsOnPauseEnabled:YES];
+        [Flurry setUserID:[self deviceID]];
+    }
+    @catch (id exception) {
+        elog(exception);
+    }
+    
+    @try {
+        [self checkpoint:KWCheckpointLaunch];
+    }
+    @catch (id exception) {
+        elog(exception);
+    }
+}
+
++ (void) flurryLocation {
+//    CLLocationManager *lman = [[CLLocationManager alloc] init];
+//    [lman startUpdatingLocation];
+//
+//    CLLocation *loc = lman.location;
+//    [Flurry setLatitude:loc.coordinate.latitude
+//              longitude:loc.coordinate.longitude
+//     horizontalAccuracy:loc.horizontalAccuracy
+//       verticalAccuracy:loc.verticalAccuracy];
+}
+
++ (void) flurry:(NSString*)name event:(id)event {
+    [self flurry:name event:event block:nil];
+}
+
++ (void) flurry:(NSString*)name event:(id)event block:(NSDictionary* (^)(void))block {
+    if ([event isKindOfClass:[NSError class]]) {
+        [Flurry logError:name message:[event description] error:event];
+    } else if ([event isKindOfClass:[NSException class]]) {
+        [Flurry logError:name message:[event description] exception:event];
+    } else {
+        BOOL timed = block != nil;
+        [Flurry logEvent:name withParameters:event timed:timed];
+        if (timed) {
+            [Flurry endTimedEvent:name withParameters:block()];
+        }
+    }    
+}
+
++ (void) launchFeedback { [TestFlight openFeedbackView]; }
 
 
 @end
