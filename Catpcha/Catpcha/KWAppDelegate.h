@@ -37,6 +37,19 @@
 
 //sort kittens by something something to improve sight?
 
+/*
+ 
+ void uncaughtExceptionHandler(NSException *exception) {
+ [Flurry logError:@"Uncaught" message:@"Crash!" exception:exception];
+ }
+ 
+ - (void)applicationDidFinishLaunching:(UIApplication *)application {
+ NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+ [Flurry startSession:@"YOUR_API_KEY"];
+ ....
+ }
+ */
+
 @interface KWAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

@@ -7,28 +7,43 @@
 //
 
 #import "UIColor+LL.h"
+#import "NSString+LL.h"
 
 @implementation UIColor (LL)
 
-+ (UIColor*) colorWithHex:(NSString*)hexcolor {
-    NSString *cleanString = [hexcolor stringByReplacingOccurrencesOfString:@"#" withString:@""];
-    if([cleanString length] == 3) {
-        cleanString = [NSString stringWithFormat:@"%@%@%@%@%@%@",
-                       [cleanString substringWithRange:NSMakeRange(0, 1)],[cleanString substringWithRange:NSMakeRange(0, 1)],
-                       [cleanString substringWithRange:NSMakeRange(1, 1)],[cleanString substringWithRange:NSMakeRange(1, 1)],
-                       [cleanString substringWithRange:NSMakeRange(2, 1)],[cleanString substringWithRange:NSMakeRange(2, 1)]];
-    }
-    if([cleanString length] == 6) {
-        cleanString = [cleanString stringByAppendingString:@"ff"];
++ (UIColor*) colorWithString:(NSString*)color {
+    static NSRegularExpression* regex;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        NSString* pattern = @"^#?(?:([0-9A-F])([0-9A-F])([0-9A-F])([0-9A-F])?|([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})?)$";
+        regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:NULL];
+    });
+    
+    color = color.lowercaseString;
+    
+    SEL uicolor = NSSelectorFromString([color stringByAppendingString:@"Color"]);
+    if ([UIColor respondsToSelector:uicolor]) {
+        return [UIColor performSelector:uicolor];
     }
     
-    unsigned int baseValue;
-    [[NSScanner scannerWithString:cleanString] scanHexInt:&baseValue];
+    NSArray* rgba = [color capture:regex];
     
-    float red = ((baseValue >> 24) & 0xFF)/255.0f;
-    float green = ((baseValue >> 16) & 0xFF)/255.0f;
-    float blue = ((baseValue >> 8) & 0xFF)/255.0f;
-    float alpha = ((baseValue >> 0) & 0xFF)/255.0f;
+    NSMutableString* hexcolor = [NSMutableString string];
+    [rgba enumerateObjectsUsingBlock:^(NSString* hex, NSUInteger idx, BOOL *stop) {
+        [hexcolor appendString:hex];
+        if (hex.length == 1) { [hexcolor appendString:hex]; }
+    }];
+    if (hexcolor.length == 6) {
+        [hexcolor appendString:@"ff"];
+    }
+    
+    unsigned int icolor;
+    [[NSScanner scannerWithString:hexcolor] scanHexInt:&icolor];
+    
+    float red   = ((icolor >> 24) & 0xFF)/255.0f;
+    float green = ((icolor >> 16) & 0xFF)/255.0f;
+    float blue  = ((icolor >> 8)  & 0xFF)/255.0f;
+    float alpha = ((icolor >> 0)  & 0xFF)/255.0f;
     
     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];}
 

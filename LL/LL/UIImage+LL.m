@@ -10,7 +10,7 @@
 
 @implementation UIImage (LL)
 
-+ (UIImage*) imageFromPath:(NSString*)path {
++ (UIImage*) imageWithPath:(NSString*)path {
     UIImage* image = nil;
     if ([path hasPrefix:@"http://"] || [path hasPrefix:@"file://"]) {
         NSURL* url = [NSURL URLWithString:path];

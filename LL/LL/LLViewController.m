@@ -10,21 +10,26 @@
 #import "LLTableViewCell.h"
 #import "LLPDFView.h"
 #import "UIView+LL.h"
+#import "NSObject+LL.h"
+#import "NSString+LL.h"
 
 @interface LLViewController ()
 
-@property (nonatomic, strong) NSArray* data;
-@property (nonatomic, weak) IBOutlet UITableView* table;
-@property (nonatomic, weak) IBOutlet UIWebView* web;
-@property (nonatomic, weak) IBOutlet LLPDFView* pdf;
+@property (nonatomic, strong) NSArray* tableData;
+@property (nonatomic, weak) IBOutlet UITableView* tableView;
 
 @property (nonatomic, strong) NSArray* pageData;
 @property (nonatomic, strong) NSMutableArray* pages;
-@property (nonatomic, strong) UIPageViewController* book;
+@property (nonatomic, strong) UIPageViewController* bookView;
+
+@property (nonatomic, weak) IBOutlet UIWebView* webView;
+@property (nonatomic, weak) IBOutlet LLPDFView* pdfView;
 
 @end
 
-@implementation LLViewController
+@implementation LLViewController {
+    UIImageView* background;
+}
 
 LL_INIT_VIEW_CONTROLLER
 
@@ -34,8 +39,17 @@ LL_INIT_VIEW_CONTROLLER
     frame.origin.y = 0;
     self.app.window.frame = frame;
 
-    [self configure];    
+    background = [[UIImageView alloc] init];
+    background.frame = self.view.frame;  
+
+    [self configure];
 }
+
+- (void) awakeFromNib {
+    [super awakeFromNib];
+    background.frame = self.view.frame;    
+}
+
 - (void) configure {}
 
 - (NSArray*) autoload:(NSString*)type {
@@ -62,11 +76,11 @@ LL_INIT_VIEW_CONTROLLER
         size.width /= 2.0f;
     }
 
-    self.web.scrollView.scrollEnabled = NO;
-    self.web.scrollView.contentSize = size;
+    self.webView.scrollView.scrollEnabled = NO;
+    self.webView.scrollView.contentSize = size;
 
-    self.pdf.scrollEnabled = NO;
-    self.pdf.contentSize = size;
+    self.pdfView.scrollEnabled = NO;
+    self.pdfView.contentSize = size;
 }
 
 - (UIViewController*) page:(int)page {
@@ -76,16 +90,16 @@ LL_INIT_VIEW_CONTROLLER
 - (void) viewDidLoad {
     [super viewDidLoad];
     
-    self.web.delegate = self;
+    self.webView.delegate = self;
     
-    self.data = [self autoload:@"data"];
+    self.tableData = [self autoload:@"data"]; //xxx autoload shoulld now load json
             
-    if (self.data && self.table.dataSource == nil) {
-        self.table.dataSource = self;
+    if (self.tableData && self.tableView.dataSource == nil) {
+        self.tableView.dataSource = self;
     }
     
-    if (self.table.delegate == nil) {
-        self.table.delegate = self;
+    if (self.tableView.delegate == nil) {
+        self.tableView.delegate = self;
     }
     
     self.pageData = [self autoload:@"pages"];
@@ -95,17 +109,17 @@ LL_INIT_VIEW_CONTROLLER
 
         BOOL landscape = UIInterfaceOrientationIsLandscape(self.interfaceOrientation);
         
-        self.book = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
+        self.bookView = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
                                                     navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                   options:@{UIPageViewControllerOptionSpineLocationKey : landscape ? @(UIPageViewControllerSpineLocationMid) : @(UIPageViewControllerSpineLocationMin) }];
-        self.book.dataSource = self;
-        self.book.delegate = self;
-        self.book.doubleSided = YES;
-        [self addChildViewController:self.book];
-        self.book.view.frame = self.view.bounds;
-        [self.view addSubview:self.book.view];
-        [self.book didMoveToParentViewController:self];
-        self.view.gestureRecognizers = self.book.gestureRecognizers;
+        self.bookView.dataSource = self;
+        self.bookView.delegate = self;
+        self.bookView.doubleSided = YES;
+        [self addChildViewController:self.bookView];
+        self.bookView.view.frame = self.view.bounds;
+        [self.view addSubview:self.bookView.view];
+        [self.bookView didMoveToParentViewController:self];
+        self.view.gestureRecognizers = self.bookView.gestureRecognizers;
         [self reloadPages:self.interfaceOrientation];
     }
 }
@@ -122,14 +136,14 @@ LL_INIT_VIEW_CONTROLLER
         }
         
         NSUInteger page = split.count > 1 ? [[split lastObject] intValue] : 0;
-        [self.pdf loadPDF:url atPage:page];
-        [self.view bringSubviewToFront:self.pdf];
+        [self.pdfView loadPDF:url atPage:page];
+        [self.view bringSubviewToFront:self.pdfView];
     } else if ([@"url" isEqualToString:type]) {
-        [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:content]]];
-        [self.view bringSubviewToFront:self.web];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:content]]];
+        [self.view bringSubviewToFront:self.webView];
     } else {
-        [self.web loadHTMLString:content baseURL:nil];
-        [self.view bringSubviewToFront:self.web];
+        [self.webView loadHTMLString:content baseURL:nil];
+        [self.view bringSubviewToFront:self.webView];
     }
 }
 
@@ -141,7 +155,7 @@ LL_INIT_VIEW_CONTROLLER
 
 - (void) reloadPages:(UIInterfaceOrientation)orientation {
     BOOL blanks = UIInterfaceOrientationIsPortrait(orientation);    
-    int index = self.book.viewControllers.count ? [self.pages indexOfObject:[self.book.viewControllers objectAtIndex:0]] : 0;
+    int index = self.bookView.viewControllers.count ? [self.pages indexOfObject:[self.bookView.viewControllers objectAtIndex:0]] : 0;
     if (index == NSNotFound) {
         index = 0;
     }
@@ -175,13 +189,13 @@ LL_INIT_VIEW_CONTROLLER
         index--;
     }
     
-    [self.book setViewControllers:blanks ? @[[self page:index]] : @[[self page:index], [self page:index + 1]]
+    [self.bookView setViewControllers:blanks ? @[[self page:index]] : @[[self page:index], [self page:index + 1]]
                         direction:UIPageViewControllerNavigationDirectionForward
                          animated:YES completion:nil];
 }
 
 - (NSString*) ident {
-    NSString* ident = self.oid;
+    NSString* ident = self.LLID;
     
     if (ident == nil) {
         NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:@"^LL(.*)ViewController$" options:0 error:NULL];
@@ -195,7 +209,7 @@ LL_INIT_VIEW_CONTROLLER
     return [ident lowercaseString];
 }
 
-- (NSArray*)      sections                         { return [self data]; }
+- (NSArray*)      sections                         { return [self tableData]; }
 - (NSDictionary*) section:(NSUInteger)section      { return [self.sections objectAtIndex:section]; }
 - (NSString*)     sectionTitle:(NSUInteger)section { return [[self.sections objectAtIndex:section] objectForKey:@"title"]; }
 - (NSArray*)      rows:(NSUInteger)section         { return [[self section:section] objectForKey:@"rows"]; }
@@ -257,7 +271,6 @@ LL_INIT_VIEW_CONTROLLER
         case UIWebViewNavigationTypeLinkClicked:
             [self.app open:request.URL];
             return NO;
-            
         default:
             return YES;
     }
@@ -267,7 +280,6 @@ LL_INIT_VIEW_CONTROLLER
     elog(error);
     [self.app alert:nil message:[error localizedDescription]];
 }
-
 
 - (IBAction) feedback {
     [TestFlight openFeedbackView];
@@ -284,6 +296,111 @@ LL_INIT_VIEW_CONTROLLER
         [self.app.nav setViewControllers:@[ vc ] animated:NO];
     }];
 }
+
+//xxx
+- (void) setBackground:(id)bg {
+    if ([bg isKindOfClass:UIImage.class]) {
+        background.image = bg;
+        [self.view insertSubview:background atIndex:0];
+    } else if ([bg isKindOfClass:UIColor.class]) {
+        self.view.backgroundColor = bg;
+    } else if (bg) {
+        self.background = [bg str].obj;
+    } else {
+        self.view.backgroundColor = UIColor.clearColor;
+        [background removeFromSuperview];
+    }
+}
+
+- (void) setNav:(id)val {
+    if ([val isKindOfClass:NSDictionary.class]) {
+        NSDictionary* nav = (NSDictionary*)val;
+        
+        NSString* bg = [nav valueForPath:@[@"background", @"bg"]];
+        id bgobj = [bg obj];
+        if ([bgobj isKindOfClass:UIColor.class]) {
+            [self.app.nav.navigationBar setBackgroundColor:bgobj];
+        } else if ([bgobj isKindOfClass:UIImage.class]) {
+            [self.app.nav.navigationBar setBackgroundImage:bgobj forBarMetrics:UIBarMetricsDefault];
+        }
+        
+        NSString* tint = [nav valueForPath:@"tint"];
+        if (tint) {
+            [self.app.nav.navigationBar setBackgroundColor:[tint obj]];
+        }
+        
+        NSArray* items = [nav valueForPath:@"items"];
+        [items enumerateObjectsUsingBlock:^(NSDictionary* item, NSUInteger idx, BOOL *stop) {
+            NSString* position = [item valueForPath:@"position"];
+            NSString* image = [item valueForPath:@"image"];
+            id actions = [item valueForPath:@[@"action", @"actions"]];
+            //xxx should add some kind of action hash?
+            if ([actions isKindOfClass:NSArray.class]) {
+                //add
+            } else {
+                //set
+            }
+                          
+            //xxx set nav item
+        }];
+    } else {
+        [self.app.nav setNavigationBarHidden:[val str].boolValue]; //xxx animated?
+    }
+}
+
+- (void) setTable:(NSDictionary*)data {
+// xxx?
+//    "table"   : { "view"     : "name or default (or missing)",
+//        "sections" : [{ "title" : "string or null/false (or missing)", "rows"  : [objs]}]},
+/* sections: [
+ { "title"  : "Public Projects",
+ "rows"   : {
+ "source" : "#{projects.public}",
+ "cell"   : "dark cell"
+ },
+ "action" : {
+ "type" : "push",
+ "view" : "people"
+ }
+ }]
+ 
+ vs
+
+ { "title"  : "Public Projects",
+   "data"   : "#{projects.public}",
+   "cell"   : "dark cell",
+   "action" : {
+     "type" : "push",
+     "view" : "people"
+   }
+ 
+ */
+}
+- (void) setText:(NSString*)text {
+//    "text"    : { "text" : "url to file or text" },
+}
+- (void) setImage:(NSString*)path {
+//    "image"   : { "path" : "url or bundle name" },
+}
+- (void) setWeb:(NSString*)path {
+//    "web"     : { "path" : "url or inline" },
+}
+- (void) setPDF:(NSString*)path {
+//    "pdf"     : { "path" : "url or bundle name", "page" : "page number or missing" },
+}
+- (void) setBook:(NSString*)path {
+// xxx?    "book"    : { "view" : "name or default (or missing)", "pages" : [objs] },
+}
+- (void) setGallery:(NSString*)path {
+// xxx?    "gallery" : { "view" : "name or default (or missing)", "items" : [objs] }
+}
+- (void) setMap:(NSString*)path {
+//    "map"     : { },
+}
+
+
+
+
 
 
 @end

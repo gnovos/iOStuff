@@ -15,24 +15,8 @@
 
 #import "NSObject+LL.h"
 #import "LLApplicationBuilder.h"
+#import "UIColor+LL.h"
 
-/*
- data = {
- 
- "text"    : { "text" : "url to file or text" },
- "image"   : { "path" : "url or bundle name" },
- "web"     : { "path" : "url or inline" },
- "pdf"     : { "path" : "url or bundle name", "page" : "page number or missing" },
- "map"     : { },
- 
- "table"   : { "view"     : "name or default (or missing)",
- "sections" : [{ "title" : "string or null/false (or missing)", "rows"  : [objs]}]},
- 
- "book"    : { "view" : "name or default (or missing)", "pages" : [objs] },
- "gallery" : { "view" : "name or default (or missing)", "items" : [objs] }
- 
- }
- */
 
 @implementation LLAppDelegate
 
@@ -124,6 +108,7 @@
 
 - (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
     LLApplicationBuilder* app = [[LLApplicationBuilder alloc] init];
+        
     [app build:@"Application"];
     
     [TestFlight takeOff:@"4458812bd5ebcfc812a03b2015057c83_MTAzMTA2MjAxMi0wNi0yMyAwMTo1Nzo0OS40NzgyMDg"];

@@ -8,7 +8,7 @@
 
 @interface UIImage (LL)
 
-+ (UIImage*) imageFromPath:(NSString*)path;
++ (UIImage*) imageWithPath:(NSString*)path;
 
 - (NSData*) jpgData;
 - (NSData*) pngData;

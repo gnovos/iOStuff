@@ -25,4 +25,9 @@
 - (void) setBorderColor:(UIColor*)color;
 - (void) setBorderRounding:(CGFloat)radius;
 
+- (void) clearActions;
+- (void) setAction:(NSDictionary*)action;
+- (void) addActions:(NSArray*)action;
+- (void) addAction:(NSDictionary*)action;
+
 @end

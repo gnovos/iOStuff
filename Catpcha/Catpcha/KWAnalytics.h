@@ -15,6 +15,7 @@
 + (void) checkpoint:(NSString*)checkpoint;
 + (void) launchFeedback;
 
++ (void) flurry:(NSString*)name;
 + (void) flurry:(NSString*)name event:(id)event;
 + (void) flurry:(NSString*)name event:(id)event block:(NSDictionary*(^)(void))block;
 + (void) flurryLocation;

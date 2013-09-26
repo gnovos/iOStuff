@@ -1,6 +1,6 @@
 {
     "data" : {
-        "people" : {            
+        "people" : {
             "mason"  : { "first" : "Mason",  "last" : "Glaves"  },
             "lorien" : { "first" : "Lorien", "last" : "Wilkins" },
             "hollin" : { "first" : "Hollin", "last" : "Wilkins" },

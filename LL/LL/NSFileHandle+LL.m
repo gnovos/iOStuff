@@ -7,7 +7,6 @@
 //
 
 #import "NSFileHandle+LL.h"
-#import <CommonCrypto/CommonDigest.h>
 
 @implementation NSFileHandle (LL)
 

@@ -7,7 +7,8 @@
 //
 
 #import "NSString+LL.h"
-#import <CommonCrypto/CommonDigest.h>
+#import "UIImage+LL.h"
+#import "UIColor+LL.h"
 
 @implementation NSString (LL)
 
@@ -113,6 +114,15 @@
 
 - (NSString*) trim:(NSString*)characters {
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:characters]];
+}
+
+- (id) obj {
+    
+    id obj = [UIImage imageWithPath:self];
+
+    if (obj == nil) { obj = [UIColor colorWithString:self]; }
+    
+    return obj;
 }
 
 @end

@@ -111,16 +111,6 @@
     return macAddressString;
 }
 
-+ (void) checkpoint:(NSString*)checkpoint {
-    @try {
-        [TestFlight passCheckpoint:checkpoint];
-    }
-    @catch (id exception) {
-        elog(exception);
-    }
-}
-
-
 + (void) init {
     @try {
         [TestFlight takeOff:KWTestFlightAPIKey];
@@ -150,6 +140,16 @@
     }
 }
 
++ (void) checkpoint:(NSString*)checkpoint {
+    @try {
+        [TestFlight passCheckpoint:checkpoint];
+        [self flurry:checkpoint];
+    }
+    @catch (id exception) {
+        elog(exception);
+    }
+}
+
 + (void) flurryLocation {
 //    CLLocationManager *lman = [[CLLocationManager alloc] init];
 //    [lman startUpdatingLocation];
@@ -159,6 +159,10 @@
 //              longitude:loc.coordinate.longitude
 //     horizontalAccuracy:loc.horizontalAccuracy
 //       verticalAccuracy:loc.verticalAccuracy];
+}
+
++ (void) flurry:(NSString*)name {
+    [self flurry:name event:nil block:nil];
 }
 
 + (void) flurry:(NSString*)name event:(id)event {

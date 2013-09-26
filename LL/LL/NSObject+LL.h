@@ -40,6 +40,8 @@ typedef enum {
 - (void) setLLID:(NSString*)llid;
 - (NSString*) LLID;
 
+- (NSString*) str;
+
 + (NSArray*) properties;
 
 + (BOOL) isDynamicProperty:(NSString*)selector;
@@ -81,7 +83,7 @@ typedef enum {
 - (id) getValueForDynamicProperty:(NSString *)property;
 - (NSMutableDictionary*) dynamicProperties;
 
-- (id) valueForPath:(NSString*)path;
+- (id) valueForPath:(id)path;
 - (void) setValue:(id)value forPath:(NSString*)path;
 
 - (void) walk:(void(^)(NSString* key, id value))block;

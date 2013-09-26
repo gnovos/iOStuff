@@ -41,6 +41,7 @@
     }
     
     LLViewController* vc = [storyboard instantiateViewControllerWithIdentifier:viewname];
+    
     //xxx set objects
     
     return vc;

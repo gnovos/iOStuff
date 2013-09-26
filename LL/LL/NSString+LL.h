@@ -26,4 +26,6 @@
 - (NSUInteger) count;
 - (NSUInteger) size;
 
+- (id) obj;
+
 @end

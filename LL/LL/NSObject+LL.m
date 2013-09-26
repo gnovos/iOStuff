@@ -412,7 +412,15 @@ static IMP implementationWithBlock(id block) {
     
 }
 
-- (NSString*) str { return [self respondsToSelector:@selector(stringValue)] ? [self performSelector:@selector(stringValue)] : [self description]; }
+- (NSString*) str {
+    if ([self isKindOfClass:NSString.class]){
+        return (NSString*)self;
+    } else if ([self respondsToSelector:@selector(stringValue)]) {
+        return [self performSelector:@selector(stringValue)];
+    } else {
+        return [self description];
+    }
+}
 
 - (void) listenFor:(NSString*)notification andInvoke:(void(^)(NSNotification *note))nvok { [[NSNotificationCenter defaultCenter] addObserverForName:notification object:nil queue:nil usingBlock:nvok]; }
 - (void) listenFor:(NSString*)notification andPerform:(SEL)selector { [[NSNotificationCenter defaultCenter] addObserver:self selector:selector name:notification object:nil]; }
@@ -436,8 +444,18 @@ static IMP implementationWithBlock(id block) {
     return value;
 }
 
-- (id) valueForPath:(NSString*)path {
-    return [self valueForPath:path root:self];
+- (id) valueForPath:(id)path {
+    if ([path isKindOfClass:NSArray.class]) {
+        __block id val = nil;
+        [path enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            val = [self valueForPath:[obj str]];
+            if (val) {
+                *stop = YES;
+            }
+        }];
+        return val;
+    }
+    return [self valueForPath:[path str] root:self];
 }
 
 - (id) valueForPath:(NSString*)path root:(id)root {

@@ -9,9 +9,11 @@
 @interface LLViewController : UIViewController <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (nonatomic, weak) LLAppDelegate* app;
-@property (nonatomic, strong) NSString* oid;
 
 - (void) configure;
-- (void) fade:(NSString*)to duration:(NSTimeInterval)duration;
+- (void) fade:(NSString*)to duration:(NSTimeInterval)duration; //xxx
+
+- (void) setBackground:(id)background;
+- (void) setNav:(id)nav;
 
 @end

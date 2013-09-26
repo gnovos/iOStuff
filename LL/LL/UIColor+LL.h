@@ -8,6 +8,6 @@
 
 @interface UIColor (LL)
 
-+ (UIColor*) colorWithHex:(NSString*)hexcolor;
++ (UIColor*) colorWithString:(NSString*)hexcolor;
 
 @end

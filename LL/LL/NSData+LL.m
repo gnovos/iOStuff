@@ -8,7 +8,6 @@
 
 #import "NSData+LL.h"
 #import "NSString+LL.h"
-#import <CommonCrypto/CommonDigest.h>
 
 @implementation NSData (LL)
 
